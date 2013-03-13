@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleFury.Components.Animated.AnimationComponent" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Animated\AnimationComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Animated.CharacterAnimationComponent" Collapsed="true">
+    <Position X="6.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAACAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Components\Animated\CharacterAnimationComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Animated.ItemAnimationComponent" Collapsed="true">
+    <Position X="8.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAACAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Components\Animated\ItemAnimationComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.GravityComponent" Collapsed="true">
+    <Position X="14.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\GravityComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.RectangularCollisionComponent" Collapsed="true">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\RectangularCollisionComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.SphericalCollisionComponent" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQACAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\SphericalCollisionComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.TransformComponent" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAYAgAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\TransformComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Movement.GrabComponent" Collapsed="true">
+    <Position X="11.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Movement\GrabComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Movement.JumpComponent" Collapsed="true">
+    <Position X="13" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Movement\JumpComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Movement.ThrowComponent" Collapsed="true">
+    <Position X="16.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Movement\ThrowComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.EntitySystem.Component" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAgQAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntitySystem\Component.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BattleFury.EntitySystem.DrawableComponent" Collapsed="true">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAACAAEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>EntitySystem\DrawableComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

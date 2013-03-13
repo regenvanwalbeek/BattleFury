@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleFury.Entities.Characters.Character">
+    <Position X="0.75" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAQAIAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Characters\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Characters.FightingRobot" Collapsed="true">
+    <Position X="1.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Characters\FightingRobot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.EntitySystem.Entity" Collapsed="true">
+    <Position X="1.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAAAAAg4AAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>EntitySystem\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Animated.AnimationComponent">
+    <Position X="4.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Animated\AnimationComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Animated.CharacterAnimationComponent" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAACAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Components\Animated\CharacterAnimationComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.Animated.ItemAnimationComponent" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAACAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Components\Animated\ItemAnimationComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.GravityComponent">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\GravityComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.TransformComponent">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAYAgAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\TransformComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

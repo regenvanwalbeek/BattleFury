@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleFury.Entities.Hitboxes.AbsorptionHitbox" Collapsed="true">
+    <Position X="7.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Hitboxes\AbsorptionHitbox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Hitboxes.DamageableHitbox" Collapsed="true">
+    <Position X="9.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Hitboxes\DamageableHitbox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Hitboxes.DamagingHitbox">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Hitboxes\DamagingHitbox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Hitboxes.GrabHitbox" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Hitboxes\GrabHitbox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Hitboxes.Hitbox">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Hitboxes\Hitbox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Hitboxes.ShieldHitbox" Collapsed="true">
+    <Position X="5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Hitboxes\ShieldHitbox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.EntitySystem.Entity" Collapsed="true">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAAAAAg4AAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>EntitySystem\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Components.SphericalCollisionComponent">
+    <Position X="7.25" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQACAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\SphericalCollisionComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
