@@ -10,7 +10,7 @@ namespace BattleFury
         /// </summary>
         static void Main(string[] args)
         {
-            using (BattleFury game = new BattleFury())
+            using (BattleFuryGame game = new BattleFuryGame())
             {
                 game.Run();
             }

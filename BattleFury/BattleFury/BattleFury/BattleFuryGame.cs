@@ -9,13 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using BattleFury.ScreenManagement;
+using BattleFury.Screens;
 
 namespace BattleFury
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class BattleFury : Microsoft.Xna.Framework.Game
+    public class BattleFuryGame : Microsoft.Xna.Framework.Game
     {
 
         GraphicsDeviceManager graphics;
@@ -23,7 +24,7 @@ namespace BattleFury
 
         ScreenManager screenManager;
 
-        public BattleFury()
+        public BattleFuryGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -38,8 +39,8 @@ namespace BattleFury
             Components.Add(screenManager);
 
             // Activate the first screens
-            // screenManager.AddScreen(new Screen(), null);
-
+            screenManager.AddScreen(new BackgroundScreen(), null);
+            screenManager.AddScreen(new MainMenuScreen(), null);
         }
 
         /// <summary>
@@ -83,10 +84,7 @@ namespace BattleFury
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
+          
             // TODO: Add your update logic here
 
             base.Update(gameTime);
