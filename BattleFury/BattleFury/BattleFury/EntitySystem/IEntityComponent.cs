@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BattleFury.EntitySystem
 {
+    /// <summary>
+    /// Interface which all components will need to implement.
+    /// </summary>
     public interface IEntityComponent
     {
         /// <summary>

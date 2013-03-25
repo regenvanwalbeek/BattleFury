@@ -15,7 +15,7 @@ namespace BattleFury.Components.Animated
         public AnimationComponent(Entity parent, String id)
             : base(parent, id)
         {
-            
+              
         }
     }
 }

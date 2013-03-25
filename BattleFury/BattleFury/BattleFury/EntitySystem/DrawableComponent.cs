@@ -6,27 +6,46 @@ using Microsoft.Xna.Framework.Content;
 
 namespace BattleFury.EntitySystem
 {
+    /// <summary>
+    /// A drawable component in the Entity-Component model. A component 
+    /// represents a small piece of functionality of an entity which is able to
+    /// modify the data of a parent entity.
+    /// 
+    /// Specific drawable components which wish to provide functionality should 
+    /// subclass this class.
+    /// </summary>
     public abstract class DrawableComponent : Component, IEntityDrawable
     {
-
+        /// <summary>
+        /// Whether or not the component should be drawn.
+        /// </summary>
         public bool IsVisible { get; set; }
 
+        /// <summary>
+        /// Constructs the drawable component.
+        /// </summary>
+        /// <param name="parent">The parent entity.</param>
+        /// <param name="id">The name of the component.</param>
         public DrawableComponent(Entity parent, String id)
             : base(parent, id)
         {
             this.IsVisible = true;
         }
 
-        public abstract override void Start();
-
-        public abstract override void Initialize();
-
+        /// <summary>
+        /// Loads any content necessary for drawing this component.
+        /// </summary>
         public abstract void LoadContent();
 
+        /// <summary>
+        /// Unloads any content necessary for drawing this component
+        /// </summary>
         public abstract void UnloadContent();
 
-        public abstract override void Update(Microsoft.Xna.Framework.GameTime gameTime);
-
+        /// <summary>
+        /// Draws the component.
+        /// </summary>
+        /// <param name="gameTime">The current GameTime.</param>
         public abstract void Draw(Microsoft.Xna.Framework.GameTime gameTime);
 
     }

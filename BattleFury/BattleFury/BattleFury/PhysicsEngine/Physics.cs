@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BEPUphysics;
+using BEPUphysics.Entities.Prefabs;
 
 namespace BattleFury.PhysicsEngine
 {
@@ -20,6 +21,11 @@ namespace BattleFury.PhysicsEngine
         public void Update()
         {
             space.Update();
+        }
+
+        public void Add(ISpaceObject spaceObject)
+        {
+            space.Add(spaceObject);
         }
     }
 }
