@@ -23,7 +23,7 @@ namespace BattleFury.Screens
             MenuEntry quitGameMenuEntry = new MenuEntry("Quit");
 
             // Add event handlers
-            // playGameMenuEntry += ;
+            playGameMenuEntry.Selected += PlayGameMenuSelected;
             optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             quitGameMenuEntry.Selected += QuitMenuEntrySelected;
 
@@ -51,6 +51,15 @@ namespace BattleFury.Screens
         protected void QuitMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             ScreenManager.Game.Exit();
+        }
+
+        /// <summary>
+        /// Handler goes to start a game.
+        /// </summary>
+        protected void PlayGameMenuSelected(object sender, PlayerIndexEventArgs e)
+        {
+            ScreenManager.AddScreen(new BattleScreen(), null);
+            LoadingScreen.Load(ScreenManager, e.PlayerIndex, new BattleScreen());
         }
 
         
