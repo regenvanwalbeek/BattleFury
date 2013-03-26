@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using BattleFury.ScreenManagement;
 using BattleFury.Screens;
+using BattleFury.Settings;
 
 namespace BattleFury
 {
@@ -26,12 +27,25 @@ namespace BattleFury
 
         public BattleFuryGame()
         {
-            graphics = new GraphicsDeviceManager(this);
+            
             Content.RootDirectory = "Content";
+            
+            // Set up the graphics device.
+            graphics = new GraphicsDeviceManager(this);
+            DisplayModeCollection displayModes = GraphicsAdapter.DefaultAdapter.SupportedDisplayModes;
+            int height = 800, width = 600;
+            foreach (DisplayMode mode in displayModes){
+                width = mode.Width;
+                height = mode.Height;
+                break;
+            }
+            graphics.PreferredBackBufferWidth = width;
+            graphics.PreferredBackBufferHeight = height ;
+            GameSettings.LoadDefaultGameSettings(width, height);
+            
 
-            // Set the height and width
-            graphics.PreferredBackBufferHeight = 600;
-            graphics.PreferredBackBufferWidth = 800;
+            Services.AddService(typeof(GraphicsDeviceManager), graphics);
+            Services.AddService(typeof(DisplayModeCollection), displayModes);
 
             // Create the new screen manager component
             screenManager = new ScreenManager(this);
@@ -86,7 +100,6 @@ namespace BattleFury
         {
           
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 

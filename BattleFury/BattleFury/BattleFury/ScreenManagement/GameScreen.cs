@@ -11,6 +11,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using System.IO;
+using BattleFury.Input;
 #endregion
 
 namespace BattleFury.ScreenManagement

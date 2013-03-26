@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using BattleFury.ScreenManagement;
 using Microsoft.Xna.Framework;
+using BattleFury.Input;
+using BattleFury.Settings;
 
 namespace BattleFury.Screens
 {
@@ -66,7 +68,7 @@ namespace BattleFury.Screens
         public override void HandleInput(InputState input)
         {
             PlayerIndex playerIndex;
-            if (input.IsMenuCancel(ControllingPlayer, out playerIndex)){
+            if (MenuBindings.IsMenuCancel(input, ControllingPlayer, out playerIndex)){
                 ScreenManager.Game.Exit();
             }
             base.HandleInput(input);

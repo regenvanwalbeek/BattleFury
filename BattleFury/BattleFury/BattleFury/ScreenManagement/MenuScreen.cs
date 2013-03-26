@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using BattleFury.Input;
+using BattleFury.Settings;
 #endregion
 
 namespace BattleFury.ScreenManagement
@@ -73,7 +75,7 @@ namespace BattleFury.ScreenManagement
         public override void HandleInput(InputState input)
         {
             // Move to the previous menu entry?
-            if (input.IsMenuUp(ControllingPlayer))
+            if (MenuBindings.IsMenuUp(input, ControllingPlayer))
             {
                 selectedEntry--;
 
@@ -82,7 +84,7 @@ namespace BattleFury.ScreenManagement
             }
 
             // Move to the next menu entry?
-            if (input.IsMenuDown(ControllingPlayer))
+            if (MenuBindings.IsMenuDown(input, ControllingPlayer))
             {
                 selectedEntry++;
 
@@ -97,11 +99,11 @@ namespace BattleFury.ScreenManagement
             // OnSelectEntry and OnCancel, so they can tell which player triggered them.
             PlayerIndex playerIndex;
 
-            if (input.IsMenuSelect(ControllingPlayer, out playerIndex))
+            if (MenuBindings.IsMenuSelect(input, ControllingPlayer, out playerIndex))
             {
                 OnSelectEntry(selectedEntry, playerIndex);
             }
-            else if (input.IsMenuCancel(ControllingPlayer, out playerIndex))
+            else if (MenuBindings.IsMenuCancel(input, ControllingPlayer, out playerIndex))
             {
                 OnCancel(playerIndex);
             }

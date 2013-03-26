@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using BattleFury.Input;
 #endregion
 
 namespace BattleFury.ScreenManagement
@@ -77,6 +78,9 @@ namespace BattleFury.ScreenManagement
             set { traceEnabled = value; }
         }
 
+        public GraphicsDeviceManager GraphicsDeviceManager { get; private set; }
+
+        public DisplayModeCollection DisplayModes { get; private set; }
 
         #endregion
 
@@ -101,6 +105,10 @@ namespace BattleFury.ScreenManagement
             base.Initialize();
 
             isInitialized = true;
+            this.GraphicsDeviceManager = (GraphicsDeviceManager) Game.Services.GetService(typeof(GraphicsDeviceManager));
+            this.DisplayModes = (DisplayModeCollection)Game.Services.GetService(typeof(DisplayModeCollection));
+            
+
         }
 
 

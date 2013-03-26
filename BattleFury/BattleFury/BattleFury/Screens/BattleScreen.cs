@@ -6,6 +6,8 @@ using BattleFury.ScreenManagement;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using BattleFury.EntitySystem;
+using BattleFury.Input;
+using BattleFury.Settings;
 
 namespace BattleFury.Screens
 {
@@ -19,11 +21,18 @@ namespace BattleFury.Screens
         /// </summary>
         private ContentManager content;
 
+        /// <summary>
+        /// Manages the game entities.
+        /// </summary>
         private EntityManager entityManager;
 
+        private float pauseAlpha;
+
+        /// <summary>
+        /// Constructs the battle screen.
+        /// </summary>
         public BattleScreen()
         {
-
         }
 
         /// <summary>
@@ -36,6 +45,8 @@ namespace BattleFury.Screens
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
 
+            // Create the Entity Manager.
+            entityManager = new EntityManager(content);
             entityManager.Initialize();
         }
 
@@ -44,7 +55,6 @@ namespace BattleFury.Screens
         /// </summary>
         public override void UnloadContent()
         {
-           
             content.Unload();
         }
 
@@ -57,7 +67,7 @@ namespace BattleFury.Screens
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
-
+            
             // TODO pause screens are cool.
 
             entityManager.Update(gameTime);
@@ -79,6 +89,12 @@ namespace BattleFury.Screens
         public override void HandleInput(InputState input)
         {
             // TODO handle input.
+            if (GameplayBindings.IsPauseGame(input, ControllingPlayer))
+            {
+
+                ScreenManager.AddScreen(new PauseScreen(), ControllingPlayer);
+
+            }
         }
 
     }
