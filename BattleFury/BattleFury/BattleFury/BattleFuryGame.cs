@@ -32,16 +32,20 @@ namespace BattleFury
             
             // Set up the graphics device.
             graphics = new GraphicsDeviceManager(this);
+            // Initialize the screen resolution, no smaller than the min height/width supported by the game.
             DisplayModeCollection displayModes = GraphicsAdapter.DefaultAdapter.SupportedDisplayModes;
-            int height = 800, width = 600;
+            int height = GlobalGameConstants.MIN_SCREEN_HEIGHT, width = GlobalGameConstants.MIN_SCREEN_WIDTH;
             foreach (DisplayMode mode in displayModes){
-                width = mode.Width;
-                height = mode.Height;
+                if (mode.Width > GlobalGameConstants.MIN_SCREEN_WIDTH && mode.Height > GlobalGameConstants.MIN_SCREEN_HEIGHT)
+                {
+                    width = mode.Width;
+                    height = mode.Height;
+                }
                 break;
             }
             graphics.PreferredBackBufferWidth = width;
             graphics.PreferredBackBufferHeight = height ;
-            GameSettings.LoadDefaultGameSettings(width, height);
+            UserGameSettings.LoadDefaultGameSettings(width, height);
             
 
             Services.AddService(typeof(GraphicsDeviceManager), graphics);

@@ -67,30 +67,30 @@ namespace BattleFury.Screens
 
         private void setMenuEntryText()
         {
-            itemsMenuEntry.Text = "Items: " + (GameSettings.ItemsOn ? "on" : "off");
+            itemsMenuEntry.Text = "Items: " + (UserGameSettings.ItemsOn ? "on" : "off");
         }
 
         private void setWindowedEntryText()
         {
-            windowedMenuEntry.Text = GameSettings.Windowed ? "Windowed" : "Fullscreen";
+            windowedMenuEntry.Text = UserGameSettings.Windowed ? "Windowed" : "Fullscreen";
         }
 
         private void setResolutionEntryText()
         {
-            resolutionMenuEntry.Text = "Resolution: " + GameSettings.WindowWidth + "x" + GameSettings.WindowHeight;
+            resolutionMenuEntry.Text = "Resolution: " + UserGameSettings.WindowWidth + "x" + UserGameSettings.WindowHeight;
         }
 
         // Toggle whether items are on or off
         private void ItemsMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            GameSettings.ItemsOn = !GameSettings.ItemsOn;
+            UserGameSettings.ItemsOn = !UserGameSettings.ItemsOn;
             setMenuEntryText();
         }
 
         // Toggle fullscreen
         private void FullscreenMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            GameSettings.Windowed = !GameSettings.Windowed;
+            UserGameSettings.Windowed = !UserGameSettings.Windowed;
             setWindowedEntryText();
         }
 
@@ -111,7 +111,13 @@ namespace BattleFury.Screens
                         }
                     }
 
-                    if (!alreadyAdded)
+                    bool tooSmall = false;
+                    if (mode.Height < GlobalGameConstants.MIN_SCREEN_HEIGHT || mode.Width < GlobalGameConstants.MIN_SCREEN_WIDTH)
+                    {
+                        tooSmall = true;
+                    }
+
+                    if (!alreadyAdded && !tooSmall)
                     {
                         displayModes.Add(mode);
                     }
@@ -121,7 +127,7 @@ namespace BattleFury.Screens
                 for (int i = 0; i < displayModes.Count; i++)
                 {
                     DisplayMode mode = displayModes[i];
-                    if (mode.Width == GameSettings.WindowWidth && mode.Height == GameSettings.WindowHeight)
+                    if (mode.Width == UserGameSettings.WindowWidth && mode.Height == UserGameSettings.WindowHeight)
                     {
                         displayModeIndex = i;
                         break;
@@ -140,8 +146,8 @@ namespace BattleFury.Screens
 
             // Update the settings
             DisplayMode newDisplayMode = displayModes[displayModeIndex];
-            GameSettings.WindowWidth = newDisplayMode.Width;
-            GameSettings.WindowHeight = newDisplayMode.Height;
+            UserGameSettings.WindowWidth = newDisplayMode.Width;
+            UserGameSettings.WindowHeight = newDisplayMode.Height;
 
             setResolutionEntryText();
         }
@@ -150,17 +156,17 @@ namespace BattleFury.Screens
         private void OnComplete(object sender, PlayerIndexEventArgs e)
         {
             // Set full screen, if necessary
-            if (GameSettings.Windowed == ScreenManager.GraphicsDeviceManager.IsFullScreen)
+            if (UserGameSettings.Windowed == ScreenManager.GraphicsDeviceManager.IsFullScreen)
             {
                 ScreenManager.GraphicsDeviceManager.ToggleFullScreen();
             }
 
             // Resize window, if necessary
-            if (GameSettings.WindowWidth != ScreenManager.GraphicsDevice.Viewport.Width || 
-                GameSettings.WindowHeight != ScreenManager.GraphicsDevice.Viewport.Height)
+            if (UserGameSettings.WindowWidth != ScreenManager.GraphicsDevice.Viewport.Width || 
+                UserGameSettings.WindowHeight != ScreenManager.GraphicsDevice.Viewport.Height)
             {
-                ScreenManager.GraphicsDeviceManager.PreferredBackBufferWidth = GameSettings.WindowWidth;
-                ScreenManager.GraphicsDeviceManager.PreferredBackBufferHeight = GameSettings.WindowHeight;
+                ScreenManager.GraphicsDeviceManager.PreferredBackBufferWidth = UserGameSettings.WindowWidth;
+                ScreenManager.GraphicsDeviceManager.PreferredBackBufferHeight = UserGameSettings.WindowHeight;
                 ScreenManager.GraphicsDeviceManager.ApplyChanges();
             }
 

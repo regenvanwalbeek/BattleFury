@@ -9,7 +9,7 @@ namespace BattleFury.Settings
     /// <summary>
     /// A easily accessible class which maintains the settings for game play
     /// </summary>
-    public class GameSettings
+    public class UserGameSettings
     {
 
 

@@ -106,7 +106,8 @@
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
     <Compile Include="Entities\Items\Item.cs" />
-    <Compile Include="Settings\GameSettings.cs" />
+    <Compile Include="Settings\GlobalGameConstants.cs" />
+    <Compile Include="Settings\UserGameSettings.cs" />
     <Compile Include="PhysicsEngine\Physics.cs" />
     <Compile Include="Settings\GameplayBindings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
