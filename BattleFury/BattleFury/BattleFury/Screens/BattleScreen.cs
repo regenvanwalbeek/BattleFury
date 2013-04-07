@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework;
 using BattleFury.EntitySystem;
 using BattleFury.Input;
 using BattleFury.Settings;
+using BattleFury.Entities;
+using BattleFury.PhysicsEngine;
 
 namespace BattleFury.Screens
 {
@@ -29,10 +31,18 @@ namespace BattleFury.Screens
         private float pauseAlpha;
 
         /// <summary>
+        /// Battle arena.
+        /// </summary>
+        private Arena arenaEntity;
+
+        private Physics p;
+
+        /// <summary>
         /// Constructs the battle screen.
         /// </summary>
         public BattleScreen()
         {
+            this.p = new Physics();
         }
 
         /// <summary>
@@ -47,7 +57,15 @@ namespace BattleFury.Screens
 
             // Create the Entity Manager.
             entityManager = new EntityManager(content);
+
+            if (GameSettings.Arena == GameSettings.ARENA_SETTING.PLAIN_ARENA)
+            {
+                arenaEntity = new PlainArena();
+            }
+            entityManager.AddEntity(arenaEntity);
             entityManager.Initialize();
+
+
         }
 
         /// <summary>
@@ -67,7 +85,8 @@ namespace BattleFury.Screens
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
-            
+
+            p.Update();
             // TODO pause screens are cool.
 
             entityManager.Update(gameTime);

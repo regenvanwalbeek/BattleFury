@@ -40,7 +40,7 @@ namespace BattleFury.EntitySystem
         }
 
         /// <summary>
-        /// Remvoes an entity from the entity manager.
+        /// Removes an entity from the entity manager.
         /// </summary>
         /// <param name="entity">The entity to remove.</param>
         /// <returns>True if the entity was successfully removed. False otherwise.</returns>

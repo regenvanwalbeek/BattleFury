@@ -96,6 +96,7 @@
     <Compile Include="Entities\Hitboxes\GrabHitbox.cs" />
     <Compile Include="Entities\Hitboxes\ShieldHitbox.cs" />
     <Compile Include="Entities\Items\Rock.cs" />
+    <Compile Include="Entities\PlainArena.cs" />
     <Compile Include="Entities\Platform.cs" />
     <Compile Include="EntitySystem\Component.cs" />
     <Compile Include="EntitySystem\DrawableComponent.cs" />
@@ -107,7 +108,7 @@
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
     <Compile Include="Entities\Items\Item.cs" />
     <Compile Include="Settings\GlobalGameConstants.cs" />
-    <Compile Include="Settings\UserGameSettings.cs" />
+    <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="PhysicsEngine\Physics.cs" />
     <Compile Include="Settings\GameplayBindings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

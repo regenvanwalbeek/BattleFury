@@ -10,9 +10,9 @@ namespace BattleFury.Entities
     public abstract class Arena : Entity
     {
 
-        private List<Platform> platforms;
+        protected List<Platform> platforms;
 
-        private BoundingBox boundingBox;
+        protected BoundingBox boundingBox;
 
         public Arena(string id)
             : base(id)

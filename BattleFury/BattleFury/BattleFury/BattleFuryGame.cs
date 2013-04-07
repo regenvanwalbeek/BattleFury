@@ -45,7 +45,7 @@ namespace BattleFury
             }
             graphics.PreferredBackBufferWidth = width;
             graphics.PreferredBackBufferHeight = height ;
-            UserGameSettings.LoadDefaultGameSettings(width, height);
+            GameSettings.LoadDefaultGameSettings(width, height);
             
 
             Services.AddService(typeof(GraphicsDeviceManager), graphics);
