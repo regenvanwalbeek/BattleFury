@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BattleFury.ScreenManagement;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework;
+﻿using BattleFury.Entities;
+using BattleFury.Entities.Arenas;
 using BattleFury.EntitySystem;
 using BattleFury.Input;
-using BattleFury.Settings;
-using BattleFury.Entities;
 using BattleFury.PhysicsEngine;
-using BattleFury.Entities.Arenas;
+using BattleFury.ScreenManagement;
+using BattleFury.Settings;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 
 namespace BattleFury.Screens
@@ -75,7 +71,7 @@ namespace BattleFury.Screens
             entityManager.AddEntity(cameraEntity);
             entityManager.Initialize();
 
-            p.LoadContent();
+            p.LoadContent(content, cameraEntity);
         }
 
         /// <summary>
@@ -108,6 +104,7 @@ namespace BattleFury.Screens
         public override void Draw(GameTime gameTime)
         {
             entityManager.Draw(gameTime);
+            p.Draw(gameTime);
         }
 
         /// <summary>

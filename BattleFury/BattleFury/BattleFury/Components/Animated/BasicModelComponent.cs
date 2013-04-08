@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using BattleFury.Components.CameraComponents;
 using BattleFury.EntitySystem;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using BattleFury.Components.CameraComponents;
+using Microsoft.Xna.Framework.Graphics;
+using BattleFury.Entities;
 
 namespace BattleFury.Components.Animated
 {
-    public abstract class BasicModelComponent : DrawableComponent
+    public class BasicModelComponent : DrawableComponent
     {
         private Model model;
 
-        private ViewProjectionComponent cameraComponent;
+        private ViewProjectionComponent viewProjectionComponent;
 
-        public BasicModelComponent(Entity parent, Model model)
+        private EntityProvider<Camera> camera;
+
+        public BasicModelComponent(Entity parent, Model model, Camera camera)
             : base(parent, "BasicModelComponent")
         {
             this.model = model;
+            this.camera = new EntityProvider<Camera>(camera);
         }
 
         public override void Draw(GameTime gameTime)
@@ -31,8 +31,8 @@ namespace BattleFury.Components.Animated
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    effect.Projection = cameraComponent.Projection;
-                    effect.View = cameraComponent.View;
+                    effect.Projection = viewProjectionComponent.Projection;
+                    effect.View = viewProjectionComponent.View;
                     effect.World = GetWorld() * mesh.ParentBone.Transform;
                 }
                 mesh.Draw();
@@ -42,7 +42,7 @@ namespace BattleFury.Components.Animated
         public override void Start()
         {
             // Gather reference to Camera Drawing this entity
-            cameraComponent = (ViewProjectionComponent) ((DrawableByCameraComponent) Parent.GetComponent("DrawableByCameraComponent")).Camera.GetComponent("ViewProjectionComponent");
+            viewProjectionComponent = (ViewProjectionComponent) camera.Entity.GetComponent("ViewProjectionComponent");
         }
 
         public override void Update(GameTime gameTime)
@@ -58,5 +58,17 @@ namespace BattleFury.Components.Animated
             return Matrix.Identity;
         }
 
+
+        public override void LoadContent()
+        {
+        }
+
+        public override void UnloadContent()
+        {
+        }
+
+        public override void Initialize()
+        {
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace BattleFury.Entities
         public Camera()
             : base("Camera")
         {
-            this.AttachComponent(new ViewProjectionComponent(this, new Vector3(0, 0, -10), Vector3.Zero, Vector3.Up));
+            this.AttachComponent(new ViewProjectionComponent(this, new Vector3(0, 0, 20), Vector3.Zero, Vector3.Up));
         }
     }
 }

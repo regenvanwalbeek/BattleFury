@@ -80,8 +80,9 @@
     <Compile Include="Components\Animated\AnimationComponent.cs" />
     <Compile Include="Components\Animated\BasicModelComponent.cs" />
     <Compile Include="Components\Animated\CharacterAnimationComponent.cs" />
-    <Compile Include="Components\CameraComponents\DrawableByCameraComponent.cs" />
+    <Compile Include="Components\BepuPhysicsComponent.cs" />
     <Compile Include="Components\CameraComponents\ViewProjectionComponent.cs" />
+    <Compile Include="Components\EntityProvider.cs" />
     <Compile Include="Components\GravityComponent.cs" />
     <Compile Include="Components\RectangularCollisionComponent.cs" />
     <Compile Include="Components\SphericalCollisionComponent.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Components\Movement\ThrowComponent.cs" />
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Entities\Arenas\Arena.cs" />
+    <Compile Include="Entities\BepuPhysicsEntity.cs" />
     <Compile Include="Entities\Camera.cs" />
     <Compile Include="Entities\Characters\Character.cs" />
     <Compile Include="Entities\Characters\FightingRobot.cs" />
