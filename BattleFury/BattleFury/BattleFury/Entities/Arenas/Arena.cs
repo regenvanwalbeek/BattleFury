@@ -5,7 +5,7 @@ using System.Text;
 using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 
-namespace BattleFury.Entities
+namespace BattleFury.Entities.Arenas
 {
     public abstract class Arena : Entity
     {

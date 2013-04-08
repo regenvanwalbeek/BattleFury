@@ -10,6 +10,8 @@ using BattleFury.Input;
 using BattleFury.Settings;
 using BattleFury.Entities;
 using BattleFury.PhysicsEngine;
+using BattleFury.Entities.Arenas;
+
 
 namespace BattleFury.Screens
 {
@@ -34,6 +36,11 @@ namespace BattleFury.Screens
         /// Battle arena.
         /// </summary>
         private Arena arenaEntity;
+
+        /// <summary>
+        /// Camera to view the world.
+        /// </summary>
+        private Camera cameraEntity;
 
         private Physics p;
 
@@ -62,10 +69,13 @@ namespace BattleFury.Screens
             {
                 arenaEntity = new PlainArena();
             }
+            cameraEntity = new Camera();
+  
             entityManager.AddEntity(arenaEntity);
+            entityManager.AddEntity(cameraEntity);
             entityManager.Initialize();
 
-
+            p.LoadContent();
         }
 
         /// <summary>
@@ -87,7 +97,6 @@ namespace BattleFury.Screens
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
             p.Update();
-            // TODO pause screens are cool.
 
             entityManager.Update(gameTime);
         }
