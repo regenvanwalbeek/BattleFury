@@ -13,10 +13,10 @@ namespace BattleFury.Entities
 
         private BepuPhysicsComponent bepuPhysicsComponent;
 
-        public BepuPhysicsEntity(Box b, Model m, Camera c) : base("BepuPhysicsEntity")
+        public BepuPhysicsEntity(Box b, Model m) : base("BepuPhysicsEntity")
         {
             bepuPhysicsComponent = new BepuPhysicsComponent(this, b);
-            BasicModelComponent drawComponent = new BasicModelComponent(this, m, c);
+            BasicModelComponent drawComponent = new BasicModelComponent(this, m);
             this.AttachComponent(bepuPhysicsComponent);
             this.AttachComponent(drawComponent);
         }

@@ -11,11 +11,13 @@ namespace BattleFury.Entities
 {
     public class Camera : Entity
     {
+        public ViewProjectionComponent ViewProjection;
 
         public Camera()
             : base("Camera")
         {
-            this.AttachComponent(new ViewProjectionComponent(this, new Vector3(0, 0, 20), Vector3.Zero, Vector3.Up));
+            this.ViewProjection = new ViewProjectionComponent(this, new Vector3(0, 0, 20), Vector3.Zero, Vector3.Up);
+            this.AttachComponent(ViewProjection);
         }
     }
 }

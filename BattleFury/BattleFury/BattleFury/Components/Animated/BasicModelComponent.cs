@@ -10,18 +10,13 @@ namespace BattleFury.Components.Animated
     {
         private Model model;
 
-        private ViewProjectionComponent viewProjectionComponent;
-
-        private EntityProvider<Camera> camera;
-
-        public BasicModelComponent(Entity parent, Model model, Camera camera)
+        public BasicModelComponent(Entity parent, Model model)
             : base(parent, "BasicModelComponent")
         {
             this.model = model;
-            this.camera = new EntityProvider<Camera>(camera);
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime, Matrix view, Matrix projection)
         {
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
@@ -31,8 +26,8 @@ namespace BattleFury.Components.Animated
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    effect.Projection = viewProjectionComponent.Projection;
-                    effect.View = viewProjectionComponent.View;
+                    effect.Projection = projection;
+                    effect.View = view;
                     effect.World = GetWorld() * mesh.ParentBone.Transform;
                 }
                 mesh.Draw();
@@ -41,8 +36,6 @@ namespace BattleFury.Components.Animated
 
         public override void Start()
         {
-            // Gather reference to Camera Drawing this entity
-            viewProjectionComponent = (ViewProjectionComponent) camera.Entity.GetComponent("ViewProjectionComponent");
         }
 
         public override void Update(GameTime gameTime)
@@ -53,7 +46,7 @@ namespace BattleFury.Components.Animated
         /// Gets the model's world matrix
         /// </summary>
         /// <returns>The model's world</returns>
-        public virtual Matrix GetWorld()
+        protected virtual Matrix GetWorld()
         {
             return Matrix.Identity;
         }

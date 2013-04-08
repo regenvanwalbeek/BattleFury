@@ -29,7 +29,7 @@ namespace BattleFury.Components.CameraComponents
         public ViewProjectionComponent(Entity parent, Vector3 position, Vector3 target, Vector3 up)
             : base(parent, "ViewProjectionComponent")
         {
-            this.View = Matrix.CreateLookAt(position, position + target, up);
+            this.View = Matrix.CreateLookAt(position, target, up);
             this.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(FOV), 
                 (float) GameSettings.WindowWidth / GameSettings.WindowHeight, NEAR_PLANE_DISTANCE, FAR_PLANE_DISTANCE);
         }

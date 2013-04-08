@@ -159,13 +159,13 @@ namespace BattleFury.EntitySystem
         /// Draws the entity by drawing each component attached to this entity.
         /// </summary>
         /// <param name="gameTime">The current GameTime.</param>
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, Matrix view, Matrix projection)
         {
             for (int i = 0; i < drawableComponents.Count; i++)
             {
                 if (drawableComponents[i].IsVisible)
                 {
-                    drawableComponents[i].Draw(gameTime);
+                    drawableComponents[i].Draw(gameTime, view, projection);
                 }
             }
         }

@@ -20,6 +20,6 @@ namespace BattleFury.EntitySystem
         /// Draws the component.
         /// </summary>
         /// <param name="gameTime">The current GameTime.</param>
-        void Draw(GameTime gameTime);
+        void Draw(GameTime gameTime, Matrix view, Matrix projection);
     }
 }

@@ -53,6 +53,7 @@ namespace BattleFury.Screens
         /// </summary>
         public override void LoadContent()
         {
+            // Create the Content Manager.
             if (content == null)
             {
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
@@ -71,7 +72,7 @@ namespace BattleFury.Screens
             entityManager.AddEntity(cameraEntity);
             entityManager.Initialize();
 
-            p.LoadContent(content, cameraEntity);
+            p.LoadContent(content);
         }
 
         /// <summary>
@@ -103,8 +104,13 @@ namespace BattleFury.Screens
         /// <param name="gameTime">The current GameTime.</param>
         public override void Draw(GameTime gameTime)
         {
-            entityManager.Draw(gameTime);
-            p.Draw(gameTime);
+            this.ScreenManager.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+
+            Matrix view = cameraEntity.ViewProjection.View;
+            Matrix projection = cameraEntity.ViewProjection.Projection;
+            entityManager.Draw(gameTime, view, projection);
+            p.Draw(gameTime, view, projection);
         }
 
         /// <summary>

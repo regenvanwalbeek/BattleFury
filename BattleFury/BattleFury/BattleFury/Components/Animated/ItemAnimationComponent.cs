@@ -40,7 +40,7 @@ namespace BattleFury.Components.Animated
             throw new NotImplementedException();
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime, Matrix view, Matrix projection)
         {
             throw new NotImplementedException();
         }

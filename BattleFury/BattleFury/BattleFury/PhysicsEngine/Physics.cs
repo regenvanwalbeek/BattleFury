@@ -31,16 +31,18 @@ namespace BattleFury.PhysicsEngine
            
         }
 
-        public void LoadContent(ContentManager content, Camera camera)
+        private Model cube2;
+
+        public void LoadContent(ContentManager content)
         {
-            unitcube = content.Load<Model>("meshes/unitcube");
+            unitcube = content.Load<Model>("meshes/cube");
 
             // This would probably be good for initialize in an entity
-            ground = new BepuPhysicsEntity(new Box(Vector3.Zero, 30, 1, 30), unitcube, camera);
+            ground = new BepuPhysicsEntity(new Box(Vector3.Zero, 30, 1, 30), unitcube);
 
-            stuff1 = new BepuPhysicsEntity(new Box(new Vector3(0, 4, 0), 1, 1, 1, 1), unitcube, camera);
-            stuff2 = new BepuPhysicsEntity(new Box(new Vector3(0, 8, 0), 1, 1, 1, 1), unitcube, camera);
-            stuff3 = new BepuPhysicsEntity(new Box(new Vector3(0, 12, 0), 1, 1, 1, 1), unitcube, camera);
+            stuff1 = new BepuPhysicsEntity(new Box(new Vector3(0, 4, 0), 1, 1, 1, 1), unitcube);
+            stuff2 = new BepuPhysicsEntity(new Box(new Vector3(0, 8, 0), 1, 1, 1, 1), unitcube);
+            stuff3 = new BepuPhysicsEntity(new Box(new Vector3(0, 12, 0), 1, 1, 1, 1), unitcube);
 
             space.Add(ground.GetBox());
             space.Add(stuff1.GetBox());
@@ -53,6 +55,8 @@ namespace BattleFury.PhysicsEngine
             stuff3.Initialize();
 
             space.ForceUpdater.Gravity = new Vector3(0, -9.81f, 0);
+            cube2 = content.Load<Model>("meshes/unitcube");
+
         }
 
         public void Update()
@@ -60,12 +64,12 @@ namespace BattleFury.PhysicsEngine
             space.Update();
         }
 
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, Matrix view, Matrix projection)
         {
-            ground.Draw(gameTime);
-            stuff1.Draw(gameTime);
-            stuff2.Draw(gameTime);
-            stuff3.Draw(gameTime);
+            ground.Draw(gameTime, view, projection);
+            stuff1.Draw(gameTime, view, projection);
+            stuff2.Draw(gameTime, view, projection);
+            stuff3.Draw(gameTime, view, projection);
         }
 
         public void Add(ISpaceObject spaceObject)

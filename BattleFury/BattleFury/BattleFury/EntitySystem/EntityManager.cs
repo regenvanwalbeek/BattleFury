@@ -76,11 +76,11 @@ namespace BattleFury.EntitySystem
         /// Draws all the entities in the manager.
         /// </summary>
         /// <param name="gameTime">The current GameTime.</param>
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, Matrix view, Matrix projection)
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].Draw(gameTime);
+                entities[i].Draw(gameTime, view, projection);
             }
         }
 

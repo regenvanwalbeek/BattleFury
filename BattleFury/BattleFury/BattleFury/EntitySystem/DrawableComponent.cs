@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 
 namespace BattleFury.EntitySystem
 {
@@ -45,8 +46,10 @@ namespace BattleFury.EntitySystem
         /// <summary>
         /// Draws the component.
         /// </summary>
-        /// <param name="gameTime">The current GameTime.</param>
-        public abstract void Draw(Microsoft.Xna.Framework.GameTime gameTime);
+        /// <param nam="gameTime">The current GameTime.</param>
+        /// <param name="view">The camera's view matrix.</param>
+        /// <param name="projection">The camera's projection matrix.</param>
+        public abstract void Draw(Microsoft.Xna.Framework.GameTime gameTime, Matrix view, Matrix projection);
 
     }
 }
