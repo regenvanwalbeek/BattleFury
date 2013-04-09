@@ -15,7 +15,7 @@ namespace BattleFury.Components.CameraComponents
 
         ViewProjectionComponent cameraViewProjection;
 
-        public BattleCameraComponent(Entity parent) : base(parent, "BattleCaemraComponent")
+        public BattleCameraComponent(Entity parent) : base(parent, "BattleCameraComponent")
         {
         }
 
