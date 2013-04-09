@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BattleFury.EntitySystem;
 using BEPUphysics.Entities.Prefabs;
 using BattleFury.Entities;
+using BEPUphysics;
 
 namespace BattleFury.Components
 {
@@ -11,8 +12,8 @@ namespace BattleFury.Components
 
         public Box Box;
 
-        public BepuPhysicsComponent(Entity parent, Box b) : base(parent, "BepuPhysicsComponent"){
-            this.Box = b;
+        public BepuPhysicsComponent(Entity parent, Box box) : base(parent, "BepuPhysicsComponent"){
+            this.Box = box;
         }
 
         public override void Initialize()
