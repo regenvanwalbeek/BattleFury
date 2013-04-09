@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using BattleFury.Entities.Physics;
 using Microsoft.Xna.Framework.Graphics;
 using BEPUphysics.Entities.Prefabs;
+using System.Collections.Generic;
 
 
 namespace BattleFury.Screens
@@ -41,9 +42,14 @@ namespace BattleFury.Screens
         private Arena arenaEntity;
 
         /// <summary>
-        /// Camera to view the world.
+        /// Cameras to view the world.
         /// </summary>
-        private Camera cameraEntity;
+        private List<Camera> cameraEntities = new List<Camera>();
+
+        /// <summary>
+        /// Index of current camera to be used for drawing.
+        /// </summary>
+        private int currentCameraIndex = 0;
 
         /// <summary>
         /// Physics Simulator for all the game objects.
@@ -82,12 +88,15 @@ namespace BattleFury.Screens
             }
 
             // Create the Camera Entity.
-            cameraEntity = new Camera();
+            Camera gameCamera = new Camera(new Vector3(0, 10, 40), Vector3.Zero, Vector3.Up);
+            Camera debugCamera = new Camera(new Vector3(0, 20, 40), Vector3.Zero, Vector3.Up);
+            cameraEntities.Add(gameCamera); // Game Camera
+            cameraEntities.Add(debugCamera); // Debug Camera
 
             // Create the Physics Simulator.
             physicsEntity = new PhysicsSimulator();
             BepuPhysicsBox ground = new BepuPhysicsBox(new Box(Vector3.Zero, 30, 1, 30), cube);
-            BepuPhysicsBox stuff1 = new BepuPhysicsBox(new Box(new Vector3(0, 4, 0), 1, 1, 1, 1), cube);
+            BepuPhysicsBox stuff1 = new BepuPhysicsBox(new Box(new Vector3(0, 4, 0), 1, 5, 1, 1), cube);
             BepuPhysicsBox stuff2 = new BepuPhysicsBox(new Box(new Vector3(0, 8, 0), 1, 1, 1, 1), cube);
             BepuPhysicsBox stuff3 = new BepuPhysicsBox(new Box(new Vector3(0, 12, 0), 1, 1, 1, 1), cube);
             physicsEntity.AddPhysicsEntity(ground);
@@ -97,7 +106,8 @@ namespace BattleFury.Screens
 
             // Add the entities to the Entity Manager and init the manager
             entityManager.AddEntity(arenaEntity);
-            entityManager.AddEntity(cameraEntity);
+            entityManager.AddEntity(gameCamera);
+            entityManager.AddEntity(debugCamera);
             entityManager.AddEntity(physicsEntity);
             entityManager.AddEntity(ground);
             entityManager.AddEntity(stuff1);
@@ -126,6 +136,7 @@ namespace BattleFury.Screens
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
+            // Update the entities.
             entityManager.Update(gameTime);
         }
 
@@ -137,9 +148,9 @@ namespace BattleFury.Screens
         {
             this.ScreenManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-
-            Matrix view = cameraEntity.ViewProjection.View;
-            Matrix projection = cameraEntity.ViewProjection.Projection;
+            // Draw the entities based on the current camera
+            Matrix view = cameraEntities[currentCameraIndex].GetView();
+            Matrix projection = cameraEntities[currentCameraIndex].GetProjection();
             entityManager.Draw(gameTime, view, projection);
         }
 
@@ -149,13 +160,26 @@ namespace BattleFury.Screens
         /// <param name="input">The current input state.</param>
         public override void HandleInput(InputState input)
         {
-            // TODO handle input.
+            // Handle input.
+
+            // Pause Handling
             if (GameplayBindings.IsPauseGame(input, ControllingPlayer))
             {
-
                 ScreenManager.AddScreen(new PauseScreen(), ControllingPlayer);
-
             }
+
+            
+            // Debug Handling
+            #if DEBUG
+            if (DebugBindings.IsSwitchCamera(input, ControllingPlayer)){
+                currentCameraIndex++;
+                if (currentCameraIndex == cameraEntities.Count)
+                {
+                    currentCameraIndex = 0;
+                }
+            }
+
+            #endif
         }
 
     }

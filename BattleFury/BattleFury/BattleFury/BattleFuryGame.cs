@@ -83,7 +83,7 @@ namespace BattleFury
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            // Load Game Content here.
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace BattleFury
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -102,8 +102,15 @@ namespace BattleFury
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-          
-            // TODO: Add your update logic here
+            // Debug Controls
+            #if DEBUG
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.F12))
+            {
+                this.Exit();
+            }
+            #endif
+            
             base.Update(gameTime);
         }
 
