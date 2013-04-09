@@ -93,7 +93,7 @@ namespace BattleFury.Screens
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
-            p.Update();
+            p.Update(gameTime);
 
             entityManager.Update(gameTime);
         }

@@ -56,12 +56,17 @@ namespace BattleFury.PhysicsEngine
 
             space.ForceUpdater.Gravity = new Vector3(0, -9.81f, 0);
             cube2 = content.Load<Model>("meshes/unitcube");
-
+            Console.WriteLine("Phsycis");
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             space.Update();
+            ground.Update(gameTime);
+            stuff1.Update(gameTime);
+            stuff2.Update(gameTime);
+            stuff3.Update(gameTime);
+
         }
 
         public void Draw(GameTime gameTime, Matrix view, Matrix projection)

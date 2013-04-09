@@ -6,8 +6,14 @@ using BattleFury.Entities;
 
 namespace BattleFury.Components.Animated
 {
+    /// <summary>
+    /// A rendering component for a model.
+    /// </summary>
     public class BasicModelComponent : DrawableComponent
     {
+        /// <summary>
+        /// Model to render
+        /// </summary>
         private Model model;
 
         public BasicModelComponent(Entity parent, Model model)

@@ -80,6 +80,7 @@
     <Compile Include="Components\Animated\AnimationComponent.cs" />
     <Compile Include="Components\Animated\BasicModelComponent.cs" />
     <Compile Include="Components\Animated\CharacterAnimationComponent.cs" />
+    <Compile Include="Components\Animated\CubeRenderComponent.cs" />
     <Compile Include="Components\BepuPhysicsComponent.cs" />
     <Compile Include="Components\CameraComponents\ViewProjectionComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />

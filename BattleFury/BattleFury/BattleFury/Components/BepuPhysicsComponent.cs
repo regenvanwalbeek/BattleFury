@@ -22,12 +22,12 @@ namespace BattleFury.Components
 
         public override void Start()
         {
-            // Gather references to other components. Do nothing.
+
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            // Do nothing
+
         }
     }
 }

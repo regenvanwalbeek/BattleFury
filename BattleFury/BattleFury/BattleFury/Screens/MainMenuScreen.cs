@@ -60,7 +60,6 @@ namespace BattleFury.Screens
         /// </summary>
         protected void PlayGameMenuSelected(object sender, PlayerIndexEventArgs e)
         {
-            ScreenManager.AddScreen(new BattleScreen(), null);
             LoadingScreen.Load(ScreenManager, e.PlayerIndex, new BattleScreen());
         }
 

@@ -11,32 +11,26 @@ namespace BattleFury.Components
     {
         public Vector3 Position;
 
-        public float scale;
+        // public float scale;
 
-        public Quaternion Rotation;
+        // public Quaternion Rotation;
 
-        public TransformComponent(Entity parent)
+        public TransformComponent(Entity parent, Vector3 position)
             : base(parent, "TransformComponent")
         {
-
+            this.Position = position;
         }
 
         public override void Initialize()
         {
-            // TODO
-            throw new NotImplementedException();
         }
 
         public override void Start()
         {
-            // TODO
-            throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)
         {
-            // TODO
-            throw new NotImplementedException();
         }
     }
 }
