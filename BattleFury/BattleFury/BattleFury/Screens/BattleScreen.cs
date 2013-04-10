@@ -112,7 +112,7 @@ namespace BattleFury.Screens
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
                 {
-                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetSpawnPosition(), cube);
+                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetSpawnPosition(), cube, player.PlayerIndex, player.Team);
                     physicsEntity.AddPhysicsEntity(character.GetBox());
                     characters.Add(character);
                     

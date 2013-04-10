@@ -17,16 +17,10 @@ namespace BattleFury.Settings
 
         public Color Color;
 
-        public int PlayerIndex;
+        public PlayerIndex PlayerIndex;
 
-        public PlayerSettings(GameSettings.CHARACTER_SETTING character, int team, Color color, int playerIndex)
+        public PlayerSettings(GameSettings.CHARACTER_SETTING character, int team, Color color, PlayerIndex playerIndex)
         {
-            if (playerIndex > 4 || playerIndex < 0)
-            {
-                // Currently only support 4 players.
-                throw new ArgumentOutOfRangeException();
-            }
-
             this.Character = character;
             this.Team = team;
             this.Color = color;

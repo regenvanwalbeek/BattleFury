@@ -28,6 +28,31 @@ namespace BattleFury.Settings
                    InputState.IsNewButtonPress(Buttons.Start, controllingPlayer, out playerIndex);
         }
 
+        /// <summary>
+        /// Binds Y Button to Jump.
+        /// </summary>
+        public static bool IsJump(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+
+            return InputState.IsNewKeyPress(Keys.J, controllingPlayer, out playerIndex) ||
+                InputState.IsNewButtonPress(Buttons.Y, controllingPlayer, out playerIndex);
+        }
+
+
+        public static float MoveAmount(PlayerIndex controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+            if (InputState.IsKeyPressed(Keys.K, controllingPlayer, out playerIndex))
+            {
+                return -1.0f;
+            }
+            else if (InputState.IsKeyPressed(Keys.L, controllingPlayer, out playerIndex))
+            {
+                return 1.0f;
+            }
+            return InputState.GetLeftAnalogStick(controllingPlayer).X;
+        }
 
 
     }

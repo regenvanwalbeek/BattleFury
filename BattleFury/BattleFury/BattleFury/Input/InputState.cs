@@ -128,7 +128,7 @@ namespace BattleFury.Input
         }
 
         /// <summary>
-        /// Checks if a key is pressed for a given player index.
+        /// Helper for checking if a key is pressed for a given player index.
         /// </summary>
         public static bool IsKeyPressed(Keys key, PlayerIndex? controllingPlayer,
                                             out PlayerIndex playerIndex)
@@ -153,7 +153,7 @@ namespace BattleFury.Input
         }
 
         /// <summary>
-        /// Checks if a button is pressed for a given player index.
+        /// Helper for checking if a button is pressed for a given player index.
         /// </summary>
         public static bool IsButtonPressed(Buttons button, PlayerIndex? controllingPlayer,
                                                      out PlayerIndex playerIndex)
@@ -177,16 +177,28 @@ namespace BattleFury.Input
             }
         }
 
+        /// <summary>
+        /// Helper for Checking Mouse X Change between Updates
+        /// </summary>
         public static int GetMouseDeltaX()
         {
             return CurrentMouseState.X - LastMouseState.X;
         }
 
+        /// <summary>
+        /// Helper for Checking Mouse Y change between Updates
+        /// </summary>
         public static int GetMouseDeltaY()
         {
             return CurrentMouseState.Y - LastMouseState.Y;
         }
 
+
+        public static Vector2 GetLeftAnalogStick(PlayerIndex playerIndex)
+        {
+            int i = (int) playerIndex;
+            return CurrentGamePadStates[i].ThumbSticks.Left;
+        }
 
         #endregion
     }

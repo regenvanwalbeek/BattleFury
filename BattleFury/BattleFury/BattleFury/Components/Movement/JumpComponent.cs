@@ -5,31 +5,42 @@ using System.Text;
 
 using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
+using BattleFury.Components.Characters;
+using BattleFury.Settings;
 
 namespace BattleFury.Components.Movement
 {
     public class JumpComponent : Component
     {
-        public JumpComponent(Entity parent) : base(parent, "JumpComponent"){
+        private int JumpHeight;
 
+        private PlayerIndex controllingPlayer;
+
+        private BepuPhysicsComponent bepuPhysicsComponent;
+
+        public JumpComponent(Entity parent, int jumpHeight)
+            : base(parent, "JumpComponent")
+        {
+            this.JumpHeight = jumpHeight;
         }
 
-        public override void  Initialize()
+        public override void Initialize()
         {
-            // TODO
-            throw new NotImplementedException();
         }
 
         public override void Start()
         {
-            // TODO
-            throw new NotImplementedException();
+            controllingPlayer = ((CharacterInformationComponent) Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
+            bepuPhysicsComponent = ((BepuPhysicsComponent) Parent.GetComponent("BepuPhysicsComponent"));
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            // TODO
-            throw new NotImplementedException();
+
+            if (GameplayBindings.IsJump(controllingPlayer))
+            {
+                bepuPhysicsComponent.Box.LinearVelocity = new Vector3(0, JumpHeight, 0);
+            }
         }
     }
 }
