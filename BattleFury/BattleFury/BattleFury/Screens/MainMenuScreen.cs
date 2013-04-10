@@ -67,7 +67,7 @@ namespace BattleFury.Screens
         public override void HandleInput(InputState input)
         {
             PlayerIndex playerIndex;
-            if (MenuBindings.IsMenuCancel(input, ControllingPlayer, out playerIndex)){
+            if (MenuBindings.IsMenuCancel(ControllingPlayer, out playerIndex)){
                 ScreenManager.Game.Exit();
             }
             base.HandleInput(input);

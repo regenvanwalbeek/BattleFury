@@ -10,6 +10,7 @@ using BattleFury.Entities.Physics;
 using Microsoft.Xna.Framework.Graphics;
 using BEPUphysics.Entities.Prefabs;
 using System.Collections.Generic;
+using BattleFury.Components.CameraComponents;
 
 
 namespace BattleFury.Screens
@@ -45,6 +46,8 @@ namespace BattleFury.Screens
         /// Cameras to view the world.
         /// </summary>
         private List<Camera> cameraEntities = new List<Camera>();
+
+        private DebugCameraComponent debugCameraComponent;
 
         /// <summary>
         /// Index of current camera to be used for drawing.
@@ -90,6 +93,8 @@ namespace BattleFury.Screens
             // Create the Camera Entity.
             Camera gameCamera = new Camera(new Vector3(0, 10, 40), Vector3.Zero, Vector3.Up);
             Camera debugCamera = new Camera(new Vector3(0, 20, 40), Vector3.Zero, Vector3.Up);
+            debugCameraComponent = new DebugCameraComponent(debugCamera);
+            debugCamera.AttachComponent(debugCameraComponent);
             cameraEntities.Add(gameCamera); // Game Camera
             cameraEntities.Add(debugCamera); // Debug Camera
 
@@ -163,7 +168,7 @@ namespace BattleFury.Screens
             // Handle input.
 
             // Pause Handling
-            if (GameplayBindings.IsPauseGame(input, ControllingPlayer))
+            if (GameplayBindings.IsPauseGame(ControllingPlayer))
             {
                 ScreenManager.AddScreen(new PauseScreen(), ControllingPlayer);
             }
@@ -171,12 +176,17 @@ namespace BattleFury.Screens
             
             // Debug Handling
             #if DEBUG
-            if (DebugBindings.IsSwitchCamera(input, ControllingPlayer)){
+            if (DebugBindings.IsSwitchCamera(ControllingPlayer)){
                 currentCameraIndex++;
                 if (currentCameraIndex == cameraEntities.Count)
                 {
                     currentCameraIndex = 0;
+                
                 }
+               
+                cameraEntities[currentCameraIndex].ResetCamera();
+               
+
             }
 
             #endif

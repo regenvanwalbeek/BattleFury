@@ -27,33 +27,15 @@ namespace BattleFury.Input
 
         public const int MaxInputs = 4;
 
-        public readonly KeyboardState[] CurrentKeyboardStates;
-        public readonly GamePadState[] CurrentGamePadStates;
+        public static readonly KeyboardState[] CurrentKeyboardStates = new KeyboardState[MaxInputs];
+        public static readonly GamePadState[] CurrentGamePadStates = new GamePadState[MaxInputs];
+        public static MouseState CurrentMouseState { get; private set; }
 
-        public readonly KeyboardState[] LastKeyboardStates;
-        public readonly GamePadState[] LastGamePadStates;
+        public static readonly KeyboardState[] LastKeyboardStates = new KeyboardState[MaxInputs];
+        public static readonly GamePadState[] LastGamePadStates = new GamePadState[MaxInputs];
+        public static MouseState LastMouseState { get; private set;  }
 
-        public readonly bool[] GamePadWasConnected;
-
-        #endregion
-
-        #region Initialization
-
-
-        /// <summary>
-        /// Constructs a new input state.
-        /// </summary>
-        public InputState()
-        {
-            CurrentKeyboardStates = new KeyboardState[MaxInputs];
-            CurrentGamePadStates = new GamePadState[MaxInputs];
-
-            LastKeyboardStates = new KeyboardState[MaxInputs];
-            LastGamePadStates = new GamePadState[MaxInputs];
-
-            GamePadWasConnected = new bool[MaxInputs];
-        }
-
+        public static readonly bool[] GamePadWasConnected = new bool[MaxInputs];
 
         #endregion
 
@@ -63,8 +45,10 @@ namespace BattleFury.Input
         /// <summary>
         /// Reads the latest state of the keyboard and gamepad.
         /// </summary>
-        public void Update()
+        public static void Update()
         {
+            LastMouseState = CurrentMouseState;
+            CurrentMouseState = Mouse.GetState();
             for (int i = 0; i < MaxInputs; i++)
             {
                 LastKeyboardStates[i] = CurrentKeyboardStates[i];
@@ -72,6 +56,7 @@ namespace BattleFury.Input
 
                 CurrentKeyboardStates[i] = Keyboard.GetState((PlayerIndex)i);
                 CurrentGamePadStates[i] = GamePad.GetState((PlayerIndex)i);
+
 
                 // Keep track of whether a gamepad has ever been
                 // connected, so we can detect if it is unplugged.
@@ -89,7 +74,7 @@ namespace BattleFury.Input
         /// If this is null, it will accept input from any player. When a keypress
         /// is detected, the output playerIndex reports which player pressed it.
         /// </summary>
-        public bool IsNewKeyPress(Keys key, PlayerIndex? controllingPlayer,
+        public static bool IsNewKeyPress(Keys key, PlayerIndex? controllingPlayer,
                                             out PlayerIndex playerIndex)
         {
             if (controllingPlayer.HasValue)
@@ -119,7 +104,7 @@ namespace BattleFury.Input
         /// If this is null, it will accept input from any player. When a button press
         /// is detected, the output playerIndex reports which player pressed it.
         /// </summary>
-        public bool IsNewButtonPress(Buttons button, PlayerIndex? controllingPlayer,
+        public static bool IsNewButtonPress(Buttons button, PlayerIndex? controllingPlayer,
                                                      out PlayerIndex playerIndex)
         {
             if (controllingPlayer.HasValue)
@@ -140,6 +125,66 @@ namespace BattleFury.Input
                         IsNewButtonPress(button, PlayerIndex.Three, out playerIndex) ||
                         IsNewButtonPress(button, PlayerIndex.Four, out playerIndex));
             }
+        }
+
+        /// <summary>
+        /// Checks if a key is pressed for a given player index.
+        /// </summary>
+        public static bool IsKeyPressed(Keys key, PlayerIndex? controllingPlayer,
+                                            out PlayerIndex playerIndex)
+        {
+            if (controllingPlayer.HasValue)
+            {
+                // Read input from the specified player.
+                playerIndex = controllingPlayer.Value;
+
+                int i = (int)playerIndex;
+
+                return (CurrentKeyboardStates[i].IsKeyDown(key));
+            }
+            else
+            {
+                // Accept input from any player.
+                return (IsKeyPressed(key, PlayerIndex.One, out playerIndex) ||
+                        IsKeyPressed(key, PlayerIndex.Two, out playerIndex) ||
+                        IsKeyPressed(key, PlayerIndex.Three, out playerIndex) ||
+                        IsKeyPressed(key, PlayerIndex.Four, out playerIndex));
+            }
+        }
+
+        /// <summary>
+        /// Checks if a button is pressed for a given player index.
+        /// </summary>
+        public static bool IsButtonPressed(Buttons button, PlayerIndex? controllingPlayer,
+                                                     out PlayerIndex playerIndex)
+        {
+            if (controllingPlayer.HasValue)
+            {
+                // Read input from the specified player.
+                playerIndex = controllingPlayer.Value;
+
+                int i = (int)playerIndex;
+
+                return (CurrentGamePadStates[i].IsButtonDown(button));
+            }
+            else
+            {
+                // Accept input from any player.
+                return (IsButtonPressed(button, PlayerIndex.One, out playerIndex) ||
+                        IsButtonPressed(button, PlayerIndex.Two, out playerIndex) ||
+                        IsButtonPressed(button, PlayerIndex.Three, out playerIndex) ||
+                        IsButtonPressed(button, PlayerIndex.Four, out playerIndex));
+            }
+        }
+
+        public static int GetMouseDeltaX()
+        {
+            return CurrentMouseState.X - LastMouseState.X;
+        }
+
+        public static int GetMouseDeltaY()
+        {
+            return CurrentMouseState.Y - LastMouseState.Y;
         }
 
 

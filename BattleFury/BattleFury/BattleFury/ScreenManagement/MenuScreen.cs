@@ -75,7 +75,7 @@ namespace BattleFury.ScreenManagement
         public override void HandleInput(InputState input)
         {
             // Move to the previous menu entry?
-            if (MenuBindings.IsMenuUp(input, ControllingPlayer))
+            if (MenuBindings.IsMenuUp(ControllingPlayer))
             {
                 selectedEntry--;
 
@@ -84,7 +84,7 @@ namespace BattleFury.ScreenManagement
             }
 
             // Move to the next menu entry?
-            if (MenuBindings.IsMenuDown(input, ControllingPlayer))
+            if (MenuBindings.IsMenuDown(ControllingPlayer))
             {
                 selectedEntry++;
 
@@ -99,11 +99,11 @@ namespace BattleFury.ScreenManagement
             // OnSelectEntry and OnCancel, so they can tell which player triggered them.
             PlayerIndex playerIndex;
 
-            if (MenuBindings.IsMenuSelect(input, ControllingPlayer, out playerIndex))
+            if (MenuBindings.IsMenuSelect(ControllingPlayer, out playerIndex))
             {
                 OnSelectEntry(selectedEntry, playerIndex);
             }
-            else if (MenuBindings.IsMenuCancel(input, ControllingPlayer, out playerIndex))
+            else if (MenuBindings.IsMenuCancel(ControllingPlayer, out playerIndex))
             {
                 OnCancel(playerIndex);
             }

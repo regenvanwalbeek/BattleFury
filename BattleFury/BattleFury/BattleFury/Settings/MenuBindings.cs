@@ -19,13 +19,13 @@ namespace BattleFury.Settings
         /// If this is null, it will accept input from any player. When the action
         /// is detected, the output playerIndex reports which player pressed it.
         /// </summary>
-        public static bool IsMenuSelect(InputState inputState, PlayerIndex? controllingPlayer,
+        public static bool IsMenuSelect(PlayerIndex? controllingPlayer,
                                  out PlayerIndex playerIndex)
         {
-            return inputState.IsNewKeyPress(Keys.Space, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewKeyPress(Keys.Enter, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.A, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.Start, controllingPlayer, out playerIndex);
+            return InputState.IsNewKeyPress(Keys.Space, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewKeyPress(Keys.Enter, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.A, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.Start, controllingPlayer, out playerIndex);
         }
 
 
@@ -35,12 +35,12 @@ namespace BattleFury.Settings
         /// If this is null, it will accept input from any player. When the action
         /// is detected, the output playerIndex reports which player pressed it.
         /// </summary>
-        public static bool IsMenuCancel(InputState inputState, PlayerIndex? controllingPlayer,
+        public static bool IsMenuCancel(PlayerIndex? controllingPlayer,
                                  out PlayerIndex playerIndex)
         {
-            return inputState.IsNewKeyPress(Keys.Escape, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.B, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.Back, controllingPlayer, out playerIndex);
+            return InputState.IsNewKeyPress(Keys.Escape, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.B, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.Back, controllingPlayer, out playerIndex);
         }
 
 
@@ -49,13 +49,13 @@ namespace BattleFury.Settings
         /// The controllingPlayer parameter specifies which player to read
         /// input for. If this is null, it will accept input from any player.
         /// </summary>
-        public static bool IsMenuUp(InputState inputState, PlayerIndex? controllingPlayer)
+        public static bool IsMenuUp(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
 
-            return inputState.IsNewKeyPress(Keys.Up, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.DPadUp, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.LeftThumbstickUp, controllingPlayer, out playerIndex);
+            return InputState.IsNewKeyPress(Keys.Up, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.DPadUp, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.LeftThumbstickUp, controllingPlayer, out playerIndex);
         }
 
 
@@ -64,13 +64,13 @@ namespace BattleFury.Settings
         /// The controllingPlayer parameter specifies which player to read
         /// input for. If this is null, it will accept input from any player.
         /// </summary>
-        public static bool IsMenuDown(InputState inputState, PlayerIndex? controllingPlayer)
+        public static bool IsMenuDown(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
 
-            return inputState.IsNewKeyPress(Keys.Down, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.DPadDown, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.LeftThumbstickDown, controllingPlayer, out playerIndex);
+            return InputState.IsNewKeyPress(Keys.Down, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.DPadDown, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.LeftThumbstickDown, controllingPlayer, out playerIndex);
         }
 
 

@@ -19,13 +19,13 @@ namespace BattleFury.Settings
         /// The controllingPlayer parameter specifies which player to read
         /// input for. If this is null, it will accept input from any player.
         /// </summary>
-        public static bool IsPauseGame(InputState inputState, PlayerIndex? controllingPlayer)
+        public static bool IsPauseGame(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
 
-            return inputState.IsNewKeyPress(Keys.Escape, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.Back, controllingPlayer, out playerIndex) ||
-                   inputState.IsNewButtonPress(Buttons.Start, controllingPlayer, out playerIndex);
+            return InputState.IsNewKeyPress(Keys.Escape, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.Back, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.Start, controllingPlayer, out playerIndex);
         }
 
 

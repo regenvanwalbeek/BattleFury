@@ -82,6 +82,7 @@
     <Compile Include="Components\Animated\CharacterAnimationComponent.cs" />
     <Compile Include="Components\Animated\CubeRenderComponent.cs" />
     <Compile Include="Components\CameraComponents\BattleCameraComponent.cs" />
+    <Compile Include="Components\CameraComponents\DebugCameraComponent.cs" />
     <Compile Include="Components\CameraComponents\ViewProjectionComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
     <Compile Include="Components\GravityComponent.cs" />

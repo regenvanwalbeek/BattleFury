@@ -13,63 +13,97 @@ namespace BattleFury.Settings
         /// <summary>
         /// Binds F12 to Force Quit.
         /// </summary>
-        public static bool IsForceQuit(InputState inputState, PlayerIndex? controllingPlayer)
+        public static bool IsForceQuit(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
 
-            return inputState.IsNewKeyPress(Keys.F12, controllingPlayer, out playerIndex);
+            return InputState.IsNewKeyPress(Keys.F12, controllingPlayer, out playerIndex);
         }
 
         /// <summary>
         /// Binds F11 swapping camera.
         /// </summary>
-        public static bool IsSwitchCamera(InputState inputState, PlayerIndex? controllingPlayer)
+        public static bool IsSwitchCamera(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
 
-            return inputState.IsNewKeyPress(Keys.F11, controllingPlayer, out playerIndex);
+            return InputState.IsNewKeyPress(Keys.F11, controllingPlayer, out playerIndex);
         }
 
         /// <summary>
-        /// Binds Forward movement to 
+        /// Binds Forward camera movement to W key.
         /// </summary>
-        public static bool IsCameraForward(InputState inputState, PlayerIndex? controllingPlayer)
+        public static bool IsCameraForward(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            return inputState.IsNewKeyPress(Keys.W, controllingPlayer, out playerIndex);
-            throw new NotImplementedException();
+            return InputState.IsKeyPressed(Keys.W, controllingPlayer, out playerIndex);
         }
 
-        public static bool IsCameraBackward(InputState inputState, PlayerIndex? controllingPlayer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool IsCameraUp(InputState inputState, PlayerIndex? controllingPlayer)
+        /// <summary>
+        /// Binds Backward camera movement to S key.
+        /// </summary>
+        public static bool IsCameraBackward(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            return inputState.IsNewKeyPress(Keys.Up, controllingPlayer, out playerIndex);
+            return InputState.IsKeyPressed(Keys.S, controllingPlayer, out playerIndex);
         }
 
-        public static bool IsCameraDown(InputState inputState, PlayerIndex? controllingPlayer)
+        /// <summary>
+        /// Binds Left camera movement to A key.
+        /// </summary>
+        public static bool IsCameraLeft(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            return inputState.IsNewKeyPress(Keys.Down, controllingPlayer, out playerIndex);
+            return InputState.IsKeyPressed(Keys.A, controllingPlayer, out playerIndex);
         }
 
-        public static bool IsCameraLeft(InputState inputState, PlayerIndex? controllingPlayer)
+        /// <summary>
+        /// Binds Right camera movement to D key.
+        /// </summary>
+        public static bool IsCameraRight(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            return inputState.IsNewKeyPress(Keys.Left, controllingPlayer, out playerIndex)
-                || inputState.IsNewKeyPress(Keys.A, controllingPlayer, out playerIndex);
+            return InputState.IsKeyPressed(Keys.D, controllingPlayer, out playerIndex);
         }
 
-        public static bool IsCameraRight(InputState inputState, PlayerIndex? controllingPlayer)
+        /// <summary>
+        /// Binds Up Look Camera Movement to Up key.
+        /// </summary>
+        public static bool IsCameraLookUp(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            return inputState.IsNewKeyPress(Keys.Right, controllingPlayer, out playerIndex) 
-                || inputState.IsNewKeyPress(Keys.D, controllingPlayer, out playerIndex);
+            return InputState.IsKeyPressed(Keys.Up, controllingPlayer, out playerIndex);
         }
+
+        /// <summary>
+        /// Binds Down Look Camera Movement to Down key.
+        /// </summary>
+        public static bool IsCameraLookDown(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+            return InputState.IsKeyPressed(Keys.Down, controllingPlayer, out playerIndex);
+        }
+
+        /// <summary>
+        /// Binds Left Look Camera Movement to Left key.
+        /// </summary>
+        public static bool IsCameraLookLeft(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+            return InputState.IsKeyPressed(Keys.Left, controllingPlayer, out playerIndex);
+        }
+
+        /// <summary>
+        /// Binds Right Look Camera Movement to Right key.
+        /// </summary>
+        public static bool IsCameraLookRight(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+            return InputState.IsKeyPressed(Keys.Right, controllingPlayer, out playerIndex);
+        }
+     
+
+       
 
         
 

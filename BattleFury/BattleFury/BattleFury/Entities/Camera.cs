@@ -20,11 +20,19 @@ namespace BattleFury.Entities
     {
         private ViewProjectionComponent viewProjection;
 
+        private Vector3 startPosition;
+        private Vector3 startTarget;
+        private Vector3 startUp;
+
         public Camera(Vector3 position, Vector3 target, Vector3 up)
             : base("Camera")
         {
             this.viewProjection = new ViewProjectionComponent(this, position, target, up);
             this.AttachComponent(viewProjection);
+
+            startPosition = position;
+            startTarget = target;
+            startUp = up;
         }
 
         public Matrix GetView()
@@ -35,6 +43,11 @@ namespace BattleFury.Entities
         public Matrix GetProjection()
         {
             return viewProjection.Projection;
+        }
+
+        public void ResetCamera()
+        {
+            viewProjection.Reset();
         }
     }
 }

@@ -15,6 +15,14 @@ namespace BattleFury.Components.CameraComponents
 
         private const int FAR_PLANE_DISTANCE = 3000;
 
+        private Vector3 startPosition;
+        private Vector3 startDirection;
+        private Vector3 startUp;
+
+
+        public float MoveSpeed = 1.0f;
+
+        public float RotationSpeed = .05f;
 
         /// <summary>
         /// The camera's view matrix. Contains the camera's position, the camera's target, and the 's up vector.
@@ -26,12 +34,30 @@ namespace BattleFury.Components.CameraComponents
         /// </summary>
         public Matrix Projection { get; protected set; }
 
+        public Vector3 Position { get; protected set; }
+
+        public Vector3 Direction { get; protected set; }
+
+        public Vector3 Up { get; protected set; }
+
+        
+
         public ViewProjectionComponent(Entity parent, Vector3 position, Vector3 target, Vector3 up)
             : base(parent, "ViewProjectionComponent")
         {
             this.View = Matrix.CreateLookAt(position, target, up);
             this.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(FOV), 
                 (float) GameSettings.WindowWidth / GameSettings.WindowHeight, NEAR_PLANE_DISTANCE, FAR_PLANE_DISTANCE);
+
+            this.Position = position;
+            this.Direction = Vector3.Normalize(target - position);
+            this.Up = Vector3.Normalize(up);
+
+            this.startPosition = Position;
+            this.startDirection = Direction;
+            this.startUp = Up;
+
+
         }
 
         public override void Initialize()
@@ -47,9 +73,74 @@ namespace BattleFury.Components.CameraComponents
         public override void Update(GameTime gameTime)
         {
             // update the view matrix
-            // TODO
-            // for now, do nothing!
+            View = Matrix.CreateLookAt(Position, Position + Direction, Up);
         }
 
+        public void Reset()
+        {
+            this.Position = startPosition;
+            this.Direction = startDirection;
+            this.Up = startUp;
+        }
+
+
+        public void MoveForward()
+        {
+            Position += MoveSpeed * Direction;
+        }
+
+        public void MoveBackward()
+        {
+            Position -= MoveSpeed * Direction;
+        }
+        
+        public void MoveLeft()
+        {
+            Position -= MoveSpeed * Vector3.Cross(Direction, Up);
+        }
+        
+        public void MoveRight()
+        {
+            Position += MoveSpeed * Vector3.Cross(Direction, Up);
+        }
+
+        public void LookUp()
+        {
+            float pitchRotation = RotationSpeed;
+            if (Position.Z < 0)
+            {
+                pitchRotation *= -1;
+            }
+            Quaternion rotation = Quaternion.CreateFromYawPitchRoll(0, pitchRotation, 0);
+            Direction = Vector3.Transform(Direction, Matrix.CreateFromQuaternion(rotation));
+            Up = Vector3.Transform(Up, Matrix.CreateFromQuaternion(rotation));
+            Console.WriteLine(Position);
+        }
+
+        public void LookDown(){
+            float pitchRotation = -RotationSpeed;
+            if (Position.Z < 0)
+            {
+                pitchRotation *= -1;
+            }
+            Quaternion rotation = Quaternion.CreateFromYawPitchRoll(0, pitchRotation, 0);
+            Direction = Vector3.Transform(Direction, Matrix.CreateFromQuaternion(rotation));
+            Up = Vector3.Transform(Up, Matrix.CreateFromQuaternion(rotation));
+            Console.WriteLine(Position);
+        }
+
+        public void LookLeft(){
+            float yawRotation = RotationSpeed;
+            Quaternion rotation = Quaternion.CreateFromYawPitchRoll(yawRotation, 0, 0);
+            Direction = Vector3.Transform(Direction, Matrix.CreateFromQuaternion(rotation));
+        }
+
+        public void LookRight()
+        {
+            float yawRotation = -RotationSpeed;
+            Quaternion rotation = Quaternion.CreateFromYawPitchRoll(yawRotation, 0, 0);
+            Direction = Vector3.Transform(Direction, Matrix.CreateFromQuaternion(rotation));
+        }
+  
     }
 }
