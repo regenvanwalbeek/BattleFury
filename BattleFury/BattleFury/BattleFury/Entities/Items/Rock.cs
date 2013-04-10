@@ -11,7 +11,6 @@ namespace BattleFury.Entities.Items
         private DamagingHitbox hitbox;
 
         public Rock()
-            : base("Rock")
         {
 
         }

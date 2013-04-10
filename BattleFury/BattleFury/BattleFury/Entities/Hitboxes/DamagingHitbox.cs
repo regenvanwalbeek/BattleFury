@@ -12,7 +12,6 @@ namespace BattleFury.Entities.Hitboxes
         public int RawFlinchValue;
 
         public DamagingHitbox()
-            : base("DamagingHitbox")
         {
         
         }

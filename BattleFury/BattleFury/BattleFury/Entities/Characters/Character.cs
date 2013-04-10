@@ -19,7 +19,7 @@ namespace BattleFury.Entities.Characters
 
         protected CharacterInformationComponent characterInformationComponent;   
 
-        public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team) : base(id){
+        public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team) {
             vitalityComponent = new VitalityComponent(this, lives);
             this.AttachComponent(vitalityComponent);
 

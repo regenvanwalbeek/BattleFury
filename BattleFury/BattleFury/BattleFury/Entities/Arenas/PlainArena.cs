@@ -14,7 +14,6 @@ namespace BattleFury.Entities.Arenas
 
 
         public PlainArena()
-            : base("PlainArena")
         {
             spawnPositions = new List<Vector3>();
             spawnPositions.Add(new Vector3(-4, 4, 0));

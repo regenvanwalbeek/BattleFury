@@ -17,7 +17,6 @@ namespace BattleFury.Entities.Physics
         private BepuPhysicsComponent bepuPhysicsComponent;
 
         public BepuPhysicsBox(Box b, Model m)
-            : base("BepuPhysicsEntity")
         {
             // Create the physics Component.
             bepuPhysicsComponent = new BepuPhysicsComponent(this, b);

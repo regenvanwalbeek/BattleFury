@@ -15,7 +15,6 @@ namespace BattleFury.Entities.Physics
         private PhysicsSimulationComponent physics;
 
         public PhysicsSimulator()
-            : base("PhysicsSimulator")
         {
             physics = new PhysicsSimulationComponent(this);
             this.AttachComponent(physics);

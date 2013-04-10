@@ -19,7 +19,6 @@ namespace BattleFury.Entities
         private RectangularCollisionComponent collisionComponent;
 
         public Platform()
-            : base("Platform")
         {
             throw new NotImplementedException();
         }

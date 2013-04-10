@@ -15,7 +15,8 @@ namespace BattleFury.Entities.Hitboxes
 
         protected Entity owner;
 
-        public Hitbox(string id) : base(id){
+        public Hitbox()
+        {
         
         }
 

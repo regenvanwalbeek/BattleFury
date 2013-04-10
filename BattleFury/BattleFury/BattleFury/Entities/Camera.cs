@@ -25,7 +25,6 @@ namespace BattleFury.Entities
         private Vector3 startUp;
 
         public Camera(Vector3 position, Vector3 target, Vector3 up)
-            : base("Camera")
         {
             this.viewProjection = new ViewProjectionComponent(this, position, target, up);
             this.AttachComponent(viewProjection);

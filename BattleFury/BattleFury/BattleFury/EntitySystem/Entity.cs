@@ -14,10 +14,6 @@ namespace BattleFury.EntitySystem
     /// </summary>
     public abstract class Entity
     {
-        /// <summary>
-        /// The Entity's id.
-        /// </summary>
-        public string ID { get; protected set; }
 
         /// <summary>
         /// List of components for the entity.
@@ -43,8 +39,8 @@ namespace BattleFury.EntitySystem
         /// Creates the entity.
         /// </summary>
         /// <param name="id">The entity's id.</param>
-        public Entity(String id){
-            this.ID = id;
+        public Entity(){
+            this.isInitialized = false;
         }
         
         /// <summary>

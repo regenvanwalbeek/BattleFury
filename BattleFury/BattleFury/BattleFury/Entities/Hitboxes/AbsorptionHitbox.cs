@@ -8,7 +8,6 @@ namespace BattleFury.Entities.Hitboxes
     public class AbsorptionHitbox : Hitbox
     {
         public AbsorptionHitbox()
-            : base("AbsorptionHitbox")
         {
         }
     }

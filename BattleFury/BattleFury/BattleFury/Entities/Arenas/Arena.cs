@@ -14,8 +14,7 @@ namespace BattleFury.Entities.Arenas
 
         protected BoundingBox boundingBox;
 
-        public Arena(string id)
-            : base(id)
+        public Arena()
         {
         }
 

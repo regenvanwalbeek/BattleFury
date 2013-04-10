@@ -9,7 +9,6 @@ namespace BattleFury.Entities.Hitboxes
     {
 
         public GrabHitbox()
-            : base("GrabHitbox")
         {
         }
 

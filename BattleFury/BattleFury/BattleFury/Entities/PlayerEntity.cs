@@ -10,7 +10,6 @@ namespace BattleFury.Entities
     {
 
         public PlayerEntity()
-            : base("PlayerEntity")
         {
         
         }

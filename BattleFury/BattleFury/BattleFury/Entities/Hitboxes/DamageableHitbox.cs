@@ -8,7 +8,6 @@ namespace BattleFury.Entities.Hitboxes
     public class DamageableHitbox : Hitbox
     {
         public DamageableHitbox()
-            : base("DamageableHitbox")
         {
         
         }

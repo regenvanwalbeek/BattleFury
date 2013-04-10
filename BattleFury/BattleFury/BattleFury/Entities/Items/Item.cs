@@ -14,7 +14,7 @@ namespace BattleFury.Entities.Items
 
         protected AnimationComponent animationComponent;
 
-        public Item(string id) : base(id){
+        public Item(){
         
         }
     }
