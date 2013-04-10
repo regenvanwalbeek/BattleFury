@@ -5,6 +5,7 @@ using System.Text;
 using BattleFury.EntitySystem;
 using BattleFury.Components.Physics;
 using BEPUphysics;
+using BEPUphysics.Entities.Prefabs;
 
 namespace BattleFury.Entities.Physics
 {
@@ -20,14 +21,14 @@ namespace BattleFury.Entities.Physics
             this.AttachComponent(physics);
         }
 
-        public void AddPhysicsEntity(BepuPhysicsBox physicsEntity)
+        public void AddPhysicsEntity(Box physicsEntity)
         {
-            physics.AddPhysicsObject(physicsEntity.GetBox());
+            physics.AddPhysicsObject(physicsEntity);
         }
 
-        public void RemovePhysicsEntity(BepuPhysicsBox physicsEntity)
+        public void RemovePhysicsEntity(Box physicsEntity)
         {
-            physics.RemovePhysicsObject(physicsEntity.GetBox());
+            physics.RemovePhysicsObject(physicsEntity);
         }
 
     }

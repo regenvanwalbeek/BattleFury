@@ -17,6 +17,7 @@ namespace BattleFury.Components
         public GravityComponent(Entity parent)
             : base(parent, "GravityComponent")
         {
+            throw new NotImplementedException();
         }
 
         public override void Initialize()

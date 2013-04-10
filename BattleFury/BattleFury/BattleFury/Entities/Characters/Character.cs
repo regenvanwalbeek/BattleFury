@@ -1,27 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using BattleFury.Components.Characters;
 using BattleFury.EntitySystem;
-using BattleFury.AnimationEngine;
 using BattleFury.Components;
-using BattleFury.Components.Animated;
-using BattleFury.Entities.Hitboxes;
+using BEPUphysics.Entities.Prefabs;
 
 namespace BattleFury.Entities.Characters
 {
+    /// <summary>
+    /// Game character used for battling.
+    /// </summary>
     public abstract class Character : Entity
     {
-        protected TransformComponent transformComponent;
 
-        protected AnimationComponent animationComponent;
+        protected VitalityComponent vitalityComponent;
 
-        protected GravityComponent gravityComponent;
+        protected BepuPhysicsComponent bepuPhysicsComponent;
 
-        protected List<Hitbox> hitboxes;
 
-        public Character(string id) : base(id){
-            throw new NotImplementedException();
+
+        public Character(string id, int lives, Box box) : base(id){
+            vitalityComponent = new VitalityComponent(this, lives);
+            this.AttachComponent(vitalityComponent);
+
+            // Create the physics Component. 
+            // This will actually probably just translate into one box for jumps/gravity/trajectories
+            // and collision between characters.
+            bepuPhysicsComponent = new BepuPhysicsComponent(this, box);
+
+            this.AttachComponent(bepuPhysicsComponent);
         }
+
+        public Box GetBox()
+        {
+            return bepuPhysicsComponent.Box;
+        }
+
     }
 }

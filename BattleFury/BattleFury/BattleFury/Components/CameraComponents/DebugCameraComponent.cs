@@ -32,6 +32,7 @@ namespace BattleFury.Components.CameraComponents
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
+            // Camera Movement
             if (DebugBindings.IsCameraForward(null))
             {
                 viewProjection.MoveForward();
@@ -49,6 +50,7 @@ namespace BattleFury.Components.CameraComponents
                 viewProjection.MoveRight();
             }
             
+            // Camera Looking
             if (DebugBindings.IsCameraLookLeft(null))
             {
                 viewProjection.LookLeft();
@@ -65,7 +67,10 @@ namespace BattleFury.Components.CameraComponents
             {
                 viewProjection.LookUp();
             }
-            // viewProjection.Look(InputState.GetMouseDeltaX(), InputState.GetMouseDeltaY());
+            if (DebugBindings.IsCameraReset(null))
+            {
+                viewProjection.Reset();
+            }
 
         }
 

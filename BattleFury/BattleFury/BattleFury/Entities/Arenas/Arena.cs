@@ -19,5 +19,12 @@ namespace BattleFury.Entities.Arenas
         {
         }
 
+        /// <summary>
+        /// Returns the next position to spawn a character.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>Where to spawn a character</returns>
+        public abstract Vector3 GetSpawnPosition();
+
     }
 }

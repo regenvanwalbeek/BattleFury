@@ -101,8 +101,15 @@ namespace BattleFury.Settings
             PlayerIndex playerIndex;
             return InputState.IsKeyPressed(Keys.Right, controllingPlayer, out playerIndex);
         }
-     
 
+        /// <summary>
+        /// Binds F10 to Reseting the Debug Camera
+        /// </summary>
+        public static bool IsCameraReset(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+            return InputState.IsKeyPressed(Keys.F10, controllingPlayer, out playerIndex);
+        }
        
 
         
