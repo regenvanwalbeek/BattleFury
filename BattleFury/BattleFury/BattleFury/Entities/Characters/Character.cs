@@ -17,7 +17,9 @@ namespace BattleFury.Entities.Characters
 
         protected BepuPhysicsComponent bepuPhysicsComponent;
 
-        protected CharacterInformationComponent characterInformationComponent;   
+        protected CharacterInformationComponent characterInformationComponent;
+
+        protected RespawnableComponent respawnableObjectComponent;
 
         public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team) {
             vitalityComponent = new VitalityComponent(this, lives);

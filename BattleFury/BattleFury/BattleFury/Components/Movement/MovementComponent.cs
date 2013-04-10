@@ -36,9 +36,9 @@ namespace BattleFury.Components.Movement
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             float moveAmount = GameplayBindings.MoveAmount(controllingPlayer);
-            //bepuPhysicsComponent.Box.AngularVelocity = new Vector3(moveSpeed * moveAmount, 0, 0);
-            moveSpeed = .1f;
-            bepuPhysicsComponent.Box.Position = bepuPhysicsComponent.Box.Position + new Vector3(moveSpeed * moveAmount, 0, 0);
+            float downMovement = bepuPhysicsComponent.Box.LinearVelocity.Y;
+            bepuPhysicsComponent.Box.LinearVelocity = new Vector3(moveSpeed * moveAmount, downMovement, 0);
+            
         }
     }
 }

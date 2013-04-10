@@ -14,6 +14,7 @@ namespace BattleFury.Components
 
         public BepuPhysicsComponent(Entity parent, Box box) : base(parent, "BepuPhysicsComponent"){
             this.Box = box;
+            //PointOnPlaneJoint join;
         }
 
         public override void Initialize()

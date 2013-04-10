@@ -85,6 +85,7 @@
     <Compile Include="Components\CameraComponents\DebugCameraComponent.cs" />
     <Compile Include="Components\CameraComponents\ViewProjectionComponent.cs" />
     <Compile Include="Components\Characters\CharacterInformationComponent.cs" />
+    <Compile Include="Components\Characters\RespawnableComponent.cs" />
     <Compile Include="Components\Characters\VitalityComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
     <Compile Include="Components\GravityComponent.cs" />

@@ -13,10 +13,14 @@ namespace BattleFury.Entities.Characters
 {
     public class FightingRobot : Character
     {
-        
+        private const int SPEED = 10;
+
+        private const int JUMP_HEIGHT = 10;
+
+        private const int MASS = 1;
 
         public FightingRobot(int lives, Vector3 spawnPosition, Model model, PlayerIndex controllingPlayer, int team)
-            : base("FightingRobot", lives, new Box(spawnPosition, 1, 1, 1, 1), controllingPlayer, team)
+            : base("FightingRobot", lives, new Box(spawnPosition, 1, 1, 1, MASS), controllingPlayer, team)
         {
             
             // Create the rendering component. Since the cube model is 1x1x1, 
@@ -25,10 +29,10 @@ namespace BattleFury.Entities.Characters
             BasicModelComponent drawComponent = new CubeRenderComponent(this, model, scaling);
             this.AttachComponent(drawComponent);
 
-            JumpComponent jumpComponent = new JumpComponent(this, 10);
+            JumpComponent jumpComponent = new JumpComponent(this, SPEED);
             this.AttachComponent(jumpComponent);
 
-            MovementComponent moveComponent = new MovementComponent(this, 100);
+            MovementComponent moveComponent = new MovementComponent(this, JUMP_HEIGHT);
             this.AttachComponent(moveComponent);
 
         }
