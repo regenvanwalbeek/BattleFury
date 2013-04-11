@@ -14,7 +14,7 @@ namespace BattleFury.Components.Animated
         /// <summary>
         /// Model to render
         /// </summary>
-        private Model model;
+        protected Model model;
 
         public BasicModelComponent(Entity parent, Model model)
             : base(parent, "BasicModelComponent")

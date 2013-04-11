@@ -36,7 +36,7 @@ namespace BattleFury.Settings
             PlayerIndex playerIndex;
 
             return InputState.IsNewKeyPress(Keys.J, controllingPlayer, out playerIndex) ||
-                InputState.IsNewButtonPress(Buttons.Y, controllingPlayer, out playerIndex);
+                InputState.IsNewButtonPress(Buttons.A, controllingPlayer, out playerIndex);
         }
 
 

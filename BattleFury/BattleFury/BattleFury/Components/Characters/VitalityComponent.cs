@@ -12,6 +12,8 @@ namespace BattleFury.Components.Characters
 
         public float RageMeter;
 
+        public bool IsAlive = true;
+
         public VitalityComponent(Entity parent, int lives) : 
             base(parent, "VitalityComponent")
         {

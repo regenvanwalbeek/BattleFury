@@ -6,11 +6,17 @@ using Microsoft.Xna.Framework;
 
 namespace BattleFury.Entities.Arenas
 {
+    /// <summary>
+    /// A plain arena with no entities. Just a single base platform.
+    /// </summary>
     public class PlainArena : Arena
     {
+
         private List<Vector3> spawnPositions;
 
         private int currentSpawnIndex = 0;
+
+        private BoundingBox boundingBox;
 
 
         public PlainArena()
@@ -20,9 +26,11 @@ namespace BattleFury.Entities.Arenas
             spawnPositions.Add(new Vector3(0, 16, 0));
             spawnPositions.Add(new Vector3(4, 16, 0));
             spawnPositions.Add(new Vector3(8, 4, 0));
+
+            boundingBox = new BoundingBox(new Vector3(-20, -20, -20), new Vector3(20, 20, 20));
         }
 
-        public override Microsoft.Xna.Framework.Vector3 GetSpawnPosition()
+        public override Vector3 GetSpawnPosition()
         {
             Vector3 toReturn = spawnPositions[currentSpawnIndex];
             currentSpawnIndex++;
@@ -31,6 +39,11 @@ namespace BattleFury.Entities.Arenas
                 currentSpawnIndex = 0;
             }
             return toReturn;
+        }
+
+        public override BoundingBox GetBoundingBox()
+        {
+            return boundingBox;
         }
     }
 }

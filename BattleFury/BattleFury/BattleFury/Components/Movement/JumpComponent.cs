@@ -10,18 +10,33 @@ using BattleFury.Settings;
 
 namespace BattleFury.Components.Movement
 {
+    /// <summary>
+    /// Component which enables an entity to jump.
+    /// </summary>
     public class JumpComponent : Component
     {
-        private int JumpHeight;
+        /// <summary>
+        /// Height the character jumps.
+        /// </summary>
+        public int JumpHeight;
 
+        /// <summary>
+        /// Number of jumps a character can do simultaneously.
+        /// </summary>
+        public int MaxJumps;
+
+        /// <summary>
+        /// Player controlling the jumping entity.
+        /// </summary>
         private PlayerIndex controllingPlayer;
 
         private BepuPhysicsComponent bepuPhysicsComponent;
 
-        public JumpComponent(Entity parent, int jumpHeight)
+        public JumpComponent(Entity parent, int jumpHeight, int maxJumps)
             : base(parent, "JumpComponent")
         {
             this.JumpHeight = jumpHeight;
+            this.MaxJumps = maxJumps;
         }
 
         public override void Initialize()
@@ -41,6 +56,8 @@ namespace BattleFury.Components.Movement
             {
                 bepuPhysicsComponent.Box.LinearVelocity = new Vector3(0, JumpHeight, 0);
             }
+
+
         }
     }
 }

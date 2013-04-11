@@ -7,13 +7,15 @@ using Microsoft.Xna.Framework;
 
 namespace BattleFury.Entities.Arenas
 {
+    /// <summary>
+    /// An abstract arena entity for battling.
+    /// </summary>
     public abstract class Arena : Entity
     {
 
-        protected List<Platform> platforms;
-
-        protected BoundingBox boundingBox;
-
+        /// <summary>
+        /// Construct the Arena Entity.
+        /// </summary>
         public Arena()
         {
         }
@@ -24,6 +26,12 @@ namespace BattleFury.Entities.Arenas
         /// <param name="index"></param>
         /// <returns>Where to spawn a character</returns>
         public abstract Vector3 GetSpawnPosition();
+
+        /// <summary>
+        /// Retrieves the game's bounding box. Falling out of this bounding box will kill the character.
+        /// </summary>
+        /// <returns></returns>
+        public abstract BoundingBox GetBoundingBox();
 
     }
 }

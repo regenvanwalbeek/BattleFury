@@ -1,17 +1,17 @@
-﻿using BattleFury.Entities;
+﻿using System.Collections.Generic;
+using BattleFury.Components.CameraComponents;
+using BattleFury.Entities;
 using BattleFury.Entities.Arenas;
+using BattleFury.Entities.Characters;
+using BattleFury.Entities.Physics;
 using BattleFury.EntitySystem;
 using BattleFury.Input;
 using BattleFury.ScreenManagement;
 using BattleFury.Settings;
+using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using BattleFury.Entities.Physics;
 using Microsoft.Xna.Framework.Graphics;
-using BEPUphysics.Entities.Prefabs;
-using System.Collections.Generic;
-using BattleFury.Components.CameraComponents;
-using BattleFury.Entities.Characters;
 
 
 namespace BattleFury.Screens
@@ -32,11 +32,6 @@ namespace BattleFury.Screens
         private EntityManager entityManager;
 
         private float pauseAlpha;
-
-        /// <summary>
-        /// 1x1x1 unit cube model.
-        /// </summary>
-        private Model cube;
 
         /// <summary>
         /// Cameras to view the world.
@@ -69,7 +64,8 @@ namespace BattleFury.Screens
             }
 
             // Load the unit cube model.
-            cube = content.Load<Model>("meshes/cube");
+            Model cube = content.Load<Model>("meshes/cube");
+            Effect colorEffect = content.Load<Effect>("effects/ReplaceColor");
 
             // Create the Entity Manager.
             entityManager = new EntityManager(content);
@@ -95,10 +91,10 @@ namespace BattleFury.Screens
 
             // Create the Physics Simulator.
             PhysicsSimulator physicsEntity = new PhysicsSimulator();
-            BepuPhysicsBox ground = new BepuPhysicsBox(new Box(Vector3.Zero, 30, 1, 30), cube);
-            BepuPhysicsBox stuff1 = new BepuPhysicsBox(new Box(new Vector3(0, 4, 0), 1, 5, 1, 1), cube);
-            BepuPhysicsBox stuff2 = new BepuPhysicsBox(new Box(new Vector3(0, 8, 0), 1, 1, 1, 1), cube);
-            BepuPhysicsBox stuff3 = new BepuPhysicsBox(new Box(new Vector3(0, 12, 0), 1, 1, 1, 1), cube);
+            BepuPhysicsBox ground = new BepuPhysicsBox(new Box(Vector3.Zero, 30, 1, 5), cube, colorEffect, Color.Green);
+            BepuPhysicsBox stuff1 = new BepuPhysicsBox(new Box(new Vector3(0, 4, 0), 1, 5, 1, 1), cube, colorEffect, Color.Blue);
+            BepuPhysicsBox stuff2 = new BepuPhysicsBox(new Box(new Vector3(0, 8, 0), 1, 1, 1, 1), cube, colorEffect, Color.Blue);
+            BepuPhysicsBox stuff3 = new BepuPhysicsBox(new Box(new Vector3(0, 12, 0), 1, 1, 1, 1), cube, colorEffect, Color.Blue);
             physicsEntity.AddPhysicsEntity(ground.GetBox());
             physicsEntity.AddPhysicsEntity(stuff1.GetBox());
             physicsEntity.AddPhysicsEntity(stuff2.GetBox());
@@ -112,7 +108,7 @@ namespace BattleFury.Screens
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
                 {
-                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetSpawnPosition(), cube, player.PlayerIndex, player.Team);
+                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetSpawnPosition(), cube, player.PlayerIndex, player.Team, arenaEntity);
                     physicsEntity.AddPhysicsEntity(character.GetBox());
                     characters.Add(character);
                     

@@ -4,6 +4,7 @@ using BattleFury.EntitySystem;
 using BEPUphysics.Entities.Prefabs;
 using BattleFury.Entities;
 using BEPUphysics;
+using Microsoft.Xna.Framework;
 
 namespace BattleFury.Components
 {
@@ -27,9 +28,10 @@ namespace BattleFury.Components
 
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-
+            // Restrict the Z Axis movement.
+            Box.Position = new Vector3(Box.Position.X, Box.Position.Y, 0);
         }
     }
 }

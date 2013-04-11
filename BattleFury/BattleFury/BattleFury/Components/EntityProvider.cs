@@ -9,7 +9,7 @@ namespace BattleFury.Components
     /// easy data sharing between entities.
     /// </summary>
     /// <typeparam name="T">The entity type to share.</typeparam>
-    public class EntityProvider<T>  where T : Entity 
+    public class EntityProvider<T>  where T : Component
     {
         /// <summary>
         /// The entity to share.
