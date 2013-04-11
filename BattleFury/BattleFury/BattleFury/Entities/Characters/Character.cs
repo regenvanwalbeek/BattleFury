@@ -58,5 +58,10 @@ namespace BattleFury.Entities.Characters
             return bepuPhysicsComponent.Box;
         }
 
+        public bool IsKO()
+        {
+            return vitalityComponent.IsKO;
+        }
+
     }
 }

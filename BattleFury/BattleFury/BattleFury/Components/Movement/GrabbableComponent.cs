@@ -73,7 +73,7 @@ namespace BattleFury.Components.Movement
             }
             Vector2 throwVelocity = throwStrength * direction;
             Console.WriteLine("Throw Velocity " + throwVelocity);
-            bepuPhysicsComponent.Box.LinearVelocity = new Vector3(throwVelocity.X, throwVelocity.Y, 10);
+            bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 10);
             Console.WriteLine("Box Linear velocity " + bepuPhysicsComponent.Box.LinearVelocity);
            
         }

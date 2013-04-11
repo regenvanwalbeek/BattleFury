@@ -44,6 +44,13 @@ namespace BattleFury.Screens
         /// </summary>
         private int currentCameraIndex = 0;
 
+        private List<Character> characters;
+
+        /// <summary>
+        /// Numer of milliseconds since game over.
+        /// </summary>
+        private float timeSinceGameOver = 0;
+
         /// <summary>
         /// Constructs the battle screen.
         /// </summary>
@@ -108,7 +115,7 @@ namespace BattleFury.Screens
             // Create the Characters.
             List<PlayerSettings> players = GameSettings.Players;
             int numPlayers = players.Count;
-            List<Character> characters = new List<Character>(numPlayers);
+            characters = new List<Character>(numPlayers);
             foreach (PlayerSettings player in players)
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
@@ -162,6 +169,28 @@ namespace BattleFury.Screens
 
             // Update the entities.
             entityManager.Update(gameTime);
+
+
+            // Check if the game is over. If so, go to the game over screen.
+            int KOCount = 0;
+            for (int i = 0; i < characters.Count; i++)
+            {
+                if (characters[i].IsKO())
+                {
+                    KOCount++;
+                }
+            }
+            
+            // Exit the Battle Screen
+            if (KOCount == (characters.Count - 1))
+            {
+                timeSinceGameOver += gameTime.ElapsedGameTime.Milliseconds;
+                if (timeSinceGameOver >= 2000)
+                {
+                    // Match over. Go to the game over screen.
+                    LoadingScreen.Load(ScreenManager, null, new BackgroundScreen(), new MainMenuScreen());
+                }
+            }
         }
 
         /// <summary>

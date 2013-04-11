@@ -124,6 +124,7 @@
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
     <Compile Include="Entities\Items\Item.cs" />
+    <Compile Include="Screens\GameOver.cs" />
     <Compile Include="Settings\DebugBindings.cs" />
     <Compile Include="Settings\GlobalGameConstants.cs" />
     <Compile Include="Settings\GameSettings.cs" />
