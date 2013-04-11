@@ -89,6 +89,7 @@
     <Compile Include="Components\Characters\VitalityComponent.cs" />
     <Compile Include="Components\DrawableHUDComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
+    <Compile Include="Components\Movement\GrabbableComponent.cs" />
     <Compile Include="Components\Movement\MovementComponent.cs" />
     <Compile Include="Components\Physics\BepuPhysicsComponent.cs" />
     <Compile Include="Components\Physics\PhysicsSimulationComponent.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Entities\Camera.cs" />
     <Compile Include="Entities\Characters\Character.cs" />
     <Compile Include="Entities\Characters\FightingRobot.cs" />
+    <Compile Include="Entities\Environment.cs" />
     <Compile Include="Entities\Hitboxes\AbsorptionHitbox.cs" />
     <Compile Include="Entities\Hitboxes\DamageableHitbox.cs" />
     <Compile Include="Entities\Hitboxes\DamagingHitbox.cs" />

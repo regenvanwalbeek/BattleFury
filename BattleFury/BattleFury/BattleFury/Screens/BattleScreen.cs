@@ -86,6 +86,9 @@ namespace BattleFury.Screens
                 arenaEntity = new PlainArena(entityManager, physicsEntity, cube);
             }
 
+            // Create the environment
+            Environment environment = new Environment(arenaEntity);
+
             // Create the Camera Entity.
             Camera gameCamera = new Camera(new Vector3(0, 10, 60), Vector3.Zero + new Vector3(0, 20, -100), Vector3.Up );
             Camera debugCamera = new Camera(new Vector3(0, 20, 40), Vector3.Zero, Vector3.Up);
@@ -110,9 +113,10 @@ namespace BattleFury.Screens
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
                 {
-                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetSpawnPosition(), cube, player.PlayerIndex, player.Team, arenaEntity);
+                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetSpawnPosition(), cube, player.PlayerIndex, player.Team, environment);
                     physicsEntity.AddPhysicsEntity(character.GetBox());
                     characters.Add(character);
+                    environment.AddCharacter(character);
                     
                 }
             }

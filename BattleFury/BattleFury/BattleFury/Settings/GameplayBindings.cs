@@ -34,25 +34,56 @@ namespace BattleFury.Settings
         public static bool IsJump(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-
-            return InputState.IsNewKeyPress(Keys.J, controllingPlayer, out playerIndex) ||
+            #if DEBUG
+            return InputState.IsNewKeyPress(Keys.J, PlayerIndex.One, out playerIndex) ||
                 InputState.IsNewButtonPress(Buttons.A, controllingPlayer, out playerIndex);
+            #else
+            return InputState.IsNewButtonPress(Buttons.A, controllingPlayer, out playerIndex);
+            #endif
         }
 
-
-        public static float MoveAmount(PlayerIndex controllingPlayer)
+        /// <summary>
+        /// Binds X Button to Grab
+        /// </summary>
+        public static bool IsGrab(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            if (InputState.IsKeyPressed(Keys.K, controllingPlayer, out playerIndex))
+            #if DEBUG
+            return InputState.IsNewButtonPress(Buttons.X, controllingPlayer, out playerIndex) ||
+                InputState.IsNewKeyPress(Keys.G, PlayerIndex.One, out playerIndex) ;
+            #else
+            return InputState.IsNewButtonPress(Buttons.X, controllingPlayer, out playerIndex);
+            #endif
+        }
+
+        /// <summary>
+        /// Binds Grab button to throw.
+        /// </summary>
+        public static bool IsThrow(PlayerIndex? controllingPlayer)
+        {
+            return IsGrab(controllingPlayer);
+        }
+
+        /// <summary>
+        /// Gets the amount moved left or right.
+        /// </summary>
+        public static float MoveAmount(PlayerIndex controllingPlayer)
+        {
+            #if DEBUG
+            PlayerIndex playerIndex;
+            if (InputState.IsKeyPressed(Keys.K, PlayerIndex.One, out playerIndex))
             {
                 return -1.0f;
             }
-            else if (InputState.IsKeyPressed(Keys.L, controllingPlayer, out playerIndex))
+            else if (InputState.IsKeyPressed(Keys.L, PlayerIndex.One, out playerIndex))
             {
                 return 1.0f;
             }
+            #endif
+
             return InputState.GetLeftAnalogStick(controllingPlayer).X;
         }
+
 
 
     }

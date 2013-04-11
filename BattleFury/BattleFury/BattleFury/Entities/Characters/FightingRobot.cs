@@ -22,8 +22,10 @@ namespace BattleFury.Entities.Characters
 
         private const int MASS = 1;
 
-        public FightingRobot(int lives, Vector3 spawnPosition, Model model, PlayerIndex controllingPlayer, int team, Arena arena)
-            : base("FightingRobot", lives, new Box(spawnPosition, 1, 1, 1, MASS), controllingPlayer, team, arena)
+        private const int THROW_STRENGTH = 100;
+
+        public FightingRobot(int lives, Vector3 spawnPosition, Model model, PlayerIndex controllingPlayer, int team, Environment environment)
+            : base("FightingRobot", lives, new Box(spawnPosition, 1, 1, 1, MASS), controllingPlayer, team, environment)
         {
             
             // Create the rendering component. Since the cube model is 1x1x1, 
@@ -37,6 +39,9 @@ namespace BattleFury.Entities.Characters
 
             MovementComponent moveComponent = new MovementComponent(this, SPEED);
             this.AttachComponent(moveComponent);
+
+            grabComponent = new GrabComponent(this, environment.Characters, THROW_STRENGTH);
+            this.AttachComponent(grabComponent);
 
         }
 

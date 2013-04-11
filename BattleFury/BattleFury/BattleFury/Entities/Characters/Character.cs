@@ -5,6 +5,8 @@ using BattleFury.Components;
 using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
 using BattleFury.Entities.Arenas;
+using BattleFury.Components.Movement;
+using System.Collections.Generic;
 
 namespace BattleFury.Entities.Characters
 {
@@ -22,7 +24,11 @@ namespace BattleFury.Entities.Characters
 
         protected RespawnableComponent respawnableObjectComponent;
 
-        public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team, Arena arena) {
+        protected GrabbableComponent grabbableComponent;
+
+        protected GrabComponent grabComponent;
+
+        public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team, Environment environment) {
             // Create the vitality component to track the character's health.
             vitalityComponent = new VitalityComponent(this, lives);
             this.AttachComponent(vitalityComponent);
@@ -38,8 +44,13 @@ namespace BattleFury.Entities.Characters
             this.AttachComponent(bepuPhysicsComponent);
 
             // Create the Respawnable Component
-            respawnableObjectComponent = new RespawnableComponent(this, arena);
+            respawnableObjectComponent = new RespawnableComponent(this, environment.Arena);
             this.AttachComponent(respawnableObjectComponent);
+
+            grabbableComponent = new GrabbableComponent(this);
+            this.AttachComponent(grabbableComponent);
+
+            
         }
 
         public Box GetBox()
