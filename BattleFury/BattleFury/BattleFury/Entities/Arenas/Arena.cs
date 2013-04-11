@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
+using BEPUphysics.Entities.Prefabs;
 
 namespace BattleFury.Entities.Arenas
 {
@@ -12,12 +13,14 @@ namespace BattleFury.Entities.Arenas
     /// </summary>
     public abstract class Arena : Entity
     {
+        protected List<Platform> platforms;
 
         /// <summary>
         /// Construct the Arena Entity.
         /// </summary>
         public Arena()
         {
+            platforms = new List<Platform>();
         }
 
         /// <summary>

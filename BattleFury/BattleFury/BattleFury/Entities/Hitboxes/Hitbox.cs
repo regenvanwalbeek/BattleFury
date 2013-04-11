@@ -9,9 +9,7 @@ namespace BattleFury.Entities.Hitboxes
 {
     public abstract class Hitbox : Entity
     {
-        protected TransformComponent transformComponent;
-
-        protected SphericalCollisionComponent collisionComponent;
+  
 
         protected Entity owner;
 

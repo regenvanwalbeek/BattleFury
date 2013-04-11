@@ -16,7 +16,7 @@ namespace BattleFury.Entities.Characters
     {
         private const int SPEED = 10;
 
-        private const int JUMP_HEIGHT = 10;
+        private const int JUMP_HEIGHT = 20;
 
         private const int MAX_JUMPS = 2;
 
@@ -32,10 +32,10 @@ namespace BattleFury.Entities.Characters
             BasicModelComponent drawComponent = new CubeRenderComponent(this, model, scaling);
             this.AttachComponent(drawComponent);
 
-            JumpComponent jumpComponent = new JumpComponent(this, SPEED, MAX_JUMPS);
+            JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);
             this.AttachComponent(jumpComponent);
 
-            MovementComponent moveComponent = new MovementComponent(this, JUMP_HEIGHT);
+            MovementComponent moveComponent = new MovementComponent(this, SPEED);
             this.AttachComponent(moveComponent);
 
         }

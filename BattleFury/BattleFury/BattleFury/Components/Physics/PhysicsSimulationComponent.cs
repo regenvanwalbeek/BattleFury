@@ -22,7 +22,7 @@ namespace BattleFury.Components.Physics
             : base(parent, "PhysicsSimulationComponent")
         {
             space = new Space();
-            space.ForceUpdater.Gravity = new Vector3(0, -9.81f, 0);
+            space.ForceUpdater.Gravity = new Vector3(0, -20.0f, 0);
         }
         
         public override void Initialize()

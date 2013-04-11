@@ -7,6 +7,7 @@ using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 using BattleFury.Components.Characters;
 using BattleFury.Settings;
+using BEPUphysics.Collidables;
 
 namespace BattleFury.Components.Movement
 {
@@ -30,6 +31,11 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private PlayerIndex controllingPlayer;
 
+        /// <summary>
+        /// Number of jumps since hitting the ground.
+        /// </summary>
+        private int numJumps = 0;
+
         private BepuPhysicsComponent bepuPhysicsComponent;
 
         public JumpComponent(Entity parent, int jumpHeight, int maxJumps)
@@ -51,9 +57,17 @@ namespace BattleFury.Components.Movement
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-
-            if (GameplayBindings.IsJump(controllingPlayer))
+            // Reset the number of jumps if hitting the ground
+            CollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedCollidables;
+            if (overlappedCollideables.Count > 0)
             {
+                numJumps = 0;
+            }
+
+            // Jump if still have jumps left
+            if (GameplayBindings.IsJump(controllingPlayer) && numJumps < MaxJumps)
+            {
+                numJumps++;
                 bepuPhysicsComponent.Box.LinearVelocity = new Vector3(0, JumpHeight, 0);
             }
 

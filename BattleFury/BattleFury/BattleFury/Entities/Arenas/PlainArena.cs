@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using BEPUphysics.Entities.Prefabs;
+using BattleFury.EntitySystem;
+using BattleFury.Entities.Physics;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BattleFury.Entities.Arenas
 {
@@ -12,22 +16,45 @@ namespace BattleFury.Entities.Arenas
     public class PlainArena : Arena
     {
 
+        /// <summary>
+        /// List of spawn positions.
+        /// </summary>
         private List<Vector3> spawnPositions;
 
+        /// <summary>
+        /// Next place to spawn.
+        /// </summary>
         private int currentSpawnIndex = 0;
 
+        /// <summary>
+        /// The Bounding box. Falling outside of this will destroy the
+        /// character or item.
+        /// </summary>
         private BoundingBox boundingBox;
 
-
-        public PlainArena()
+        /// <summary>
+        /// Constructs the arena. Also constructs several platforms and physics elements
+        /// which need to get added to the EntityManager and PhysicsSimulator.
+        /// </summary>
+        /// <param name="entityManager"></param>
+        /// <param name="physicsSimulator"></param>
+        public PlainArena(EntityManager entityManager, PhysicsSimulator physicsSimulator, Model model)
         {
-            spawnPositions = new List<Vector3>();
-            spawnPositions.Add(new Vector3(-4, 4, 0));
-            spawnPositions.Add(new Vector3(0, 16, 0));
-            spawnPositions.Add(new Vector3(4, 16, 0));
-            spawnPositions.Add(new Vector3(8, 4, 0));
+            // Create the platforms.
+            Platform ground = new Platform(new Vector3(0, 0, 0), 50.0f, 1.0f, 5.0f, model);
+            platforms.Add(ground);
+            entityManager.AddEntity(ground);
+            physicsSimulator.AddPhysicsEntity(ground.GetBox());
 
-            boundingBox = new BoundingBox(new Vector3(-20, -20, -20), new Vector3(20, 20, 20));
+            // Create the Spawn Positions
+            spawnPositions = new List<Vector3>();
+            spawnPositions.Add(new Vector3(-15, 10, 0));
+            spawnPositions.Add(new Vector3(-5, 15, 0));
+            spawnPositions.Add(new Vector3(5, 15, 0));
+            spawnPositions.Add(new Vector3(15, 10, 0));
+
+            // Create the Bounding box.
+            boundingBox = new BoundingBox(new Vector3(-70, -20, -50), new Vector3(70, 60, 50));
         }
 
         public override Vector3 GetSpawnPosition()

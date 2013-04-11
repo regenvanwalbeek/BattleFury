@@ -88,18 +88,14 @@
     <Compile Include="Components\Characters\RespawnableComponent.cs" />
     <Compile Include="Components\Characters\VitalityComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
-    <Compile Include="Components\GravityComponent.cs" />
     <Compile Include="Components\Movement\MovementComponent.cs" />
     <Compile Include="Components\Physics\BepuPhysicsComponent.cs" />
     <Compile Include="Components\Physics\PhysicsSimulationComponent.cs" />
     <Compile Include="Components\PlayerInfoComponent.cs" />
-    <Compile Include="Components\RectangularCollisionComponent.cs" />
-    <Compile Include="Components\SphericalCollisionComponent.cs" />
     <Compile Include="Components\Movement\GrabComponent.cs" />
     <Compile Include="Components\Animated\ItemAnimationComponent.cs" />
     <Compile Include="Components\Movement\JumpComponent.cs" />
     <Compile Include="Components\Movement\ThrowComponent.cs" />
-    <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Entities\Arenas\Arena.cs" />
     <Compile Include="Entities\Camera.cs" />
     <Compile Include="Entities\Characters\Character.cs" />
@@ -113,7 +109,7 @@
     <Compile Include="Entities\Arenas\PlainArena.cs" />
     <Compile Include="Entities\Physics\BepuPhysicsBox.cs" />
     <Compile Include="Entities\Physics\PhysicsSimulator.cs" />
-    <Compile Include="Entities\Platform.cs" />
+    <Compile Include="Entities\Arenas\Platform.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="EntitySystem\Component.cs" />
     <Compile Include="EntitySystem\DrawableComponent.cs" />

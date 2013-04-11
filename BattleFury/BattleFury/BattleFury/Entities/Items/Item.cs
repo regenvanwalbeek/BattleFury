@@ -10,7 +10,7 @@ namespace BattleFury.Entities.Items
 {
     public abstract class Item : Entity
     {
-        protected TransformComponent transformComponent;
+       
 
         protected AnimationComponent animationComponent;
 
