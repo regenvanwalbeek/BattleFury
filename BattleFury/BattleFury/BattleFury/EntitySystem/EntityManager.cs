@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BattleFury.EntitySystem
 {
@@ -76,12 +77,22 @@ namespace BattleFury.EntitySystem
         /// Draws all the entities in the manager.
         /// </summary>
         /// <param name="gameTime">The current GameTime.</param>
-        public void Draw(GameTime gameTime, Matrix view, Matrix projection)
+        /// <param name="view">The camera's view matrix.</param>
+        /// <param name="projection">The camera's projection matrix.</param>
+        /// <param name="spriteBatch">The spriteBatch to draw with.</param>
+        public void Draw(GameTime gameTime, Matrix view, Matrix projection, SpriteBatch spriteBatch)
         {
+
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].Draw(gameTime, view, projection);
             }
+            spriteBatch.Begin();
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].Draw2D(gameTime, spriteBatch);
+            }
+            spriteBatch.End();
         }
 
 

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BattleFury.EntitySystem
 {
@@ -21,5 +18,12 @@ namespace BattleFury.EntitySystem
         /// </summary>
         /// <param name="gameTime">The current GameTime.</param>
         void Draw(GameTime gameTime, Matrix view, Matrix projection);
+
+        /// <summary>
+        /// Draws 2D elements.
+        /// </summary>
+        /// <param name="gameTime">The current GameTime</param>
+        /// <param name="spriteBatch">The spritebatch to draw with.</param>
+        void Draw2D(GameTime gameTime, SpriteBatch spriteBatch);
     }
 }

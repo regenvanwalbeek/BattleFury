@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BattleFury.EntitySystem
 {
@@ -50,6 +51,16 @@ namespace BattleFury.EntitySystem
         /// <param name="view">The camera's view matrix.</param>
         /// <param name="projection">The camera's projection matrix.</param>
         public abstract void Draw(Microsoft.Xna.Framework.GameTime gameTime, Matrix view, Matrix projection);
+
+        /// <summary>
+        /// Draws 2D elements. This will be called after all 3D draws are 
+        /// complete. To have a component draw in 2D (such as for a HUD), 
+        /// override this method.
+        /// </summary>
+        /// <param name="spriteBatch">The spritebatch to draw with.</param>
+        public virtual void Draw2D(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+        }
 
     }
 }

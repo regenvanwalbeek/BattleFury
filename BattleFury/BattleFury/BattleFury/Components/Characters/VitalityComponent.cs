@@ -14,11 +14,13 @@ namespace BattleFury.Components.Characters
 
         public bool IsAlive = true;
 
+        public bool IsKO = false;
+
         public VitalityComponent(Entity parent, int lives) : 
             base(parent, "VitalityComponent")
         {
             this.LivesLeft = lives;
-            this.RageMeter = 100.0f;
+            this.RageMeter = 0.0f;
         }
 
         public override void Initialize()
@@ -32,5 +34,8 @@ namespace BattleFury.Components.Characters
         public override void Update(GameTime gameTime)
         {
         }
+
+
+  
     }
 }

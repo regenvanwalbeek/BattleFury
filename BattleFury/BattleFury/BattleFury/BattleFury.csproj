@@ -87,6 +87,7 @@
     <Compile Include="Components\Characters\CharacterInformationComponent.cs" />
     <Compile Include="Components\Characters\RespawnableComponent.cs" />
     <Compile Include="Components\Characters\VitalityComponent.cs" />
+    <Compile Include="Components\DrawableHUDComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
     <Compile Include="Components\Movement\MovementComponent.cs" />
     <Compile Include="Components\Physics\BepuPhysicsComponent.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Entities\Hitboxes\DamagingHitbox.cs" />
     <Compile Include="Entities\Hitboxes\GrabHitbox.cs" />
     <Compile Include="Entities\Hitboxes\ShieldHitbox.cs" />
+    <Compile Include="Entities\HUD.cs" />
     <Compile Include="Entities\Items\Rock.cs" />
     <Compile Include="Entities\Arenas\PlainArena.cs" />
     <Compile Include="Entities\Physics\BepuPhysicsBox.cs" />

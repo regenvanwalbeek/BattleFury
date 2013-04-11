@@ -49,7 +49,7 @@ namespace BattleFury.Screens
         /// </summary>
         public BattleScreen()
         {
- 
+     
         }
 
         /// <summary>
@@ -66,6 +66,8 @@ namespace BattleFury.Screens
             // Load the unit cube model.
             Model cube = content.Load<Model>("meshes/cube");
             Effect colorEffect = content.Load<Effect>("effects/ReplaceColor");
+            SpriteFont hudFontRage = content.Load<SpriteFont>("fonts/HUDFontRage");
+            SpriteFont hudFontLives = content.Load<SpriteFont>("fonts/HUDFontLives");
 
             // Create the Entity Manager.
             entityManager = new EntityManager(content);
@@ -92,11 +94,10 @@ namespace BattleFury.Screens
             cameraEntities.Add(gameCamera); // Game Camera
             cameraEntities.Add(debugCamera); // Debug Camera
 
-            // Create the Physics Simulator.
+            // Add some physics elements.
             BepuPhysicsBox stuff1 = new BepuPhysicsBox(new Box(new Vector3(0, 4, 0), 1, 5, 1, 1), cube);
             BepuPhysicsBox stuff2 = new BepuPhysicsBox(new Box(new Vector3(0, 8, 0), 1, 1, 1, 1), cube);
             BepuPhysicsBox stuff3 = new BepuPhysicsBox(new Box(new Vector3(0, 12, 0), 1, 1, 1, 1), cube);
-            // physicsEntity.AddPhysicsEntity(ground.GetBox());
             physicsEntity.AddPhysicsEntity(stuff1.GetBox());
             physicsEntity.AddPhysicsEntity(stuff2.GetBox());
             physicsEntity.AddPhysicsEntity(stuff3.GetBox());
@@ -116,12 +117,14 @@ namespace BattleFury.Screens
                 }
             }
 
+            // Create the Hud
+            HUD hud = new HUD(characters, hudFontRage, hudFontLives);
+
             // Add the entities to the Entity Manager and init the manager
             entityManager.AddEntity(arenaEntity);
             entityManager.AddEntity(gameCamera);
             entityManager.AddEntity(debugCamera);
             entityManager.AddEntity(physicsEntity);
-            // entityManager.AddEntity(ground);
             entityManager.AddEntity(stuff1);
             entityManager.AddEntity(stuff2);
             entityManager.AddEntity(stuff3);
@@ -129,6 +132,7 @@ namespace BattleFury.Screens
             {
                 entityManager.AddEntity(characters[i]);
             }
+            entityManager.AddEntity(hud);
             entityManager.Initialize();
 
        
@@ -162,12 +166,16 @@ namespace BattleFury.Screens
         /// <param name="gameTime">The current GameTime.</param>
         public override void Draw(GameTime gameTime)
         {
-            this.ScreenManager.GraphicsDevice.Clear(Color.CornflowerBlue);
+            // Reset the graphics device (for mixing 2D and 3D)
+            this.ScreenManager.GraphicsDevice.BlendState = BlendState.Opaque;
+            this.ScreenManager.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            this.ScreenManager.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+            this.ScreenManager.GraphicsDevice.Clear(Color.Black);
 
-            // Draw the entities based on the current camera
+            // Draw the entities based on the current camera. Will draw 3D elements first, then 2D.
             Matrix view = cameraEntities[currentCameraIndex].GetView();
             Matrix projection = cameraEntities[currentCameraIndex].GetProjection();
-            entityManager.Draw(gameTime, view, projection);
+            entityManager.Draw(gameTime, view, projection, ScreenManager.SpriteBatch);
         }
 
         /// <summary>

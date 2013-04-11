@@ -56,27 +56,30 @@ namespace BattleFury.Components.Characters
                 // Check if the object is outside of the arena. If so, kill it.
                 if (arena.GetBoundingBox().Contains(bepuPhysicsComponent.Box.Position) == ContainmentType.Disjoint)
                 {
-                    // Kill the character
-                    vitalityComponent.LivesLeft--;
-                    vitalityComponent.IsAlive = false;
-                    timeTillRespawn = RESPAWN_TIME;
-                    cubeRenderComponent.IsVisible = false; // Just hide the character until respawn.
-                    Console.WriteLine("Killing");
+                    if (vitalityComponent.LivesLeft > 0){
+                        // Kill the character
+                        vitalityComponent.LivesLeft--;
+                        vitalityComponent.IsAlive = false;
+                        timeTillRespawn = RESPAWN_TIME;
+                        cubeRenderComponent.IsVisible = false; // Just hide the character until respawn.
+                    } else {
+                        vitalityComponent.IsKO = true;
+                    }
                 }
             }
             else
             {
                 // The character is dead. Check if it needs to be respawned.
                 timeTillRespawn -= gameTime.ElapsedGameTime.Milliseconds;
-                if (timeTillRespawn < 0)
+                if (timeTillRespawn < 0 && vitalityComponent.LivesLeft >= 0)
                 {
                     // Respawn
-                    vitalityComponent.RageMeter = 100.0f;
+                    vitalityComponent.IsAlive = true;
+                    vitalityComponent.RageMeter = 0.0f;
                     bepuPhysicsComponent.Box.Position = arena.GetSpawnPosition();
                     bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero;
-                    vitalityComponent.IsAlive = true;
+                    
                     cubeRenderComponent.IsVisible = true;
-                    Console.WriteLine("Respawning");
                 }
             }
 

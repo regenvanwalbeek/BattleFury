@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BattleFury.EntitySystem
 {
@@ -163,6 +162,14 @@ namespace BattleFury.EntitySystem
                 {
                     drawableComponents[i].Draw(gameTime, view, projection);
                 }
+            }
+        }
+
+        public void Draw2D(GameTime gameTime, SpriteBatch spritebatch)
+        {
+            for (int i = 0; i < drawableComponents.Count; i++)
+            {
+                drawableComponents[i].Draw2D(gameTime, spritebatch);
             }
         }
 
