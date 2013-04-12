@@ -44,6 +44,9 @@ namespace BattleFury.Screens
         /// </summary>
         private int currentCameraIndex = 0;
 
+        /// <summary>
+        /// Characters in the battle
+        /// </summary>
         private List<Character> characters;
 
         /// <summary>
@@ -52,11 +55,9 @@ namespace BattleFury.Screens
         private float timeSinceGameOver = 0;
 
         /// <summary>
-        /// Results of the battle.
+        /// Characters still in the battle
         /// </summary>
-        private GameResults gameResults;
-
-        private int nextPlacement;
+        private List<Character> livingCharacters;
 
         /// <summary>
         /// Constructs the battle screen.
@@ -153,9 +154,12 @@ namespace BattleFury.Screens
             entityManager.AddEntity(hud);
             entityManager.Initialize();
 
-            // Set up the game results
-            this.gameResults = new GameResults();
-            this.nextPlacement = numPlayers;
+            // Track the characters that are alive
+            livingCharacters = new List<Character>();
+            for (int i = 0; i < characters.Count; i++)
+            {
+                livingCharacters.Add(characters[i]);
+            }
         }
 
         /// <summary>
@@ -179,28 +183,40 @@ namespace BattleFury.Screens
             // Update the entities.
             entityManager.Update(gameTime);
 
-            // Check if another player has been KO'd
-            // TODO
-
-
-            // Check if the game is over. If so, go to the game over screen.
-            int KOCount = 0;
-            for (int i = 0; i < characters.Count; i++)
+            // Check if another player has been KO'd. Set placement if KO'd
+            int numKOd = 0; // Count the number of characters KO'd this frame
+            for (int i = 0; i < livingCharacters.Count; i++)
             {
-                if (characters[i].IsKO())
+                if (livingCharacters[i].IsKO())
                 {
-                    KOCount++;
+                    numKOd++;
                 }
+            }
+            int placement = livingCharacters.Count - numKOd + 1;
+            for (int i = 0; i < livingCharacters.Count; i++)
+            {
+                if (livingCharacters[i].IsKO())
+                {
+                    livingCharacters[i].SetPlacement(placement);
+                    livingCharacters.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            // Check if the game is over. If so, set the winner and go to the game over screen.
+            if (livingCharacters.Count == 1)
+            {
+                livingCharacters[0].SetPlacement(1); // Winner Winner Chicken Dinner!
             }
             
             // Exit the Battle Screen
-            if (KOCount == (characters.Count - 1))
+            if (livingCharacters.Count <= 1)
             {
                 timeSinceGameOver += gameTime.ElapsedGameTime.Milliseconds;
                 if (timeSinceGameOver >= 2000)
                 {
                     // Match over. Go to the game over screen.
-                    LoadingScreen.Load(ScreenManager, null, new BackgroundScreen(), new GameOverScreen(gameResults));
+                    LoadingScreen.Load(ScreenManager, null, new BackgroundScreen(), new GameOverScreen(characters));
                 }
             }
 
@@ -248,10 +264,7 @@ namespace BattleFury.Screens
                     currentCameraIndex = 0;
                 
                 }
-               
                 cameraEntities[currentCameraIndex].ResetCamera();
-               
-
             }
 
             #endif

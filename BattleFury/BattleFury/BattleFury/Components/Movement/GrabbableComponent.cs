@@ -8,10 +8,19 @@ using Microsoft.Xna.Framework;
 
 namespace BattleFury.Components.Movement
 {
+    /// <summary>
+    /// A component which makes an entity grabbable.
+    /// </summary>
     public class GrabbableComponent : Component
     {
+        /// <summary>
+        /// Maximum amount of time this entity can be grabbed.
+        /// </summary>
         private const int MAX_GRAB_TIME = 3000;
 
+        /// <summary>
+        /// Time since the entity has been picked up.
+        /// </summary>
         private int timeSinceGrab;
 
         /// <summary>
@@ -19,14 +28,25 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private BepuPhysicsComponent bepuPhysicsComponent;
 
-        public bool IsGrabbed { get; private set; }
+        /// <summary>
+        /// Entity grabbing this entity
+        /// </summary>
+        private GrabComponent grabber = null;
 
-        private MovementComponent grabbedEntityMoveComponent;
+        private Vector3 grabbingEntityPositionOffset;
+
+        public bool IsGrabbed
+        {
+            get
+            {
+                return (grabber != null);
+            }
+        }
 
         public GrabbableComponent(Entity parent)
             : base(parent, "GrabbableComponent")
         {
-            IsGrabbed = false;
+
         }
 
 
@@ -49,12 +69,16 @@ namespace BattleFury.Components.Movement
                 timeSinceGrab += gameTime.ElapsedGameTime.Milliseconds;
                 if (timeSinceGrab >= MAX_GRAB_TIME)
                 {
-
-                    // Drop the entity. TODO
+                    // Drop the entity
+                    ((MovementComponent)Parent.GetComponent("MovementComponent")).Enabled = true;
+                    grabber.LoseGrip();
+                    grabber = null;
                 }
                 else
                 {
-                    // TODO move with grabbing entity
+                    // Move this entity with the grabbing entity.
+                    this.bepuPhysicsComponent.Box.Position = grabber.GetPosition() + grabbingEntityPositionOffset;
+                    this.bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero; // Else it gains acceleration from gravity, and when it's dropped, it goes crazy.
                 }
             }
         }
@@ -67,8 +91,9 @@ namespace BattleFury.Components.Movement
         /// <summary>
         /// Grabs an entity. Returns true if the grab is successful. False otherwise.
         /// </summary>
-        /// <returns></returns>
-        public bool Grab()
+        /// <param name="grabber">The component grabbing this component</param>
+        /// <returns>True if successful grab</returns>
+        public bool Grab(GrabComponent grabber)
         {
             if (IsGrabbed)
             {
@@ -76,20 +101,22 @@ namespace BattleFury.Components.Movement
                 return false;
             }
 
-            IsGrabbed = true;
-            // Disable the move component
-            grabbedEntityMoveComponent =(MovementComponent) Parent.GetComponent("MovementComponent");
-            Parent.DetachComponent(grabbedEntityMoveComponent);
+            
+            timeSinceGrab = 0;
+            this.grabber = grabber;
+            this.grabbingEntityPositionOffset = this.bepuPhysicsComponent.Box.Position - grabber.GetPosition();
 
+            // Disable the move component
+            ((MovementComponent)Parent.GetComponent("MovementComponent")).Enabled = false;
             return true;
         }
 
         public void Throw(Vector2 direction, float throwStrength)
         {
-            
-            IsGrabbed = false;
+
+            grabber = null;
             // Give movement back.
-            Parent.AttachComponent(grabbedEntityMoveComponent);
+            ((MovementComponent)Parent.GetComponent("MovementComponent")).Enabled = true;
 
             // Set the force to throw the entity.
             if (direction.Equals(Vector2.Zero))
@@ -102,9 +129,8 @@ namespace BattleFury.Components.Movement
                 direction = Vector2.Normalize(direction);
             }
             Vector2 throwVelocity = throwStrength * direction;
-            Console.WriteLine("Throw Velocity " + throwVelocity);
-            bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 10);
-            Console.WriteLine("Box Linear velocity " + bepuPhysicsComponent.Box.LinearVelocity);
+            bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 0);
+
            
         }
     }

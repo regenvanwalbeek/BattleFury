@@ -10,19 +10,46 @@ using BattleFury.Input;
 
 namespace BattleFury.Components.Movement
 {
+    /// <summary>
+    /// Component which enables an entity to grab a Grabbable entity. After an entity is grabbed, it can be thrown.
+    /// </summary>
     public class GrabComponent : Component
     {
+        /// <summary>
+        /// How hard to throw the grabbed entity.
+        /// </summary>
         private float throwStrength;
 
+        /// <summary>
+        /// Grabbing hitbox
+        /// </summary>
         private BepuPhysicsComponent bepuPhysicsComponent;
 
+        /// <summary>
+        /// Player doing the grabbing for this entity.
+        /// </summary>
         private PlayerIndex controllingPlayer;
 
+        /// <summary>
+        /// List of grabbable characters
+        /// </summary>
         List<Character> characters;
 
-        private bool isGrabbingObject = false;
+        /// <summary>
+        /// Whether this entity is currently grabbing a grabbable object.
+        /// </summary>
+        public bool IsGrabbingObject
+        {
+            get
+            {
+                return (grabbedObject != null);
+            }
+        }
 
-        private GrabbableComponent grabbedObject;
+        /// <summary>
+        /// The object being grabbed, if IsGrabbingObject = true;
+        /// </summary>
+        private GrabbableComponent grabbedObject = null;
 
         public GrabComponent(Entity parent, List<Character> characters, float throwStrength) : base(parent, "GrabComponent"){
             this.characters = characters;
@@ -35,14 +62,14 @@ namespace BattleFury.Components.Movement
 
         public override void Start()
         {
-            controllingPlayer = ((CharacterInformationComponent)Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
+            this.controllingPlayer = ((CharacterInformationComponent)Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
             this.bepuPhysicsComponent = (BepuPhysicsComponent) Parent.GetComponent("BepuPhysicsComponent");
         }
 
         public override void Update(GameTime gameTime)
         {
 
-            if (!isGrabbingObject)
+            if (!IsGrabbingObject)
             {
                 // Do a grab if nothing is currently grabbed.
                 if (GameplayBindings.IsGrab(controllingPlayer))
@@ -67,16 +94,15 @@ namespace BattleFury.Components.Movement
                         {
                             if (collidingEntity == grabbables[i].getGrabbableBox())
                             {
-                                bool success = grabbables[i].Grab();
+                                bool success = grabbables[i].Grab(this);
                                 if (success)
                                 {
-                                    isGrabbingObject = true;
                                     grabbedObject = grabbables[i];
                                     break;
                                 }
                             }
                         }
-                        if (isGrabbingObject)
+                        if (IsGrabbingObject)
                         {
                             break;
                         }
@@ -90,14 +116,25 @@ namespace BattleFury.Components.Movement
                 // Do a throw if something is currently being grabbed.
                 if (GameplayBindings.IsThrow(controllingPlayer))
                 {
-                    // Do a throw.
-                    isGrabbingObject = false;
-
-                    // Throw in the direction of the left analog stick
+                    // Do a throw in the direction of the left analog stick
                     Vector2 direction = InputState.GetLeftAnalogStick(controllingPlayer);
                     grabbedObject.Throw(direction, throwStrength);
+                    this.grabbedObject = null; // Let go!
                 }
             }
+        }
+
+        public Vector3 GetPosition()
+        {
+            return bepuPhysicsComponent.Box.Position;
+        }
+
+        /// <summary>
+        /// Forces this entity to lose grip of the grabbed object
+        /// </summary>
+        public void LoseGrip()
+        {
+            this.grabbedObject = null;
         }
     }
 }

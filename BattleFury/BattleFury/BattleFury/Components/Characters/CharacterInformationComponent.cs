@@ -14,7 +14,10 @@ namespace BattleFury.Components.Characters
 
         public int Team;
 
-        public int Place;
+        /// <summary>
+        /// Place the character finished in. -1 if character is still alive.
+        /// </summary>
+        public int Place = -1;
 
         public PlayerIndex PlayerIndex;
 

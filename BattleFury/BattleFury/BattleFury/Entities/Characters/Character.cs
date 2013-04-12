@@ -63,15 +63,22 @@ namespace BattleFury.Entities.Characters
             return vitalityComponent.IsKO;
         }
 
-        public int GetPlace()
-        {
-            return characterInformationComponent.Place; 
-        }
-
-        public int SetPlace(int place)
+        public void SetPlacement(int place)
         {
             characterInformationComponent.Place = place;
         }
+
+        public int GetPlacement()
+        {
+            return characterInformationComponent.Place;
+        }
+
+        public int GetPlayerIndex()
+        {
+            return (int) characterInformationComponent.PlayerIndex;
+        }
+
+
 
     }
 }

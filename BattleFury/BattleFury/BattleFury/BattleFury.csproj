@@ -93,7 +93,6 @@
     <Compile Include="Components\Movement\MovementComponent.cs" />
     <Compile Include="Components\Physics\BepuPhysicsComponent.cs" />
     <Compile Include="Components\Physics\PhysicsSimulationComponent.cs" />
-    <Compile Include="Components\PlayerInfoComponent.cs" />
     <Compile Include="Components\Movement\GrabComponent.cs" />
     <Compile Include="Components\Animated\ItemAnimationComponent.cs" />
     <Compile Include="Components\Movement\JumpComponent.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="Entities\Characters\Character.cs" />
     <Compile Include="Entities\Characters\FightingRobot.cs" />
     <Compile Include="Entities\Environment.cs" />
-    <Compile Include="Entities\GameResults.cs" />
     <Compile Include="Entities\Hitboxes\AbsorptionHitbox.cs" />
     <Compile Include="Entities\Hitboxes\DamageableHitbox.cs" />
     <Compile Include="Entities\Hitboxes\DamagingHitbox.cs" />
