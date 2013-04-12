@@ -145,7 +145,10 @@ namespace BattleFury.EntitySystem
             {
                 if (updateableComponents[i].Enabled)
                 {
-                    updateableComponents[i].Update(gameTime);
+                    if (updateableComponents[i].Enabled)
+                    {
+                        updateableComponents[i].Update(gameTime);
+                    }
                 }
             }
         }
@@ -169,7 +172,10 @@ namespace BattleFury.EntitySystem
         {
             for (int i = 0; i < drawableComponents.Count; i++)
             {
-                drawableComponents[i].Draw2D(gameTime, spritebatch);
+                if (drawableComponents[i].IsVisible)
+                {
+                    drawableComponents[i].Draw2D(gameTime, spritebatch);
+                }
             }
         }
 
