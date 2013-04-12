@@ -10,12 +10,18 @@ namespace BattleFury.Components.Movement
 {
     public class GrabbableComponent : Component
     {
+        private const int MAX_GRAB_TIME = 3000;
+
+        private int timeSinceGrab;
+
         /// <summary>
         /// The box that is grabbable.
         /// </summary>
-        BepuPhysicsComponent bepuPhysicsComponent;
+        private BepuPhysicsComponent bepuPhysicsComponent;
 
         public bool IsGrabbed { get; private set; }
+
+        private MovementComponent grabbedEntityMoveComponent;
 
         public GrabbableComponent(Entity parent)
             : base(parent, "GrabbableComponent")
@@ -36,7 +42,21 @@ namespace BattleFury.Components.Movement
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-       
+            // If the entity is grabbed, move it with the grabbing entity.
+            // Also, drop the grab after 3 seconds.
+            if (IsGrabbed)
+            {
+                timeSinceGrab += gameTime.ElapsedGameTime.Milliseconds;
+                if (timeSinceGrab >= MAX_GRAB_TIME)
+                {
+
+                    // Drop the entity. TODO
+                }
+                else
+                {
+                    // TODO move with grabbing entity
+                }
+            }
         }
 
         public Box getGrabbableBox()
@@ -52,19 +72,29 @@ namespace BattleFury.Components.Movement
         {
             if (IsGrabbed)
             {
+                // Can't be grabbed twice. Though grab stealing could be a cool feature...
                 return false;
             }
+
             IsGrabbed = true;
+            // Disable the move component
+            grabbedEntityMoveComponent =(MovementComponent) Parent.GetComponent("MovementComponent");
+            Parent.DetachComponent(grabbedEntityMoveComponent);
+
             return true;
         }
 
         public void Throw(Vector2 direction, float throwStrength)
         {
+            
             IsGrabbed = false;
+            // Give movement back.
+            Parent.AttachComponent(grabbedEntityMoveComponent);
 
+            // Set the force to throw the entity.
             if (direction.Equals(Vector2.Zero))
             {
-                // TODO for now, throw up right. Should throw up in the direction facing.
+                // TODO for now, throw up right. Should throw up in the direction facing. (maybe get the bepubox linear velocity x)
                 direction = Vector2.Normalize(new Vector2(1, 1));
             }
             else
