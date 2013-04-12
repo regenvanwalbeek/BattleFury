@@ -52,6 +52,13 @@ namespace BattleFury.Screens
         private float timeSinceGameOver = 0;
 
         /// <summary>
+        /// Results of the battle.
+        /// </summary>
+        private GameResults gameResults;
+
+        private int nextPlacement;
+
+        /// <summary>
         /// Constructs the battle screen.
         /// </summary>
         public BattleScreen()
@@ -146,7 +153,9 @@ namespace BattleFury.Screens
             entityManager.AddEntity(hud);
             entityManager.Initialize();
 
-       
+            // Set up the game results
+            this.gameResults = new GameResults();
+            this.nextPlacement = numPlayers;
         }
 
         /// <summary>
@@ -170,6 +179,9 @@ namespace BattleFury.Screens
             // Update the entities.
             entityManager.Update(gameTime);
 
+            // Check if another player has been KO'd
+            // TODO
+
 
             // Check if the game is over. If so, go to the game over screen.
             int KOCount = 0;
@@ -188,9 +200,10 @@ namespace BattleFury.Screens
                 if (timeSinceGameOver >= 2000)
                 {
                     // Match over. Go to the game over screen.
-                    LoadingScreen.Load(ScreenManager, null, new BackgroundScreen(), new MainMenuScreen());
+                    LoadingScreen.Load(ScreenManager, null, new BackgroundScreen(), new GameOverScreen(gameResults));
                 }
             }
+
         }
 
         /// <summary>

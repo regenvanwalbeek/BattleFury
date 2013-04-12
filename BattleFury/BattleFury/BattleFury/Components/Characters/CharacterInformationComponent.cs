@@ -14,6 +14,8 @@ namespace BattleFury.Components.Characters
 
         public int Team;
 
+        public int Place;
+
         public PlayerIndex PlayerIndex;
 
         public CharacterInformationComponent(Entity parent, PlayerIndex playerIndex, int team) 
@@ -35,6 +37,11 @@ namespace BattleFury.Components.Characters
 
         public override void Update(GameTime gameTime)
         {
+        }
+
+        public void setPlace(int place)
+        {
+            this.Place = place;
         }
     }
 }

@@ -71,11 +71,15 @@ namespace BattleFury.Settings
         {
             #if DEBUG
             PlayerIndex playerIndex;
-            if (InputState.IsKeyPressed(Keys.K, PlayerIndex.One, out playerIndex))
+            if (controllingPlayer != PlayerIndex.One)
+            {
+                return 0f;
+            }
+            if (InputState.IsKeyPressed(Keys.K, controllingPlayer, out playerIndex))
             {
                 return -1.0f;
             }
-            else if (InputState.IsKeyPressed(Keys.L, PlayerIndex.One, out playerIndex))
+            else if (InputState.IsKeyPressed(Keys.L, controllingPlayer, out playerIndex))
             {
                 return 1.0f;
             }

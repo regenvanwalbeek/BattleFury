@@ -97,12 +97,12 @@
     <Compile Include="Components\Movement\GrabComponent.cs" />
     <Compile Include="Components\Animated\ItemAnimationComponent.cs" />
     <Compile Include="Components\Movement\JumpComponent.cs" />
-    <Compile Include="Components\Movement\ThrowComponent.cs" />
     <Compile Include="Entities\Arenas\Arena.cs" />
     <Compile Include="Entities\Camera.cs" />
     <Compile Include="Entities\Characters\Character.cs" />
     <Compile Include="Entities\Characters\FightingRobot.cs" />
     <Compile Include="Entities\Environment.cs" />
+    <Compile Include="Entities\GameResults.cs" />
     <Compile Include="Entities\Hitboxes\AbsorptionHitbox.cs" />
     <Compile Include="Entities\Hitboxes\DamageableHitbox.cs" />
     <Compile Include="Entities\Hitboxes\DamagingHitbox.cs" />
@@ -124,7 +124,7 @@
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
     <Compile Include="Entities\Items\Item.cs" />
-    <Compile Include="Screens\GameOver.cs" />
+    <Compile Include="Screens\GameOverScreen.cs" />
     <Compile Include="Settings\DebugBindings.cs" />
     <Compile Include="Settings\GlobalGameConstants.cs" />
     <Compile Include="Settings\GameSettings.cs" />
