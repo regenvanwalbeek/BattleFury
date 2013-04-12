@@ -17,7 +17,6 @@ namespace BattleFury.Components.Movement
 
         private float moveSpeed;
 
-        private float previousMovementAmount = 0;
 
         public MovementComponent(Entity parent, float moveSpeed)
             : base(parent, "MovementComponent")
@@ -37,25 +36,29 @@ namespace BattleFury.Components.Movement
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
+            // Calculate the new move speed in the x direction. 
+            // The object should not move faster than moveSpeed due to user input.
+            float maxSpeed = moveSpeed;
             float moveAmount = GameplayBindings.MoveAmount(controllingPlayer);
-            float downMovement = bepuPhysicsComponent.Box.LinearVelocity.Y;
-            bepuPhysicsComponent.Box.LinearVelocity = new Vector3(moveSpeed * moveAmount, downMovement, 0);
+            Vector3 currentLinearVelocity = bepuPhysicsComponent.Box.LinearVelocity;
+            float currentLinearVelocityX = currentLinearVelocity.X;
 
-            previousMovementAmount = moveAmount;
+            float newLinearVelocity = currentLinearVelocityX + moveAmount; // new velocity without a speed limit
 
-            //bepuPhysicsComponent.Box.Position += new Vector3(.15f * moveAmount, 0, 0);
-            
+            // impose the speed limit.
+            if (newLinearVelocity > maxSpeed || newLinearVelocity < -maxSpeed){
+                if (currentLinearVelocityX > 0 && currentLinearVelocityX < maxSpeed){
+                    newLinearVelocity = maxSpeed;
+                } else if (currentLinearVelocityX < 0 && currentLinearVelocityX > maxSpeed){
+                    newLinearVelocity = -maxSpeed;
+                } else {
+                    newLinearVelocity = currentLinearVelocityX;
+                }
+            }
 
-            
-            
-            
-            
-            
-            /*
-            float currentMovementX = bepuPhysicsComponent.Box.LinearVelocity.X;
-            float movementX = moveSpeed * moveAmount;
-            float newMovementX = currentMovementX + movementX;
-            bepuPhysicsComponent.Box.LinearVelocity = new Vector3(newMovementX, downMovement, bepuPhysicsComponent.Box.LinearVelocity.Z);*/
+            // Set the new speed in the x direction.
+            bepuPhysicsComponent.Box.LinearVelocity = new Vector3(newLinearVelocity, currentLinearVelocity.Y, currentLinearVelocity.Z);
+
         }
     }
 }
