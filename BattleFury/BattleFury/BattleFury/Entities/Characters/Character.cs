@@ -22,7 +22,7 @@ namespace BattleFury.Entities.Characters
 
         protected CharacterInformationComponent characterInformationComponent;
 
-        protected RespawnableComponent respawnableObjectComponent;
+        protected RespawnableComponent respawnableComponent;
 
         protected GrabbableComponent grabbableComponent;
 
@@ -44,8 +44,8 @@ namespace BattleFury.Entities.Characters
             this.AttachComponent(bepuPhysicsComponent);
 
             // Create the Respawnable Component
-            respawnableObjectComponent = new RespawnableComponent(this, environment.Arena);
-            this.AttachComponent(respawnableObjectComponent);
+            respawnableComponent = new RespawnableComponent(this, environment.Arena);
+            this.AttachComponent(respawnableComponent);
 
             grabbableComponent = new GrabbableComponent(this);
             this.AttachComponent(grabbableComponent);

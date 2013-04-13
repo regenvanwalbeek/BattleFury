@@ -26,15 +26,22 @@ namespace BattleFury.Entities.Arenas
         /// <summary>
         /// Returns the next position to spawn a character.
         /// </summary>
-        /// <param name="index"></param>
         /// <returns>Where to spawn a character</returns>
-        public abstract Vector3 GetSpawnPosition();
+        public abstract Vector3 GetCharacterSpawnPosition();
+
+        /// <summary>
+        /// Returns the next position to spawn an item.
+        /// </summary>
+        /// <returns>Where to spawn an item</returns>
+        public abstract Vector3 GetItemSpawnPosition(Random random);
 
         /// <summary>
         /// Retrieves the game's bounding box. Falling out of this bounding box will kill the character.
         /// </summary>
         /// <returns></returns>
         public abstract BoundingBox GetBoundingBox();
+
+
 
     }
 }

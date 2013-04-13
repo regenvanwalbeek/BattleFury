@@ -12,6 +12,7 @@ using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using BattleFury.Entities.Items;
 
 
 namespace BattleFury.Screens
@@ -112,13 +113,8 @@ namespace BattleFury.Screens
             cameraEntities.Add(gameCamera); // Game Camera
             cameraEntities.Add(debugCamera); // Debug Camera
 
-            // Add some physics elements.
-            BepuPhysicsBox stuff1 = new BepuPhysicsBox(new Box(new Vector3(0, 4, 0), 1, 5, 1, 1), cube);
-            BepuPhysicsBox stuff2 = new BepuPhysicsBox(new Box(new Vector3(0, 8, 0), 1, 1, 1, 1), cube);
-            BepuPhysicsBox stuff3 = new BepuPhysicsBox(new Box(new Vector3(0, 12, 0), 1, 1, 1, 1), cube);
-            physicsEntity.AddPhysicsEntity(stuff1.GetBox());
-            physicsEntity.AddPhysicsEntity(stuff2.GetBox());
-            physicsEntity.AddPhysicsEntity(stuff3.GetBox());
+            // Create the Item Spawner
+            ItemSpawner itemSpawner = new ItemSpawner(entityManager, physicsEntity, arenaEntity, cube);
 
             // Create the Characters.
             List<PlayerSettings> players = GameSettings.Players;
@@ -128,7 +124,7 @@ namespace BattleFury.Screens
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
                 {
-                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetSpawnPosition(), cube, player.PlayerIndex, player.Team, environment);
+                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetCharacterSpawnPosition(), cube, player.PlayerIndex, player.Team, environment);
                     physicsEntity.AddPhysicsEntity(character.GetBox());
                     characters.Add(character);
                     environment.AddCharacter(character);
@@ -144,9 +140,7 @@ namespace BattleFury.Screens
             entityManager.AddEntity(gameCamera);
             entityManager.AddEntity(debugCamera);
             entityManager.AddEntity(physicsEntity);
-            entityManager.AddEntity(stuff1);
-            entityManager.AddEntity(stuff2);
-            entityManager.AddEntity(stuff3);
+            entityManager.AddEntity(itemSpawner);
             for (int i = 0; i < characters.Count; i++)
             {
                 entityManager.AddEntity(characters[i]);

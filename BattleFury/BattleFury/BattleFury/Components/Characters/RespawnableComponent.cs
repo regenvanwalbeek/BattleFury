@@ -76,7 +76,7 @@ namespace BattleFury.Components.Characters
                     // Respawn
                     vitalityComponent.IsAlive = true;
                     vitalityComponent.RageMeter = 0.0f;
-                    bepuPhysicsComponent.Box.Position = arena.GetSpawnPosition();
+                    bepuPhysicsComponent.Box.Position = arena.GetCharacterSpawnPosition();
                     bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero;
                     
                     cubeRenderComponent.IsVisible = true;

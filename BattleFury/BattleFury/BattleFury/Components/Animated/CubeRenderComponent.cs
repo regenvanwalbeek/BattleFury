@@ -1,6 +1,7 @@
 ﻿using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using BattleFury.Entities.Items;
 
 namespace BattleFury.Components.Animated
 {
@@ -24,7 +25,7 @@ namespace BattleFury.Components.Animated
         public override void Start()
         {
             base.Start();
-            
+ 
             // Get a reference to the transform component
             this.physicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
         }

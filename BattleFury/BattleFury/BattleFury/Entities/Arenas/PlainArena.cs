@@ -54,10 +54,10 @@ namespace BattleFury.Entities.Arenas
             spawnPositions.Add(new Vector3(15, 10, 0));
 
             // Create the Bounding box.
-            boundingBox = new BoundingBox(new Vector3(-70, -20, -50), new Vector3(70, 60, 50));
+            boundingBox = new BoundingBox(new Vector3(-70, -20, -20), new Vector3(70, 60, 20));
         }
 
-        public override Vector3 GetSpawnPosition()
+        public override Vector3 GetCharacterSpawnPosition()
         {
             Vector3 toReturn = spawnPositions[currentSpawnIndex];
             currentSpawnIndex++;
@@ -71,6 +71,12 @@ namespace BattleFury.Entities.Arenas
         public override BoundingBox GetBoundingBox()
         {
             return boundingBox;
+        }
+
+        public override Vector3 GetItemSpawnPosition(Random random)
+        {
+            Vector3 spawnPosition = new Vector3(random.Next(51) - 25, random.Next(10) + 5, 0);
+            return spawnPosition;
         }
     }
 }

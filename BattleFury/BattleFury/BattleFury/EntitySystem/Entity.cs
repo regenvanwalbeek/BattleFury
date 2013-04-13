@@ -79,6 +79,7 @@ namespace BattleFury.EntitySystem
             if (isInitialized)
             {
                 component.Initialize();
+                component.Start();
             }
         }
 
