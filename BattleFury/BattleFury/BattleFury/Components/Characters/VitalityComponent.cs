@@ -35,6 +35,18 @@ namespace BattleFury.Components.Characters
         {
         }
 
+        public void Damage(int damageAmount)
+        {
+            if (RageMeter < 100)
+            {
+                RageMeter += damageAmount;
+            }
+            else if (RageMeter < 100)
+            {
+                RageMeter = 100;
+            }
+        }
+
 
   
     }

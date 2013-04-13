@@ -13,7 +13,6 @@ namespace BattleFury.EntitySystem
     /// </summary>
     public abstract class Entity
     {
-
         /// <summary>
         /// List of components for the entity.
         /// </summary>

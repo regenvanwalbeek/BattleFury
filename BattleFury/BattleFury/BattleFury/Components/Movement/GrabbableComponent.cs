@@ -5,6 +5,7 @@ using System.Text;
 using BattleFury.EntitySystem;
 using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
+using BattleFury.Components.Characters;
 
 namespace BattleFury.Components.Movement
 {
@@ -130,8 +131,10 @@ namespace BattleFury.Components.Movement
             }
             Vector2 throwVelocity = throwStrength * direction;
             bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 0);
-
-           
+            
+            // Damage the vitality component when thrown.
+            VitalityComponent health = (VitalityComponent) Parent.GetComponent("VitalityComponent");
+            health.Damage(5);
         }
     }
 }

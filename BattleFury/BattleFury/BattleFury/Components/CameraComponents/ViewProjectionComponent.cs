@@ -114,7 +114,6 @@ namespace BattleFury.Components.CameraComponents
             Quaternion rotation = Quaternion.CreateFromYawPitchRoll(0, pitchRotation, 0);
             Direction = Vector3.Transform(Direction, Matrix.CreateFromQuaternion(rotation));
             Up = Vector3.Transform(Up, Matrix.CreateFromQuaternion(rotation));
-            Console.WriteLine(Position);
         }
 
         public void LookDown(){
@@ -126,7 +125,6 @@ namespace BattleFury.Components.CameraComponents
             Quaternion rotation = Quaternion.CreateFromYawPitchRoll(0, pitchRotation, 0);
             Direction = Vector3.Transform(Direction, Matrix.CreateFromQuaternion(rotation));
             Up = Vector3.Transform(Up, Matrix.CreateFromQuaternion(rotation));
-            Console.WriteLine(Position);
         }
 
         public void LookLeft(){
