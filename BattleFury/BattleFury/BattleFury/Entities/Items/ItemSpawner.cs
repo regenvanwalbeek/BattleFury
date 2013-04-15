@@ -3,6 +3,7 @@ using BattleFury.Components;
 using BattleFury.Entities.Physics;
 using BattleFury.Entities.Arenas;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace BattleFury.Entities.Items
 {
@@ -21,6 +22,10 @@ namespace BattleFury.Entities.Items
             this.AttachComponent(itemSpawner);
         }
 
+        public List<Item> GetItems()
+        {
+            return itemSpawner.Items;
+        }
 
     }
 }

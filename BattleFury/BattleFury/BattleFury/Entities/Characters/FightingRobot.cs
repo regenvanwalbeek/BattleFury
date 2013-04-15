@@ -40,7 +40,7 @@ namespace BattleFury.Entities.Characters
             MovementComponent moveComponent = new MovementComponent(this, SPEED);
             this.AttachComponent(moveComponent);
 
-            grabComponent = new GrabComponent(this, environment.Characters, THROW_STRENGTH);
+            grabComponent = new GrabComponent(this, environment, THROW_STRENGTH);
             this.AttachComponent(grabComponent);
 
         }
