@@ -71,7 +71,11 @@ namespace BattleFury.Components.Movement
                 if (timeSinceGrab >= MAX_GRAB_TIME)
                 {
                     // Drop the entity
-                    ((MovementComponent)Parent.GetComponent("MovementComponent")).Enabled = true;
+                    MovementComponent moveComponent = ((MovementComponent)Parent.GetComponent("MovementComponent"));
+                    if (moveComponent != null)
+                    {
+                        moveComponent.Enabled = true;
+                    }
                     grabber.LoseGrip();
                     grabber = null;
                 }
