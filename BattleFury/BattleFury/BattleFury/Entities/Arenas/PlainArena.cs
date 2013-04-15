@@ -38,10 +38,10 @@ namespace BattleFury.Entities.Arenas
         /// </summary>
         /// <param name="entityManager"></param>
         /// <param name="physicsSimulator"></param>
-        public PlainArena(EntityManager entityManager, PhysicsSimulator physicsSimulator, Model model)
+        public PlainArena(EntityManager entityManager, PhysicsSimulator physicsSimulator)
         {
             // Create the platforms.
-            Platform ground = new Platform(new Vector3(0, 0, 0), 50.0f, 1.0f, 5.0f, model);
+            Platform ground = new Platform(new Vector3(0, 0, 0), 50.0f, 1.0f, 5.0f);
             platforms.Add(ground);
             entityManager.AddEntity(ground);
             physicsSimulator.AddPhysicsEntity(ground.GetBox());

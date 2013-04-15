@@ -23,10 +23,10 @@ namespace BattleFury.Entities.Arenas
 
         protected BepuPhysicsComponent bepuPhysicsComponent;
 
-        public Platform(Vector3 position, Model model):this(position, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_LENGTH, model){
+        public Platform(Vector3 position, Model model):this(position, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_LENGTH){
         }
 
-        public Platform(Vector3 position, float width, float height, float length, Model model)
+        public Platform(Vector3 position, float width, float height, float length)
         {
             this.width = width;
             this.height = height;
@@ -38,7 +38,7 @@ namespace BattleFury.Entities.Arenas
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
             Matrix scaling = Matrix.CreateScale(width, height, length);
-            BasicModelComponent drawComponent = new CubeRenderComponent(this, model, scaling);
+            BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
 
             this.AttachComponent(bepuPhysicsComponent);
             this.AttachComponent(drawComponent);

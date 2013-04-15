@@ -17,11 +17,11 @@ namespace BattleFury.Components
 
         private SpriteFont livesFont;
 
-        public DrawableHUDComponent(Entity parent, List<Character> characters, SpriteFont rageFont, SpriteFont livesFont)
+        public DrawableHUDComponent(Entity parent, List<Character> characters)
             : base(parent, "DrawableHUDComponent")
         {
-            this.rageFont = rageFont;
-            this.livesFont = livesFont;
+            this.rageFont = ContentLoader.HUDRageFont;
+            this.livesFont = ContentLoader.HUDLivesFont;
 
             vitalityComponents = new List<VitalityComponent>();
             for (int i = 0; i < characters.Count; i++)

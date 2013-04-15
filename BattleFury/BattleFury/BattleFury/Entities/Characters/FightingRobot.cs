@@ -24,14 +24,14 @@ namespace BattleFury.Entities.Characters
 
         private const int THROW_STRENGTH = 100;
 
-        public FightingRobot(int lives, Vector3 spawnPosition, Model model, PlayerIndex controllingPlayer, int team, Environment environment)
+        public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment)
             : base("FightingRobot", lives, new Box(spawnPosition, 1, 1, 1, MASS), controllingPlayer, team, environment)
         {
             
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
             Matrix scaling = Matrix.CreateScale(1, 1, 1);
-            BasicModelComponent drawComponent = new CubeRenderComponent(this, model, scaling);
+            BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
 
             JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);

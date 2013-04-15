@@ -82,11 +82,9 @@ namespace BattleFury.Screens
 
             // Load content necessary for the battle screen
             ContentLoader.LoadContent(content);
-            // Load the unit cube model.
-            Model cube = ContentLoader.Cube;
+            
             Effect colorEffect = content.Load<Effect>("effects/ReplaceColor");
-            SpriteFont hudFontRage = content.Load<SpriteFont>("fonts/HUDFontRage");
-            SpriteFont hudFontLives = content.Load<SpriteFont>("fonts/HUDFontLives");
+
 
             // Create the Entity Manager.
             entityManager = new EntityManager(content);
@@ -98,11 +96,11 @@ namespace BattleFury.Screens
             Arena arenaEntity;
             if (GameSettings.Arena == GameSettings.ARENA_SETTING.PLAIN_ARENA)
             {
-                arenaEntity = new PlainArena(entityManager, physicsEntity, cube);
+                arenaEntity = new PlainArena(entityManager, physicsEntity);
             }
             else
             {
-                arenaEntity = new PlainArena(entityManager, physicsEntity, cube);
+                arenaEntity = new PlainArena(entityManager, physicsEntity);
             }
 
             // Create the environment
@@ -117,7 +115,7 @@ namespace BattleFury.Screens
             cameraEntities.Add(debugCamera); // Debug Camera
 
             // Create the Item Spawner
-            ItemSpawner itemSpawner = new ItemSpawner(entityManager, physicsEntity, arenaEntity, cube);
+            ItemSpawner itemSpawner = new ItemSpawner(entityManager, physicsEntity, arenaEntity);
 
             // Create the Characters.
             List<PlayerSettings> players = GameSettings.Players;
@@ -127,7 +125,7 @@ namespace BattleFury.Screens
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
                 {
-                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetCharacterSpawnPosition(), cube, player.PlayerIndex, player.Team, environment);
+                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetCharacterSpawnPosition(), player.PlayerIndex, player.Team, environment);
                     physicsEntity.AddPhysicsEntity(character.GetBox());
                     characters.Add(character);
                     environment.AddCharacter(character);
@@ -136,7 +134,7 @@ namespace BattleFury.Screens
             }
 
             // Create the Hud
-            HUD hud = new HUD(characters, hudFontRage, hudFontLives);
+            HUD hud = new HUD(characters);
 
             // Add the entities to the Entity Manager and init the manager
             entityManager.AddEntity(arenaEntity);

@@ -31,17 +31,14 @@ namespace BattleFury.Components
         /// </summary>
         private int timeTillSpawn;
 
-        private Model rockModel;
-
         private Arena arena;
 
-        public ItemSpawnComponent(Entity parent, EntityManager entityManager, PhysicsSimulator physics, Arena arena, Model rockModel) : base(parent, "ItemSpawnComponent")
+        public ItemSpawnComponent(Entity parent, EntityManager entityManager, PhysicsSimulator physics, Arena arena) : base(parent, "ItemSpawnComponent")
         {
             this.random = new Random();
             this.entityManager = entityManager;
             this.timeTillSpawn = random.Next(MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
             this.physics = physics;
-            this.rockModel = rockModel;
             this.arena = arena;
         }
 
@@ -62,7 +59,7 @@ namespace BattleFury.Components
                 Vector3 spawnPosition = arena.GetItemSpawnPosition(random);
 
                 // Spawn a random item
-                Item item = new Rock(rockModel, spawnPosition);
+                Item item = new Rock(spawnPosition);
                 item.Initialize();
 
                 // Add the item to the world.

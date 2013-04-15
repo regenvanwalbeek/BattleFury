@@ -15,9 +15,9 @@ namespace BattleFury.Entities.Items
 
         private ItemSpawnComponent itemSpawner;
 
-        public ItemSpawner(EntityManager entityManager, PhysicsSimulator physics, Arena arena, Model rockModel)
+        public ItemSpawner(EntityManager entityManager, PhysicsSimulator physics, Arena arena)
         {
-            this.itemSpawner = new ItemSpawnComponent(this, entityManager, physics, arena, rockModel);
+            this.itemSpawner = new ItemSpawnComponent(this, entityManager, physics, arena);
             this.AttachComponent(itemSpawner);
         }
 

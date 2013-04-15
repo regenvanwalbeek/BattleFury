@@ -10,9 +10,9 @@ namespace BattleFury.Entities
     {
         private DrawableComponent drawableHUDComponent;
 
-        public HUD(List<Character> characterList, SpriteFont rageFont, SpriteFont livesFont)
+        public HUD(List<Character> characterList)
         {
-            this.drawableHUDComponent = new DrawableHUDComponent(this, characterList, rageFont, livesFont);
+            this.drawableHUDComponent = new DrawableHUDComponent(this, characterList);
             AttachComponent(drawableHUDComponent);
         }
     }

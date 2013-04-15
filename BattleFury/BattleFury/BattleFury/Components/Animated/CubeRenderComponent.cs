@@ -11,8 +11,8 @@ namespace BattleFury.Components.Animated
 
         private BepuPhysicsComponent physicsComponent;
 
-        public CubeRenderComponent(Entity parent, Model model, Matrix transform)
-            : base(parent, model)
+        public CubeRenderComponent(Entity parent, Matrix transform)
+            : base(parent, ContentLoader.Cube)
         {
             this.Transform = transform;
         }
