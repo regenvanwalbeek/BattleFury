@@ -28,6 +28,10 @@ namespace BattleFury.Entities.Characters
 
         protected GrabComponent grabComponent;
 
+        protected PunchableComponent punchableComponent;
+
+        protected PunchComponent punchComponent;
+
         public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team, Environment environment) {
             // Create the vitality component to track the character's health.
             vitalityComponent = new VitalityComponent(this, lives);
@@ -50,6 +54,8 @@ namespace BattleFury.Entities.Characters
             grabbableComponent = new GrabbableComponent(this);
             this.AttachComponent(grabbableComponent);
 
+            punchableComponent = new PunchableComponent(this);
+            this.AttachComponent(punchableComponent);
             
         }
 

@@ -88,7 +88,7 @@ namespace BattleFury.Components.Movement
             }
         }
 
-        public Box getGrabbableBox()
+        public Box GetGrabbableBox()
         {
             return this.bepuPhysicsComponent.Box;
         }

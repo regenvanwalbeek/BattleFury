@@ -24,6 +24,10 @@ namespace BattleFury.Entities.Characters
 
         private const int THROW_STRENGTH = 100;
 
+        private const int PUNCH_SPEED = 1;
+
+        private const int PUNCH_STRENGTH = 100;
+
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment)
             : base("FightingRobot", lives, new Box(spawnPosition, 1, 1, 1, MASS), controllingPlayer, team, environment)
         {
@@ -43,6 +47,8 @@ namespace BattleFury.Entities.Characters
             grabComponent = new GrabComponent(this, environment, THROW_STRENGTH);
             this.AttachComponent(grabComponent);
 
+            punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_STRENGTH);
+            this.AttachComponent(punchComponent);
         }
 
   

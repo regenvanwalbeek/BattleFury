@@ -85,7 +85,7 @@ namespace BattleFury.Components.Movement
                         // Check if the entity is equal to any of the grabbables.
                         for (int i = 0; i < grabbables.Count; i++)
                         {
-                            if (collidingEntity == grabbables[i].getGrabbableBox())
+                            if (collidingEntity == grabbables[i].GetGrabbableBox())
                             {
                                 bool success = grabbables[i].Grab(this);
                                 if (success)
