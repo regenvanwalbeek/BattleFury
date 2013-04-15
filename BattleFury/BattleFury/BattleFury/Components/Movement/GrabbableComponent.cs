@@ -107,25 +107,17 @@ namespace BattleFury.Components.Movement
             this.grabber = grabber;
             this.grabbingEntityPositionOffset = this.bepuPhysicsComponent.Box.Position - grabber.GetPosition();
 
-            // Disable the move component if the entity has a moveable
-            MovementComponent moveComponent = (MovementComponent) Parent.GetComponent("MovementComponent");
-            if (moveComponent != null)
-            {
-                moveComponent.Enabled = false;
-            }
+            // Disable the move component
+            ((MovementComponent)Parent.GetComponent("MovementComponent")).Enabled = false;
             return true;
         }
 
         public void Throw(Vector2 direction, float throwStrength)
         {
-            Console.WriteLine("wat");
+
             grabber = null;
             // Give movement back.
-            MovementComponent moveComponent = (MovementComponent)Parent.GetComponent("MovementComponent");
-            if (moveComponent != null)
-            {
-                moveComponent.Enabled = true;
-            }
+            ((MovementComponent)Parent.GetComponent("MovementComponent")).Enabled = true;
 
             // Set the force to throw the entity.
             if (direction.Equals(Vector2.Zero))
@@ -140,13 +132,9 @@ namespace BattleFury.Components.Movement
             Vector2 throwVelocity = throwStrength * direction;
             bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 0);
             
-            // Damage the vitality component when thrown if the item has a vitali
-            VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
-            if (health != null)
-            {
-                health.Damage(5);
-            }
-          
+            // Damage the vitality component when thrown.
+            VitalityComponent health = (VitalityComponent) Parent.GetComponent("VitalityComponent");
+            health.Damage(5);
         }
     }
 }

@@ -5,7 +5,6 @@ using BattleFury.Entities.Physics;
 using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
 namespace BattleFury.Components
 {
@@ -34,11 +33,6 @@ namespace BattleFury.Components
 
         private Arena arena;
 
-        /// <summary>
-        /// Items that have been spawned.
-        /// </summary>
-        public List<Item> Items;
-
         public ItemSpawnComponent(Entity parent, EntityManager entityManager, PhysicsSimulator physics, Arena arena) : base(parent, "ItemSpawnComponent")
         {
             this.random = new Random();
@@ -46,7 +40,6 @@ namespace BattleFury.Components
             this.timeTillSpawn = random.Next(MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
             this.physics = physics;
             this.arena = arena;
-            this.Items = new List<Item>();
         }
 
         public override void Initialize()
@@ -68,7 +61,6 @@ namespace BattleFury.Components
                 // Spawn a random item
                 Item item = new Rock(spawnPosition);
                 item.Initialize();
-                Items.Add(item);
 
                 // Add the item to the world.
                 entityManager.AddEntity(item);

@@ -183,7 +183,7 @@ namespace BattleFury.EntitySystem
         /// Retrieves a component by a given id.
         /// </summary>
         /// <param name="id">The id to retrieve</param>
-        /// <returns>The component with the specified id. Null if component does not exist.</returns>
+        /// <returns>The component with the specified id.</returns>
         public IEntityComponent GetComponent(String id)
         {
             for (int i = 0; i < components.Count; i++)
@@ -193,8 +193,7 @@ namespace BattleFury.EntitySystem
                     return components[i];
                 }
             }
-            // throw new ArgumentException("Component id: " + id + " does not exist.");
-            return null;
+            throw new ArgumentException("Component id: " + id + " does not exist.");
         }
 
 

@@ -103,11 +103,8 @@ namespace BattleFury.Screens
                 arenaEntity = new PlainArena(entityManager, physicsEntity);
             }
 
-            // Create the Item Spawner
-            ItemSpawner itemSpawner = new ItemSpawner(entityManager, physicsEntity, arenaEntity);
-
             // Create the environment
-            Environment environment = new Environment(arenaEntity, itemSpawner);
+            Environment environment = new Environment(arenaEntity);
 
             // Create the Camera Entity.
             Camera gameCamera = new Camera(new Vector3(0, 10, 60), Vector3.Zero + new Vector3(0, 20, -100), Vector3.Up );
@@ -116,6 +113,9 @@ namespace BattleFury.Screens
             debugCamera.AttachComponent(debugCameraComponent);
             cameraEntities.Add(gameCamera); // Game Camera
             cameraEntities.Add(debugCamera); // Debug Camera
+
+            // Create the Item Spawner
+            ItemSpawner itemSpawner = new ItemSpawner(entityManager, physicsEntity, arenaEntity);
 
             // Create the Characters.
             List<PlayerSettings> players = GameSettings.Players;
