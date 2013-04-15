@@ -93,6 +93,8 @@
     <Compile Include="Components\ItemSpawnComponent.cs" />
     <Compile Include="Components\Movement\GrabbableComponent.cs" />
     <Compile Include="Components\Movement\MovementComponent.cs" />
+    <Compile Include="Components\Movement\PunchableComponent.cs" />
+    <Compile Include="Components\Movement\PunchComponent.cs" />
     <Compile Include="Components\Physics\BepuPhysicsComponent.cs" />
     <Compile Include="Components\Physics\PhysicsSimulationComponent.cs" />
     <Compile Include="Components\Movement\GrabComponent.cs" />
