@@ -1,5 +1,4 @@
-﻿using System;
-using BattleFury.EntitySystem;
+﻿using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 using BattleFury.Settings;
 using BattleFury.Components.Characters;
@@ -7,6 +6,7 @@ using BattleFury.Entities.Characters;
 using System.Collections.Generic;
 using BEPUphysics.Collidables;
 using BattleFury.Input;
+using BattleFury.Entities;
 
 namespace BattleFury.Components.Movement
 {
@@ -30,10 +30,7 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private PlayerIndex controllingPlayer;
 
-        /// <summary>
-        /// List of grabbable characters
-        /// </summary>
-        List<Character> characters;
+        private Environment environment;
 
         /// <summary>
         /// Whether this entity is currently grabbing a grabbable object.
@@ -51,8 +48,8 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private GrabbableComponent grabbedObject = null;
 
-        public GrabComponent(Entity parent, List<Character> characters, float throwStrength) : base(parent, "GrabComponent"){
-            this.characters = characters;
+        public GrabComponent(Entity parent, Environment environment, float throwStrength) : base(parent, "GrabComponent"){
+            this.environment = environment;
             this.throwStrength = throwStrength;
         }
 
@@ -75,11 +72,7 @@ namespace BattleFury.Components.Movement
                 if (GameplayBindings.IsGrab(controllingPlayer))
                 {
                     // Get all the grabbable components available in this frame.
-                    List<GrabbableComponent> grabbables = new List<GrabbableComponent>();
-                    for (int i = 0; i < characters.Count; i++)
-                    {
-                        grabbables.Add((GrabbableComponent)characters[i].GetComponent("GrabbableComponent"));
-                    }
+                    List<GrabbableComponent> grabbables = environment.GetEntitiesWithComponent<GrabbableComponent>("GrabbableComponent");
 
                     // Get all the entities colliding with the hitbox
                     EntityCollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedEntities;

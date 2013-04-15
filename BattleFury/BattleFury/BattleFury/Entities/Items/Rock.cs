@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework.Graphics;
 using BattleFury.Components.Animated;
+using BattleFury.Components.Movement;
 
 namespace BattleFury.Entities.Items
 {
@@ -22,6 +23,8 @@ namespace BattleFury.Entities.Items
             Matrix scaling = Matrix.CreateScale(1, 1, 1);
             BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
+            GrabbableComponent grabbable = new GrabbableComponent(this);
+            this.AttachComponent(grabbable);
         }
 
 
