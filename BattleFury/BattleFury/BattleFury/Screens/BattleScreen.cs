@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using BattleFury.Entities.Items;
+using BattleFury.Components;
 
 
 namespace BattleFury.Screens
@@ -79,8 +80,10 @@ namespace BattleFury.Screens
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
 
+            // Load content necessary for the battle screen
+            ContentLoader.LoadContent(content);
             // Load the unit cube model.
-            Model cube = content.Load<Model>("meshes/cube");
+            Model cube = ContentLoader.Cube;
             Effect colorEffect = content.Load<Effect>("effects/ReplaceColor");
             SpriteFont hudFontRage = content.Load<SpriteFont>("fonts/HUDFontRage");
             SpriteFont hudFontLives = content.Load<SpriteFont>("fonts/HUDFontLives");

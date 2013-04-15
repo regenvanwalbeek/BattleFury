@@ -87,6 +87,7 @@
     <Compile Include="Components\Characters\CharacterInformationComponent.cs" />
     <Compile Include="Components\Characters\RespawnableComponent.cs" />
     <Compile Include="Components\Characters\VitalityComponent.cs" />
+    <Compile Include="Components\ContentLoader.cs" />
     <Compile Include="Components\DrawableHUDComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
     <Compile Include="Components\ItemSpawnComponent.cs" />
