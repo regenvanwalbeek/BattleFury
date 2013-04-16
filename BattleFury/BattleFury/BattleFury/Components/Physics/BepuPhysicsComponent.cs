@@ -32,6 +32,9 @@ namespace BattleFury.Components
         {
             // Restrict the Z Axis movement.
             Box.Position = new Vector3(Box.Position.X, Box.Position.Y, 0);
+
+            // Restrict rotation of boxes.
+            Box.Orientation = Quaternion.Identity;
         }
     }
 }

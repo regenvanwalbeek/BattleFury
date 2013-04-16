@@ -39,7 +39,8 @@ namespace BattleFury.Entities.Characters
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
             Matrix scaling = Matrix.CreateScale(1, 1, 1);
-            BasicModelComponent drawComponent = new RobotRenderComponent(this, scaling);
+            scaling *= Matrix.CreateRotationY(MathHelper.PiOver2);
+            BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
 
             JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);

@@ -78,12 +78,14 @@ namespace BattleFury.Components.Movement
                     }
                     grabber.LoseGrip();
                     grabber = null;
+                    this.bepuPhysicsComponent.Box.IsAffectedByGravity = true; // re enable gravity when let go.
                 }
                 else
                 {
                     // Move this entity with the grabbing entity.
                     this.bepuPhysicsComponent.Box.Position = grabber.GetPosition() + grabbingEntityPositionOffset;
-                    this.bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero; // Else it gains acceleration from gravity, and when it's dropped, it goes crazy.
+                    
+                  //  this.bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero; // Else it gains acceleration from gravity, and when it's dropped, it goes crazy.
                 }
             }
         }
@@ -110,6 +112,7 @@ namespace BattleFury.Components.Movement
             timeSinceGrab = 0;
             this.grabber = grabber;
             this.grabbingEntityPositionOffset = this.bepuPhysicsComponent.Box.Position - grabber.GetPosition();
+            this.bepuPhysicsComponent.Box.IsAffectedByGravity = false; // disable gravity, else it falls fast when dropped.
 
             // Disable the move component if the entity has a moveable
             MovementComponent moveComponent = (MovementComponent) Parent.GetComponent("MovementComponent");
@@ -124,6 +127,7 @@ namespace BattleFury.Components.Movement
         {
             Console.WriteLine("wat");
             grabber = null;
+            this.bepuPhysicsComponent.Box.IsAffectedByGravity = true; // reenable gravity when let go.
             // Give movement back.
             MovementComponent moveComponent = (MovementComponent)Parent.GetComponent("MovementComponent");
             if (moveComponent != null)
