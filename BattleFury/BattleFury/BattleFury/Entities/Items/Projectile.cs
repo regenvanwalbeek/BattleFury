@@ -6,18 +6,14 @@ namespace BattleFury.Entities.Items
 {
     public class Projectile : Item
     {
-
-
-
-
         public Projectile(Vector3 spawnPosition, Vector3 velocity)
-            : base(new Box(spawnPosition, 1, 1, 1))
+            : base(new Box(spawnPosition, .5f, .5f, .5f))
         {
             this.bepuPhysicsComponent.Box.LinearVelocity = velocity;
 
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
-            Matrix scaling = Matrix.CreateScale(1, 1, 1);
+            Matrix scaling = Matrix.CreateScale(.75f, .75f, .75f);
             BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
         }
