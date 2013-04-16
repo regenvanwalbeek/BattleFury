@@ -79,6 +79,20 @@ namespace BattleFury.Settings
         }
 
         /// <summary>
+        /// Binds Punch to Y button.
+        /// </summary>
+        public static bool IsFire(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+            #if DEBUG
+            return InputState.IsNewButtonPress(Buttons.Y, controllingPlayer, out playerIndex) ||
+                InputState.IsNewKeyPress(Keys.F, PlayerIndex.One, out playerIndex);
+            #else
+            return InputState.IsNewButtonPress(Buttons.Y, controllingPlayer, out playerIndex);
+            #endif
+        }
+
+        /// <summary>
         /// Gets the amount moved left or right.
         /// </summary>
         public static float MoveAmount(PlayerIndex controllingPlayer)

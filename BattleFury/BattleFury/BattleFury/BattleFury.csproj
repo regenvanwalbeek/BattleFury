@@ -81,6 +81,7 @@
     <Compile Include="Components\Animated\BasicModelComponent.cs" />
     <Compile Include="Components\Animated\CharacterAnimationComponent.cs" />
     <Compile Include="Components\Animated\CubeRenderComponent.cs" />
+    <Compile Include="Components\Animated\RobotRenderComponent.cs" />
     <Compile Include="Components\CameraComponents\BattleCameraComponent.cs" />
     <Compile Include="Components\CameraComponents\DebugCameraComponent.cs" />
     <Compile Include="Components\CameraComponents\ViewProjectionComponent.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Components\DrawableHUDComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
     <Compile Include="Components\ItemSpawnComponent.cs" />
+    <Compile Include="Components\Movement\FireProjectileComponent.cs" />
     <Compile Include="Components\Movement\GrabbableComponent.cs" />
     <Compile Include="Components\Movement\MovementComponent.cs" />
     <Compile Include="Components\Movement\PunchableComponent.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Entities\Hitboxes\ShieldHitbox.cs" />
     <Compile Include="Entities\HUD.cs" />
     <Compile Include="Entities\Items\ItemSpawner.cs" />
+    <Compile Include="Entities\Items\Projectile.cs" />
     <Compile Include="Entities\Items\Rock.cs" />
     <Compile Include="Entities\Arenas\PlainArena.cs" />
     <Compile Include="Entities\Physics\BepuPhysicsBox.cs" />

@@ -28,6 +28,10 @@ namespace BattleFury.Entities.Characters
 
         private const int PUNCH_STRENGTH = 100;
 
+        private const int FIRE_SPEED = 1000;
+
+        private const int FIRE_VELOCITY = 100;
+
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment)
             : base("FightingRobot", lives, new Box(spawnPosition, 1, 1, 1, MASS), controllingPlayer, team, environment)
         {
@@ -35,7 +39,7 @@ namespace BattleFury.Entities.Characters
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
             Matrix scaling = Matrix.CreateScale(1, 1, 1);
-            BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
+            BasicModelComponent drawComponent = new RobotRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
 
             JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);
@@ -49,6 +53,12 @@ namespace BattleFury.Entities.Characters
 
             punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_STRENGTH);
             this.AttachComponent(punchComponent);
+
+            FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment);
+            this.AttachComponent(fireProjectileComponent);
+
+
+
         }
 
   

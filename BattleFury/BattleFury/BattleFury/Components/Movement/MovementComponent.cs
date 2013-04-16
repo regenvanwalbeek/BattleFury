@@ -17,6 +17,13 @@ namespace BattleFury.Components.Movement
 
         private float moveSpeed;
 
+        /// <summary>
+        /// The last X direction this entity was "facing". 
+        /// If the entity was last seen moving right (positive X), DirectionX = 1. 
+        /// Else DirectionX = -1
+        /// </summary>
+        public int DirectionX = 1;
+
 
         public MovementComponent(Entity parent, float moveSpeed)
             : base(parent, "MovementComponent")
@@ -59,6 +66,15 @@ namespace BattleFury.Components.Movement
             // Set the new speed in the x direction.
             bepuPhysicsComponent.Box.LinearVelocity = new Vector3(newLinearVelocity, currentLinearVelocity.Y, currentLinearVelocity.Z);
 
+            // Set the direction
+            if (newLinearVelocity > 0)
+            {
+                DirectionX = 1;
+            }
+            else if (newLinearVelocity < 0)
+            {
+                DirectionX = -1;
+            }
         }
     }
 }

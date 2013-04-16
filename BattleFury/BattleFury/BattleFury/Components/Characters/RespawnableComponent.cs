@@ -15,7 +15,7 @@ namespace BattleFury.Components.Characters
 
         private BepuPhysicsComponent bepuPhysicsComponent;
 
-        private CubeRenderComponent cubeRenderComponent;
+        private BasicModelComponent cubeRenderComponent;
 
         private Arena arena;
 
@@ -45,7 +45,7 @@ namespace BattleFury.Components.Characters
         {
             vitalityComponent = (VitalityComponent)Parent.GetComponent("VitalityComponent");
             bepuPhysicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
-            cubeRenderComponent = (CubeRenderComponent)Parent.GetComponent("BasicModelComponent");
+            cubeRenderComponent = (BasicModelComponent)Parent.GetComponent("BasicModelComponent");
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)

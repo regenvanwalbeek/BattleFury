@@ -9,7 +9,8 @@ namespace BattleFury.Entities.Items
 {
 
     /// <summary>
-    /// Spawns items in the arena at random positions and random times.
+    /// Spawns items in the arena at random positions and random times. 
+    /// Also manages the manual spawning of any items.
     /// </summary>
     public class ItemSpawner : Entity
     {
@@ -22,10 +23,15 @@ namespace BattleFury.Entities.Items
             this.AttachComponent(itemSpawner);
         }
 
+        public void AddItem(Item item)
+        {
+            itemSpawner.Add(item);
+        }
+        
         public List<Item> GetItems()
         {
-            return itemSpawner.Items;
+            return itemSpawner.GetItems();
         }
-
+        
     }
 }

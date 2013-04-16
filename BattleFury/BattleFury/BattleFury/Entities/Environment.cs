@@ -17,17 +17,9 @@ namespace BattleFury.Entities
     {
         public List<Character> Characters { get; private set; }
 
-        public List<Item> Items
-        {
-            get
-            {
-                return spawner.GetItems();
-            }
-        }
-
         public Arena Arena { get; private set; }
 
-        public ItemSpawner spawner;
+        public ItemSpawner Spawner;
 
         /// <summary>
         /// Initialize the Game Environment
@@ -38,7 +30,7 @@ namespace BattleFury.Entities
         {
             Characters = new List<Character>();
             this.Arena = arena;
-            this.spawner = spawner;
+            this.Spawner = spawner;
         }
 
         /// <summary>
@@ -66,7 +58,7 @@ namespace BattleFury.Entities
                 }
             }
 
-            foreach (Item item in Items){
+            foreach (Item item in Spawner.GetItems()){
                 IEntityComponent component = item.GetComponent(componentID);
                 if (component != null){
                     components.Add( (T) component );

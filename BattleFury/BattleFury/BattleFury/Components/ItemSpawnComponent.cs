@@ -37,7 +37,7 @@ namespace BattleFury.Components
         /// <summary>
         /// Items that have been spawned.
         /// </summary>
-        public List<Item> Items;
+        private List<Item> Items;
 
         public ItemSpawnComponent(Entity parent, EntityManager entityManager, PhysicsSimulator physics, Arena arena) : base(parent, "ItemSpawnComponent")
         {
@@ -77,5 +77,19 @@ namespace BattleFury.Components
                 timeTillSpawn = random.Next(MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
             }
         }
+
+        public void Add(Item item)
+        {
+            Items.Add(item);
+            entityManager.AddEntity(item);
+            physics.AddPhysicsEntity(item.GetBox());
+        }
+
+        public List<Item> GetItems()
+        {
+            return this.Items;
+        }
+
+
     }
 }

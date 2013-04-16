@@ -24,6 +24,8 @@ namespace BattleFury.Components
 
         public static Model Cube;
 
+        public static Model Robot;
+
         public static SpriteFont HUDRageFont;
 
         public static SpriteFont HUDLivesFont;
@@ -48,9 +50,15 @@ namespace BattleFury.Components
             Content = content;
 
             // Load the cube model
-            Cube = content.Load<Model>("meshes/cube");
+            Cube = content.Load<Model>("meshes/Cube");
+            
+            // Load the robot model
+            Robot = content.Load<Model>("meshes/Robot");
+
+            // Load HUD Fonts
             HUDRageFont = content.Load<SpriteFont>("fonts/HUDFontRage");
             HUDLivesFont = content.Load<SpriteFont>("fonts/HUDFontLives");
+
 
 
             contentLoaded = true;
