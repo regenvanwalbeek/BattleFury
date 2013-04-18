@@ -126,7 +126,7 @@ namespace BattleFury.Components.Movement
         public void Throw(Vector2 direction, float throwStrength)
         {
             Console.WriteLine("wat");
-            grabber = null;
+            
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = true; // reenable gravity when let go.
             // Give movement back.
             MovementComponent moveComponent = (MovementComponent)Parent.GetComponent("MovementComponent");
@@ -138,8 +138,9 @@ namespace BattleFury.Components.Movement
             // Set the force to throw the entity.
             if (direction.Equals(Vector2.Zero))
             {
-                // TODO for now, throw up right. Should throw up in the direction facing. (maybe get the bepubox linear velocity x)
-                direction = Vector2.Normalize(new Vector2(1, 1));
+                // Throw up in the direction facing.
+                int xDir = ((MovementComponent)grabber.Parent.GetComponent("MovementComponent")).DirectionX;
+                direction = Vector2.Normalize(new Vector2(xDir, 1));
             }
             else
             {
@@ -148,13 +149,13 @@ namespace BattleFury.Components.Movement
             Vector2 throwVelocity = throwStrength * direction;
             bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 0);
             
-            // Damage the vitality component when thrown if the item has a vitali
+            // Damage the vitality component when thrown if the entity has vitality
             VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
             if (health != null)
             {
                 health.Damage(5);
             }
-          
+            grabber = null;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using BattleFury.EntitySystem;
 using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
+using BattleFury.Components.Characters;
 
 namespace BattleFury.Components.Movement
 {
@@ -41,6 +42,12 @@ namespace BattleFury.Components.Movement
             Vector3 velocity = Vector3.Normalize(this.bepuPhysicsComponent.Box.Position - puncher.GetPosition()) * strength;
             this.bepuPhysicsComponent.Box.LinearVelocity = velocity;
 
+            // Damage the vitality component when thrown if the entity has vitality
+            VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
+            if (health != null)
+            {
+                health.Damage(5);
+            }
         }
 
         public Box GetPunchableBox(){

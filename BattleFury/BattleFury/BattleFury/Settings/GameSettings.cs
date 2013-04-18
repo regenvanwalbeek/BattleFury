@@ -70,8 +70,8 @@ namespace BattleFury.Settings
             Players = new List<PlayerSettings>();
             Players.Add(new PlayerSettings(CHARACTER_SETTING.ROBOT, 1, Color.Blue, PlayerIndex.One));
             Players.Add(new PlayerSettings(CHARACTER_SETTING.ROBOT, 2, Color.Red, PlayerIndex.Two));
-            Players.Add(new PlayerSettings(CHARACTER_SETTING.ROBOT, 3, Color.Green, PlayerIndex.Three));
-            Players.Add(new PlayerSettings(CHARACTER_SETTING.ROBOT, 4, Color.Yellow, PlayerIndex.Four));
+            /*Players.Add(new PlayerSettings(CHARACTER_SETTING.ROBOT, 3, Color.Green, PlayerIndex.Three));
+            Players.Add(new PlayerSettings(CHARACTER_SETTING.ROBOT, 4, Color.Yellow, PlayerIndex.Four));*/
         }
     }
 }

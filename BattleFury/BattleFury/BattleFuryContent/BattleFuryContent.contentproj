@@ -79,9 +79,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="meshes\Robot.x">
-      <Name>Robot</Name>
+    <Compile Include="meshes\cylinder_test.fbx">
+      <Name>cylinder_test</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="meshes\cylinder_img.png">
+      <Name>cylinder_img</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="meshes\cylinder.x">
+      <Name>cylinder</Name>
       <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="meshes\Robot.fbx">
+      <Name>Robot</Name>
+      <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
   </ItemGroup>

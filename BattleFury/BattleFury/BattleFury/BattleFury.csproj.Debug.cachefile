@@ -1,8 +1,12 @@
 Content\fonts\menufont.xnb
-Content\textures\white.xnb
-Content\textures\background.xnb
-Content\meshes\cube.xnb
 Content\fonts\HUDFontRage.xnb
 Content\fonts\HUDFontLives.xnb
+Content\textures\background.xnb
+Content\textures\white.xnb
+Content\meshes\cylinder_img.xnb
+Content\meshes\cube.xnb
+Content\meshes\cylinder_test.xnb
 Content\effects\ReplaceColor.xnb
+Content\meshes\cylinder_img_0.xnb
+Content\meshes\cylinder.xnb
 Content\meshes\Robot.xnb

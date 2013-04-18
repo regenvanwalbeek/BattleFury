@@ -64,7 +64,7 @@ namespace BattleFury.Components.Movement
                 int direction = movementComponent.DirectionX;
                 
                 // Create a projectile and add it to the environment.
-                Projectile p = new Projectile(this.bepuPhysicsComponent.Box.Position, new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity);
+                Projectile p = new Projectile(this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX, 0, 0), new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity);
                 p.Initialize();
                 environment.Spawner.AddItem(p);
             }

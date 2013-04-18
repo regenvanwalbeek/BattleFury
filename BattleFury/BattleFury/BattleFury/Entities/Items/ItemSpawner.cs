@@ -17,9 +17,9 @@ namespace BattleFury.Entities.Items
 
         private ItemSpawnComponent itemSpawner;
 
-        public ItemSpawner(EntityManager entityManager, PhysicsSimulator physics, Arena arena)
+        public ItemSpawner(EntityManager entityManager, PhysicsSimulator physics, Arena arena, bool itemDropsAllowed)
         {
-            this.itemSpawner = new ItemSpawnComponent(this, entityManager, physics, arena);
+            this.itemSpawner = new ItemSpawnComponent(this, entityManager, physics, arena, itemDropsAllowed);
             this.AttachComponent(itemSpawner);
         }
 

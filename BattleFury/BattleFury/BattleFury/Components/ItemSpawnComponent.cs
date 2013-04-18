@@ -32,6 +32,11 @@ namespace BattleFury.Components
         /// </summary>
         private int timeTillSpawn;
 
+        /// <summary>
+        /// Limit on the number of items that can be randomly spawned. Note that items can still be added manually after random spawning
+        /// </summary>
+        private const int ITEM_LIMIT = 1;
+
         private Arena arena;
 
         /// <summary>
@@ -39,7 +44,9 @@ namespace BattleFury.Components
         /// </summary>
         private List<Item> Items;
 
-        public ItemSpawnComponent(Entity parent, EntityManager entityManager, PhysicsSimulator physics, Arena arena) : base(parent, "ItemSpawnComponent")
+        private bool itemDropsAllowed;
+
+        public ItemSpawnComponent(Entity parent, EntityManager entityManager, PhysicsSimulator physics, Arena arena, bool itemDropsAllowed) : base(parent, "ItemSpawnComponent")
         {
             this.random = new Random();
             this.entityManager = entityManager;
@@ -47,6 +54,7 @@ namespace BattleFury.Components
             this.physics = physics;
             this.arena = arena;
             this.Items = new List<Item>();
+            this.itemDropsAllowed = itemDropsAllowed;
         }
 
         public override void Initialize()
@@ -59,8 +67,10 @@ namespace BattleFury.Components
 
         public override void Update(GameTime gameTime)
         {
+
+            // Spawn items at random times.
             timeTillSpawn -= gameTime.ElapsedGameTime.Milliseconds;
-            if (timeTillSpawn <= 0)
+            if (itemDropsAllowed && timeTillSpawn <= 0 && Items.Count < ITEM_LIMIT)
             {
                 // Get a spawn position
                 Vector3 spawnPosition = arena.GetItemSpawnPosition(random);
@@ -75,6 +85,20 @@ namespace BattleFury.Components
                 physics.AddPhysicsEntity(item.GetBox());
 
                 timeTillSpawn = random.Next(MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
+            }
+
+            // Remove any items outside of the arena
+            for (int i = 0; i < Items.Count; i++)
+            {
+                Item item = Items[i];
+                if (arena.GetBoundingBox().Contains(item.GetBox().Position) == ContainmentType.Disjoint)
+                {
+                    // Remove the item from the physics, the entity manager, and the items list.
+                    Items.Remove(item);
+                    entityManager.RemoveEntity(item);
+                    physics.RemovePhysicsEntity(item.GetBox());
+                    i--;
+                }
             }
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace BattleFury.Components
 {
@@ -59,8 +60,6 @@ namespace BattleFury.Components
             HUDRageFont = content.Load<SpriteFont>("fonts/HUDFontRage");
             HUDLivesFont = content.Load<SpriteFont>("fonts/HUDFontLives");
 
-
-
             contentLoaded = true;
         }
 
@@ -71,6 +70,7 @@ namespace BattleFury.Components
         {
             if (contentLoaded)
             {
+                contentLoaded = false;
                 Content.Unload();
             }
             else

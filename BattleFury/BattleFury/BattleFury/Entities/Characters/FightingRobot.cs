@@ -28,7 +28,7 @@ namespace BattleFury.Entities.Characters
 
         private const int PUNCH_STRENGTH = 100;
 
-        private const int FIRE_SPEED = 1000;
+        private const int FIRE_SPEED = 200;
 
         private const int FIRE_VELOCITY = 100;
 
@@ -39,8 +39,11 @@ namespace BattleFury.Entities.Characters
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
             Matrix scaling = Matrix.CreateScale(1, 1, 1);
+            scaling *= Matrix.CreateRotationX(MathHelper.PiOver2);
             scaling *= Matrix.CreateRotationY(MathHelper.PiOver2);
-            BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
+            scaling *= Matrix.CreateRotationZ(MathHelper.PiOver2);
+
+            BasicModelComponent drawComponent = new RobotRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
 
             JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);
