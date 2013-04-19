@@ -67,9 +67,17 @@ namespace BattleFury.Components.Animated
             }
 
             // Matrix transform = Matrix.CreateTranslation(new Vector3(10, -5, 3)) * Matrix.CreateRotationY(-1 *MathHelper.PiOver2) ;
-            Matrix transform = Matrix.CreateRotationZ(MathHelper.PiOver2) * Matrix.CreateTranslation(new Vector3(xVal, yVal, zVal));
+            // Matrix transform = Matrix.CreateRotationZ(MathHelper.PiOver2) * Matrix.CreateTranslation(new Vector3(xVal, yVal, zVal));
+            // Matrix transform = Matrix.CreateTranslation(new Vector3(this.physicsComponent.Box.Position.X , 0, 0)) * Matrix.CreateRotationZ(- 1  * MathHelper.PiOver2) * Matrix.CreateRotationY(MathHelper.PiOver2);//  *Matrix.CreateTranslation(new Vector3(xVal, yVal, zVal));
+            /*Matrix transform = Matrix.CreateTranslation(new Vector3(this.physicsComponent.Box.Position.X, this.physicsComponent.Box.Position.Y, this.physicsComponent.Box.Position.Z)) *
+                 Matrix.CreateRotationZ(0) *  Matrix.CreateRotationX(0)*
+                Matrix.CreateRotationY(0);*/
 
-            return transform * physicsComponent.Box.WorldTransform;
+            Matrix transform = Matrix.CreateRotationX(-1*MathHelper.PiOver2) 
+                * Matrix.CreateTranslation(physicsComponent.Box.Position) 
+                * physicsComponent.Box.WorldTransform * Matrix.CreateRotationZ(-1 * MathHelper.PiOver2) 
+                * Matrix.CreateRotationY(-1*MathHelper.PiOver2);
+            return transform;
         }
 
         public override void Start()
