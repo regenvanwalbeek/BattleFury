@@ -58,7 +58,7 @@ namespace BattleFury.EntitySystem
             {
                 if (components[i].ID.Equals(id))
                 {
-                    throw new ArgumentException("Component already exists in entity.");
+                    //throw new ArgumentException("Component already exists in entity.");
                 }
             }
 

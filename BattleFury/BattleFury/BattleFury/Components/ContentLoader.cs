@@ -54,7 +54,7 @@ namespace BattleFury.Components
             Cube = content.Load<Model>("meshes/Cube");
             
             // Load the robot model
-            Robot = content.Load<Model>("meshes/Robot");
+            Robot = content.Load<Model>("meshes/Robot-joined");
 
             // Load HUD Fonts
             HUDRageFont = content.Load<SpriteFont>("fonts/HUDFontRage");
