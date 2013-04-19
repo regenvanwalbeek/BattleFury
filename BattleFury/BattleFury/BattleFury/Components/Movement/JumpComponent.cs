@@ -42,7 +42,7 @@ namespace BattleFury.Components.Movement
             : base(parent, "JumpComponent")
         {
             this.JumpHeight = jumpHeight;
-            this.MaxJumps = maxJumps;
+            this.MaxJumps = maxJumps + 2;
         }
 
         public override void Initialize()

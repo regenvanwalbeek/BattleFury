@@ -34,49 +34,17 @@ namespace BattleFury.Components.Animated
         int zVal = 0;
         protected override Matrix GetWorld()
         {
-            PlayerIndex outP;
-            if (InputState.IsNewKeyPress(Microsoft.Xna.Framework.Input.Keys.X, null, out outP))
-            {
-                xVal++;
-                Console.WriteLine("X: " + xVal + " Y: " + yVal + " Z: " + zVal);
-            }
-            else if (InputState.IsNewKeyPress(Microsoft.Xna.Framework.Input.Keys.Z, null, out outP))
-            {
-                zVal++;
-                Console.WriteLine("X: " + xVal + " Y: " + yVal + " Z: " + zVal);
-            }
-            else if (InputState.IsNewKeyPress(Microsoft.Xna.Framework.Input.Keys.Y, null, out outP))
-            {
-                yVal++;
-                Console.WriteLine("X: " + xVal + " Y: " + yVal + " Z: " + zVal);
-            }
-            else if (InputState.IsNewKeyPress(Microsoft.Xna.Framework.Input.Keys.C, null, out outP))
-            {
-                xVal--;
-                Console.WriteLine("X: " + xVal + " Y: " + yVal + " Z: " + zVal);
-            }
-            else if (InputState.IsNewKeyPress(Microsoft.Xna.Framework.Input.Keys.V, null, out outP))
-            {
-                zVal--;
-                Console.WriteLine("X: " + xVal + " Y: " + yVal + " Z: " + zVal);
-            }
-            else if (InputState.IsNewKeyPress(Microsoft.Xna.Framework.Input.Keys.T, null, out outP))
-            {
-                yVal--;
-                Console.WriteLine("X: " + xVal + " Y: " + yVal + " Z: " + zVal);
-            }
+            // Translation offset. Fixes some screwiness with the model (or maybe I'm just rotating wrong). 
+            // I'm sure there's an easier way to come up with this. Anyway, it seems to work. 
+            // DON'T FREAKIN BREAK THIS. WAY TOO MUCH TIME WASTED ON THIS.
+            Vector3 offset = new Vector3(physicsComponent.Box.Position.X * -.114f + .1f, physicsComponent.Box.Position.Y * .2381f - 1.0f, 0);
 
-            // Matrix transform = Matrix.CreateTranslation(new Vector3(10, -5, 3)) * Matrix.CreateRotationY(-1 *MathHelper.PiOver2) ;
-            // Matrix transform = Matrix.CreateRotationZ(MathHelper.PiOver2) * Matrix.CreateTranslation(new Vector3(xVal, yVal, zVal));
-            // Matrix transform = Matrix.CreateTranslation(new Vector3(this.physicsComponent.Box.Position.X , 0, 0)) * Matrix.CreateRotationZ(- 1  * MathHelper.PiOver2) * Matrix.CreateRotationY(MathHelper.PiOver2);//  *Matrix.CreateTranslation(new Vector3(xVal, yVal, zVal));
-            /*Matrix transform = Matrix.CreateTranslation(new Vector3(this.physicsComponent.Box.Position.X, this.physicsComponent.Box.Position.Y, this.physicsComponent.Box.Position.Z)) *
-                 Matrix.CreateRotationZ(0) *  Matrix.CreateRotationX(0)*
-                Matrix.CreateRotationY(0);*/
-
+            // Apply the transform. Yikes.
             Matrix transform = Matrix.CreateRotationX(-1*MathHelper.PiOver2) 
-                * Matrix.CreateTranslation(physicsComponent.Box.Position) 
+                * Matrix.CreateTranslation(physicsComponent.Box.Position + offset) 
                 * physicsComponent.Box.WorldTransform * Matrix.CreateRotationZ(-1 * MathHelper.PiOver2) 
                 * Matrix.CreateRotationY(-1*MathHelper.PiOver2);
+
             return transform;
         }
 
