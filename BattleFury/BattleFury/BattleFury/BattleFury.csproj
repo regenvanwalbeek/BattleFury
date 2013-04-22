@@ -89,8 +89,10 @@
     <Compile Include="Components\Characters\RespawnableComponent.cs" />
     <Compile Include="Components\Characters\VitalityComponent.cs" />
     <Compile Include="Components\ContentLoader.cs" />
+    <Compile Include="Components\DestroyItemOnCharacterImpactComponent.cs" />
     <Compile Include="Components\DrawableHUDComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
+    <Compile Include="Components\ItemManagerComponent.cs" />
     <Compile Include="Components\ItemSpawnComponent.cs" />
     <Compile Include="Components\Movement\FireProjectileComponent.cs" />
     <Compile Include="Components\Movement\GrabbableComponent.cs" />
@@ -113,7 +115,7 @@
     <Compile Include="Entities\Hitboxes\GrabHitbox.cs" />
     <Compile Include="Entities\Hitboxes\ShieldHitbox.cs" />
     <Compile Include="Entities\HUD.cs" />
-    <Compile Include="Entities\Items\ItemSpawner.cs" />
+    <Compile Include="Entities\Items\ItemManager.cs" />
     <Compile Include="Entities\Items\Projectile.cs" />
     <Compile Include="Entities\Items\Rock.cs" />
     <Compile Include="Entities\Arenas\PlainArena.cs" />

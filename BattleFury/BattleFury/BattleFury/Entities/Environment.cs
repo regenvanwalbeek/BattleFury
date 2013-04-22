@@ -19,18 +19,18 @@ namespace BattleFury.Entities
 
         public Arena Arena { get; private set; }
 
-        public ItemSpawner Spawner;
+        public ItemManager ItemManager;
 
         /// <summary>
         /// Initialize the Game Environment
         /// </summary>
         /// <param name="arena">The arena to battle in.</param>
         /// <param name="spawner">The item spawner.</param>
-        public Environment(Arena arena, ItemSpawner spawner)
+        public Environment(Arena arena, ItemManager spawner)
         {
             Characters = new List<Character>();
             this.Arena = arena;
-            this.Spawner = spawner;
+            this.ItemManager = spawner;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace BattleFury.Entities
                 }
             }
 
-            foreach (Item item in Spawner.GetItems()){
+            foreach (Item item in ItemManager.GetItems()){
                 IEntityComponent component = item.GetComponent(componentID);
                 if (component != null){
                     components.Add( (T) component );

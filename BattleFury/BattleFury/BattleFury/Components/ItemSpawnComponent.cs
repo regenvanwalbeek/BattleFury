@@ -13,10 +13,6 @@ namespace BattleFury.Components
     {
         private Random random;
 
-        private EntityManager entityManager;
-
-        private PhysicsSimulator physics;
-
         /// <summary>
         /// Minimum amount of time in which items should be spawned.
         /// </summary>
@@ -39,22 +35,13 @@ namespace BattleFury.Components
 
         private Arena arena;
 
-        /// <summary>
-        /// Items that have been spawned.
-        /// </summary>
-        private List<Item> Items;
+        private ItemManagerComponent itemManagerComponent;
 
-        private bool itemDropsAllowed;
-
-        public ItemSpawnComponent(Entity parent, EntityManager entityManager, PhysicsSimulator physics, Arena arena, bool itemDropsAllowed) : base(parent, "ItemSpawnComponent")
+        public ItemSpawnComponent(Entity parent, Arena arena) : base(parent, "ItemSpawnComponent")
         {
             this.random = new Random();
-            this.entityManager = entityManager;
             this.timeTillSpawn = random.Next(MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
-            this.physics = physics;
             this.arena = arena;
-            this.Items = new List<Item>();
-            this.itemDropsAllowed = itemDropsAllowed;
         }
 
         public override void Initialize()
@@ -63,6 +50,8 @@ namespace BattleFury.Components
 
         public override void Start()
         {
+            // Get the Item Manager.
+            this.itemManagerComponent = (ItemManagerComponent) Parent.GetComponent("ItemManagerComponent");
         }
 
         public override void Update(GameTime gameTime)
@@ -70,7 +59,7 @@ namespace BattleFury.Components
 
             // Spawn items at random times.
             timeTillSpawn -= gameTime.ElapsedGameTime.Milliseconds;
-            if (itemDropsAllowed && timeTillSpawn <= 0 && Items.Count < ITEM_LIMIT)
+            if (timeTillSpawn <= 0 && itemManagerComponent.NumItems() < ITEM_LIMIT)
             {
                 // Get a spawn position
                 Vector3 spawnPosition = arena.GetItemSpawnPosition(random);
@@ -78,40 +67,12 @@ namespace BattleFury.Components
                 // Spawn a random item
                 Item item = new Rock(spawnPosition);
                 item.Initialize();
-                Items.Add(item);
-
-                // Add the item to the world.
-                entityManager.AddEntity(item);
-                physics.AddPhysicsEntity(item.GetBox());
+                itemManagerComponent.Add(item);
 
                 timeTillSpawn = random.Next(MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
             }
 
-            // Remove any items outside of the arena
-            for (int i = 0; i < Items.Count; i++)
-            {
-                Item item = Items[i];
-                if (arena.GetBoundingBox().Contains(item.GetBox().Position) == ContainmentType.Disjoint)
-                {
-                    // Remove the item from the physics, the entity manager, and the items list.
-                    Items.Remove(item);
-                    entityManager.RemoveEntity(item);
-                    physics.RemovePhysicsEntity(item.GetBox());
-                    i--;
-                }
-            }
-        }
-
-        public void Add(Item item)
-        {
-            Items.Add(item);
-            entityManager.AddEntity(item);
-            physics.AddPhysicsEntity(item.GetBox());
-        }
-
-        public List<Item> GetItems()
-        {
-            return this.Items;
+            
         }
 
 

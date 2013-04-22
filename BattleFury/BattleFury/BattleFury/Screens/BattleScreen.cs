@@ -104,7 +104,7 @@ namespace BattleFury.Screens
             }
 
             // Create the Item Spawner
-            ItemSpawner itemSpawner = new ItemSpawner(entityManager, physicsEntity, arenaEntity, GameSettings.ItemsOn);
+            ItemManager itemSpawner = new ItemManager(entityManager, physicsEntity, arenaEntity, GameSettings.ItemsOn);
 
             // Create the environment
             Environment environment = new Environment(arenaEntity, itemSpawner);
