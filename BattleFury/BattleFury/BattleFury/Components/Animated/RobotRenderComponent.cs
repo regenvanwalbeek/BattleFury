@@ -19,19 +19,9 @@ namespace BattleFury.Components.Animated
         public RobotRenderComponent(Entity parent)
             : base(parent, ContentLoader.Robot)
         {
-            
-
-            // scaling *= Matrix.CreateRotationX(MathHelper.PiOver2);
-            //scaling *= Matrix.CreateRotationY(MathHelper.PiOver2);
-          
-            // scaling *= Matrix.CreateRotationZ(MathHelper.PiOver2);
-            //scaling *= Matrix.
-
             this.Transform = Matrix.Identity;// Matrix.CreateTranslation(new Vector3(0, 0, -10));
         }
-        int xVal = 0;
-        int yVal = 0;
-        int zVal = 0;
+
         protected override Matrix GetWorld()
         {
             // Translation offset. Fixes some screwiness with the model (or maybe I'm just rotating wrong). 
