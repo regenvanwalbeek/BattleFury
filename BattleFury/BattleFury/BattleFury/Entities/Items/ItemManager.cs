@@ -18,15 +18,15 @@ namespace BattleFury.Entities.Items
 
         private ItemManagerComponent itemManager;
 
-        public ItemManager(EntityManager entityManager, PhysicsSimulator physics, Arena arena, bool itemDropsAllowed)
+        public ItemManager(EntityManager entityManager, PhysicsSimulator physics, Environment environment, bool itemDropsAllowed)
         {
             if (itemDropsAllowed)
             {
-                ItemSpawnComponent itemSpawner = new ItemSpawnComponent(this, arena);
+                ItemSpawnComponent itemSpawner = new ItemSpawnComponent(this, environment);
                 this.AttachComponent(itemSpawner);
             }
 
-            this.itemManager = new ItemManagerComponent(this, entityManager, physics, arena);
+            this.itemManager = new ItemManagerComponent(this, entityManager, physics, environment.Arena);
             this.AttachComponent(itemManager);
         }
        
@@ -38,6 +38,11 @@ namespace BattleFury.Entities.Items
         public List<Item> GetItems()
         {
             return itemManager.GetItems();
+        }
+
+        public void Remove(Item item)
+        {
+            itemManager.Remove(item);
         }
 
     }

@@ -1,17 +1,17 @@
-﻿using System;
-using BattleFury.Entities.Arenas;
+﻿using BattleFury.Entities.Arenas;
 using BattleFury.Entities.Items;
 using BattleFury.Entities.Physics;
 using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using BattleFury.Entities;
 
 namespace BattleFury.Components
 {
     public class ItemSpawnComponent : Component
     {
-        private Random random;
+        private System.Random random;
 
         /// <summary>
         /// Minimum amount of time in which items should be spawned.
@@ -33,15 +33,15 @@ namespace BattleFury.Components
         /// </summary>
         private const int ITEM_LIMIT = 1;
 
-        private Arena arena;
+        private Environment environment;
 
         private ItemManagerComponent itemManagerComponent;
 
-        public ItemSpawnComponent(Entity parent, Arena arena) : base(parent, "ItemSpawnComponent")
+        public ItemSpawnComponent(ItemManager parent, Environment environment) : base(parent, "ItemSpawnComponent")
         {
-            this.random = new Random();
+            this.random = new System.Random();
             this.timeTillSpawn = random.Next(MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
-            this.arena = arena;
+            this.environment = environment;
         }
 
         public override void Initialize()
@@ -62,10 +62,10 @@ namespace BattleFury.Components
             if (timeTillSpawn <= 0 && itemManagerComponent.NumItems() < ITEM_LIMIT)
             {
                 // Get a spawn position
-                Vector3 spawnPosition = arena.GetItemSpawnPosition(random);
+                Vector3 spawnPosition = environment.Arena.GetItemSpawnPosition(random);
 
                 // Spawn a random item
-                Item item = new Rock(spawnPosition);
+                Item item = new Rock(spawnPosition, environment);
                 item.Initialize();
                 itemManagerComponent.Add(item);
 

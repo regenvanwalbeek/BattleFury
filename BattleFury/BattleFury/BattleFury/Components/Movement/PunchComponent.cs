@@ -63,7 +63,6 @@ namespace BattleFury.Components.Movement
             // Do a punch if the timer allows
             if (GameplayBindings.IsPunch(controllingPlayer) && timeTillPunch <= 0)
             {
-                System.Console.WriteLine("FALCON PUNCH");
                 timeTillPunch = punchSpeed;
 
                 // Get all punchable components available in this frame.

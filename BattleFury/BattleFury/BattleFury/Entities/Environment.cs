@@ -26,11 +26,10 @@ namespace BattleFury.Entities
         /// </summary>
         /// <param name="arena">The arena to battle in.</param>
         /// <param name="spawner">The item spawner.</param>
-        public Environment(Arena arena, ItemManager spawner)
+        public Environment(Arena arena)
         {
             Characters = new List<Character>();
             this.Arena = arena;
-            this.ItemManager = spawner;
         }
 
         /// <summary>
@@ -41,6 +40,11 @@ namespace BattleFury.Entities
         public void AddCharacter(Character character)
         {
             Characters.Add(character);
+        }
+
+        public void SetItemManager(ItemManager itemManager)
+        {
+            this.ItemManager = itemManager;
         }
 
         /// <summary>

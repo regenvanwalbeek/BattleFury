@@ -13,14 +13,14 @@ namespace BattleFury.Entities.Arenas
     /// </summary>
     public abstract class Arena : Entity
     {
-        protected List<Platform> platforms;
+        public List<Platform> Platforms;
 
         /// <summary>
         /// Construct the Arena Entity.
         /// </summary>
         public Arena()
         {
-            platforms = new List<Platform>();
+            Platforms = new List<Platform>();
         }
 
         /// <summary>

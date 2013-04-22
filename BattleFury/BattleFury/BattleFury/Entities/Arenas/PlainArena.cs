@@ -42,7 +42,7 @@ namespace BattleFury.Entities.Arenas
         {
             // Create the platforms.
             Platform ground = new Platform(new Vector3(0, 0, 0), 50.0f, 1.0f, 5.0f);
-            platforms.Add(ground);
+            Platforms.Add(ground);
             entityManager.AddEntity(ground);
             physicsSimulator.AddPhysicsEntity(ground.GetBox());
 
