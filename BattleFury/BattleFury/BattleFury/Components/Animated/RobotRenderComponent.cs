@@ -6,6 +6,7 @@ using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using BattleFury.Input;
+using BattleFury.Components.Movement;
 
 namespace BattleFury.Components.Animated
 {
@@ -15,6 +16,8 @@ namespace BattleFury.Components.Animated
         public Matrix Transform;
 
         private BepuPhysicsComponent physicsComponent;
+
+        private MovementComponent movementComponent;
 
         public RobotRenderComponent(Entity parent)
             : base(parent, ContentLoader.Robot)
@@ -28,9 +31,18 @@ namespace BattleFury.Components.Animated
             // I'm sure there's an easier way to come up with this. Anyway, it seems to work. 
             // DON'T FREAKIN BREAK THIS. WAY TOO MUCH TIME WASTED ON THIS.
             Vector3 offset = new Vector3(physicsComponent.Box.Position.X * -.114f + .1f, physicsComponent.Box.Position.Y * .2381f - 1.0f, 0);
+            float yRotation = 0;
+            if (movementComponent.DirectionX == 1)
+            {
+                yRotation = -1*MathHelper.PiOver4;
+            }
+            else if (movementComponent.DirectionX == -1)
+            {
+                yRotation = -3 * MathHelper.PiOver4;
+            }
 
             // Apply the transform. Yikes.
-            Matrix transform = Matrix.CreateRotationX(-1*MathHelper.PiOver2) 
+            Matrix transform = Matrix.CreateRotationX(-1  *MathHelper.PiOver2) * Matrix.CreateRotationY(yRotation)
                 * Matrix.CreateTranslation(physicsComponent.Box.Position + offset) 
                 * physicsComponent.Box.WorldTransform * Matrix.CreateRotationZ(-1 * MathHelper.PiOver2) 
                 * Matrix.CreateRotationY(-1*MathHelper.PiOver2);
@@ -44,6 +56,7 @@ namespace BattleFury.Components.Animated
  
             // Get a reference to the transform component
             this.physicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
+            this.movementComponent = (MovementComponent)Parent.GetComponent("MovementComponent");
         }
 
         

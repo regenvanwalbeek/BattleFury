@@ -67,11 +67,12 @@ namespace BattleFury.Components.Movement
             bepuPhysicsComponent.Box.LinearVelocity = new Vector3(newLinearVelocity, currentLinearVelocity.Y, currentLinearVelocity.Z);
 
             // Set the direction
-            if (newLinearVelocity > 0)
+            float directionSpeedThreshold = .01f; // if it's 0, sometimes they move back and forth obnoxiously
+            if (newLinearVelocity > directionSpeedThreshold)
             {
                 DirectionX = 1;
             }
-            else if (newLinearVelocity < 0)
+            else if (newLinearVelocity < -directionSpeedThreshold)
             {
                 DirectionX = -1;
             }

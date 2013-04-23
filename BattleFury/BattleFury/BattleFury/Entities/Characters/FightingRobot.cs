@@ -33,16 +33,17 @@ namespace BattleFury.Entities.Characters
         private const int FIRE_VELOCITY = 100;
 
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment)
-            : base("FightingRobot", lives, new Box(spawnPosition, 1, 3.5f, 1, MASS), controllingPlayer, team, environment)
+            : base("FightingRobot", lives, new Box(spawnPosition, 1, 1f, 1, MASS), controllingPlayer, team, environment)
         {
   
     
             BasicModelComponent drawComponent = new RobotRenderComponent(this);
             this.AttachComponent(drawComponent);
 
-            BasicModelComponent drawComponent2 = new CubeRenderComponent(this, Matrix.CreateScale(1, 3.5f, 1));
+            
+            BasicModelComponent drawComponent2 = new CubeRenderComponent(this, Matrix.CreateScale(1, 1f, 1));
             this.AttachComponent(drawComponent2);
-
+            
             JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);
             this.AttachComponent(jumpComponent);
 
