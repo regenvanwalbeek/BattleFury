@@ -15,21 +15,23 @@ namespace BattleFury.Entities.Characters
 
         private const int MASS = 1;
 
-        private const int THROW_STRENGTH = 100;
+        private const int THROW_BASE_DAMAGE = 5;
+
+        private const int THROW_MAX_DAMAGE = 15;
 
         private const int PUNCH_SPEED = 1;
 
-        private const int PUNCH_BASE_STRENGTH = 1;
+        private const int PUNCH_BASE_DAMAGE = 1;
 
-        private const int PUNCH_MAX_STRENGTH = 10;
+        private const int PUNCH_MAX_DAMAGE = 10;
 
         private const int FIRE_SPEED = 200;
 
-        private const int FIRE_VELOCITY = 100;
+        private const int FIRE_VELOCITY = 50;
 
-        private const int FIRE_BASE_STRENGTH = 1;
+        private const int FIRE_BASE_DAMAGE = 1;
 
-        private const int FIRE_MAX_STRENGTH = 5;
+        private const int FIRE_MAX_DAMAGE = 5;
 
         private const float BEPU_PHYSICS_WIDTH = 1;
 
@@ -38,7 +40,7 @@ namespace BattleFury.Entities.Characters
         private const float BEPU_PHYSICS_DEPTH = 1;
 
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment)
-            : base("FightingRobot", lives, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
+            : base("FightingRobot", 100, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
             controllingPlayer, team, environment)
         {
   
@@ -56,13 +58,13 @@ namespace BattleFury.Entities.Characters
             MoveComponent moveComponent = new MoveComponent(this, SPEED);
             this.AttachComponent(moveComponent);
 
-            grabComponent = new GrabComponent(this, environment, THROW_STRENGTH);
+            grabComponent = new GrabComponent(this, environment, THROW_BASE_DAMAGE, THROW_MAX_DAMAGE);
             this.AttachComponent(grabComponent);
 
-            punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_BASE_STRENGTH, PUNCH_MAX_STRENGTH);
+            punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_BASE_DAMAGE, PUNCH_MAX_DAMAGE);
             this.AttachComponent(punchComponent);
 
-            FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_STRENGTH, FIRE_MAX_STRENGTH);
+            FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_DAMAGE, FIRE_MAX_DAMAGE);
             this.AttachComponent(fireProjectileComponent);
 
 

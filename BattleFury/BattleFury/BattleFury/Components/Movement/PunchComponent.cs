@@ -30,9 +30,9 @@ namespace BattleFury.Components.Movement
         /// <summary>
         /// Strength of the punch attack.
         /// </summary>
-        private float baseStrength;
+        private float baseDamage;
 
-        private float maxStrength;
+        private float maxDamage;
 
         /// <summary>
         /// Milliseconds until a punch is allowed. Punches enabled when <= 0.
@@ -41,13 +41,13 @@ namespace BattleFury.Components.Movement
 
         private VitalityComponent health;
 
-        public PunchComponent(Entity parent, Environment environment, int punchSpeed, float baseStrength, float maxStrength)
+        public PunchComponent(Entity parent, Environment environment, int punchSpeed, float baseDamage, float maxDamage)
             : base(parent, "PunchComponent")
         {
             this.punchSpeed = punchSpeed;
             this.environment = environment;
-            this.baseStrength = baseStrength;
-            this.maxStrength = maxStrength;
+            this.baseDamage = baseDamage;
+            this.maxDamage = maxDamage;
         }
 
         public override void Initialize()
@@ -88,7 +88,7 @@ namespace BattleFury.Components.Movement
                         {
                             // Determine how much damage to do. This will scale linearly
                             float rage = this.health.RageMeter;
-                            float damage = baseStrength + ((maxStrength - baseStrength) / 99) * (100 - rage);
+                            float damage = baseDamage + ((maxDamage - baseDamage) / 99) * (100 - rage);
                             if (rage == 0)
                             {
                                 damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.

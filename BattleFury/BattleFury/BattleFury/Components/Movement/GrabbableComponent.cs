@@ -143,7 +143,7 @@ namespace BattleFury.Components.Movement
             return true;
         }
 
-        public void Throw(Vector2 direction, float throwStrength)
+        public void Throw(Vector2 direction, float throwDamage)
         {
             EventHandler handler = OnThrow;
             if (handler != null)
@@ -185,14 +185,14 @@ namespace BattleFury.Components.Movement
             {
                 direction = Vector2.Normalize(direction);
             }
-            Vector2 throwVelocity = throwStrength * direction;
+            Vector2 throwVelocity = 100 * direction;
             bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 0);
             
             // Damage the vitality component when thrown if the entity has vitality
             VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
             if (health != null)
             {
-                health.Damage(5);
+                health.Damage(throwDamage);
             }
             grabber = null;
         }

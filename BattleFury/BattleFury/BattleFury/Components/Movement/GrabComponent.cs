@@ -16,9 +16,14 @@ namespace BattleFury.Components.Movement
     public class GrabComponent : Component
     {
         /// <summary>
-        /// How hard to throw the grabbed entity.
+        /// Damage dealt when thrown when Entity's SM = 100%
         /// </summary>
-        private float throwStrength;
+        private float baseDamage;
+
+        /// <summary>
+        /// Damage dealth when thrown when Entity's SM = 1%
+        /// </summary>
+        private float maxDamage;
 
         /// <summary>
         /// Grabbing hitbox
@@ -31,6 +36,8 @@ namespace BattleFury.Components.Movement
         private PlayerIndex controllingPlayer;
 
         private Environment environment;
+
+        private VitalityComponent health;
 
         /// <summary>
         /// Whether this entity is currently grabbing a grabbable object.
@@ -48,9 +55,10 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private GrabbableComponent grabbedObject = null;
 
-        public GrabComponent(Entity parent, Environment environment, float throwStrength) : base(parent, "GrabComponent"){
+        public GrabComponent(Entity parent, Environment environment, float baseDamage, float maxDamage) : base(parent, "GrabComponent"){
             this.environment = environment;
-            this.throwStrength = throwStrength;
+            this.baseDamage = baseDamage;
+            this.maxDamage = maxDamage;
         }
 
         public override void Initialize()
@@ -61,6 +69,7 @@ namespace BattleFury.Components.Movement
         {
             this.controllingPlayer = ((CharacterInformationComponent)Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
             this.bepuPhysicsComponent = (BepuPhysicsComponent) Parent.GetComponent("BepuPhysicsComponent");
+            this.health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
         }
 
         public override void Update(GameTime gameTime)
@@ -111,7 +120,16 @@ namespace BattleFury.Components.Movement
                 {
                     // Do a throw in the direction of the left analog stick
                     Vector2 direction = InputState.GetLeftAnalogStick(controllingPlayer);
-                    grabbedObject.Throw(direction, throwStrength);
+                                      
+                    // Determine how much damage to do. This will scale linearly
+                    float rage = this.health.RageMeter;
+                    float damage = baseDamage + ((maxDamage - baseDamage) / 99) * (100 - rage);
+                    if (rage == 0)
+                    {
+                        damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.
+                    }
+
+                    grabbedObject.Throw(direction, damage);
                     this.grabbedObject = null; // Let go!
                 }
             }

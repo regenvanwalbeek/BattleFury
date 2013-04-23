@@ -9,7 +9,7 @@ namespace BattleFury.Entities.Items
     public class Projectile : Item
     {
         public Projectile(Vector3 spawnPosition, Vector3 velocity, Environment environment, Character attackingCharacter, float damage)
-            : base(new Box(spawnPosition, .75f, .75f, .75f))
+            : base(new Box(spawnPosition, .75f, .75f, .75f, 0.01f))
         {
             this.bepuPhysicsComponent.Box.LinearVelocity = velocity;
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = false;

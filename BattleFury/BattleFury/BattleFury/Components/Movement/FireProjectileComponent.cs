@@ -39,18 +39,18 @@ namespace BattleFury.Components.Movement
         /// <summary>
         /// Strength of the projectile attack.
         /// </summary>
-        private float baseStrength;
+        private float baseDamage;
 
-        private float maxStrength;
+        private float maxDamage;
 
-        public FireProjectileComponent(Entity parent, int fireSpeed, int fireVelocity, Environment environment, float baseStrength, float maxStrength)
+        public FireProjectileComponent(Entity parent, int fireSpeed, int fireVelocity, Environment environment, float baseDamage, float maxDamage)
             : base(parent, "FireProjectileComponent")
         {
             this.fireSpeed = fireSpeed;
             this.environment = environment;
             this.fireVelocity = fireVelocity;
-            this.baseStrength = baseStrength;
-            this.maxStrength = maxStrength;
+            this.baseDamage = baseDamage;
+            this.maxDamage = maxDamage;
         }
 
         public override void Initialize()
@@ -78,7 +78,7 @@ namespace BattleFury.Components.Movement
 
                 // Determine how much damage to do. This will scale linearly
                 float rage = this.health.RageMeter;
-                float damage = baseStrength + ((maxStrength - baseStrength) / 99) * (100 - rage);
+                float damage = baseDamage + ((maxDamage - baseDamage) / 99) * (100 - rage);
                 if (rage == 0)
                 {
                     damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.
