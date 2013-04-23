@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using BattleFury.Components.Characters;
 using System.Collections.Generic;
 using BEPUphysics.Collidables;
+using BattleFury.Input;
 
 namespace BattleFury.Components.Movement
 {
@@ -29,21 +30,24 @@ namespace BattleFury.Components.Movement
         /// <summary>
         /// Strength of the punch attack.
         /// </summary>
-        private int strength; 
+        private float baseStrength;
+
+        private float maxStrength;
 
         /// <summary>
         /// Milliseconds until a punch is allowed. Punches enabled when <= 0.
         /// </summary>
         private int timeTillPunch = 0;
 
-        
+        private VitalityComponent health;
 
-        public PunchComponent(Entity parent, Environment environment, int punchSpeed, int strength)
+        public PunchComponent(Entity parent, Environment environment, int punchSpeed, float baseStrength, float maxStrength)
             : base(parent, "PunchComponent")
         {
             this.punchSpeed = punchSpeed;
             this.environment = environment;
-            this.strength = strength;
+            this.baseStrength = baseStrength;
+            this.maxStrength = maxStrength;
         }
 
         public override void Initialize()
@@ -54,6 +58,7 @@ namespace BattleFury.Components.Movement
         {
             this.controllingPlayer = ((CharacterInformationComponent)Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
             this.bepuPhysicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
+            this.health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
         }
 
         public override void Update(GameTime gameTime)
@@ -81,7 +86,18 @@ namespace BattleFury.Components.Movement
                     {
                         if (collidingEntity == punchables[i].GetPunchableBox())
                         {
-                            punchables[i].Punch(this, strength);
+                            // Determine how much damage to do. This will scale linearly
+                            float rage = this.health.RageMeter;
+                            float damage = baseStrength + ((maxStrength - baseStrength) / 99) * (100 - rage);
+                            if (rage == 0)
+                            {
+                                damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.
+                            }
+
+                            // Determine the direction the player wants to punch in
+                            Vector3 punchDirection = new Vector3(GameplayBindings.GetPunchDirection(controllingPlayer), 0);
+
+                            punchables[i].Punch(this, damage, punchDirection);
                         }
                     }
                 }

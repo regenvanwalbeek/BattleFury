@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using BattleFury.Components.Characters;
 using BattleFury.Entities.Items;
 using BattleFury.Entities;
+using BattleFury.Entities.Characters;
 
 namespace BattleFury.Components.Movement
 {
@@ -65,7 +66,7 @@ namespace BattleFury.Components.Movement
                 
                 // Create a projectile and add it to the environment.
                 Projectile p = new Projectile(this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX, 0, 0), 
-                    new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity, environment);
+                    new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity, environment, (Character) Parent);
                 p.Initialize();
                 environment.ItemManager.AddItem(p);
             }

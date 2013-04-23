@@ -20,7 +20,7 @@ namespace BattleFury.Components.Characters
             base(parent, "VitalityComponent")
         {
             this.LivesLeft = lives;
-            this.RageMeter = 0.0f;
+            this.RageMeter = 100.0f;
         }
 
         public override void Initialize()
@@ -35,15 +35,12 @@ namespace BattleFury.Components.Characters
         {
         }
 
-        public void Damage(int damageAmount)
+        public void Damage(float damageAmount)
         {
-            if (RageMeter < 100)
+            RageMeter -= damageAmount;
+            if (RageMeter < 0)
             {
-                RageMeter += damageAmount;
-            }
-            else if (RageMeter < 100)
-            {
-                RageMeter = 100;
+                RageMeter = 0;
             }
         }
 

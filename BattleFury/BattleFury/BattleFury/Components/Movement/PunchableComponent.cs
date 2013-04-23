@@ -17,6 +17,10 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private BepuPhysicsComponent bepuPhysicsComponent;
 
+        private const float MIN_FLINCH_DISTANCE = 0;
+
+        private const float MAX_FLINCH_DISTANCE = 50;
+
         public PunchableComponent(Entity parent)
             : base(parent, "PunchableComponent")
         {
@@ -30,23 +34,53 @@ namespace BattleFury.Components.Movement
         public override void Start()
         {
             this.bepuPhysicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
+            
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
         }
 
-        public void Punch(PunchComponent puncher, int strength)
+        /// <summary>
+        /// Punches this punchable object
+        /// </summary>
+        /// <param name="puncher">The puncher doing the punching</param>
+        /// <param name="damage">The amount of damage to deal</param>
+        /// <param name="direction">The direction the player wants to punch in.</param>
+        public void Punch(PunchComponent puncher, float damage, Vector3 direction)
         {
+            // Calculate the flinch value. This determines how far the character will be knocked back
+            VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
+            float flinch = MIN_FLINCH_DISTANCE;
+            if (health != null){
+                flinch = MIN_FLINCH_DISTANCE + ((MAX_FLINCH_DISTANCE - MIN_FLINCH_DISTANCE) / 100) * (100 - health.RageMeter);
+                if (health.RageMeter == 0)
+                {
+                    // RAGE MODE
+                    flinch *= 4;
+                }
+            }
+
+            // Calculate the direction to send the entity flying at.
+            // This is a combination of user input direction and the positions of the entities
+            if (direction.X != 0 && direction.Y != 0 && direction.Z != 0)
+            {
+                direction = Vector3.Normalize(direction);
+
+            }
+            direction = Vector3.Normalize((direction + (Vector3.Normalize(this.bepuPhysicsComponent.Box.Position - puncher.GetPosition()))) / 2);
+            Console.WriteLine(direction);
+            
+
             // Calculate the velocity to send the entity flying at.
-            Vector3 velocity = Vector3.Normalize(this.bepuPhysicsComponent.Box.Position - puncher.GetPosition()) * strength;
+            Vector3 velocity = direction * flinch;
             this.bepuPhysicsComponent.Box.LinearVelocity = velocity;
 
+
             // Damage the vitality component when thrown if the entity has vitality
-            VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
             if (health != null)
             {
-                health.Damage(5);
+                health.Damage(damage);
             }
         }
 

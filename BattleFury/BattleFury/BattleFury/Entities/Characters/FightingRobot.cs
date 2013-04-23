@@ -19,7 +19,9 @@ namespace BattleFury.Entities.Characters
 
         private const int PUNCH_SPEED = 1;
 
-        private const int PUNCH_STRENGTH = 100;
+        private const int PUNCH_BASE_STRENGTH = 1;
+
+        private const int PUNCH_MAX_STRENGTH = 10;
 
         private const int FIRE_SPEED = 200;
 
@@ -53,7 +55,7 @@ namespace BattleFury.Entities.Characters
             grabComponent = new GrabComponent(this, environment, THROW_STRENGTH);
             this.AttachComponent(grabComponent);
 
-            punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_STRENGTH);
+            punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_BASE_STRENGTH, PUNCH_MAX_STRENGTH);
             this.AttachComponent(punchComponent);
 
             FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment);

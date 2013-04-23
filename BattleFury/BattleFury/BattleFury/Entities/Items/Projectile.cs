@@ -2,21 +2,24 @@
 using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
 using BattleFury.Components;
+using BattleFury.Entities.Characters;
 
 namespace BattleFury.Entities.Items
 {
     public class Projectile : Item
     {
-        public Projectile(Vector3 spawnPosition, Vector3 velocity, Environment environment)
+        public Projectile(Vector3 spawnPosition, Vector3 velocity, Environment environment, Character attackingCharacter)
             : base(new Box(spawnPosition, .75f, .75f, .75f))
         {
             this.bepuPhysicsComponent.Box.LinearVelocity = velocity;
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = false;
 
             SelfDestructOnImpactComponent selfDestructComponent = new SelfDestructOnImpactComponent(this, environment, true);
+            selfDestructComponent.IgnoreEntity(attackingCharacter);
             this.AttachComponent(selfDestructComponent);
 
             DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, 10, environment);
+            damageComponent.IgnoreEntity(attackingCharacter);
             this.AttachComponent(damageComponent);
 
             // Create the rendering component. Since the cube model is 1x1x1, 
