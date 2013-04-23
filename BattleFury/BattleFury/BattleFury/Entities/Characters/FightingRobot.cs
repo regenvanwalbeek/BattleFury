@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BattleFury.Components;
-using Microsoft.Xna.Framework;
-using BattleFury.Components.Animated;
-using BEPUphysics.Entities.Prefabs;
-using Microsoft.Xna.Framework.Graphics;
+﻿using BattleFury.Components.Animated;
 using BattleFury.Components.Movement;
-using BattleFury.Entities.Arenas;
+using BEPUphysics.Entities.Prefabs;
+using Microsoft.Xna.Framework;
 
 namespace BattleFury.Entities.Characters
 {
@@ -32,22 +25,29 @@ namespace BattleFury.Entities.Characters
 
         private const int FIRE_VELOCITY = 100;
 
+        private const float BEPU_PHYSICS_WIDTH = 1;
+
+        private const float BEPU_PHYSICS_HEIGHT = 2.6f;
+
+        private const float BEPU_PHYSICS_DEPTH = 1;
+
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment)
-            : base("FightingRobot", lives, new Box(spawnPosition, 1, 1f, 1, MASS), controllingPlayer, team, environment)
+            : base("FightingRobot", lives, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
+            controllingPlayer, team, environment)
         {
   
     
-            BasicModelComponent drawComponent = new RobotRenderComponent(this);
+            BasicModelComponent drawComponent = new RobotRenderComponent(this, BEPU_PHYSICS_HEIGHT);
             this.AttachComponent(drawComponent);
 
             
-            BasicModelComponent drawComponent2 = new CubeRenderComponent(this, Matrix.CreateScale(1, 1f, 1));
+            BasicModelComponent drawComponent2 = new CubeRenderComponent(this, Matrix.CreateScale(BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_WIDTH));
             this.AttachComponent(drawComponent2);
             
             JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);
             this.AttachComponent(jumpComponent);
 
-            MovementComponent moveComponent = new MovementComponent(this, SPEED);
+            MoveComponent moveComponent = new MoveComponent(this, SPEED);
             this.AttachComponent(moveComponent);
 
             grabComponent = new GrabComponent(this, environment, THROW_STRENGTH);

@@ -78,7 +78,7 @@ namespace BattleFury.Components.Movement
                 if (timeSinceGrab >= MAX_GRAB_TIME)
                 {
                     // Drop the entity
-                    MovementComponent moveComponent = ((MovementComponent)Parent.GetComponent("MovementComponent"));
+                    MoveComponent moveComponent = ((MoveComponent)Parent.GetComponent("MoveComponent"));
                     if (moveComponent != null)
                     {
                         moveComponent.Enabled = true;
@@ -124,7 +124,7 @@ namespace BattleFury.Components.Movement
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = false; // disable gravity, else it falls fast when dropped.
 
             // Disable the move component if the entity has a moveable
-            MovementComponent moveComponent = (MovementComponent) Parent.GetComponent("MovementComponent");
+            MoveComponent moveComponent = (MoveComponent) Parent.GetComponent("MoveComponent");
             if (moveComponent != null)
             {
                 moveComponent.Enabled = false;
@@ -142,7 +142,7 @@ namespace BattleFury.Components.Movement
             
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = true; // reenable gravity when let go.
             // Give movement back.
-            MovementComponent moveComponent = (MovementComponent)Parent.GetComponent("MovementComponent");
+            MoveComponent moveComponent = (MoveComponent)Parent.GetComponent("MoveComponent");
             if (moveComponent != null)
             {
                 moveComponent.Enabled = true;
@@ -152,7 +152,7 @@ namespace BattleFury.Components.Movement
             if (direction.Equals(Vector2.Zero))
             {
                 // Throw up in the direction facing.
-                int xDir = ((MovementComponent)grabber.Parent.GetComponent("MovementComponent")).DirectionX;
+                int xDir = ((MoveComponent)grabber.Parent.GetComponent("MoveComponent")).DirectionX;
                 direction = Vector2.Normalize(new Vector2(xDir, 1));
             }
             else

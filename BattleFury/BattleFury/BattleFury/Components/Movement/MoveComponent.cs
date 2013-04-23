@@ -9,7 +9,7 @@ using BattleFury.Settings;
 
 namespace BattleFury.Components.Movement
 {
-    public class MovementComponent : Component
+    public class MoveComponent : Component
     {
         private PlayerIndex controllingPlayer;
 
@@ -25,8 +25,8 @@ namespace BattleFury.Components.Movement
         public int DirectionX = 1;
 
 
-        public MovementComponent(Entity parent, float moveSpeed)
-            : base(parent, "MovementComponent")
+        public MoveComponent(Entity parent, float moveSpeed)
+            : base(parent, "MoveComponent")
         {
             this.moveSpeed = moveSpeed;
         }
@@ -67,7 +67,7 @@ namespace BattleFury.Components.Movement
             bepuPhysicsComponent.Box.LinearVelocity = new Vector3(newLinearVelocity, currentLinearVelocity.Y, currentLinearVelocity.Z);
 
             // Set the direction
-            float directionSpeedThreshold = .01f; // if it's 0, sometimes they move back and forth obnoxiously
+            float directionSpeedThreshold = .02f; // if it's 0, sometimes they move back and forth obnoxiously
             if (newLinearVelocity > directionSpeedThreshold)
             {
                 DirectionX = 1;

@@ -17,12 +17,15 @@ namespace BattleFury.Components.Animated
 
         private BepuPhysicsComponent physicsComponent;
 
-        private MovementComponent movementComponent;
+        private MoveComponent movementComponent;
 
-        public RobotRenderComponent(Entity parent)
+        private float height;
+
+        public RobotRenderComponent(Entity parent, float height)
             : base(parent, ContentLoader.Robot)
         {
             this.Transform = Matrix.Identity;// Matrix.CreateTranslation(new Vector3(0, 0, -10));
+            this.height = height;
         }
 
         protected override Matrix GetWorld()
@@ -30,7 +33,8 @@ namespace BattleFury.Components.Animated
             // Translation offset. Fixes some screwiness with the model (or maybe I'm just rotating wrong). 
             // I'm sure there's an easier way to come up with this. Anyway, it seems to work. 
             // DON'T FREAKIN BREAK THIS. WAY TOO MUCH TIME WASTED ON THIS.
-            Vector3 offset = new Vector3(physicsComponent.Box.Position.X * -.114f + .1f, physicsComponent.Box.Position.Y * .2381f - 1.0f, 0);
+            Vector3 offset = new Vector3(physicsComponent.Box.Position.X * -.114f + .1f, 
+                physicsComponent.Box.Position.Y * .2381f - 1.0f * height / 2 - height / 2, 0);
             float yRotation = 0;
             if (movementComponent.DirectionX == 1)
             {
@@ -56,7 +60,7 @@ namespace BattleFury.Components.Animated
  
             // Get a reference to the transform component
             this.physicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
-            this.movementComponent = (MovementComponent)Parent.GetComponent("MovementComponent");
+            this.movementComponent = (MoveComponent)Parent.GetComponent("MoveComponent");
         }
 
         

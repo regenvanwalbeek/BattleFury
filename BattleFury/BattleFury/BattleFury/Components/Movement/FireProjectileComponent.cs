@@ -29,7 +29,7 @@ namespace BattleFury.Components.Movement
 
         private PlayerIndex controllingPlayer;
 
-        private MovementComponent movementComponent;
+        private MoveComponent movementComponent;
 
         private BepuPhysicsComponent bepuPhysicsComponent;
 
@@ -48,7 +48,7 @@ namespace BattleFury.Components.Movement
         public override void Start()
         {
             this.controllingPlayer = ((CharacterInformationComponent)Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
-            this.movementComponent = (MovementComponent)Parent.GetComponent("MovementComponent");
+            this.movementComponent = (MoveComponent)Parent.GetComponent("MoveComponent");
             this.bepuPhysicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
         }
 
