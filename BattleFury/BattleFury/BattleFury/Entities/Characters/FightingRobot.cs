@@ -27,6 +27,10 @@ namespace BattleFury.Entities.Characters
 
         private const int FIRE_VELOCITY = 100;
 
+        private const int FIRE_BASE_STRENGTH = 1;
+
+        private const int FIRE_MAX_STRENGTH = 5;
+
         private const float BEPU_PHYSICS_WIDTH = 1;
 
         private const float BEPU_PHYSICS_HEIGHT = 2.6f;
@@ -58,7 +62,7 @@ namespace BattleFury.Entities.Characters
             punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_BASE_STRENGTH, PUNCH_MAX_STRENGTH);
             this.AttachComponent(punchComponent);
 
-            FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment);
+            FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_STRENGTH, FIRE_MAX_STRENGTH);
             this.AttachComponent(fireProjectileComponent);
 
 

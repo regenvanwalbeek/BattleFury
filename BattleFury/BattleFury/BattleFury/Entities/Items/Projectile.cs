@@ -8,7 +8,7 @@ namespace BattleFury.Entities.Items
 {
     public class Projectile : Item
     {
-        public Projectile(Vector3 spawnPosition, Vector3 velocity, Environment environment, Character attackingCharacter)
+        public Projectile(Vector3 spawnPosition, Vector3 velocity, Environment environment, Character attackingCharacter, float damage)
             : base(new Box(spawnPosition, .75f, .75f, .75f))
         {
             this.bepuPhysicsComponent.Box.LinearVelocity = velocity;
@@ -18,7 +18,7 @@ namespace BattleFury.Entities.Items
             selfDestructComponent.IgnoreEntity(attackingCharacter);
             this.AttachComponent(selfDestructComponent);
 
-            DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, 10, environment);
+            DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, damage, environment);
             damageComponent.IgnoreEntity(attackingCharacter);
             this.AttachComponent(damageComponent);
 

@@ -13,7 +13,7 @@ namespace BattleFury.Components
     public class DamageOnImpactComponent : Component
     {
 
-        private int damage;
+        private float damage;
 
         private Environment environment;
 
@@ -23,7 +23,7 @@ namespace BattleFury.Components
 
         private List<Character> tempIgnoredEntities = new List<Character>();
 
-        public DamageOnImpactComponent(Item parent, int damage, Environment environment)
+        public DamageOnImpactComponent(Item parent, float damage, Environment environment)
             : base(parent, "DamageOnImpactComponent")
         {
             this.damage = damage;

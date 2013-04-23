@@ -34,12 +34,23 @@ namespace BattleFury.Components.Movement
 
         private BepuPhysicsComponent bepuPhysicsComponent;
 
-        public FireProjectileComponent(Entity parent, int fireSpeed, int fireVelocity, Environment environment)
+        private VitalityComponent health;
+
+        /// <summary>
+        /// Strength of the projectile attack.
+        /// </summary>
+        private float baseStrength;
+
+        private float maxStrength;
+
+        public FireProjectileComponent(Entity parent, int fireSpeed, int fireVelocity, Environment environment, float baseStrength, float maxStrength)
             : base(parent, "FireProjectileComponent")
         {
             this.fireSpeed = fireSpeed;
             this.environment = environment;
             this.fireVelocity = fireVelocity;
+            this.baseStrength = baseStrength;
+            this.maxStrength = maxStrength;
         }
 
         public override void Initialize()
@@ -51,6 +62,7 @@ namespace BattleFury.Components.Movement
             this.controllingPlayer = ((CharacterInformationComponent)Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
             this.movementComponent = (MoveComponent)Parent.GetComponent("MoveComponent");
             this.bepuPhysicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
+            this.health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
         }
 
         public override void Update(GameTime gameTime)
@@ -63,10 +75,19 @@ namespace BattleFury.Components.Movement
                 timeTillFire = fireSpeed;
 
                 int direction = movementComponent.DirectionX;
-                
+
+                // Determine how much damage to do. This will scale linearly
+                float rage = this.health.RageMeter;
+                float damage = baseStrength + ((maxStrength - baseStrength) / 99) * (100 - rage);
+                if (rage == 0)
+                {
+                    damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.
+                }
+
                 // Create a projectile and add it to the environment.
-                Projectile p = new Projectile(this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX, 0, 0), 
-                    new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity, environment, (Character) Parent);
+                Vector3 spawnPosition = this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX, 0, 0);
+                Vector3 velocity = new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity;
+                Projectile p = new Projectile(spawnPosition, velocity, environment, (Character) Parent, damage);
                 p.Initialize();
                 environment.ItemManager.AddItem(p);
             }
