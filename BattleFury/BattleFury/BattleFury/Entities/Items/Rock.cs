@@ -4,6 +4,8 @@ using BattleFury.Components.Movement;
 using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
 using BattleFury.EntitySystem;
+using System;
+using BattleFury.Entities.Characters;
 
 namespace BattleFury.Entities.Items
 {
@@ -11,12 +13,14 @@ namespace BattleFury.Entities.Items
     {
         private const int MASS = 1;
 
+        private Environment environment;
+
+        private GrabbableComponent grabbable;
+
         public Rock(Vector3 spawnPosition, Environment environment)
             : base(new Box(spawnPosition, 1, 1, 1, MASS))
         {
-
-            //SelfDestructOnImpactComponent selfDestructComponent = new SelfDestructOnImpactComponent(this, environment, false);
-            //this.AttachComponent(selfDestructComponent);
+            this.environment = environment;
 
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
@@ -24,11 +28,23 @@ namespace BattleFury.Entities.Items
             BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
 
-            GrabbableComponent grabbable = new GrabbableComponent(this);
+            grabbable = new GrabbableComponent(this);
+            grabbable.OnThrow += OnRockThrow;
             this.AttachComponent(grabbable);
+            
             
         }
 
+        public void OnRockThrow(object sender, EventArgs e)
+        {
+            DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, 10, environment);
+            damageComponent.IgnoreEntityTemporarily((Character) grabbable.Grabber.Parent);
+            this.AttachComponent(damageComponent);
+
+            SelfDestructOnImpactComponent selfDestructComponent = new SelfDestructOnImpactComponent(this, environment, false);
+            selfDestructComponent.IgnoreEntityTemporarily(grabbable.Grabber.Parent);
+            this.AttachComponent(selfDestructComponent);
+        }
 
     }
 

@@ -34,6 +34,11 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private GrabComponent grabber = null;
 
+        public GrabComponent Grabber
+        {
+            get { return grabber; }
+        }
+
         private Vector3 grabbingEntityPositionOffset;
 
         public bool IsGrabbed
@@ -44,13 +49,15 @@ namespace BattleFury.Components.Movement
             }
         }
 
+        /// <summary>
+        /// Event to be triggered when the entity is thrown
+        /// </summary>
+        public EventHandler OnThrow;
+
         public GrabbableComponent(Entity parent)
             : base(parent, "GrabbableComponent")
         {
-
         }
-
-
 
         public override void Initialize()
         {
@@ -111,6 +118,8 @@ namespace BattleFury.Components.Movement
             
             timeSinceGrab = 0;
             this.grabber = grabber;
+            Vector3 currentPos = bepuPhysicsComponent.Box.Position;
+            this.bepuPhysicsComponent.Box.Position = new Vector3(currentPos.X , grabber.GetPosition().Y, currentPos.Z);
             this.grabbingEntityPositionOffset = this.bepuPhysicsComponent.Box.Position - grabber.GetPosition();
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = false; // disable gravity, else it falls fast when dropped.
 
@@ -125,7 +134,11 @@ namespace BattleFury.Components.Movement
 
         public void Throw(Vector2 direction, float throwStrength)
         {
-            Console.WriteLine("wat");
+            EventHandler handler = OnThrow;
+            if (handler != null)
+            {
+                handler(this, null);
+            }
             
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = true; // reenable gravity when let go.
             // Give movement back.
@@ -157,5 +170,7 @@ namespace BattleFury.Components.Movement
             }
             grabber = null;
         }
+
+        
     }
 }
