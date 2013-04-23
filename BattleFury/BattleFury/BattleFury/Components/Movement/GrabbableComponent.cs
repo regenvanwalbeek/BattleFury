@@ -159,12 +159,27 @@ namespace BattleFury.Components.Movement
                 moveComponent.Enabled = true;
             }
 
+
+            // Move this entity to a position on the side of the direction being thrown.
+            int grabberCurrentDirection = ((MoveComponent)grabber.Parent.GetComponent("MoveComponent")).DirectionX;
+            const float offset = .1f;
+            int xDirFacing = ((MoveComponent)grabber.Parent.GetComponent("MoveComponent")).DirectionX;
+            if (direction.X > 0 || (direction.X == 0 && xDirFacing == 1))
+            {
+                BepuPhysicsComponent grabberPhysicsComp = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
+                this.bepuPhysicsComponent.Box.Position = grabber.GetPosition() + new Vector3(grabberPhysicsComp.Box.Width + offset, 0, 0);//new Vector3(grabber.GetPosition().X + grabberPhysicsComp.Box.Width, currentPos.Y, currentPos.Z);
+            }
+            else if (direction.X < 0 || (direction.X == 0 && xDirFacing == -1))
+            {
+                this.bepuPhysicsComponent.Box.Position = grabber.GetPosition() - new Vector3(bepuPhysicsComponent.Box.Width - offset, 0, 0); // new Vector3(grabber.GetPosition().X - bepuPhysicsComponent.Box.Width, currentPos.Y, currentPos.Z);
+            }
+
+
             // Set the force to throw the entity.
             if (direction.Equals(Vector2.Zero))
             {
-                // Throw up in the direction facing.
-                int xDir = ((MoveComponent)grabber.Parent.GetComponent("MoveComponent")).DirectionX;
-                direction = Vector2.Normalize(new Vector2(xDir, 1));
+                // Throw up in the direction facing
+                direction = Vector2.Normalize(new Vector2(xDirFacing, 1));
             }
             else
             {
