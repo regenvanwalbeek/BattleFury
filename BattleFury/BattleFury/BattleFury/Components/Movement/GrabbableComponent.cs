@@ -39,9 +39,9 @@ namespace BattleFury.Components.Movement
             get { return grabber; }
         }
 
-        private Vector3 grabbingEntityPositionOffset;
+        private Vector3 grabberPositionOffset;
 
-        private int grabbingEntityStartDirection;
+        private int grabberPrevDirection;
 
         public bool IsGrabbed
         {
@@ -103,7 +103,21 @@ namespace BattleFury.Components.Movement
                     {
                         this.bepuPhysicsComponent.Box.Position = grabber.GetPosition() - new Vector3(bepuPhysicsComponent.Box.Width - offset, 0, 0); // new Vector3(grabber.GetPosition().X - bepuPhysicsComponent.Box.Width, currentPos.Y, currentPos.Z);
                     }
+
+
+                    // Swap the direction facing if the grabber swapped the direction it's facing. Looks better.
+                    if (grabberPrevDirection != grabberCurrentDirection)
+                    {
+                        MoveComponent moveComponent = (MoveComponent) Parent.GetComponent("MoveComponent");
+                        if (moveComponent != null)
+                        {
+                            moveComponent.DirectionX *= -1;
+                        }
+                    }
+
+                    grabberPrevDirection = grabberCurrentDirection;
                 }
+
             }
         }
 
@@ -130,8 +144,8 @@ namespace BattleFury.Components.Movement
             this.grabber = grabber;
             Vector3 currentPos = bepuPhysicsComponent.Box.Position;
             this.bepuPhysicsComponent.Box.Position = new Vector3(currentPos.X , grabber.GetPosition().Y, currentPos.Z);
-            this.grabbingEntityPositionOffset = this.bepuPhysicsComponent.Box.Position - grabber.GetPosition();
-            this.grabbingEntityStartDirection = ((MoveComponent)grabber.Parent.GetComponent("MoveComponent")).DirectionX;
+            this.grabberPositionOffset = this.bepuPhysicsComponent.Box.Position - grabber.GetPosition();
+            this.grabberPrevDirection = ((MoveComponent)grabber.Parent.GetComponent("MoveComponent")).DirectionX;
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = false; // disable gravity, else it falls fast when dropped.
 
             // Disable the move component if the entity has a moveable

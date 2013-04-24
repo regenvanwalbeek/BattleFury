@@ -39,13 +39,13 @@ namespace BattleFury.Entities.Characters
 
         private const float BEPU_PHYSICS_DEPTH = 1;
 
-        public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment)
+        public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment, Color color)
             : base("FightingRobot", 100, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
             controllingPlayer, team, environment)
         {
   
     
-            BasicModelComponent drawComponent = new RobotRenderComponent(this, BEPU_PHYSICS_HEIGHT);
+            BasicModelComponent drawComponent = new RobotRenderComponent(this, BEPU_PHYSICS_HEIGHT, color);
             this.AttachComponent(drawComponent);
 
             

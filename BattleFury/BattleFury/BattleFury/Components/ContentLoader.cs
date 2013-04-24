@@ -27,9 +27,16 @@ namespace BattleFury.Components
 
         public static Model Robot;
 
+        // Temporary hack due to some blender silliness
+        public static Model RobotRed;
+        public static Model RobotBlue;
+        public static Model RobotYellow;
+
         public static SpriteFont HUDRageFont;
 
         public static SpriteFont HUDLivesFont;
+
+        public static Effect ColorEffect;
 
         private ContentLoader()
         {
@@ -55,10 +62,16 @@ namespace BattleFury.Components
             
             // Load the robot model
             Robot = content.Load<Model>("meshes/Robot-joined");
+            RobotRed = content.Load<Model>("meshes/Robot-red");
+            RobotBlue = content.Load<Model>("meshes/Robot-blue");
+            RobotYellow = content.Load<Model>("meshes/Robot-yellow");
 
             // Load HUD Fonts
             HUDRageFont = content.Load<SpriteFont>("fonts/HUDFontRage");
             HUDLivesFont = content.Load<SpriteFont>("fonts/HUDFontLives");
+
+            // Load the color shader
+            ColorEffect = content.Load<Effect>("effects/ReplaceColor");
 
             contentLoaded = true;
         }

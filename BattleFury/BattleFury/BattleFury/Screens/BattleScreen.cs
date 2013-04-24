@@ -83,7 +83,7 @@ namespace BattleFury.Screens
             // Load content necessary for the battle screen
             ContentLoader.LoadContent(content);
             
-            Effect colorEffect = content.Load<Effect>("effects/ReplaceColor");
+            
 
 
             // Create the Entity Manager.
@@ -126,7 +126,7 @@ namespace BattleFury.Screens
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
                 {
-                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetCharacterSpawnPosition(), player.PlayerIndex, player.Team, environment);
+                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetCharacterSpawnPosition(), player.PlayerIndex, player.Team, environment, player.Color);
                     physicsEntity.AddPhysicsEntity(character.GetBox());
                     characters.Add(character);
                     environment.AddCharacter(character);

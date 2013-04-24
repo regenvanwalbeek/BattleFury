@@ -21,7 +21,7 @@ namespace BattleFury.Components.Animated
         {
             this.model = model;
         }
-
+        
         public override void Draw(GameTime gameTime, Matrix view, Matrix projection)
         {
             Matrix[] transforms = new Matrix[model.Bones.Count];
@@ -39,7 +39,7 @@ namespace BattleFury.Components.Animated
                 mesh.Draw();
             }
         }
-
+        
         public override void Start()
         {
         }
