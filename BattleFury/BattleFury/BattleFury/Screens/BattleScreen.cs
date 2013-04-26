@@ -163,7 +163,7 @@ namespace BattleFury.Screens
         /// </summary>
         public override void UnloadContent()
         {
-            content.Unload();
+            ContentLoader.UnloadContent();
         }
 
         /// <summary>
