@@ -8,19 +8,20 @@ namespace BattleFury.Entities.Items
 {
     public class Projectile : Item
     {
-        public Projectile(Vector3 spawnPosition, Vector3 velocity, Environment environment, Character attackingCharacter, float damage)
+        public Projectile(Vector3 spawnPosition, Vector3 velocity, Environment environment, Character attackingCharacter, float damage, float minFlinch, float maxFlinch)
             : base(new Box(spawnPosition, .75f, .75f, .75f, 0.01f))
         {
             this.bepuPhysicsComponent.Box.LinearVelocity = velocity;
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = false;
 
+            DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, damage, environment, minFlinch, maxFlinch);
+            damageComponent.IgnoreEntity(attackingCharacter);
+            this.AttachComponent(damageComponent);
+
             SelfDestructOnImpactComponent selfDestructComponent = new SelfDestructOnImpactComponent(this, environment, true);
             selfDestructComponent.IgnoreEntity(attackingCharacter);
             this.AttachComponent(selfDestructComponent);
-
-            DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, damage, environment);
-            damageComponent.IgnoreEntity(attackingCharacter);
-            this.AttachComponent(damageComponent);
+            
 
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.

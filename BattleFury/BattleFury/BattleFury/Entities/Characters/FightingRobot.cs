@@ -7,8 +7,14 @@ namespace BattleFury.Entities.Characters
 {
     public class FightingRobot : Character
     {
+        /// <summary>
+        /// Move speed of the character
+        /// </summary>
         private const int SPEED = 10;
 
+        /// <summary>
+        /// Heigh the character can jump
+        /// </summary>
         private const int JUMP_HEIGHT = 20;
 
         private const int MAX_JUMPS = 2;
@@ -32,6 +38,10 @@ namespace BattleFury.Entities.Characters
         private const int FIRE_BASE_DAMAGE = 1;
 
         private const int FIRE_MAX_DAMAGE = 5;
+
+        private const float FIRE_MIN_FLINCH = 0;
+         
+        private const float FIRE_MAX_FLINCH = 25;
 
         private const float BEPU_PHYSICS_WIDTH = 1;
 
@@ -64,7 +74,7 @@ namespace BattleFury.Entities.Characters
             punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_BASE_DAMAGE, PUNCH_MAX_DAMAGE);
             this.AttachComponent(punchComponent);
 
-            FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_DAMAGE, FIRE_MAX_DAMAGE);
+            FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_DAMAGE, FIRE_MAX_DAMAGE, FIRE_MIN_FLINCH, FIRE_MAX_FLINCH);
             this.AttachComponent(fireProjectileComponent);
 
 

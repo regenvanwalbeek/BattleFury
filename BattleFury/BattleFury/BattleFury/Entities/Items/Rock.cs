@@ -13,6 +13,10 @@ namespace BattleFury.Entities.Items
     {
         private const int MASS = 1;
 
+        private const float MIN_FLINCH_DISTANCE = 10;
+
+        private const float MAX_FLINCH_DISTANCE = 25;
+
         private Environment environment;
 
         private GrabbableComponent grabbable;
@@ -37,7 +41,7 @@ namespace BattleFury.Entities.Items
 
         public void OnRockThrow(object sender, EventArgs e)
         {
-            DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, 10, environment);
+            DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, 10, environment, MIN_FLINCH_DISTANCE, MAX_FLINCH_DISTANCE);
             damageComponent.IgnoreEntityTemporarily((Character) grabbable.Grabber.Parent);
             this.AttachComponent(damageComponent);
 

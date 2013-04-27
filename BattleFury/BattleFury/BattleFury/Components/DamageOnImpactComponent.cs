@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using BEPUphysics.Collidables;
 using BattleFury.Components.Characters;
 using BattleFury.Entities.Arenas;
+using Microsoft.Xna.Framework;
 
 namespace BattleFury.Components
 {
@@ -14,6 +15,10 @@ namespace BattleFury.Components
     {
 
         private float damage;
+
+        private float minFlinch;
+
+        private float maxFlinch;
 
         private Environment environment;
 
@@ -23,11 +28,13 @@ namespace BattleFury.Components
 
         private List<Character> tempIgnoredEntities = new List<Character>();
 
-        public DamageOnImpactComponent(Item parent, float damage, Environment environment)
+        public DamageOnImpactComponent(Item parent, float damage, Environment environment, float minFlinch, float maxFlinch)
             : base(parent, "DamageOnImpactComponent")
         {
             this.damage = damage;
             this.environment = environment;
+            this.minFlinch = minFlinch;
+            this.maxFlinch = maxFlinch;
         }
 
         public override void Initialize()
@@ -52,7 +59,7 @@ namespace BattleFury.Components
                 collidingEntities.Add(enumerator.Current);
             }
 
-            // Check if characters are colliding
+            // Check if colliding with a character
             List<Character> characters = environment.Characters;
             for (int i = 0; i < characters.Count; i++)
             {
@@ -61,21 +68,38 @@ namespace BattleFury.Components
                 if (collidingWithCharacter && !ignoredEntities.Contains(characters[i]))
                 {
                     // Damage the vitality component when thrown if the entity has vitality
+                    // Also apply flinch based on vitality
                     VitalityComponent health = (VitalityComponent)characters[i].GetComponent("VitalityComponent");
                     if (health != null)
                     {
+                        // Damage
                         health.Damage(damage);
                         damageApplied = true;
+
+                        // Flinch
+                        float flinch = minFlinch + ((maxFlinch - minFlinch) / 100) * (100 - health.RageMeter);
+                        if (health.RageMeter == 0)
+                        {
+                            // RAGE MODE
+                            flinch *= 4;
+                        }
+                        Vector3 characterPosition = ((BepuPhysicsComponent) characters[i].GetComponent("BepuPhysicsComponent")).Box.Position;
+                        Vector3 flinchDirection = characterPosition - this.bepuPhysicsComponent.Box.Position;
+                        flinchDirection = Vector3.Normalize(flinchDirection);
+
+                        Vector3 flinchVector = flinchDirection * flinch;
+                        characters[i].GetBox().ApplyLinearImpulse(ref flinchVector);
                     }
                 }
                 else if (!collidingWithCharacter && tempIgnoredEntities.Contains(characters[i]))
                 {
+                    // No longer ignore this entity.
                     ignoredEntities.Remove(characters[i]);
                     tempIgnoredEntities.Remove(characters[i]);
                 }
             }
 
-            // Turn off damage if arena elements are colliding
+            // Turn off damage if arena elements are colliding (ex. rock thrown, lands on ground and bounces, don't want it to damage anymore)
             List<Platform> platforms = environment.Arena.Platforms;
             for (int i = 0; i < platforms.Count; i++)
             {
@@ -88,30 +112,6 @@ namespace BattleFury.Components
                     
                 }
             }
-
-
-            /*
-            // Damage any characters it is colliding with.
-            EntityCollidableCollection.Enumerator enumerator = overlappedCollideables.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                BEPUphysics.Entities.Entity collidingEntity = enumerator.Current;
-
-                // Check if the entity collides with any characters
-                for (int i = 0; i < characters.Count; i++)
-                {
-                    if (collidingEntity == characters[i].GetBox())
-                    {
-                        // Damage the vitality component when thrown if the entity has vitality
-                        VitalityComponent health = (VitalityComponent)characters[i].GetComponent("VitalityComponent");
-                        if (health != null)
-                        {
-                            health.Damage(damage);
-                            damageApplied = true;
-                        }
-                    }
-                }
-            }*/
 
             // Stop damaging if the item has dealt damage.
             if (damageApplied)

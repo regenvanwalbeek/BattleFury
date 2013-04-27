@@ -43,7 +43,11 @@ namespace BattleFury.Components.Movement
 
         private float maxDamage;
 
-        public FireProjectileComponent(Entity parent, int fireSpeed, int fireVelocity, Environment environment, float baseDamage, float maxDamage)
+        private float minFlinch;
+
+        private float maxFlinch;
+
+        public FireProjectileComponent(Entity parent, int fireSpeed, int fireVelocity, Environment environment, float baseDamage, float maxDamage, float minFlinch, float maxFlinch)
             : base(parent, "FireProjectileComponent")
         {
             this.fireSpeed = fireSpeed;
@@ -51,6 +55,8 @@ namespace BattleFury.Components.Movement
             this.fireVelocity = fireVelocity;
             this.baseDamage = baseDamage;
             this.maxDamage = maxDamage;
+            this.minFlinch = minFlinch;
+            this.maxFlinch = maxFlinch;
         }
 
         public override void Initialize()
@@ -87,7 +93,7 @@ namespace BattleFury.Components.Movement
                 // Create a projectile and add it to the environment.
                 Vector3 spawnPosition = this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX, 0, 0);
                 Vector3 velocity = new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity;
-                Projectile p = new Projectile(spawnPosition, velocity, environment, (Character) Parent, damage);
+                Projectile p = new Projectile(spawnPosition, velocity, environment, (Character) Parent, damage, minFlinch, maxFlinch);
                 p.Initialize();
                 environment.ItemManager.AddItem(p);
             }
