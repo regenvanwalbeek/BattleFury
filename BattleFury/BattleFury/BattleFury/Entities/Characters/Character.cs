@@ -51,11 +51,9 @@ namespace BattleFury.Entities.Characters
             respawnableComponent = new RespawnableComponent(this, environment.Arena);
             this.AttachComponent(respawnableComponent);
 
-            grabbableComponent = new GrabbableComponent(this);
-            this.AttachComponent(grabbableComponent);
+            
 
-            punchableComponent = new PunchableComponent(this);
-            this.AttachComponent(punchableComponent);
+            
             
         }
 

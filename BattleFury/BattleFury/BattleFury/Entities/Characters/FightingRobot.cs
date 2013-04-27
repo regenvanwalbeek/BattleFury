@@ -13,47 +13,119 @@ namespace BattleFury.Entities.Characters
         private const int SPEED = 10;
 
         /// <summary>
-        /// Heigh the character can jump
+        /// Height the character can jump
         /// </summary>
         private const int JUMP_HEIGHT = 20;
 
+        /// <summary>
+        /// Number of times the character can jump
+        /// </summary>
         private const int MAX_JUMPS = 2;
 
+        /// <summary>
+        /// Mass of the character
+        /// </summary>
         private const int MASS = 1;
 
+        /// <summary>
+        /// Base damage the character will deal with a throw attack (when rage = 100%)
+        /// </summary>
         private const int THROW_BASE_DAMAGE = 5;
 
+        /// <summary>
+        /// Max damage the character will deal with a throw attack (when rage = 0%)
+        /// </summary>
         private const int THROW_MAX_DAMAGE = 15;
 
+        /// <summary>
+        /// Max Speed the character can punch at
+        /// </summary>
         private const int PUNCH_SPEED = 1;
 
+        /// <summary>
+        /// Base damage dealt with a punch attack (when rage = 100%)
+        /// </summary>
         private const int PUNCH_BASE_DAMAGE = 1;
 
+        /// <summary>
+        /// Max damage dealt with a punch attack (when rage = 0%)
+        /// </summary>
         private const int PUNCH_MAX_DAMAGE = 10;
 
+        /// <summary>
+        /// Max speed the character can fire a projectile
+        /// </summary>
         private const int FIRE_SPEED = 200;
 
+        /// <summary>
+        /// Velocity of a projectile fired
+        /// </summary>
         private const int FIRE_VELOCITY = 50;
 
+        /// <summary>
+        /// Base damage dealt with a projectile (when rage = 100%)
+        /// </summary>
         private const int FIRE_BASE_DAMAGE = 1;
 
+        /// <summary>
+        /// Max damage dealt with a projectile (when rage = 0%)
+        /// </summary>
         private const int FIRE_MAX_DAMAGE = 5;
 
+        /// <summary>
+        /// Base distance an opponent will flinch when hit with a projectile
+        /// </summary>
         private const float FIRE_MIN_FLINCH = 0;
          
-        private const float FIRE_MAX_FLINCH = 25;
+        /// <summary>
+        /// Max distance an opponent will flinch when hit with a projectile
+        /// </summary>
+        private const float FIRE_MAX_FLINCH = 10;
 
+        /// <summary>
+        /// Width of the character's damage taking hitbox
+        /// </summary>
         private const float BEPU_PHYSICS_WIDTH = 1;
 
+        /// <summary>
+        /// Height of the character's damage taking hitbox
+        /// </summary>
         private const float BEPU_PHYSICS_HEIGHT = 2.6f;
 
+        /// <summary>
+        /// Depth of the character's damage taking hitbox
+        /// </summary>
         private const float BEPU_PHYSICS_DEPTH = 1;
+
+        /// <summary>
+        /// Min distance this character will flinch when punched (when rage = 100%)
+        /// </summary>
+        private const float PUNCH_MIN_FLINCH = 0;
+
+        /// <summary>
+        /// Max distance this character will flinch when punched (when rage = 0%)
+        /// </summary>
+        private const float PUNCH_MAX_FLINCH = 50;
+
+        /// <summary>
+        /// Min distance this character will flinch when thrown (when rage = 100%)
+        /// </summary>
+        private const float THROW_MIN_FLINCH = 10;
+
+        /// <summary>
+        /// Max distance this character will flinch when thrown (when rage = 0%)
+        /// </summary>
+        private const float THROW_MAX_FLINCH = 50;
 
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment, Color color)
             : base("FightingRobot", 100, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
             controllingPlayer, team, environment)
         {
-  
+            punchableComponent = new PunchableComponent(this, PUNCH_MIN_FLINCH, PUNCH_MAX_FLINCH);
+            this.AttachComponent(punchableComponent);
+
+            grabbableComponent = new GrabbableComponent(this, THROW_MIN_FLINCH, THROW_MAX_FLINCH);
+            this.AttachComponent(grabbableComponent);
     
             BasicModelComponent drawComponent = new RobotRenderComponent(this, BEPU_PHYSICS_HEIGHT, color);
             this.AttachComponent(drawComponent);

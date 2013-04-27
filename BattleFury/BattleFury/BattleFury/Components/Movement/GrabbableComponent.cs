@@ -34,6 +34,10 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private GrabComponent grabber = null;
 
+        private float minFlinch;
+
+        private float maxFlinch;
+
         public GrabComponent Grabber
         {
             get { return grabber; }
@@ -56,9 +60,11 @@ namespace BattleFury.Components.Movement
         /// </summary>
         public EventHandler OnThrow;
 
-        public GrabbableComponent(Entity parent)
+        public GrabbableComponent(Entity parent, float minFlinch, float maxFlinch)
             : base(parent, "GrabbableComponent")
         {
+            this.minFlinch = minFlinch;
+            this.maxFlinch = maxFlinch;
         }
 
         public override void Initialize()
@@ -199,11 +205,26 @@ namespace BattleFury.Components.Movement
             {
                 direction = Vector2.Normalize(direction);
             }
-            Vector2 throwVelocity = 100 * direction;
+
+            // calculate flinch based on character's vitality. If character has no vitality, throw at max flinch value
+            float flinch = maxFlinch;
+            VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
+            if (health != null)
+            {
+                // Calculate flinch based on vitality
+                flinch = minFlinch + ((maxFlinch - minFlinch) / 100) * (100 - health.RageMeter);
+                if (health.RageMeter == 0)
+                {
+                    // RAGE MODE
+                    flinch *= 4;
+                }
+            }
+
+
+            Vector2 throwVelocity = flinch * direction;
             bepuPhysicsComponent.Box.LinearVelocity += new Vector3(throwVelocity.X, throwVelocity.Y, 0);
             
             // Damage the vitality component when thrown if the entity has vitality
-            VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
             if (health != null)
             {
                 health.Damage(throwDamage);

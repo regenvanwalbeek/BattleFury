@@ -65,7 +65,7 @@ namespace BattleFury.Components.Movement
             }
 
             // Jump if still have jumps left
-            if (GameplayBindings.IsJump(controllingPlayer) && numJumps < MaxJumps)
+            if (GameplayBindings.IsJump(controllingPlayer) && numJumps < MaxJumps - 1)
             {
                 numJumps++;
                 bepuPhysicsComponent.Box.LinearVelocity = new Vector3(0, JumpHeight, 0);

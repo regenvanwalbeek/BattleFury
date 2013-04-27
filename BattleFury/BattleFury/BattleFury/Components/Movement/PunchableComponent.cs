@@ -17,14 +17,15 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private BepuPhysicsComponent bepuPhysicsComponent;
 
-        private const float MIN_FLINCH_DISTANCE = 0;
+        private float minFlinchDistance;
 
-        private const float MAX_FLINCH_DISTANCE = 50;
+        private float maxFlinchDistance;
 
-        public PunchableComponent(Entity parent)
+        public PunchableComponent(Entity parent, float minFlinchDistance, float maxFlinchDistance)
             : base(parent, "PunchableComponent")
         {
-        
+            this.minFlinchDistance = minFlinchDistance;
+            this.maxFlinchDistance = maxFlinchDistance;
         }
 
         public override void Initialize()
@@ -51,9 +52,9 @@ namespace BattleFury.Components.Movement
         {
             // Calculate the flinch value. This determines how far the character will be knocked back
             VitalityComponent health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
-            float flinch = MIN_FLINCH_DISTANCE;
+            float flinch = minFlinchDistance;
             if (health != null){
-                flinch = MIN_FLINCH_DISTANCE + ((MAX_FLINCH_DISTANCE - MIN_FLINCH_DISTANCE) / 100) * (100 - health.RageMeter);
+                flinch = minFlinchDistance + ((maxFlinchDistance - minFlinchDistance) / 100) * (100 - health.RageMeter);
                 if (health.RageMeter == 0)
                 {
                     // RAGE MODE

@@ -32,7 +32,7 @@ namespace BattleFury.Entities.Items
             BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
 
-            grabbable = new GrabbableComponent(this);
+            grabbable = new GrabbableComponent(this, 0, 100);
             grabbable.OnThrow += OnRockThrow;
             this.AttachComponent(grabbable);
             
