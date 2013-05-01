@@ -73,7 +73,34 @@ namespace BattleFury.Settings
                    InputState.IsNewButtonPress(Buttons.LeftThumbstickDown, controllingPlayer, out playerIndex);
         }
 
+        /// <summary>
+        /// Bidns for left/right (forward/back) scrolling options
+        /// </summary>
+        /// <param name="controllingPlayer"></param>
+        /// <returns></returns>
+        public static bool IsMenuLeft(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
 
-        
+            return InputState.IsNewKeyPress(Keys.Left, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.DPadLeft, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewLeftThumbstickPressedHardLeft(controllingPlayer, out playerIndex, -.5f);
+            
+        }
+
+        /// <summary>
+        /// Bidns for left/right (forward/back) scrolling options
+        /// </summary>
+        /// <param name="controllingPlayer"></param>
+        /// <returns></returns>
+        public static bool IsMenuRight(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+
+            return InputState.IsNewKeyPress(Keys.Right, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewButtonPress(Buttons.DPadRight, controllingPlayer, out playerIndex) ||
+                   InputState.IsNewLeftThumbstickPressedHardRight(controllingPlayer, out playerIndex, .5f);
+        }
+
     }
 }

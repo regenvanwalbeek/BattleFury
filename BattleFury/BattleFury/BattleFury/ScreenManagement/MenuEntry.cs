@@ -79,6 +79,9 @@ namespace BattleFury.ScreenManagement
         /// </summary>
         public event EventHandler<PlayerIndexEventArgs> Selected;
 
+        public event EventHandler<PlayerIndexEventArgs> LeftSelected;
+
+        public event EventHandler<PlayerIndexEventArgs> RightSelected;
 
         /// <summary>
         /// Method for raising the Selected event.
@@ -89,6 +92,17 @@ namespace BattleFury.ScreenManagement
                 Selected(this, new PlayerIndexEventArgs(playerIndex));
         }
 
+        protected internal virtual void OnLeftEntry(PlayerIndex playerIndex)
+        {
+            if (LeftSelected != null)
+                LeftSelected(this, new PlayerIndexEventArgs(playerIndex));
+        }
+
+        protected internal virtual void OnRightEntry(PlayerIndex playerIndex)
+        {
+            if (RightSelected != null)
+                RightSelected(this, new PlayerIndexEventArgs(playerIndex));
+        }
 
         #endregion
 

@@ -36,6 +36,7 @@ namespace BattleFury.Screens
         bool firstTime = true;
 
         #region Initialization
+
         public OptionsScreen()
             : base("Options")
         {

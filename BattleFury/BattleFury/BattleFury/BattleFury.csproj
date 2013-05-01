@@ -144,7 +144,6 @@
     <Compile Include="BattleFuryGame.cs" />
     <Compile Include="Screens\ArenaSelectScreen.cs" />
     <Compile Include="Screens\BattleScreen.cs" />
-    <Compile Include="Screens\CharacterSelectScreen.cs" />
     <Compile Include="ScreenManagement\GameScreen.cs" />
     <Compile Include="Input\InputState.cs" />
     <Compile Include="ScreenManagement\MenuEntry.cs" />

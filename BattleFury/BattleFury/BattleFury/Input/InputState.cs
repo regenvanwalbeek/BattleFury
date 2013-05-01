@@ -193,11 +193,63 @@ namespace BattleFury.Input
             return CurrentMouseState.Y - LastMouseState.Y;
         }
 
-
+        /// <summary>
+        /// Helper method for getting the Left analog stick value
+        /// </summary>
         public static Vector2 GetLeftAnalogStick(PlayerIndex playerIndex)
         {
             int i = (int) playerIndex;
             return CurrentGamePadStates[i].ThumbSticks.Left;
+        }
+
+        /// <summary>
+        /// Helper method to check if the thumbstick was pressed left over a certain threshhold. Messy, but I need it.
+        /// </summary>
+        public static bool IsNewLeftThumbstickPressedHardLeft(PlayerIndex? controllingPlayer, out PlayerIndex playerIndex, float threshold)
+        {
+            if (controllingPlayer.HasValue)
+            {
+                // Read input from the specified player.
+                playerIndex = controllingPlayer.Value;
+
+                int i = (int)playerIndex;
+
+                return (CurrentGamePadStates[i].ThumbSticks.Left.X < threshold &&
+                        LastGamePadStates[i].ThumbSticks.Left.X > threshold);
+            }
+            else
+            {
+                // Accept input from any player.
+                return (IsNewLeftThumbstickPressedHardLeft(PlayerIndex.One, out playerIndex, threshold) ||
+                        IsNewLeftThumbstickPressedHardLeft(PlayerIndex.Two, out playerIndex, threshold) ||
+                        IsNewLeftThumbstickPressedHardLeft(PlayerIndex.Three, out playerIndex, threshold) ||
+                        IsNewLeftThumbstickPressedHardLeft(PlayerIndex.Four, out playerIndex, threshold));
+            }
+        }
+
+        /// <summary>
+        /// Helper method to check if the thumbstick was pressed right over a certain threshhold. Messy, but I need it.
+        /// </summary>
+        public static bool IsNewLeftThumbstickPressedHardRight(PlayerIndex? controllingPlayer, out PlayerIndex playerIndex, float threshold)
+        {
+            if (controllingPlayer.HasValue)
+            {
+                // Read input from the specified player.
+                playerIndex = controllingPlayer.Value;
+
+                int i = (int)playerIndex;
+
+                return (CurrentGamePadStates[i].ThumbSticks.Left.X > threshold &&
+                        LastGamePadStates[i].ThumbSticks.Left.X < threshold);
+            }
+            else
+            {
+                // Accept input from any player.
+                return (IsNewLeftThumbstickPressedHardRight(PlayerIndex.One, out playerIndex, threshold) ||
+                        IsNewLeftThumbstickPressedHardRight(PlayerIndex.Two, out playerIndex, threshold) ||
+                        IsNewLeftThumbstickPressedHardRight(PlayerIndex.Three, out playerIndex, threshold) ||
+                        IsNewLeftThumbstickPressedHardRight(PlayerIndex.Four, out playerIndex, threshold));
+            }
         }
 
         #endregion

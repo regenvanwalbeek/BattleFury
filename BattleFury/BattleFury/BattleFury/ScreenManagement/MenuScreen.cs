@@ -107,6 +107,14 @@ namespace BattleFury.ScreenManagement
             {
                 OnCancel(playerIndex);
             }
+            else if (MenuBindings.IsMenuRight(ControllingPlayer))
+            {
+                OnRightEntry(selectedEntry, playerIndex);
+            }
+            else if (MenuBindings.IsMenuLeft(ControllingPlayer))
+            {
+                OnLeftEntry(selectedEntry, playerIndex);
+            }
         }
 
 
@@ -116,6 +124,22 @@ namespace BattleFury.ScreenManagement
         protected virtual void OnSelectEntry(int entryIndex, PlayerIndex playerIndex)
         {
             menuEntries[entryIndex].OnSelectEntry(playerIndex);
+        }
+
+        /// <summary>
+        /// Handler for when the user hits left.
+        /// </summary>
+        protected virtual void OnLeftEntry(int entryIndex, PlayerIndex playerIndex)
+        {
+            menuEntries[entryIndex].OnLeftEntry(playerIndex);
+        }
+
+        /// <summary>
+        /// Handler for when the user hits right.
+        /// </summary>
+        protected virtual void OnRightEntry(int entryIndex, PlayerIndex playerIndex)
+        {
+            menuEntries[entryIndex].OnRightEntry(playerIndex);
         }
 
 
