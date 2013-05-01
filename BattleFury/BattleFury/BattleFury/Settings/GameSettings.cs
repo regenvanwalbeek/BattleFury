@@ -60,7 +60,17 @@ namespace BattleFury.Settings
         /// <summary>
         /// List of characters each player will use to play.
         /// </summary>
-        public static List<PlayerSettings> Players;
+        private static List<PlayerSettings> Players;
+
+        public static List<PlayerSettings> GetPlayers()
+        {
+            List<PlayerSettings> toReturn = new List<PlayerSettings>();
+            for (int i = 0; i < NumPlayers; i++)
+            {
+                toReturn.Add(Players[i]);
+            }
+            return toReturn;
+        }
 
         public static void LoadDefaultGameSettings(int windowWidth, int windowHeight)
         {

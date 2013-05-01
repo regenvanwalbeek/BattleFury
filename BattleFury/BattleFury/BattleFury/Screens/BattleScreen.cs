@@ -61,12 +61,20 @@ namespace BattleFury.Screens
         /// </summary>
         private List<Character> livingCharacters;
 
+        private int numLives;
+
+        private int numPlayers;
+
+        private bool itemsOn;
+
         /// <summary>
         /// Constructs the battle screen.
         /// </summary>
         public BattleScreen(int numLives, int numPlayers, bool itemsOn)
         {
-            
+            this.numLives = numLives;
+            this.numPlayers = numPlayers;
+            this.itemsOn = itemsOn;
         }
 
         /// <summary>
@@ -119,14 +127,13 @@ namespace BattleFury.Screens
             cameraEntities.Add(debugCamera); // Debug Camera
 
             // Create the Characters.
-            List<PlayerSettings> players = GameSettings.Players;
-            int numPlayers = players.Count;
+            List<PlayerSettings> players = GameSettings.GetPlayers();
             characters = new List<Character>(numPlayers);
             foreach (PlayerSettings player in players)
             {
                 if (player.Character == GameSettings.CHARACTER_SETTING.ROBOT)
                 {
-                    Character character = new FightingRobot(GameSettings.NumLives, arenaEntity.GetCharacterSpawnPosition(), player.PlayerIndex, player.Team, environment, player.Color);
+                    Character character = new FightingRobot(numLives, arenaEntity.GetCharacterSpawnPosition(), player.PlayerIndex, player.Team, environment, player.Color);
                     physicsEntity.AddPhysicsEntity(character.GetBox());
                     characters.Add(character);
                     environment.AddCharacter(character);

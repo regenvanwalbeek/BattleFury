@@ -118,7 +118,7 @@ namespace BattleFury.Entities.Characters
         private const float THROW_MAX_FLINCH = 50;
 
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment, Color color)
-            : base("FightingRobot", 100, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
+            : base("FightingRobot", lives, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
             controllingPlayer, team, environment)
         {
             punchableComponent = new PunchableComponent(this, PUNCH_MIN_FLINCH, PUNCH_MAX_FLINCH);
