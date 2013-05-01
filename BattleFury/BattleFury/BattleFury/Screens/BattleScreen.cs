@@ -64,7 +64,7 @@ namespace BattleFury.Screens
         /// <summary>
         /// Constructs the battle screen.
         /// </summary>
-        public BattleScreen()
+        public BattleScreen(int numLives, int numPlayers)
         {
      
         }
