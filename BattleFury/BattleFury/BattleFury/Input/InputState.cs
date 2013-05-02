@@ -177,6 +177,11 @@ namespace BattleFury.Input
             }
         }
 
+        public static void Rumble(PlayerIndex playerIndex, float leftMotor, float rightMotor)
+        {
+            GamePad.SetVibration(playerIndex, leftMotor, rightMotor);
+        }
+
         /// <summary>
         /// Helper for Checking Mouse X Change between Updates
         /// </summary>

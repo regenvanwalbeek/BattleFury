@@ -87,7 +87,5 @@ namespace BattleFury.Entities.Characters
             return characterInformationComponent.Color;
         }
 
-
-
     }
 }
