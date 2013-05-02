@@ -3,11 +3,11 @@ Content\fonts\HUDFontRage.xnb
 Content\fonts\HUDFontLives.xnb
 Content\textures\background.xnb
 Content\textures\white.xnb
+Content\textures\triangle.xnb
 Content\meshes\cube.xnb
-Content\effects\ReplaceColor.xnb
 Content\meshes\Robot.xnb
 Content\meshes\Robot-joined.xnb
 Content\meshes\Robot-blue.xnb
 Content\meshes\Robot-red.xnb
 Content\meshes\Robot-yellow.xnb
-Content\textures\triangle.xnb
+Content\effects\ReplaceColor.xnb

@@ -43,6 +43,16 @@ namespace BattleFury.Entities.Characters
         private const int THROW_MAX_DAMAGE = 15;
 
         /// <summary>
+        /// Min distance this character will flinch when thrown (when rage = 100%)
+        /// </summary>
+        private const float THROW_MIN_FLINCH = 25;
+
+        /// <summary>
+        /// Max distance this character will flinch when thrown (when rage = 0%)
+        /// </summary>
+        private const float THROW_MAX_FLINCH = 50;
+
+        /// <summary>
         /// Max Speed the character can punch at
         /// </summary>
         private const int PUNCH_SPEED = 1;
@@ -50,17 +60,27 @@ namespace BattleFury.Entities.Characters
         /// <summary>
         /// Base damage dealt with a punch attack (when rage = 100%)
         /// </summary>
-        private const int PUNCH_BASE_DAMAGE = 1;
+        private const int PUNCH_BASE_DAMAGE = 4;
 
         /// <summary>
         /// Max damage dealt with a punch attack (when rage = 0%)
         /// </summary>
-        private const int PUNCH_MAX_DAMAGE = 10;
+        private const int PUNCH_MAX_DAMAGE = 20;
+
+        /// <summary>
+        /// Min distance this character will flinch when punched (when rage = 100%)
+        /// </summary>
+        private const float PUNCH_MIN_FLINCH = 0;
+
+        /// <summary>
+        /// Max distance this character will flinch when punched (when rage = 0%)
+        /// </summary>
+        private const float PUNCH_MAX_FLINCH = 50;
 
         /// <summary>
         /// Max speed the character can fire a projectile
         /// </summary>
-        private const int FIRE_SPEED = 200;
+        private const int FIRE_SPEED = 170;
 
         /// <summary>
         /// Velocity of a projectile fired
@@ -75,7 +95,7 @@ namespace BattleFury.Entities.Characters
         /// <summary>
         /// Max damage dealt with a projectile (when rage = 0%)
         /// </summary>
-        private const int FIRE_MAX_DAMAGE = 5;
+        private const int FIRE_MAX_DAMAGE = 10;
 
         /// <summary>
         /// Base distance an opponent will flinch when hit with a projectile
@@ -85,7 +105,7 @@ namespace BattleFury.Entities.Characters
         /// <summary>
         /// Max distance an opponent will flinch when hit with a projectile
         /// </summary>
-        private const float FIRE_MAX_FLINCH = 10;
+        private const float FIRE_MAX_FLINCH = 20;
 
         /// <summary>
         /// Width of the character's damage taking hitbox
@@ -101,28 +121,6 @@ namespace BattleFury.Entities.Characters
         /// Depth of the character's damage taking hitbox
         /// </summary>
         private const float BEPU_PHYSICS_DEPTH = 1 * SCALE;
-
-        /// <summary>
-        /// Min distance this character will flinch when punched (when rage = 100%)
-        /// </summary>
-        private const float PUNCH_MIN_FLINCH = 0;
-
-        /// <summary>
-        /// Max distance this character will flinch when punched (when rage = 0%)
-        /// </summary>
-        private const float PUNCH_MAX_FLINCH = 50;
-
-        /// <summary>
-        /// Min distance this character will flinch when thrown (when rage = 100%)
-        /// </summary>
-        private const float THROW_MIN_FLINCH = 10;
-
-        /// <summary>
-        /// Max distance this character will flinch when thrown (when rage = 0%)
-        /// </summary>
-        private const float THROW_MAX_FLINCH = 50;
-
-
         
 
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment, Color color)

@@ -41,7 +41,7 @@ namespace BattleFury.Components
             {
                 // Draw the rage percentage
                 string rageString = (int) vitalityComponents[i].RageMeter + "%";
-                float xPosRage = ((i + 1) * (GameSettings.WindowWidth / (vitalityComponents.Count + 1))) - (rageFont.MeasureString(ragbbbbbbbbbeString).X / 2);
+                float xPosRage = ((i + 1) * (GameSettings.WindowWidth / (vitalityComponents.Count + 1))) - (rageFont.MeasureString(rageString).X / 2);
                 float yPosRage = (GameSettings.WindowHeight * .9f) - (rageFont.MeasureString(rageString).Y / 2);
                 Vector2 drawPositionRage = new Vector2(xPosRage, yPosRage);
                 spriteBatch.DrawString(rageFont, rageString, drawPositionRage, characters[i].getColor());
@@ -50,6 +50,12 @@ namespace BattleFury.Components
                 string livesString;
                 if (!vitalityComponents[i].IsKO)
                 {
+                    livesString = ":) x" + vitalityComponents[i].LivesLeft;
+                }
+                else
+                {
+                    livesString = ":(";
+                }
                 float xPosLives = ((i + 1) * (GameSettings.WindowWidth / (vitalityComponents.Count + 1))) - (livesFont.MeasureString(livesString).X / 2);
                 float yPosLives = yPosRage + (rageFont.MeasureString(rageString).Y / 2) + (livesFont.MeasureString(livesString).Y / 2);
                 Vector2 drawPositionLives = new Vector2(xPosLives, yPosLives);
