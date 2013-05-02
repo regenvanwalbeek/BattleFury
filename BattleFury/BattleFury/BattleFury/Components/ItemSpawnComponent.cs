@@ -16,12 +16,12 @@ namespace BattleFury.Components
         /// <summary>
         /// Minimum amount of time in which items should be spawned.
         /// </summary>
-        private const int MIN_FREQUENCY = 5000;
+        private const int MIN_FREQUENCY = 15000;
 
         /// <summary>
         /// Maximum amount of time in which items should be spawned.
         /// </summary>
-        private const int MAX_FREQUENCY = 10000;
+        private const int MAX_FREQUENCY = 30000;
 
         /// <summary>
         /// Number of milliseconds until an item spawns.
