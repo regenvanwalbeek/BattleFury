@@ -5,6 +5,7 @@ using BattleFury.Entities;
 using System.Collections.Generic;
 using BattleFury.Entities.Arenas;
 using BattleFury.Entities.Characters;
+using Microsoft.Xna.Framework;
 
 namespace BattleFury.Components
 {
@@ -50,7 +51,7 @@ namespace BattleFury.Components
             this.bepuPhysicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             // Remove the item 1 frame after it has collided.
             if (markedForRemoval)

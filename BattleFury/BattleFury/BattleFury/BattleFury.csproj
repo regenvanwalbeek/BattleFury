@@ -90,6 +90,7 @@
     <Compile Include="Components\Characters\VitalityComponent.cs" />
     <Compile Include="Components\ContentLoader.cs" />
     <Compile Include="Components\DamageOnImpactComponent.cs" />
+    <Compile Include="Components\SelfDestructAfterTimeComponent.cs" />
     <Compile Include="Components\SelfDestructOnImpactComponent.cs" />
     <Compile Include="Components\DrawableHUDComponent.cs" />
     <Compile Include="Components\EntityProvider.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Entities\Hitboxes\GrabHitbox.cs" />
     <Compile Include="Entities\Hitboxes\ShieldHitbox.cs" />
     <Compile Include="Entities\HUD.cs" />
+    <Compile Include="Entities\Items\Fist.cs" />
     <Compile Include="Entities\Items\ItemManager.cs" />
     <Compile Include="Entities\Items\Projectile.cs" />
     <Compile Include="Entities\Items\Rock.cs" />

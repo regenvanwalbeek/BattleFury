@@ -23,12 +23,15 @@ namespace BattleFury.Components.Animated
 
         private Effect colorEffect;
 
-        public RobotRenderComponent(Entity parent, float height, Color color)
+        private float scale;
+
+        public RobotRenderComponent(Entity parent, float height, float scale, Color color)
             : base(parent, ContentLoader.Robot)
         {
-            this.Transform = Matrix.Identity;// Matrix.CreateTranslation(new Vector3(0, 0, -10));
+            this.Transform = Matrix.Identity;
             this.height = height;
             this.colorEffect = ContentLoader.ColorEffect;
+            this.scale = scale;
 
             // Temp fix...
             if (color.Equals(Color.Red))
@@ -63,7 +66,7 @@ namespace BattleFury.Components.Animated
             }
 
             // Apply the transform. Yikes.
-            Matrix transform = Matrix.CreateRotationX(-1  *MathHelper.PiOver2) * Matrix.CreateRotationY(yRotation)
+            Matrix transform = Matrix.CreateScale(scale) * Matrix.CreateRotationX(-1  *MathHelper.PiOver2) * Matrix.CreateRotationY(yRotation)
                 * Matrix.CreateTranslation(physicsComponent.Box.Position + offset) 
                 * physicsComponent.Box.WorldTransform * Matrix.CreateRotationZ(-1 * MathHelper.PiOver2) 
                 * Matrix.CreateRotationY(-1*MathHelper.PiOver2);

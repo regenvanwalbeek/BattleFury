@@ -8,6 +8,11 @@ namespace BattleFury.Entities.Characters
     public class FightingRobot : Character
     {
         /// <summary>
+        /// Scale of the character. Useful for physics and rendering.
+        /// </summary>
+        private const float SCALE = 1.2f;
+
+        /// <summary>
         /// Move speed of the character
         /// </summary>
         private const int SPEED = 10;
@@ -85,17 +90,17 @@ namespace BattleFury.Entities.Characters
         /// <summary>
         /// Width of the character's damage taking hitbox
         /// </summary>
-        private const float BEPU_PHYSICS_WIDTH = 1;
+        private const float BEPU_PHYSICS_WIDTH = 1 * SCALE;
 
         /// <summary>
         /// Height of the character's damage taking hitbox
         /// </summary>
-        private const float BEPU_PHYSICS_HEIGHT = 2.6f;
+        private const float BEPU_PHYSICS_HEIGHT = 2.6f * SCALE;
 
         /// <summary>
         /// Depth of the character's damage taking hitbox
         /// </summary>
-        private const float BEPU_PHYSICS_DEPTH = 1;
+        private const float BEPU_PHYSICS_DEPTH = 1 * SCALE;
 
         /// <summary>
         /// Min distance this character will flinch when punched (when rage = 100%)
@@ -117,6 +122,9 @@ namespace BattleFury.Entities.Characters
         /// </summary>
         private const float THROW_MAX_FLINCH = 50;
 
+
+        
+
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment, Color color)
             : base("FightingRobot", lives, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
             controllingPlayer, team, environment)
@@ -127,7 +135,7 @@ namespace BattleFury.Entities.Characters
             grabbableComponent = new GrabbableComponent(this, THROW_MIN_FLINCH, THROW_MAX_FLINCH);
             this.AttachComponent(grabbableComponent);
     
-            BasicModelComponent drawComponent = new RobotRenderComponent(this, BEPU_PHYSICS_HEIGHT, color);
+            BasicModelComponent drawComponent = new RobotRenderComponent(this, BEPU_PHYSICS_HEIGHT, SCALE, color);
             this.AttachComponent(drawComponent);
 
             
@@ -143,7 +151,7 @@ namespace BattleFury.Entities.Characters
             grabComponent = new GrabComponent(this, environment, THROW_BASE_DAMAGE, THROW_MAX_DAMAGE);
             this.AttachComponent(grabComponent);
 
-            punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_BASE_DAMAGE, PUNCH_MAX_DAMAGE);
+            punchComponent = new PunchComponent(this, environment, PUNCH_SPEED, PUNCH_BASE_DAMAGE, PUNCH_MAX_DAMAGE, PUNCH_MIN_FLINCH, PUNCH_MAX_FLINCH);
             this.AttachComponent(punchComponent);
 
             FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_DAMAGE, FIRE_MAX_DAMAGE, FIRE_MIN_FLINCH, FIRE_MAX_FLINCH);

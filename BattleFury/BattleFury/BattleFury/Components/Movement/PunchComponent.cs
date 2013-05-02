@@ -7,6 +7,8 @@ using BattleFury.Components.Characters;
 using System.Collections.Generic;
 using BEPUphysics.Collidables;
 using BattleFury.Input;
+using BattleFury.Entities.Items;
+using BattleFury.Entities.Characters;
 
 namespace BattleFury.Components.Movement
 {
@@ -41,13 +43,21 @@ namespace BattleFury.Components.Movement
 
         private VitalityComponent health;
 
-        public PunchComponent(Entity parent, Environment environment, int punchSpeed, float baseDamage, float maxDamage)
+        private MoveComponent moveComponent;
+
+        private float minFlinch;
+
+        private float maxFlinch;
+
+        public PunchComponent(Entity parent, Environment environment, int punchSpeed, float baseDamage, float maxDamage, float minFlinch, float maxFlinch)
             : base(parent, "PunchComponent")
         {
             this.punchSpeed = punchSpeed;
             this.environment = environment;
             this.baseDamage = baseDamage;
             this.maxDamage = maxDamage;
+            this.minFlinch = minFlinch;
+            this.maxFlinch = maxFlinch;
         }
 
         public override void Initialize()
@@ -59,48 +69,31 @@ namespace BattleFury.Components.Movement
             this.controllingPlayer = ((CharacterInformationComponent)Parent.GetComponent("CharacterInformationComponent")).PlayerIndex;
             this.bepuPhysicsComponent = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
             this.health = (VitalityComponent)Parent.GetComponent("VitalityComponent");
+            this.moveComponent = ((MoveComponent)Parent.GetComponent("MoveComponent"));
         }
 
         public override void Update(GameTime gameTime)
         {
             timeTillPunch -= gameTime.ElapsedGameTime.Milliseconds;
-   
+
+
             // Do a punch if the timer allows
             if (GameplayBindings.IsPunch(controllingPlayer) && timeTillPunch <= 0)
             {
                 timeTillPunch = punchSpeed;
 
-                // Get all punchable components available in this frame.
-                List<PunchableComponent> punchables = environment.GetEntitiesWithComponent<PunchableComponent>("PunchableComponent");
+                // Determine how much damage to do. This will scale linearly
+                float rage = this.health.RageMeter;
+                float damage = baseDamage + ((maxDamage - baseDamage) / 99) * (100 - rage);
+                if (rage == 0)
+                {
+                    damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.
+                }
 
                 // Get all the entities colliding with the hitbox
-                EntityCollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedEntities;
-
-                // Iterate through the colliding entities and punch any entity if it is punchable.
-                EntityCollidableCollection.Enumerator enumerator = overlappedCollideables.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    BEPUphysics.Entities.Entity collidingEntity = enumerator.Current;
-                    // Check if the entity is equal to any of the punchables
-                    for (int i = 0; i < punchables.Count; i++)
-                    {
-                        if (collidingEntity == punchables[i].GetPunchableBox())
-                        {
-                            // Determine how much damage to do. This will scale linearly
-                            float rage = this.health.RageMeter;
-                            float damage = baseDamage + ((maxDamage - baseDamage) / 99) * (100 - rage);
-                            if (rage == 0)
-                            {
-                                damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.
-                            }
-
-                            // Determine the direction the player wants to punch in
-                            Vector3 punchDirection = new Vector3(GameplayBindings.GetPunchDirection(controllingPlayer), 0);
-
-                            punchables[i].Punch(this, damage, punchDirection);
-                        }
-                    }
-                }
+                Fist f = new Fist(bepuPhysicsComponent.Box.Position + new Vector3(moveComponent.DirectionX, 0, 0), (Character)Parent, damage, minFlinch, maxFlinch, environment);
+                f.Initialize();
+                environment.ItemManager.AddItem(f);
             }
         }
 
