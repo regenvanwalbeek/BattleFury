@@ -68,7 +68,7 @@ namespace BattleFury.Components.Characters
             if (characterInformationComponent != null)
             {
                 System.Console.WriteLine("Rumbling");
-                //bool rumbled = InputState.Rumble(characterInformationComponent.PlayerIndex, 1, 1);
+                bool rumbled = InputState.Rumble(characterInformationComponent.PlayerIndex, 1, 1);
                 //System.Console.Write(rumbled);
                 timeTillRumbleOff[(int) characterInformationComponent.PlayerIndex] = RUMBLE_TIME;
             }

@@ -56,8 +56,9 @@ namespace BattleFury.Screens
             
             spriteBatch.Draw(backgroundTexture, fullscreen, 
                 new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
-            
-            //spriteBatch.Draw(blueRobotTexture, new Vector2(0, viewport.Height - blueRobotTexture.Height), null, new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha), 0, Vector2.Zero, ((float) viewport.Height) / 1200f, SpriteEffects.None, 0);
+
+            float scale = ((float)viewport.Height) / 1200f;
+            spriteBatch.Draw(blueRobotTexture, (1 - scale) * new Vector2(0, viewport.Height - blueRobotTexture.Height), null, new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha), 0, Vector2.Zero, scale, SpriteEffects.None, 0);
 
             spriteBatch.End();
         }
