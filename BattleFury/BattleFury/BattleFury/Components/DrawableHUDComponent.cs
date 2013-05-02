@@ -17,11 +17,14 @@ namespace BattleFury.Components
 
         private SpriteFont livesFont;
 
+        private List<Character> characters;
+
         public DrawableHUDComponent(Entity parent, List<Character> characters)
             : base(parent, "DrawableHUDComponent")
         {
             this.rageFont = ContentLoader.HUDRageFont;
             this.livesFont = ContentLoader.HUDLivesFont;
+            this.characters = characters;
 
             vitalityComponents = new List<VitalityComponent>();
             for (int i = 0; i < characters.Count; i++)
@@ -29,6 +32,7 @@ namespace BattleFury.Components
                 VitalityComponent component = (VitalityComponent) characters[i].GetComponent("VitalityComponent");
                 vitalityComponents.Add(component);
             }
+            this.characters = characters;
         }
 
         public override void Draw2D(GameTime gameTime, SpriteBatch spriteBatch)
@@ -37,25 +41,19 @@ namespace BattleFury.Components
             {
                 // Draw the rage percentage
                 string rageString = (int) vitalityComponents[i].RageMeter + "%";
-                float xPosRage = ((i + 1) * (GameSettings.WindowWidth / (vitalityComponents.Count + 1))) - (rageFont.MeasureString(rageString).X / 2);
+                float xPosRage = ((i + 1) * (GameSettings.WindowWidth / (vitalityComponents.Count + 1))) - (rageFont.MeasureString(ragbbbbbbbbbeString).X / 2);
                 float yPosRage = (GameSettings.WindowHeight * .9f) - (rageFont.MeasureString(rageString).Y / 2);
                 Vector2 drawPositionRage = new Vector2(xPosRage, yPosRage);
-                spriteBatch.DrawString(rageFont, rageString, drawPositionRage, Color.White);
+                spriteBatch.DrawString(rageFont, rageString, drawPositionRage, characters[i].getColor());
 
                 // Draw the number of lives left.
                 string livesString;
                 if (!vitalityComponents[i].IsKO)
                 {
-                    livesString = ":) x" + vitalityComponents[i].LivesLeft;
-                }
-                else
-                {
-                    livesString = ":(";
-                }
                 float xPosLives = ((i + 1) * (GameSettings.WindowWidth / (vitalityComponents.Count + 1))) - (livesFont.MeasureString(livesString).X / 2);
                 float yPosLives = yPosRage + (rageFont.MeasureString(rageString).Y / 2) + (livesFont.MeasureString(livesString).Y / 2);
                 Vector2 drawPositionLives = new Vector2(xPosLives, yPosLives);
-                spriteBatch.DrawString(livesFont, livesString, drawPositionLives, Color.White);
+                spriteBatch.DrawString(livesFont, livesString, drawPositionLives, characters[i].getColor());
 
             }
 

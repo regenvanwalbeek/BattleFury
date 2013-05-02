@@ -56,7 +56,14 @@ namespace BattleFury.Components
             // Remove the item 1 frame after it has collided.
             if (markedForRemoval)
             {
-                environment.ItemManager.Remove((Item)Parent);
+                try
+                {
+                    environment.ItemManager.Remove((Item)Parent);
+                } 
+                catch (System.ArgumentException)
+                {
+                    // Ignore. Item has already been removed by another self destruct component.
+                }
             }
 
 

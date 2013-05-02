@@ -127,7 +127,7 @@ namespace BattleFury.Entities.Characters
 
         public FightingRobot(int lives, Vector3 spawnPosition, PlayerIndex controllingPlayer, int team, Environment environment, Color color)
             : base("FightingRobot", lives, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
-            controllingPlayer, team, environment)
+            controllingPlayer, team, environment, color)
         {
             punchableComponent = new PunchableComponent(this, PUNCH_MIN_FLINCH, PUNCH_MAX_FLINCH);
             this.AttachComponent(punchableComponent);

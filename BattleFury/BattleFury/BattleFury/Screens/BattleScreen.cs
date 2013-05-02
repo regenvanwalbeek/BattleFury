@@ -90,9 +90,6 @@ namespace BattleFury.Screens
 
             // Load content necessary for the battle screen
             ContentLoader.LoadContent(content);
-            
-            
-
 
             // Create the Entity Manager.
             entityManager = new EntityManager(content);

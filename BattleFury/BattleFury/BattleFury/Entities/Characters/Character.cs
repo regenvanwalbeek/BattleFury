@@ -32,13 +32,13 @@ namespace BattleFury.Entities.Characters
 
         protected PunchComponent punchComponent;
 
-        public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team, Environment environment) {
+        public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team, Environment environment, Color color) {
             // Create the vitality component to track the character's health.
             vitalityComponent = new VitalityComponent(this, lives);
             this.AttachComponent(vitalityComponent);
 
             // Create the info component to track the character information.
-            characterInformationComponent = new CharacterInformationComponent(this, controllingPlayer, team);
+            characterInformationComponent = new CharacterInformationComponent(this, controllingPlayer, team, color);
             this.AttachComponent(characterInformationComponent);
 
             // Create the physics Component. 
@@ -80,6 +80,11 @@ namespace BattleFury.Entities.Characters
         public int GetPlayerIndex()
         {
             return (int) characterInformationComponent.PlayerIndex + 1;
+        }
+
+        public Color getColor()
+        {
+            return characterInformationComponent.Color;
         }
 
 

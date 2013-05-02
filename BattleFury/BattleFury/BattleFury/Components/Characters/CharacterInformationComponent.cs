@@ -21,11 +21,14 @@ namespace BattleFury.Components.Characters
 
         public PlayerIndex PlayerIndex;
 
-        public CharacterInformationComponent(Entity parent, PlayerIndex playerIndex, int team) 
+        public Color Color;
+
+        public CharacterInformationComponent(Entity parent, PlayerIndex playerIndex, int team, Color color) 
             : base(parent, "CharacterInformationComponent")
         {
             this.PlayerIndex = playerIndex;
             this.Team = team;
+            this.Color = color;
         }
 
 
