@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 using BattleFury.Entities.Items;
 using BattleFury.Components;
 using BattleFury.SoundManager;
+using BattleFury.Components.Characters;
 
 
 namespace BattleFury.Screens

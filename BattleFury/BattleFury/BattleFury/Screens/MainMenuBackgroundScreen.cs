@@ -47,19 +47,22 @@ namespace BattleFury.Screens
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
-            
+
+            ScreenManager.GraphicsDevice.Clear(Color.Black);
             Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
 
             Rectangle fullscreen = new Rectangle(0, 0, viewport.Width, viewport.Height);
 
             spriteBatch.Begin();
-            
+            /*
             spriteBatch.Draw(backgroundTexture, fullscreen, 
                 new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
-
-            float scale = ((float)viewport.Height) / 1200f;
-            spriteBatch.Draw(blueRobotTexture, (1 - scale) * new Vector2(0, viewport.Height - blueRobotTexture.Height), null, new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha), 0, Vector2.Zero, scale, SpriteEffects.None, 0);
-
+            */
+            float scale = .8f *((float)viewport.Height) / 1080f;
+            spriteBatch.Draw(blueRobotTexture, new Vector2(0, viewport.Height - (blueRobotTexture.Height * scale)), 
+                null, new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha), 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(redRobotTexture, new Vector2(viewport.Width - (redRobotTexture.Width * scale), viewport.Height - (redRobotTexture.Height * scale)), null, new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha),
+                0, Vector2.Zero, scale, SpriteEffects.None, 0);
             spriteBatch.End();
         }
     }

@@ -46,13 +46,14 @@ namespace BattleFury.Screens
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
             Rectangle fullscreen = new Rectangle(0, 0, viewport.Width, viewport.Height);
-
+            ScreenManager.GraphicsDevice.Clear(Color.Black);
+            /*
             spriteBatch.Begin();
 
             spriteBatch.Draw(backgroundTexture, fullscreen, 
                 new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
-            spriteBatch.End();
+            spriteBatch.End();*/
         }
 
     }

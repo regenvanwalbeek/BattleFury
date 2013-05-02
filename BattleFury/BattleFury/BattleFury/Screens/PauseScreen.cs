@@ -35,7 +35,7 @@ namespace BattleFury.Screens
         /// </summary>
         protected void QuitMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            LoadingScreen.Load(ScreenManager, e.PlayerIndex, new BackgroundScreen(), new MainMenuScreen());
+            LoadingScreen.Load(ScreenManager, e.PlayerIndex, new MainMenuBackgroundScreen(), new MainMenuScreen());
         }
 
     }

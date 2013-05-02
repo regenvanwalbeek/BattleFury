@@ -76,7 +76,7 @@ namespace BattleFury.Screens
                 if (MenuBindings.IsMenuSelect(null, out playerIndex))
                 {
                     // Go to the main menu screen
-                    LoadingScreen.Load(ScreenManager, null, new BackgroundScreen(), new MainMenuScreen());
+                    LoadingScreen.Load(ScreenManager, null, new MainMenuBackgroundScreen(), new MainMenuScreen());
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace BattleFury.Screens
             for (int i = 0; i < characters.Count; i++)
             {
                 String str = characters[i].GetPlacement() + ". Player " + characters[i].GetPlayerIndex() + "\n";
-                spritebatch.DrawString(font, str, new Vector2((width / 2) - (strDim.X / 2), gameStringLoc.Y + i *gameStringDim.Y + 50), characters[i].getColor());
+                spritebatch.DrawString(font, str, new Vector2((width / 2) - (strDim.X / 2), gameStringLoc.Y + i *gameStringDim.Y + 60), characters[i].getColor());
             }
 
 
