@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using BattleFury.Components.Characters;
 using BattleFury.Settings;
 using BEPUphysics.Collidables;
+using BattleFury.SoundManager;
 
 namespace BattleFury.Components.Movement
 {
@@ -74,6 +75,7 @@ namespace BattleFury.Components.Movement
             // Jump if still have jumps left
             if (GameplayBindings.IsJump(controllingPlayer) && numJumps < MaxJumps)
             {
+                AudioManager.PlayJump();
                 timeSinceJump = 0;
                 numJumps++;
                 bepuPhysicsComponent.Box.LinearVelocity = new Vector3(0, JumpHeight, 0);

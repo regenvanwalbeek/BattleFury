@@ -39,6 +39,7 @@ namespace BattleFury.Components
         {
             for (int i = 0; i < vitalityComponents.Count; i++)
             {
+                
                 // Draw the rage percentage
                 string rageString = (int) vitalityComponents[i].RageMeter + "%";
                 float xPosRage = ((i + 1) * (GameSettings.WindowWidth / (vitalityComponents.Count + 1))) - (rageFont.MeasureString(rageString).X / 2);

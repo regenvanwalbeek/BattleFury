@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using BattleFury.Entities.Items;
 using BattleFury.Components;
+using BattleFury.SoundManager;
 
 
 namespace BattleFury.Screens
@@ -160,6 +161,8 @@ namespace BattleFury.Screens
             {
                 livingCharacters.Add(characters[i]);
             }
+
+            AudioManager.StartBattleMusic();
         }
 
         /// <summary>
@@ -167,6 +170,7 @@ namespace BattleFury.Screens
         /// </summary>
         public override void UnloadContent()
         {
+            AudioManager.StopBattleMusic();
             ContentLoader.UnloadContent();
         }
 

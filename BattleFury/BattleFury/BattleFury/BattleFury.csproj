@@ -159,7 +159,7 @@
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Settings\MenuBindings.cs" />
     <Compile Include="Settings\PlayerSettings.cs" />
-    <Compile Include="SoundManager\SoundManager.cs" />
+    <Compile Include="SoundManager\AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

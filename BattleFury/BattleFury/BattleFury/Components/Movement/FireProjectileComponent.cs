@@ -5,6 +5,7 @@ using BattleFury.Components.Characters;
 using BattleFury.Entities.Items;
 using BattleFury.Entities;
 using BattleFury.Entities.Characters;
+using BattleFury.SoundManager;
 
 namespace BattleFury.Components.Movement
 {
@@ -78,6 +79,7 @@ namespace BattleFury.Components.Movement
             // Fire a shot if the timer allows.
             if (GameplayBindings.IsFire(controllingPlayer) && timeTillFire <= 0)
             {
+                AudioManager.PlayFireLaser();
                 timeTillFire = fireSpeed;
 
                 int direction = movementComponent.DirectionX;

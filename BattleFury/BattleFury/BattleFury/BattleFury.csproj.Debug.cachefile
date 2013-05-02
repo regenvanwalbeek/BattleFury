@@ -11,3 +11,7 @@ Content\meshes\Robot-blue.xnb
 Content\meshes\Robot-red.xnb
 Content\meshes\Robot-yellow.xnb
 Content\effects\ReplaceColor.xnb
+Content\sounds\projectile.xnb
+Content\sounds\jump.xnb
+Content\sounds\pain.xnb
+Content\sounds\game.xnb

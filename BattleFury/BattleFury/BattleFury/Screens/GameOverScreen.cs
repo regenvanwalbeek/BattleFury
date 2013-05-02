@@ -101,13 +101,43 @@ namespace BattleFury.Screens
             int yPos = height / (characters.Count + 1);
             for (int i = 0; i < characters.Count; i++)
             {
-                placements += characters[i].GetPlacement() +". Player " + characters[i].GetPlayerIndex() + "\n";
+                placements += getPlacementString(characters[i].GetPlacement()) +" Player " + characters[i].GetPlayerIndex() + "\n";
             }
             Vector2 strDim = font.MeasureString(placements);
-            spritebatch.DrawString(font, placements, new Vector2((width / 2) - (strDim.X / 2), gameStringLoc.Y + gameStringDim.Y + 25), Color.White);
+            //spritebatch.DrawString(font, placements, new Vector2((width / 2) - (strDim.X / 2), gameStringLoc.Y + gameStringDim.Y + 25), Color.White);
+
+            for (int i = 0; i < characters.Count; i++)
+            {
+                String str = characters[i].GetPlacement() + ". Player " + characters[i].GetPlayerIndex() + "\n";
+                spritebatch.DrawString(font, str, new Vector2((width / 2) - (strDim.X / 2), gameStringLoc.Y + i *gameStringDim.Y + 50), characters[i].getColor());
+            }
 
 
             spritebatch.End();
+        }
+
+        private string getPlacementString(int placement)
+        {
+            if (placement == 1)
+            {
+                return "1st";
+            }
+            else if (placement == 2)
+            {
+                return "2nd";
+            }
+            else if (placement == 3)
+            {
+                return "3rd";
+            }
+            else if (placement == 4)
+            {
+                return "4th";
+            }
+            else
+            {
+                return "FIX ME";
+            }
         }
 
        

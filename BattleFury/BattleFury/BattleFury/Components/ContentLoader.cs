@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace BattleFury.Components
 {
@@ -37,6 +38,11 @@ namespace BattleFury.Components
         public static SpriteFont HUDLivesFont;
 
         public static Effect ColorEffect;
+
+        public static SoundEffect ProjectileSoundEffect;
+        public static SoundEffect JumpSoundEffect;
+        public static SoundEffect PainSound;
+        public static SoundEffect BattleMusic;
 
         private ContentLoader()
         {
@@ -72,6 +78,12 @@ namespace BattleFury.Components
 
             // Load the color shader
             ColorEffect = content.Load<Effect>("effects/ReplaceColor");
+
+            // Load the sounds
+            ProjectileSoundEffect = content.Load<SoundEffect>("sounds/projectile");
+            JumpSoundEffect = content.Load<SoundEffect>("sounds/jump");
+            PainSound = content.Load<SoundEffect>("sounds/pain");
+            BattleMusic = content.Load<SoundEffect>("sounds/game");
 
             contentLoaded = true;
         }

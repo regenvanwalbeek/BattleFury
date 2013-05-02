@@ -177,9 +177,9 @@ namespace BattleFury.Input
             }
         }
 
-        public static void Rumble(PlayerIndex playerIndex, float leftMotor, float rightMotor)
+        public static bool Rumble(PlayerIndex playerIndex, float leftMotor, float rightMotor)
         {
-            GamePad.SetVibration(playerIndex, leftMotor, rightMotor);
+            return GamePad.SetVibration(playerIndex, leftMotor, rightMotor);
         }
 
         /// <summary>

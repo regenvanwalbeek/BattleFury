@@ -6,6 +6,7 @@ using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 using BattleFury.Entities.Arenas;
 using BattleFury.Components.Animated;
+using BattleFury.SoundManager;
 
 namespace BattleFury.Components.Characters
 {
@@ -58,6 +59,7 @@ namespace BattleFury.Components.Characters
                 {
                     if (vitalityComponent.LivesLeft > 0){
                         // Kill the character
+                        AudioManager.PlayPain();
                         vitalityComponent.LivesLeft--;
                         vitalityComponent.IsAlive = false;
                         timeTillRespawn = RESPAWN_TIME;

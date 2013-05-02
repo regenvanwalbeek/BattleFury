@@ -44,6 +44,11 @@ namespace BattleFury.Components.Characters
 
         public override void Update(GameTime gameTime)
         {
+            if (IsKO || !IsAlive)
+            {
+                RageMeter = 0;
+            }
+
             for (int i = 0; i < 4; i++)
             {
                 if (timeTillRumbleOff[i] >= 0)
@@ -51,7 +56,7 @@ namespace BattleFury.Components.Characters
                     timeTillRumbleOff[i] -= gameTime.ElapsedGameTime.Milliseconds;
                     if (timeTillRumbleOff[i] < 0)
                     {
-                        InputState.Rumble(characterInformationComponent.PlayerIndex, 0, 0);
+                       InputState.Rumble(characterInformationComponent.PlayerIndex, 0, 0);
                     }
                 }
             }
@@ -63,8 +68,9 @@ namespace BattleFury.Components.Characters
             if (characterInformationComponent != null)
             {
                 System.Console.WriteLine("Rumbling");
-                InputState.Rumble(characterInformationComponent.PlayerIndex, 1, 1);
-                timeTillRumbleOff[((int) characterInformationComponent.PlayerIndex) - 1] = RUMBLE_TIME;
+                //bool rumbled = InputState.Rumble(characterInformationComponent.PlayerIndex, 1, 1);
+                //System.Console.Write(rumbled);
+                timeTillRumbleOff[(int) characterInformationComponent.PlayerIndex] = RUMBLE_TIME;
             }
             
     
