@@ -36,6 +36,9 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private int numJumps = 0;
 
+        private const int RESET_JUMP_TIME = 25;
+        private int timeSinceJump = RESET_JUMP_TIME;
+
         private BepuPhysicsComponent bepuPhysicsComponent;
 
         public JumpComponent(Entity parent, int jumpHeight, int maxJumps)
@@ -43,6 +46,7 @@ namespace BattleFury.Components.Movement
         {
             this.JumpHeight = jumpHeight;
             this.MaxJumps = maxJumps;
+
         }
 
         public override void Initialize()
@@ -57,18 +61,23 @@ namespace BattleFury.Components.Movement
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            // Reset the number of jumps if hitting the ground
+
+            timeSinceJump += gameTime.ElapsedGameTime.Milliseconds;
+
+            // Reset the number of jumps if hitting the ground and didnt just jump
             CollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedCollidables;
-            if (overlappedCollideables.Count > 0)
+            if (overlappedCollideables.Count > 0 && timeSinceJump > RESET_JUMP_TIME)
             {
                 numJumps = 0;
             }
 
             // Jump if still have jumps left
-            if (GameplayBindings.IsJump(controllingPlayer) && numJumps < MaxJumps - 1)
+            if (GameplayBindings.IsJump(controllingPlayer) && numJumps < MaxJumps)
             {
+                timeSinceJump = 0;
                 numJumps++;
                 bepuPhysicsComponent.Box.LinearVelocity = new Vector3(0, JumpHeight, 0);
+                Console.WriteLine("Jumpoing");
             }
 
 
