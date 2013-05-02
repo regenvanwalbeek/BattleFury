@@ -79,7 +79,7 @@ namespace BattleFury.Entities.Characters
 
         public int GetPlayerIndex()
         {
-            return (int) characterInformationComponent.PlayerIndex;
+            return (int) characterInformationComponent.PlayerIndex + 1;
         }
 
 

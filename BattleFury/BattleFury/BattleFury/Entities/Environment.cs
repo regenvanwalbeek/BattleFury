@@ -70,5 +70,38 @@ namespace BattleFury.Entities
             }
             return components;
         }
+
+        public List<Entity> GetEntitiesOfType<T>()
+        {
+            throw new NotImplementedException(); // TODO this is just a warning. you can remove this line. but use at own risk.
+            List<Entity> entities = new List<Entity>();
+
+            for (int i = 0; i < Characters.Count; i++)
+            {
+                if ( typeof(T) == this.Characters[i].GetType()){
+                    entities.Add(Characters[i]);
+                }
+            }
+
+            List<Item> items = ItemManager.GetItems();
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (typeof(T) == items[i].GetType())
+                {
+                    entities.Add(items[i]);
+                }
+            }
+
+            List<Platform> platforms = Arena.Platforms;
+            for (int i = 0; i < platforms.Count; i++)
+            {
+                if (typeof(T) == platforms[i].GetType())
+                {
+                    entities.Add(platforms[i]);
+                }
+            }
+
+            return entities;
+        }
     }
 }

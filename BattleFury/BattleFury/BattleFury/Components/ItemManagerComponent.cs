@@ -49,7 +49,6 @@ namespace BattleFury.Components
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            // Remove any items outside of the arena
             for (int i = 0; i < Items.Count; i++)
             {
                 Item item = Items[i];

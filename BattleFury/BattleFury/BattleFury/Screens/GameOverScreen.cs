@@ -35,6 +35,20 @@ namespace BattleFury.Screens
         public GameOverScreen(List<Character> characters)
         {
             this.characters = characters;
+
+            // Sort the characters by placement
+            for (int i = 0; i < characters.Count; i++)
+            {
+                for (int j = 1; j < characters.Count - i; j++)
+                {
+                    if (characters[j - 1].GetPlacement() > characters[j].GetPlacement())
+                    {
+                        Character temp = characters[j - 1];
+                        characters[j - 1] = characters[j];
+                        characters[j] = temp;
+                    }
+                }
+            }
         }
 
         public override void LoadContent()
@@ -70,11 +84,30 @@ namespace BattleFury.Screens
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Draw(gameTime);
-            ScreenManager.SpriteBatch.Begin();
-            ScreenManager.SpriteBatch.DrawString(font, "Game Over", new Vector2(GameSettings.WindowWidth / 2, 
-                GameSettings.WindowHeight / 2) - font.MeasureString("Game Over") / 2, Color.White);
-            ScreenManager.SpriteBatch.End();
-            // TODO Draw placements
+
+            // Stuff I get sick of typing
+            SpriteBatch spritebatch = ScreenManager.SpriteBatch;
+            int height = GameSettings.WindowHeight; 
+            int width = GameSettings.WindowWidth;
+
+            spritebatch.Begin();
+            String gameString = "Game!";
+            Vector2 gameStringDim = font.MeasureString(gameString);
+            Vector2 gameStringLoc = new Vector2(width / 2, height / 4) - gameStringDim / 2;
+            spritebatch.DrawString(font, gameString, gameStringLoc, Color.White);
+
+            // Draw the placements
+            String placements = "";
+            int yPos = height / (characters.Count + 1);
+            for (int i = 0; i < characters.Count; i++)
+            {
+                placements += characters[i].GetPlacement() +". Player " + characters[i].GetPlayerIndex() + "\n";
+            }
+            Vector2 strDim = font.MeasureString(placements);
+            spritebatch.DrawString(font, placements, new Vector2((width / 2) - (strDim.X / 2), gameStringLoc.Y + gameStringDim.Y + 25), Color.White);
+
+
+            spritebatch.End();
         }
 
        

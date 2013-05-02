@@ -24,6 +24,16 @@ namespace BattleFury.Components
 
         private List<Entity> tempIgnoredEntities = new List<Entity>();
 
+        /// <summary>
+        /// True if the item is marked for self destruct on the next frame.
+        /// This is done so that if 2 items collide that want to self destruct,
+        /// an items waits and gives another item a chance.
+        /// 
+        /// In other words, there's a 1 frame lag between colliding and removal.
+        /// Hopefully this doesn't cause too many problems.
+        /// </summary>
+        private bool markedForRemoval;
+
         public SelfDestructOnImpactComponent(Item parent, Environment environment, bool destructOnArenaImpact)
             : base(parent, "DestroyItemOnCharacterImpactComponent")
         {
@@ -42,6 +52,12 @@ namespace BattleFury.Components
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
+            // Remove the item 1 frame after it has collided.
+            if (markedForRemoval)
+            {
+                environment.ItemManager.Remove((Item)Parent);
+            }
+
 
             // Get the entities this item is colliding with. 
             EntityCollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedEntities;
@@ -62,7 +78,7 @@ namespace BattleFury.Components
                 if (collidingWithPlatform && !ignoredEntities.Contains(platforms[i])){
                     if (destructOnArenaImpact)
                     {
-                        environment.ItemManager.Remove((Item)Parent);
+                        markedForRemoval = true;
                         return;
                     }
                     else
@@ -83,7 +99,7 @@ namespace BattleFury.Components
                 bool collidingWithCharacter = collidingEntities.Contains(characters[i].GetBox());
 
                 if (collidingWithCharacter && !ignoredEntities.Contains(characters[i])){
-                    environment.ItemManager.Remove((Item)Parent);
+                    markedForRemoval = true;
                     return;
                 } else if (!collidingWithCharacter && tempIgnoredEntities.Contains(characters[i])) {
                     ignoredEntities.Remove(characters[i]);
@@ -92,127 +108,18 @@ namespace BattleFury.Components
             }
 
             // Check if items are colliding
-            List<Character> items = environment.Characters;
+            List<Item> items = environment.ItemManager.GetItems();
             for (int i = 0; i < items.Count; i++){
                 bool collidingWithItem = collidingEntities.Contains(items[i].GetBox());
 
                 if (collidingWithItem && !ignoredEntities.Contains(items[i])){
-                    environment.ItemManager.Remove((Item)Parent);
+                    markedForRemoval = true;
                     return;
                 } else if (!collidingWithItem && tempIgnoredEntities.Contains(items[i])) {
                     ignoredEntities.Remove(items[i]);
                     tempIgnoredEntities.Remove(items[i]);
                 }
             }
-
-           
-
-            /*
-
-                // Check if the entity collides with any entities in the arena.
-                if (destructOnArenaImpact)
-                {
-                    List<Platform> platforms = environment.Arena.Platforms;
-                    for (int i = 0; i < platforms.Count; i++)
-                    {
-                        if (platforms[i].GetBox() == collidingEntity && !ignoredEntities.Contains(platforms[i]))
-                        {
-                            environment.ItemManager.Remove((Item)Parent);
-                            return;
-                        }
-                    }
-                }
-
-                // Check if the entity collides with any characters
-                List<Character> characters = environment.Characters;
-                for (int i = 0; i < characters.Count; i++)
-                {
-                    if (collidingEntity == characters[i].GetBox() && !ignoredEntities.Contains(characters[i]))
-                    {
-                        environment.ItemManager.Remove((Item)Parent);
-                        return;
-                    }
-                }
-
-                // Check if the entity collides with any other items
-                List<Item> items = environment.ItemManager.GetItems();
-                for (int i = 0; i < items.Count; i++)
-                {
-                    if (collidingEntity == items[i].GetBox() && !ignoredEntities.Contains(items[i]))
-                    {
-                        environment.ItemManager.Remove((Item)Parent);
-                        return;
-                    }
-                }
-            }
-
-
-
-            */
-
-
-
-
-            ////////////////////////////////////
-
-            /*
-
-            // Get the entities this item is colliding with. 
-            EntityCollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedEntities;
-            
-            // Destroy the item if it collided with anything.
-            EntityCollidableCollection.Enumerator enumerator = overlappedCollideables.GetEnumerator();
-            List<BEPUphysics.Entities.Entity> collidingEntities = new List<BEPUphysics.Entities.Entity>();
-            while (enumerator.MoveNext())
-            {
-                BEPUphysics.Entities.Entity collidingEntity = enumerator.Current;
-                collidingEntities.Add(collidingEntity);
-
-                // Check if the entity collides with any entities in the arena.
-                if (destructOnArenaImpact)
-                {
-                    List<Platform> platforms = environment.Arena.Platforms;
-                    for (int i = 0; i < platforms.Count; i++)
-                    {
-                        if (platforms[i].GetBox() == collidingEntity && !ignoredEntities.Contains(platforms[i]))
-                        {
-                            environment.ItemManager.Remove((Item)Parent);
-                            return;
-                        }
-                    }
-                }
-
-                // Check if the entity collides with any characters
-                List<Character> characters = environment.Characters;
-                for (int i = 0; i < characters.Count; i++)
-                {
-                    if (collidingEntity == characters[i].GetBox() && !ignoredEntities.Contains(characters[i]))
-                    {
-                        environment.ItemManager.Remove((Item)Parent);
-                        return;
-                    }
-                }
-
-                // Check if the entity collides with any other items
-                List<Item> items = environment.ItemManager.GetItems();
-                for (int i = 0; i < items.Count; i++)
-                {
-                    if (collidingEntity == items[i].GetBox() && !ignoredEntities.Contains(items[i]))
-                    {
-                        environment.ItemManager.Remove((Item)Parent);
-                        return;
-                    }
-                }
-            }
-            */
-            // Update temp if no longer colliding
-
-            /*
-            if (enumerator.MoveNext())
-            {
-                environment.ItemManager.Remove((Item)Parent);
-                return;
-            }*/
 
         }
 

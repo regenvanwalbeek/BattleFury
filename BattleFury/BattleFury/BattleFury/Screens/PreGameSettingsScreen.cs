@@ -67,7 +67,7 @@ namespace BattleFury.Screens
 
         public void setNumPlayersText()
         {
-            numPlayersMenuEntry.Text = "Number of Players: " + GameSettings.NumPlayers;
+            numPlayersMenuEntry.Text = "Players: " + GameSettings.NumPlayers;
         }
 
         public void setItemsText()

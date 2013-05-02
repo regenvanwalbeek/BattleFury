@@ -19,7 +19,7 @@ namespace BattleFury.Components.Characters
         public VitalityComponent(Entity parent, int lives) : 
             base(parent, "VitalityComponent")
         {
-            this.LivesLeft = lives;
+            this.LivesLeft = lives - 1;
             this.RageMeter = 100.0f;
         }
 
