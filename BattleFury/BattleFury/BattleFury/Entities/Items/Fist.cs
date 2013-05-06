@@ -18,6 +18,9 @@ namespace BattleFury.Entities.Items
             this.bepuPhysicsComponent.Box.IsAffectedByGravity = false;
             this.bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero;
 
+            HoldOffsetComponent offsetComponent = new HoldOffsetComponent(this, (BepuPhysicsComponent) attackingCharacter.GetComponent("BepuPhysicsComponent"));
+            this.AttachComponent(offsetComponent);
+
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
             Matrix scaling = Matrix.CreateScale(1, 1, 1);

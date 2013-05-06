@@ -28,6 +28,11 @@ namespace BattleFury.Components.Movement
         public int MaxJumps;
 
         /// <summary>
+        /// Whether or not the character is jumping.
+        /// </summary>
+        public bool IsJumping { get; private set; }
+
+        /// <summary>
         /// Player controlling the jumping entity.
         /// </summary>
         private PlayerIndex controllingPlayer;
@@ -47,7 +52,7 @@ namespace BattleFury.Components.Movement
         {
             this.JumpHeight = jumpHeight;
             this.MaxJumps = maxJumps;
-
+            this.IsJumping = false;
         }
 
         public override void Initialize()
@@ -70,6 +75,7 @@ namespace BattleFury.Components.Movement
             if (overlappedCollideables.Count > 0 && timeSinceJump > RESET_JUMP_TIME)
             {
                 numJumps = 0;
+                IsJumping = false;
             }
 
             // Jump if still have jumps left
@@ -79,7 +85,7 @@ namespace BattleFury.Components.Movement
                 timeSinceJump = 0;
                 numJumps++;
                 bepuPhysicsComponent.Box.LinearVelocity = new Vector3(0, JumpHeight, 0);
-                Console.WriteLine("Jumpoing");
+                IsJumping = true;
             }
 
 

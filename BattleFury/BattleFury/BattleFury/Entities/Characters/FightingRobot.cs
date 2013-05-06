@@ -77,6 +77,14 @@ namespace BattleFury.Entities.Characters
         /// </summary>
         private const float PUNCH_MAX_FLINCH = 50;
 
+        private const float GROUND_POUND_BASE_DAMAGE = 4;
+
+        private const float GROUND_POUND_MAX_DAMAGE = 20;
+
+        private const float GROUND_POUND_MIN_FLINCH = 0;
+
+        private const float GROUND_POUND_MAX_FLINCH = 50;
+
         /// <summary>
         /// Max speed the character can fire a projectile
         /// </summary>
@@ -153,7 +161,7 @@ namespace BattleFury.Entities.Characters
             FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_DAMAGE, FIRE_MAX_DAMAGE, FIRE_MIN_FLINCH, FIRE_MAX_FLINCH);
             this.AttachComponent(fireProjectileComponent);
 
-
+       
 
         }
 

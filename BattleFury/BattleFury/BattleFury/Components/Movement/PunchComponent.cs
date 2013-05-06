@@ -83,8 +83,14 @@ namespace BattleFury.Components.Movement
                 Vector3 offset;
                 if (GameplayBindings.IsUpPunch(controllingPlayer))
                 {
-                    offset = new Vector3(0, 1, 0);
+                    offset = new Vector3(0, 2, 0);
                 }
+                else if (GameplayBindings.IsGroundPound(controllingPlayer))
+                {
+                    offset = new Vector3(0, -4, 0);
+                    Vector3 impulse = new Vector3(0, -50, 0);
+                    bepuPhysicsComponent.Box.ApplyLinearImpulse(ref impulse);
+                } 
                 else
                 {
                     offset = new Vector3(moveComponent.DirectionX, 0, 0);

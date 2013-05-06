@@ -84,17 +84,25 @@ namespace BattleFury.Settings
         }
 
         /// <summary>
+        /// Binds Ground pound to B + Down.
+        /// </summary>
+        public static bool IsGroundPound(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+      
+            return InputState.IsNewButtonPress(Buttons.B, controllingPlayer, out playerIndex) &&
+               InputState.GetLeftAnalogStick(playerIndex).Y <= -.80f;
+        }
+
+        /// <summary>
         /// Binds Punch to Y button.
         /// </summary>
         public static bool IsFire(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            #if DEBUG
-            return InputState.IsNewButtonPress(Buttons.Y, controllingPlayer, out playerIndex) ||
-                InputState.IsNewKeyPress(Keys.F, PlayerIndex.One, out playerIndex);
-            #else
+           
             return InputState.IsNewButtonPress(Buttons.Y, controllingPlayer, out playerIndex);
-            #endif
+          
         }
 
         /// <summary>
