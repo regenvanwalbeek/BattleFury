@@ -118,6 +118,7 @@
     <Compile Include="Entities\Hitboxes\GrabHitbox.cs" />
     <Compile Include="Entities\Hitboxes\ShieldHitbox.cs" />
     <Compile Include="Entities\HUD.cs" />
+    <Compile Include="Entities\Items\GroundPoundHitbox.cs" />
     <Compile Include="Entities\Items\Fist.cs" />
     <Compile Include="Entities\Items\ItemManager.cs" />
     <Compile Include="Entities\Items\Popsicle.cs" />

@@ -80,23 +80,6 @@ namespace BattleFury.Components.Movement
             // Do a punch if the timer allows
             if (GameplayBindings.IsPunch(controllingPlayer) && timeTillPunch <= 0)
             {
-                Vector3 offset;
-                if (GameplayBindings.IsUpPunch(controllingPlayer))
-                {
-                    offset = new Vector3(0, 2, 0);
-                }
-                else if (GameplayBindings.IsGroundPound(controllingPlayer))
-                {
-                    offset = new Vector3(0, -4, 0);
-                    Vector3 impulse = new Vector3(0, -50, 0);
-                    bepuPhysicsComponent.Box.ApplyLinearImpulse(ref impulse);
-                } 
-                else
-                {
-                    offset = new Vector3(moveComponent.DirectionX, 0, 0);
-                }
-
-                timeTillPunch = punchSpeed;
 
                 // Determine how much damage to do. This will scale linearly
                 float rage = this.health.RageMeter;
@@ -106,10 +89,42 @@ namespace BattleFury.Components.Movement
                     damage *= 2; // DOUBLE DAMAGE! RAAAAAAAAAGE MODE.
                 }
 
-                // Get all the entities colliding with the hitbox
-                Fist f = new Fist(bepuPhysicsComponent.Box.Position + offset, (Character)Parent, damage, minFlinch, maxFlinch, environment);
-                f.Initialize();
-                environment.ItemManager.AddItem(f);
+                // Do ground pound
+                if (GameplayBindings.IsGroundPound(controllingPlayer))
+                {
+                    Vector3 offset = new Vector3(0, -4, 0);
+                    Vector3 impulse = new Vector3(0, -50, 0);
+                    bepuPhysicsComponent.Box.ApplyLinearImpulse(ref impulse);
+
+                    // Get all the entities colliding with the hitbox
+                    GroundPoundHitbox hitbox = new GroundPoundHitbox(bepuPhysicsComponent.Box.Position + offset, (Character)Parent, damage, minFlinch, maxFlinch, environment);
+                    hitbox.Initialize();
+                    environment.ItemManager.AddItem(hitbox);
+                }
+                // Do normal punch
+                else
+                {
+                    Vector3 offset;
+                    if (GameplayBindings.IsUpPunch(controllingPlayer))
+                    {
+                        offset = new Vector3(0, 2, 0);
+                    }
+                    else
+                    {
+                        offset = new Vector3(moveComponent.DirectionX, 0, 0);
+                    }
+                    // Get all the entities colliding with the hitbox
+                    Fist f = new Fist(bepuPhysicsComponent.Box.Position + offset, (Character)Parent, damage, minFlinch, maxFlinch, environment);
+                    f.Initialize();
+                    environment.ItemManager.AddItem(f);
+
+                }
+
+                timeTillPunch = punchSpeed;
+
+                
+
+                
             }
         }
 
