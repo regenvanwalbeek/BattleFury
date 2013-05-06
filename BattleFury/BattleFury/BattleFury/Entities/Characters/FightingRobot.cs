@@ -127,8 +127,6 @@ namespace BattleFury.Entities.Characters
             : base("FightingRobot", lives, new Box(spawnPosition, BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_DEPTH, MASS), 
             controllingPlayer, team, environment, color)
         {
-            punchableComponent = new PunchableComponent(this, PUNCH_MIN_FLINCH, PUNCH_MAX_FLINCH);
-            this.AttachComponent(punchableComponent);
 
             grabbableComponent = new GrabbableComponent(this, THROW_MIN_FLINCH, THROW_MAX_FLINCH);
             this.AttachComponent(grabbableComponent);

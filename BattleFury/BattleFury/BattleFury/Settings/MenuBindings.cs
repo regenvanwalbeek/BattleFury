@@ -84,7 +84,7 @@ namespace BattleFury.Settings
 
             return InputState.IsNewKeyPress(Keys.Left, controllingPlayer, out playerIndex) ||
                    InputState.IsNewButtonPress(Buttons.DPadLeft, controllingPlayer, out playerIndex) ||
-                   InputState.IsNewLeftThumbstickPressedHardLeft(controllingPlayer, out playerIndex, -.5f);
+                   InputState.IsNewLeftThumbstickPressedHardLeft(controllingPlayer, out playerIndex, -.75f);
             
         }
 
@@ -99,7 +99,7 @@ namespace BattleFury.Settings
 
             return InputState.IsNewKeyPress(Keys.Right, controllingPlayer, out playerIndex) ||
                    InputState.IsNewButtonPress(Buttons.DPadRight, controllingPlayer, out playerIndex) ||
-                   InputState.IsNewLeftThumbstickPressedHardRight(controllingPlayer, out playerIndex, .5f);
+                   InputState.IsNewLeftThumbstickPressedHardRight(controllingPlayer, out playerIndex, .75f);
         }
 
     }

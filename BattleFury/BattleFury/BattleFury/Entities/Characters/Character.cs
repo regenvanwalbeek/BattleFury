@@ -28,8 +28,6 @@ namespace BattleFury.Entities.Characters
 
         protected GrabComponent grabComponent;
 
-        protected PunchableComponent punchableComponent;
-
         protected PunchComponent punchComponent;
 
         public Character(string id, int lives, Box box, PlayerIndex controllingPlayer, int team, Environment environment, Color color) {

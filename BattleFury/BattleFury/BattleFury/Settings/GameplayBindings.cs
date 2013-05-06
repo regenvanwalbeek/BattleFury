@@ -70,12 +70,17 @@ namespace BattleFury.Settings
         public static bool IsPunch(PlayerIndex? controllingPlayer)
         {
             PlayerIndex playerIndex;
-            #if DEBUG
-            return InputState.IsNewButtonPress(Buttons.B, controllingPlayer, out playerIndex) ||
-                InputState.IsNewKeyPress(Keys.P, PlayerIndex.One, out playerIndex);
-            #else
             return InputState.IsNewButtonPress(Buttons.B, controllingPlayer, out playerIndex);
-            #endif
+        }
+
+        /// <summary>
+        /// Binds Punch to B + Up
+        /// </summary>
+        public static bool IsUpPunch(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+            return InputState.IsNewButtonPress(Buttons.B, controllingPlayer, out playerIndex) &&
+                InputState.GetLeftAnalogStick(playerIndex).Y >= .80f;
         }
 
         /// <summary>

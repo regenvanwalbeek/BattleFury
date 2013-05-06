@@ -99,7 +99,6 @@
     <Compile Include="Components\Movement\FireProjectileComponent.cs" />
     <Compile Include="Components\Movement\GrabbableComponent.cs" />
     <Compile Include="Components\Movement\MoveComponent.cs" />
-    <Compile Include="Components\Movement\PunchableComponent.cs" />
     <Compile Include="Components\Movement\PunchComponent.cs" />
     <Compile Include="Components\Physics\BepuPhysicsComponent.cs" />
     <Compile Include="Components\Physics\PhysicsSimulationComponent.cs" />

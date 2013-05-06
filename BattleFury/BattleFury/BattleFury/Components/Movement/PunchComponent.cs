@@ -80,6 +80,16 @@ namespace BattleFury.Components.Movement
             // Do a punch if the timer allows
             if (GameplayBindings.IsPunch(controllingPlayer) && timeTillPunch <= 0)
             {
+                Vector3 offset;
+                if (GameplayBindings.IsUpPunch(controllingPlayer))
+                {
+                    offset = new Vector3(0, 1, 0);
+                }
+                else
+                {
+                    offset = new Vector3(moveComponent.DirectionX, 0, 0);
+                }
+
                 timeTillPunch = punchSpeed;
 
                 // Determine how much damage to do. This will scale linearly
@@ -91,7 +101,7 @@ namespace BattleFury.Components.Movement
                 }
 
                 // Get all the entities colliding with the hitbox
-                Fist f = new Fist(bepuPhysicsComponent.Box.Position + new Vector3(moveComponent.DirectionX, 0, 0), (Character)Parent, damage, minFlinch, maxFlinch, environment);
+                Fist f = new Fist(bepuPhysicsComponent.Box.Position + offset, (Character)Parent, damage, minFlinch, maxFlinch, environment);
                 f.Initialize();
                 environment.ItemManager.AddItem(f);
             }
