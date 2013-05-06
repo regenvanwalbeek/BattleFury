@@ -57,32 +57,29 @@ namespace BattleFury.Components.Characters
                 // Check if the object is outside of the arena. If so, kill it.
                 if (arena.GetBoundingBox().Contains(bepuPhysicsComponent.Box.Position) == ContainmentType.Disjoint)
                 {
-                    if (vitalityComponent.LivesLeft > 0){
+                    if (!vitalityComponent.IsKO)
+                    {
                         // Kill the character
                         AudioManager.PlayPain();
-                        vitalityComponent.LivesLeft--;
-                        vitalityComponent.IsAlive = false;
+                        vitalityComponent.Knockout();
                         timeTillRespawn = RESPAWN_TIME;
                         cubeRenderComponent.IsVisible = false; // Just hide the character until respawn.
-                    } else {
-                        vitalityComponent.IsKO = true;
+                    }
+                    else
+                    {
+                        // Check if needs to be respawned
+                        timeTillRespawn -= gameTime.ElapsedGameTime.Milliseconds;
+                        if (timeTillRespawn < 0 && vitalityComponent.LivesLeft >= 0)
+                        {
+                            // Respawn
+                            vitalityComponent.Respawn();
+                            bepuPhysicsComponent.Box.Position = arena.GetCharacterSpawnPosition();
+                            bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero;
+                            cubeRenderComponent.IsVisible = true;
+                        }
                     }
                 }
-            }
-            else
-            {
-                // The character is dead. Check if it needs to be respawned.
-                timeTillRespawn -= gameTime.ElapsedGameTime.Milliseconds;
-                if (timeTillRespawn < 0 && vitalityComponent.LivesLeft >= 0)
-                {
-                    // Respawn
-                    vitalityComponent.IsAlive = true;
-                    vitalityComponent.ResetRageMeter();
-                    bepuPhysicsComponent.Box.Position = arena.GetCharacterSpawnPosition();
-                    bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero;
-                    
-                    cubeRenderComponent.IsVisible = true;
-                }
+               
             }
 
         }

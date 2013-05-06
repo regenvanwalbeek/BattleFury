@@ -39,7 +39,7 @@ namespace BattleFury.Components
         {
             for (int i = 0; i < vitalityComponents.Count; i++)
             {
-                if (vitalityComponents[i].IsAlive || vitalityComponents[i].IsKO)
+                if (!vitalityComponents[i].IsKO)
                 {
                     // Draw the rage percentage
                     string rageString = (int)vitalityComponents[i].RageMeter + "%";

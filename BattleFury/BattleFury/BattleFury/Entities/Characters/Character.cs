@@ -62,9 +62,9 @@ namespace BattleFury.Entities.Characters
             return bepuPhysicsComponent.Box;
         }
 
-        public bool IsKO()
+        public bool IsAlive()
         {
-            return vitalityComponent.IsKO;
+            return vitalityComponent.IsAlive;
         }
 
         public void SetPlacement(int place)

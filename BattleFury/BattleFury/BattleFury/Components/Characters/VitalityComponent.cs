@@ -9,22 +9,36 @@ namespace BattleFury.Components.Characters
     /// </summary>
     public class VitalityComponent : Component
     {
-        public int LivesLeft;
+        /// <summary>
+        /// Number of lives left for the character
+        /// </summary>
+        public int LivesLeft { get; private set; }
 
+        /// <summary>
+        /// The character's current rage meter
+        /// </summary>
         public float RageMeter { get; private set; }
 
-        public bool IsAlive = true;
+        /// <summary>
+        /// True if the entity is still alive (that is, the entity still has lives left)
+        /// </summary>
+        public bool IsAlive { get; private set; }
 
-        public bool IsKO = false;
+        /// <summary>
+        /// True if the entity is knocked out of the arena
+        /// </summary>
+        public bool IsKO { get; private set; }
 
         private const int RUMBLE_TIME = 100;
-        int[] timeTillRumbleOff = new int[4];
+        private int[] timeTillRumbleOff = new int[4];
 
         private CharacterInformationComponent characterInformationComponent;
 
         public VitalityComponent(Entity parent, int lives) : 
             base(parent, "VitalityComponent")
         {
+            this.IsAlive = true;
+            this.IsKO = false;
             this.LivesLeft = lives - 1;
             this.RageMeter = 100.0f;
             for (int i = 0; i < 4; i++)
@@ -62,9 +76,12 @@ namespace BattleFury.Components.Characters
             }
         }
 
+        /// <summary>
+        /// Damages the entity's rage meter
+        /// </summary>
+        /// <param name="damageAmount">The amount to damage the entity</param>
         public void Damage(float damageAmount)
         {
-            
             if (characterInformationComponent != null)
             {
                 System.Console.WriteLine("Rumbling");
@@ -73,7 +90,6 @@ namespace BattleFury.Components.Characters
                 timeTillRumbleOff[(int) characterInformationComponent.PlayerIndex] = RUMBLE_TIME;
             }
             
-    
             RageMeter -= damageAmount;
             if (RageMeter < 0)
             {
@@ -81,12 +97,24 @@ namespace BattleFury.Components.Characters
             }
         }
 
-        public void ResetRageMeter()
+        public void Knockout()
         {
-            this.RageMeter = 100.0f;
+            if (LivesLeft > 0)
+            {
+                LivesLeft--;
+            }
+            else
+            {
+                IsAlive = false;
+            }
+            IsKO = true;
+            
         }
 
-
-  
+        public void Respawn()
+        {
+            IsKO = false;
+            RageMeter = 100.0f;
+        }
     }
 }

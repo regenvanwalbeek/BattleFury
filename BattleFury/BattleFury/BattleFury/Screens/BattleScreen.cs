@@ -189,18 +189,18 @@ namespace BattleFury.Screens
             entityManager.Update(gameTime);
 
             // Check if another player has been KO'd. Set placement if KO'd
-            int numKOd = 0; // Count the number of characters KO'd this frame
+            int numKilled = 0; // Count the number of characters KO'd this frame
             for (int i = 0; i < livingCharacters.Count; i++)
             {
-                if (livingCharacters[i].IsKO())
+                if (!livingCharacters[i].IsAlive())
                 {
-                    numKOd++;
+                    numKilled++;
                 }
             }
-            int placement = livingCharacters.Count - numKOd + 1;
+            int placement = livingCharacters.Count - numKilled + 1;
             for (int i = 0; i < livingCharacters.Count; i++)
             {
-                if (livingCharacters[i].IsKO())
+                if (!livingCharacters[i].IsAlive())
                 {
                     livingCharacters[i].SetPlacement(placement);
                     livingCharacters.RemoveAt(i);
