@@ -65,7 +65,16 @@ namespace BattleFury.Components
                 Vector3 spawnPosition = environment.Arena.GetItemSpawnPosition(random);
 
                 // Spawn a random item
-                Item item = new Rock(spawnPosition, environment);
+                int next = random.Next(2);
+                Item item;
+                if (next == 0)
+                {
+                    item = new Rock(spawnPosition, environment);
+                }
+                else
+                {
+                    item = new Popsicle(spawnPosition, 50.0f, 3000, environment);
+                }
                 item.Initialize();
                 itemManagerComponent.Add(item);
 

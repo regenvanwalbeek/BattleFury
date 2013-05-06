@@ -116,5 +116,15 @@ namespace BattleFury.Components.Characters
             IsKO = false;
             RageMeter = 100.0f;
         }
+
+        public void Heal(float amount)
+        {
+            RageMeter += amount;
+            if (RageMeter > 100.0f)
+            {
+                RageMeter = 100.0f;
+            }
+        }
+
     }
 }

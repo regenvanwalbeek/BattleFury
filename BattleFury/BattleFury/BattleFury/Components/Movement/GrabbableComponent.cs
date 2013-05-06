@@ -59,6 +59,11 @@ namespace BattleFury.Components.Movement
         /// Event to be triggered when the entity is thrown
         /// </summary>
         public EventHandler OnThrow;
+        
+        /// <summary>
+        /// Event to be triggered when the entity is grabbed
+        /// </summary>
+        public EventHandler OnGrab;
 
         public GrabbableComponent(Entity parent, float minFlinch, float maxFlinch)
             : base(parent, "GrabbableComponent")
@@ -160,6 +165,14 @@ namespace BattleFury.Components.Movement
             {
                 moveComponent.Enabled = false;
             }
+
+            // Do any event handlers
+            EventHandler handler = OnGrab;
+            if (handler != null)
+            {
+                handler(this, null);
+            }
+            
             return true;
         }
 
