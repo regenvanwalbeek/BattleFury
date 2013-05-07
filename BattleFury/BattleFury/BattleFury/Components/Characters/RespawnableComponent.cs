@@ -55,9 +55,9 @@ namespace BattleFury.Components.Characters
             if (vitalityComponent.IsAlive)
             {
                 // Check if the object is outside of the arena. If so, kill it.
-                if (arena.GetBoundingBox().Contains(bepuPhysicsComponent.Box.Position) == ContainmentType.Disjoint)
+                if (!vitalityComponent.IsKO)
                 {
-                    if (!vitalityComponent.IsKO)
+                    if (arena.GetBoundingBox().Contains(bepuPhysicsComponent.Box.Position) == ContainmentType.Disjoint)
                     {
                         // Kill the character
                         AudioManager.PlayPain();
@@ -65,18 +65,18 @@ namespace BattleFury.Components.Characters
                         timeTillRespawn = RESPAWN_TIME;
                         cubeRenderComponent.IsVisible = false; // Just hide the character until respawn.
                     }
-                    else
+                }
+                else
+                {
+                    // Check if needs to be respawned
+                    timeTillRespawn -= gameTime.ElapsedGameTime.Milliseconds;
+                    if (timeTillRespawn < 0 && vitalityComponent.LivesLeft >= 0)
                     {
-                        // Check if needs to be respawned
-                        timeTillRespawn -= gameTime.ElapsedGameTime.Milliseconds;
-                        if (timeTillRespawn < 0 && vitalityComponent.LivesLeft >= 0)
-                        {
-                            // Respawn
-                            vitalityComponent.Respawn();
-                            bepuPhysicsComponent.Box.Position = arena.GetCharacterSpawnPosition();
-                            bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero;
-                            cubeRenderComponent.IsVisible = true;
-                        }
+                        // Respawn
+                        vitalityComponent.Respawn();
+                        bepuPhysicsComponent.Box.Position = arena.GetCharacterSpawnPosition();
+                        bepuPhysicsComponent.Box.LinearVelocity = Vector3.Zero;
+                        cubeRenderComponent.IsVisible = true;
                     }
                 }
                
