@@ -75,7 +75,7 @@ namespace BattleFury.Entities.Arenas
 
         public override Vector3 GetItemSpawnPosition(Random random)
         {
-            Vector3 spawnPosition = new Vector3(random.Next(51) - 25, random.Next(10) + 5, 0);
+            Vector3 spawnPosition = new Vector3(random.Next(49) - 24, random.Next(10) + 5, 0);
             return spawnPosition;
         }
     }
