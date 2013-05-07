@@ -107,6 +107,7 @@
     <Compile Include="Components\Movement\GrabComponent.cs" />
     <Compile Include="Components\Animated\ItemAnimationComponent.cs" />
     <Compile Include="Components\Movement\JumpComponent.cs" />
+    <Compile Include="Components\SelfDestructOnJumpComponent.cs" />
     <Compile Include="Entities\Arenas\Arena.cs" />
     <Compile Include="Entities\Camera.cs" />
     <Compile Include="Entities\Characters\Character.cs" />

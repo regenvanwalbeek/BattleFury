@@ -63,7 +63,6 @@ namespace BattleFury.Components
                 catch (System.ArgumentException)
                 {
                     // Ignore. Item has already been removed by another self destruct component.
-                    System.Console.WriteLine("Yeah bug happening");
                 }
             }
 

@@ -39,6 +39,9 @@ namespace BattleFury.Entities.Items
             SelfDestructOnImpactComponent selfDestructImpact = new SelfDestructOnImpactComponent(this, environment, true);
             selfDestructImpact.IgnoreEntity(attackingCharacter);
             this.AttachComponent(selfDestructImpact);
+
+            SelfDestructOnJumpComponent selfDestructJump = new SelfDestructOnJumpComponent(this, environment, attackingCharacter);
+            this.AttachComponent(selfDestructJump);
         }
 
        

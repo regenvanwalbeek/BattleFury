@@ -23,7 +23,8 @@ namespace BattleFury.Components.Physics
         {
             space = new Space();
             space.ForceUpdater.Gravity = new Vector3(0, -20.0f, 0);
-            space.TimeStepSettings.TimeStepDuration = 1.0f / 30.0f; // 1 / 60.0f is default
+            space.TimeStepSettings.TimeStepDuration = 1.0f / 30.0f; // 1 / 60.0f is default'
+            space.TimeStepSettings.MaximumTimeStepsPerFrame = 12;
         }
         
         public override void Initialize()
