@@ -47,7 +47,6 @@ namespace BattleFury.ScreenManagement
 
 
         #endregion
-
         #region Initialization
 
 
@@ -115,6 +114,10 @@ namespace BattleFury.ScreenManagement
             {
                 OnLeftEntry(selectedEntry, playerIndex);
             }
+            else if (MenuBindings.IsStart(ControllingPlayer, out playerIndex))
+            {
+                OnStartEntry(selectedEntry, playerIndex);
+            }
         }
 
 
@@ -140,6 +143,14 @@ namespace BattleFury.ScreenManagement
         protected virtual void OnRightEntry(int entryIndex, PlayerIndex playerIndex)
         {
             menuEntries[entryIndex].OnRightEntry(playerIndex);
+        }
+
+        /// <summary>
+        /// Handler for when the user hits start.
+        /// </summary>
+        protected virtual void OnStartEntry(int entryIndex, PlayerIndex playerIndex)
+        {
+            menuEntries[entryIndex].OnStartEntry(playerIndex);
         }
 
 

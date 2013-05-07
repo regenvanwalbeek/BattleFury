@@ -23,6 +23,7 @@ namespace BattleFury.Screens
 
             // Add event handlers
             resumeGameMenuEntry.Selected += OnCancel;
+            resumeGameMenuEntry.StartSelected += OnCancel;
             quitGameMenuEntry.Selected += QuitMenuEntrySelected;
 
             // Add the menu entries to the menu

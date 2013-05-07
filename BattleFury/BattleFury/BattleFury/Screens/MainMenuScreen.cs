@@ -26,6 +26,7 @@ namespace BattleFury.Screens
 
             // Add event handlers
             playGameMenuEntry.Selected += PlayGameMenuSelected;
+            playGameMenuEntry.StartSelected += PlayGameMenuSelected;
             optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             quitGameMenuEntry.Selected += QuitMenuEntrySelected;
 

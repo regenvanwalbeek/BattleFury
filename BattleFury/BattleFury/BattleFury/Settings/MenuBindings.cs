@@ -14,7 +14,7 @@ namespace BattleFury.Settings
     public class MenuBindings
     {
         /// <summary>
-        /// Binds Space, Enter, A button, and Start button to "menu select" input action.
+        /// Binds Space, Enter, and A button to "menu select" input action.
         /// The controllingPlayer parameter specifies which player to read input for.
         /// If this is null, it will accept input from any player. When the action
         /// is detected, the output playerIndex reports which player pressed it.
@@ -24,8 +24,15 @@ namespace BattleFury.Settings
         {
             return InputState.IsNewKeyPress(Keys.Space, controllingPlayer, out playerIndex) ||
                    InputState.IsNewKeyPress(Keys.Enter, controllingPlayer, out playerIndex) ||
-                   InputState.IsNewButtonPress(Buttons.A, controllingPlayer, out playerIndex) ||
-                   InputState.IsNewButtonPress(Buttons.Start, controllingPlayer, out playerIndex);
+                   InputState.IsNewButtonPress(Buttons.A, controllingPlayer, out playerIndex);
+        }
+
+        /// <summary>
+        /// Binds Start button to Start action
+        /// </summary>
+        public static bool IsStart(PlayerIndex? controllingPlayer, out PlayerIndex playerIndex)
+        {
+            return InputState.IsNewButtonPress(Buttons.Start, controllingPlayer, out playerIndex);
         }
 
 

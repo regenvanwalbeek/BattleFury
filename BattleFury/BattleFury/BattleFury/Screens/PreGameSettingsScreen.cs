@@ -50,6 +50,7 @@ namespace BattleFury.Screens
             numLivesMenuEntry.LeftSelected += NumLivesLeftSelected;
             numLivesMenuEntry.RightSelected += NumLivesRightSelected;
             fightEntry.Selected += FightSelected;
+            fightEntry.StartSelected += FightSelected;
 
             // Set the text
             setItemsText();
@@ -129,13 +130,7 @@ namespace BattleFury.Screens
 
         private void FightSelected(object sender, PlayerIndexEventArgs e)
         {
-            PlayerIndex playerIndex;
-
-            // Go to the next screen
-            if (MenuBindings.IsMenuSelect(null, out playerIndex))
-            {
-                LoadingScreen.Load(ScreenManager, null, new BattleScreen(GameSettings.NumLives, GameSettings.NumPlayers, GameSettings.ItemsOn));
-            }
+            LoadingScreen.Load(ScreenManager, null, new BattleScreen(GameSettings.NumLives, GameSettings.NumPlayers, GameSettings.ItemsOn));
         }
 
         #endregion
