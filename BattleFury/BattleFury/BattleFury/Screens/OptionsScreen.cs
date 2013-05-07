@@ -15,9 +15,14 @@ namespace BattleFury.Screens
     public class OptionsScreen : MenuScreen
     {
         /// <summary>
-        /// Menu entry for whether items should drop in game.
+        /// Menu entry for music volume
         /// </summary>
-        private MenuEntry itemsMenuEntry;
+        private MenuEntry musicVolumeMenuEntry;
+
+        /// <summary>
+        /// Menu entry for sound effect volume
+        /// </summary>
+        private MenuEntry fxVolumeMenuEntry;
 
         /// <summary>
         /// Menu entry for choosing a screen resolution.
@@ -33,30 +38,39 @@ namespace BattleFury.Screens
 
         private List<DisplayMode> displayModes = new List<DisplayMode>();
 
-        bool firstTime = true;
+        private bool firstTime = true;
 
         #region Initialization
 
         public OptionsScreen()
             : base("Options")
         {
-            itemsMenuEntry = new MenuEntry(string.Empty);
+            musicVolumeMenuEntry = new MenuEntry(string.Empty);
+            fxVolumeMenuEntry = new MenuEntry(string.Empty);
             windowedMenuEntry = new MenuEntry(string.Empty);
             resolutionMenuEntry = new MenuEntry(string.Empty);
             MenuEntry backMenuEntry = new MenuEntry("Back");
 
-            setMenuEntryText();
+            setMusicVolumeText() ;
             setWindowedEntryText();
             setResolutionEntryText();
+            setFXVolumeText();
 
             // Attach the event handlers
-            itemsMenuEntry.Selected += ItemsMenuEntrySelected;
+            musicVolumeMenuEntry.RightSelected += MusicVolumeIncrease;
+            musicVolumeMenuEntry.LeftSelected += MusicVolumeDecrease;
+            fxVolumeMenuEntry.RightSelected += FXVolumeIncrease;
+            fxVolumeMenuEntry.LeftSelected += FXVolumeDecrease;
             windowedMenuEntry.Selected += FullscreenMenuEntrySelected;
-            resolutionMenuEntry.Selected += ResolutionMenuEntrySelected;
+            windowedMenuEntry.RightSelected += FullscreenMenuEntrySelected;
+            windowedMenuEntry.LeftSelected += FullscreenMenuEntrySelected;
+            resolutionMenuEntry.RightSelected += ResolutionRightSelected;
+            resolutionMenuEntry.LeftSelected += ResolutionLeftSelected;
             backMenuEntry.Selected += OnComplete;
             backMenuEntry.Selected += OnCancel;
 
-            MenuEntries.Add(itemsMenuEntry);
+            MenuEntries.Add(musicVolumeMenuEntry);
+            MenuEntries.Add(fxVolumeMenuEntry);
             MenuEntries.Add(windowedMenuEntry);
             MenuEntries.Add(resolutionMenuEntry);
             MenuEntries.Add(backMenuEntry);
@@ -66,9 +80,14 @@ namespace BattleFury.Screens
 
         #region Handle Input
 
-        private void setMenuEntryText()
+        private void setMusicVolumeText()
         {
-            itemsMenuEntry.Text = "Items: " + (GameSettings.ItemsOn ? "on" : "off");
+            musicVolumeMenuEntry.Text = "Music Volume: " + (GameSettings.MusicVolume);
+        }
+
+        private void setFXVolumeText()
+        {
+            fxVolumeMenuEntry.Text = "Effects Volume: " + (GameSettings.FXVolume);
         }
 
         private void setWindowedEntryText()
@@ -81,12 +100,50 @@ namespace BattleFury.Screens
             resolutionMenuEntry.Text = "Resolution: " + GameSettings.WindowWidth + "x" + GameSettings.WindowHeight;
         }
 
-        // Toggle whether items are on or off
-        private void ItemsMenuEntrySelected(object sender, PlayerIndexEventArgs e)
+        // Increase music volume
+        private void MusicVolumeIncrease(object sender, PlayerIndexEventArgs e)
         {
-            GameSettings.ItemsOn = !GameSettings.ItemsOn;
-            setMenuEntryText();
+            GameSettings.MusicVolume += 1;
+            if (GameSettings.MusicVolume > 10)
+            {
+                GameSettings.MusicVolume = 10;
+            }
+            setMusicVolumeText();
         }
+
+        // Decrease music volume
+        private void MusicVolumeDecrease(object sender, PlayerIndexEventArgs e)
+        {
+            GameSettings.MusicVolume -= 1;
+            if (GameSettings.MusicVolume < 0)
+            {
+                GameSettings.MusicVolume = 0;
+            }
+            setMusicVolumeText();
+        }
+
+        // Increase effects volume
+        private void FXVolumeIncrease(object sender, PlayerIndexEventArgs e)
+        {
+            GameSettings.FXVolume += 1;
+            if (GameSettings.FXVolume > 10)
+            {
+                GameSettings.FXVolume = 10;
+            }
+            setFXVolumeText();
+        }
+
+        // Decrease effects volume
+        private void FXVolumeDecrease(object sender, PlayerIndexEventArgs e)
+        {
+            GameSettings.FXVolume -= 1;
+            if (GameSettings.FXVolume < 0)
+            {
+                GameSettings.FXVolume = 0;
+            }
+            setFXVolumeText();
+        }
+
 
         // Toggle fullscreen
         private void FullscreenMenuEntrySelected(object sender, PlayerIndexEventArgs e)
@@ -95,13 +152,54 @@ namespace BattleFury.Screens
             setWindowedEntryText();
         }
 
-        // Change Resolution
-        private void ResolutionMenuEntrySelected(object sender, PlayerIndexEventArgs e)
+        // Change Resolution - Better Resolution
+        private void ResolutionRightSelected(object sender, PlayerIndexEventArgs e)
+        {
+            initializeScreenSizes();
+
+            // Get the next display mode.
+            displayModeIndex++;
+            if (displayModeIndex >= displayModes.Count)
+            {
+                displayModeIndex = 0;
+            }
+
+            // Update the settings
+            DisplayMode newDisplayMode = displayModes[displayModeIndex];
+            GameSettings.WindowWidth = newDisplayMode.Width;
+            GameSettings.WindowHeight = newDisplayMode.Height;
+
+            setResolutionEntryText();
+        }
+
+        // Change Resolution - Worse Resolution
+        private void ResolutionLeftSelected(object sender, PlayerIndexEventArgs e)
+        {
+            initializeScreenSizes();
+
+            // Get the next display mode
+            displayModeIndex--;
+            if (displayModeIndex < 0)
+            {
+                displayModeIndex = displayModes.Count - 1;
+            }
+
+            // Update the settings
+            DisplayMode newDisplayMode = displayModes[displayModeIndex];
+            GameSettings.WindowWidth = newDisplayMode.Width;
+            GameSettings.WindowHeight = newDisplayMode.Height;
+
+            setResolutionEntryText();
+        }
+
+        // Helper method for retreiving screen sizes
+        private void initializeScreenSizes()
         {
             // Initialize resolutions the first time this is called
             if (firstTime)
             {
-                foreach (DisplayMode mode in ScreenManager.DisplayModes){
+                foreach (DisplayMode mode in ScreenManager.DisplayModes)
+                {
                     // ignore duplicates
                     bool alreadyAdded = false;
                     for (int i = 0; i < displayModes.Count; i++)
@@ -134,24 +232,11 @@ namespace BattleFury.Screens
                         break;
                     }
                 }
-                
+
                 firstTime = false;
             }
-
-            // Get the next display mode.
-            displayModeIndex++;
-            if (displayModeIndex >= displayModes.Count)
-            {
-                displayModeIndex = 0;
-            }
-
-            // Update the settings
-            DisplayMode newDisplayMode = displayModes[displayModeIndex];
-            GameSettings.WindowWidth = newDisplayMode.Width;
-            GameSettings.WindowHeight = newDisplayMode.Height;
-
-            setResolutionEntryText();
         }
+
 
         // Modify screen resolution as specified by settings.
         private void OnComplete(object sender, PlayerIndexEventArgs e)

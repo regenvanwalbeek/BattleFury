@@ -23,11 +23,6 @@ namespace BattleFury.Settings
         }
         
         /// <summary>
-        /// Whether or not items should drop.
-        /// </summary>
-        public static bool ItemsOn = true;
-
-        /// <summary>
         /// Width of the game screen.
         /// </summary>
         public static int WindowWidth = -1;
@@ -41,6 +36,21 @@ namespace BattleFury.Settings
         /// Whether to display in fullscreen or windowed
         /// </summary>
         public static bool Windowed = true;
+
+        /// <summary>
+        /// Music Volume Setting. Range 0 - 10
+        /// </summary>
+        public static int MusicVolume = -1;
+
+        /// <summary>
+        /// Sound effects Volume Setting. Range 0 - 10
+        /// </summary>
+        public static int FXVolume = -1;
+
+        /// <summary>
+        /// Whether or not items should drop.
+        /// </summary>
+        public static bool ItemsOn = true;
 
         /// <summary>
         /// The Arena to battle in.
@@ -76,6 +86,8 @@ namespace BattleFury.Settings
         {
             WindowWidth = windowWidth;
             WindowHeight = windowHeight;
+            MusicVolume = 10;
+            FXVolume = 10;
 
             Players = new List<PlayerSettings>();
             Players.Add(new PlayerSettings(CHARACTER_SETTING.ROBOT, 1, Color.Blue, PlayerIndex.One));

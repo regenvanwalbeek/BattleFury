@@ -4,13 +4,32 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Audio;
 using BattleFury.Components;
+using BattleFury.Settings;
 
 namespace BattleFury.SoundManager
 {
     public class AudioManager
     {
 
-        static SoundEffectInstance battleMusicInstance;
+        private static SoundEffectInstance battleMusicInstance;
+
+        private static float MusicVolume
+        {
+            get
+            {
+                return GameSettings.MusicVolume / 10.0f;
+            }
+        }
+
+        private static float FXVolume
+        {
+            get
+            {
+                return GameSettings.FXVolume / 10.0f;
+            }
+        }
+        
+
         public void LoadContent()
         {
         }
@@ -21,18 +40,18 @@ namespace BattleFury.SoundManager
 
         public static void PlayFireLaser()
         {
-            ContentLoader.ProjectileSoundEffect.Play(0.5f, 0, 0);
+            ContentLoader.ProjectileSoundEffect.Play(FXVolume * 0.5f, 0, 0);
         }
 
         public static void PlayJump()
         {
-          
-            ContentLoader.JumpSoundEffect.Play(0.3f, 0.0f, 0.0f);
+
+            ContentLoader.JumpSoundEffect.Play(FXVolume * 0.3f, 0.0f, 0.0f);
         }
 
         public static void PlayPain()
         {
-            ContentLoader.PainSound.Play(0.5f, 0, 0);
+            ContentLoader.PainSound.Play(FXVolume * 0.5f, 0, 0);
         }
 
         public static void StartBattleMusic()
@@ -41,7 +60,7 @@ namespace BattleFury.SoundManager
             {
                 battleMusicInstance = ContentLoader.BattleMusic.CreateInstance();
                 battleMusicInstance.IsLooped = true;
-                battleMusicInstance.Volume = .5f;
+                battleMusicInstance.Volume = MusicVolume *.5f;
                 battleMusicInstance.Play();
             }
         }
@@ -54,6 +73,8 @@ namespace BattleFury.SoundManager
             }
             battleMusicInstance = null;
         }
+
+      
 
 
     }
