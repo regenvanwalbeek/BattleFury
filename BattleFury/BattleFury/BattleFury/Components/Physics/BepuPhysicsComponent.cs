@@ -15,6 +15,7 @@ namespace BattleFury.Components
 
         public BepuPhysicsComponent(Entity parent, Box box) : base(parent, "BepuPhysicsComponent"){
             this.Box = box;
+            box.PositionUpdateMode = BEPUphysics.PositionUpdating.PositionUpdateMode.Continuous;
             //PointOnPlaneJoint join;
         }
 
