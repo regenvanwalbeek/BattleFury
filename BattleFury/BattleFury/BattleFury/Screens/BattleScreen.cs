@@ -100,14 +100,22 @@ namespace BattleFury.Screens
             PhysicsSimulator physicsEntity = new PhysicsSimulator();
 
             // Create the Arena Entity.
-            Arena arenaEntity;
+            Arena arenaEntity = null;
             if (GameSettings.Arena == GameSettings.ARENA_SETTING.PLAIN_ARENA)
             {
                 arenaEntity = new PlainArena(entityManager, physicsEntity);
             }
-            else
+            else if (GameSettings.Arena == GameSettings.ARENA_SETTING.WALLED_ARENA)
             {
-                arenaEntity = new PlainArena(entityManager, physicsEntity);
+                arenaEntity = new WalledArena(entityManager, physicsEntity);
+            }
+            else if (GameSettings.Arena == GameSettings.ARENA_SETTING.SPLIT_BASE)
+            {
+                arenaEntity = new SplitBaseArena(entityManager, physicsEntity);
+            }
+            else if (GameSettings.Arena == GameSettings.ARENA_SETTING.PIT_OF_DEATH)
+            {
+                arenaEntity = new DeathPitArena(entityManager, physicsEntity);
             }
 
             // Create the environment

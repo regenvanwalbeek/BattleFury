@@ -28,7 +28,17 @@ namespace BattleFury.Screens
         /// </summary>
         private MenuEntry numLivesMenuEntry;
 
-        
+        /// <summary>
+        /// Menu entry for choosing the arena
+        /// </summary>
+        private MenuEntry arenaMenuEntry;
+
+        /// <summary>
+        /// Index of current arena selected
+        /// </summary>
+        private int arenaIndex = 0;
+
+        private List<GameSettings.ARENA_SETTING> arenas;
 
         private const int MAX_LIVES = 10;
 
@@ -36,9 +46,17 @@ namespace BattleFury.Screens
 
         public PreGameSettingsScreen() : base("Battle Settings")
         {
+            // Initialize the arenas
+            arenas = new List<GameSettings.ARENA_SETTING>();
+            arenas.Add(GameSettings.ARENA_SETTING.PLAIN_ARENA);
+            arenas.Add(GameSettings.ARENA_SETTING.WALLED_ARENA);
+            arenas.Add(GameSettings.ARENA_SETTING.SPLIT_BASE);
+            arenas.Add(GameSettings.ARENA_SETTING.PIT_OF_DEATH);
+
             // Create the menus
             numPlayersMenuEntry = new MenuEntry(string.Empty);
             itemsMenuEntry = new MenuEntry(string.Empty);
+            arenaMenuEntry = new MenuEntry(string.Empty);
             numLivesMenuEntry = new MenuEntry(string.Empty);
             MenuEntry fightEntry = new MenuEntry("Fight!");
 
@@ -47,6 +65,8 @@ namespace BattleFury.Screens
             numPlayersMenuEntry.RightSelected += NumPlayersRightSelected;
             itemsMenuEntry.LeftSelected += ItemsSelected;
             itemsMenuEntry.RightSelected += ItemsSelected;
+            arenaMenuEntry.LeftSelected += ArenaLeftSelected;
+            arenaMenuEntry.RightSelected += ArenaLeftSelected;
             numLivesMenuEntry.LeftSelected += NumLivesLeftSelected;
             numLivesMenuEntry.RightSelected += NumLivesRightSelected;
             fightEntry.Selected += FightSelected;
@@ -56,10 +76,12 @@ namespace BattleFury.Screens
             setItemsText();
             setNumLivesText();
             setNumPlayersText();
+            setArenaText();
 
             // Add the items
             MenuEntries.Add(numPlayersMenuEntry);
             MenuEntries.Add(itemsMenuEntry);
+            MenuEntries.Add(arenaMenuEntry);
             MenuEntries.Add(numLivesMenuEntry);
             MenuEntries.Add(fightEntry);
         }
@@ -79,6 +101,31 @@ namespace BattleFury.Screens
         public void setNumLivesText()
         {
             numLivesMenuEntry.Text = "Lives: " + GameSettings.NumLives;
+        }
+
+        public void setArenaText()
+        {
+            String text = "Arena: ";
+
+            GameSettings.ARENA_SETTING currentSetting = arenas[arenaIndex];
+            if (currentSetting == GameSettings.ARENA_SETTING.PLAIN_ARENA)
+            {
+                text += "Peaceful Plains";
+            }
+            else if (currentSetting == GameSettings.ARENA_SETTING.WALLED_ARENA)
+            {
+                text += "Walls of Death";
+            }
+            else if (currentSetting == GameSettings.ARENA_SETTING.SPLIT_BASE)
+            {
+                text += "Split Base";
+            }
+            else if (currentSetting == GameSettings.ARENA_SETTING.PIT_OF_DEATH)
+            {
+                text += "Pit of Doom";
+            }
+
+            arenaMenuEntry.Text = text;
         }
 
         #endregion
@@ -117,6 +164,26 @@ namespace BattleFury.Screens
                 GameSettings.NumLives--;
                 setNumLivesText();
             }
+        }
+
+        private void ArenaRightSelected(object sender, PlayerIndexEventArgs e)
+        {
+            arenaIndex++;
+            if (arenaIndex >= arenas.Count)
+            {
+                arenaIndex = 0;
+            }
+            setArenaText();
+        }
+
+        private void ArenaLeftSelected(object sender, PlayerIndexEventArgs e)
+        {
+            arenaIndex--;
+            if (arenaIndex < 0)
+            {
+                arenaIndex = arenas.Count - 1;
+            }
+            setArenaText();
         }
 
         private void NumLivesRightSelected(object sender, PlayerIndexEventArgs e)

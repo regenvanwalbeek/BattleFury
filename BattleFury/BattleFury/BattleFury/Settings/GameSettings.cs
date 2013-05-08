@@ -14,7 +14,7 @@ namespace BattleFury.Settings
     {
         public enum ARENA_SETTING
         {
-            PLAIN_ARENA
+            PLAIN_ARENA, WALLED_ARENA, SPLIT_BASE, PIT_OF_DEATH
         }
 
         public enum CHARACTER_SETTING

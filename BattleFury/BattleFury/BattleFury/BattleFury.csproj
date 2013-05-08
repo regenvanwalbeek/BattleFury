@@ -110,6 +110,9 @@
     <Compile Include="Components\Movement\JumpComponent.cs" />
     <Compile Include="Components\SelfDestructOnJumpComponent.cs" />
     <Compile Include="Entities\Arenas\Arena.cs" />
+    <Compile Include="Entities\Arenas\DeathPitArena.cs" />
+    <Compile Include="Entities\Arenas\SplitBaseArena.cs" />
+    <Compile Include="Entities\Arenas\WalledArena.cs" />
     <Compile Include="Entities\Camera.cs" />
     <Compile Include="Entities\Characters\Character.cs" />
     <Compile Include="Entities\Characters\FightingRobot.cs" />
