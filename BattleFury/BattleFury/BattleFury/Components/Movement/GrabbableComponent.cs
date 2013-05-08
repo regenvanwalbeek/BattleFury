@@ -104,7 +104,7 @@ namespace BattleFury.Components.Movement
                 {
                     // Move this entity with the grabbing entity. Position it in the direction the grabbing entity is facing
                     int grabberCurrentDirection = ((MoveComponent)grabber.Parent.GetComponent("MoveComponent")).DirectionX;
-                    const float offset = .1f;
+                    const float offset = .2f;
                     if (grabberCurrentDirection == 1)
                     {
                         BepuPhysicsComponent grabberPhysicsComp = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");

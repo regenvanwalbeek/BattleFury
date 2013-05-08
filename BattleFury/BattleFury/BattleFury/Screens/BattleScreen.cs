@@ -185,6 +185,11 @@ namespace BattleFury.Screens
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
+            if (!IsActive)
+            {
+                return;
+            }
+
             // Update the entities.
             entityManager.Update(gameTime);
 

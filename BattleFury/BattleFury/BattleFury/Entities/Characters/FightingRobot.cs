@@ -142,8 +142,7 @@ namespace BattleFury.Entities.Characters
             BasicModelComponent drawComponent = new RobotRenderComponent(this, BEPU_PHYSICS_HEIGHT, SCALE, color);
             this.AttachComponent(drawComponent);
 
-            
-            BasicModelComponent drawComponent2 = new CubeRenderComponent(this, Matrix.CreateScale(BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_WIDTH));
+            //BasicModelComponent drawComponent2 = new CubeRenderComponent(this, Matrix.CreateScale(BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_WIDTH));
             //this.AttachComponent(drawComponent2);
             
             JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);
@@ -160,8 +159,6 @@ namespace BattleFury.Entities.Characters
 
             FireProjectileComponent fireProjectileComponent = new FireProjectileComponent(this, FIRE_SPEED, FIRE_VELOCITY, environment, FIRE_BASE_DAMAGE, FIRE_MAX_DAMAGE, FIRE_MIN_FLINCH, FIRE_MAX_FLINCH);
             this.AttachComponent(fireProjectileComponent);
-
-       
 
         }
 
