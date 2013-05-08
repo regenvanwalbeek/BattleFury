@@ -17,5 +17,9 @@ Content\sounds\projectile.xnb
 Content\sounds\jump.xnb
 Content\sounds\pain.xnb
 Content\sounds\game.xnb
-Content\meshes\icecream.xnb
 Content\meshes\icecreamcone.xnb
+Content\sounds\punch1.xnb
+Content\sounds\punch2.xnb
+Content\sounds\punch4.xnb
+Content\sounds\punch_missed.xnb
+Content\sounds\punch3.xnb

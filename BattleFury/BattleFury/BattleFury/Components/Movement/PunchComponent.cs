@@ -9,6 +9,7 @@ using BEPUphysics.Collidables;
 using BattleFury.Input;
 using BattleFury.Entities.Items;
 using BattleFury.Entities.Characters;
+using BattleFury.SoundManager;
 
 namespace BattleFury.Components.Movement
 {

@@ -3,6 +3,7 @@ using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
 using BattleFury.Components.Animated;
 using BattleFury.Components;
+using BattleFury.SoundManager;
 
 namespace BattleFury.Entities.Items
 {
@@ -33,13 +34,23 @@ namespace BattleFury.Entities.Items
 
             SelfDestructOnImpactComponent selfDestructImpact = new SelfDestructOnImpactComponent(this, environment, true);
             selfDestructImpact.IgnoreEntity(attackingCharacter);
+            selfDestructImpact.OnDestroy += OnHit;
             this.AttachComponent(selfDestructImpact);
 
             SelfDestructAfterTimeComponent selfDestructTime = new SelfDestructAfterTimeComponent(this, environment, 100);
+            selfDestructTime.OnDestroy += OnMiss;
             this.AttachComponent(selfDestructTime);
         }
 
-       
+        public void OnHit(object sender, System.EventArgs e)
+        {
+            AudioManager.PlayPunch();
+        }
+
+        public void OnMiss(object sender, System.EventArgs e)
+        {
+            AudioManager.PlayMissedPunch();
+        }
 
     }
 }

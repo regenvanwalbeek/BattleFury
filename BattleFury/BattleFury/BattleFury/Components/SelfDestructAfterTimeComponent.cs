@@ -17,6 +17,8 @@ namespace BattleFury.Components
 
         private Environment environment;
 
+        public System.EventHandler OnDestroy;
+
         public SelfDestructAfterTimeComponent(Item parent, Environment environment, int msTillSelfDestruct) 
             : base(parent, "SelfDestructAfterTimeComponent")
         {
@@ -41,10 +43,15 @@ namespace BattleFury.Components
                 try
                 {
                     environment.ItemManager.Remove((Item)Parent);
+                    System.EventHandler handler = OnDestroy;
+                    if (handler != null)
+                    {
+                        handler(this, null);
+                    }
+                    
                 }
                 catch (System.ArgumentException)
                 {
-                    System.Console.WriteLine("Yeah bug happening");
                     // Ignore. Item has already been removed by another self destruct component.
                 }
             }

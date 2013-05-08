@@ -46,6 +46,14 @@ namespace BattleFury.Components
         public static SoundEffect PainSound;
         public static SoundEffect BattleMusic;
 
+        public static SoundEffect MissedPunch;
+        public static SoundEffect Punch1;
+        public static SoundEffect Punch2;
+        public static SoundEffect Punch3;
+        public static SoundEffect Punch4;
+
+
+
         private ContentLoader()
         {
             // Ain't nobody got time for that.
@@ -89,6 +97,11 @@ namespace BattleFury.Components
             JumpSoundEffect = content.Load<SoundEffect>("sounds/jump");
             PainSound = content.Load<SoundEffect>("sounds/pain");
             BattleMusic = content.Load<SoundEffect>("sounds/game");
+            MissedPunch = content.Load<SoundEffect>("sounds/punch_missed");
+            Punch1 = content.Load<SoundEffect>("sounds/punch1");
+            Punch2 = content.Load<SoundEffect>("sounds/punch2");
+            Punch3 = content.Load<SoundEffect>("sounds/punch3");
+            Punch4 = content.Load<SoundEffect>("sounds/punch4");
 
             contentLoaded = true;
         }

@@ -35,6 +35,8 @@ namespace BattleFury.Components
         /// </summary>
         private bool markedForRemoval;
 
+        public System.EventHandler OnDestroy;
+
         public SelfDestructOnImpactComponent(Item parent, Environment environment, bool destructOnArenaImpact)
             : base(parent, "DestroyItemOnCharacterImpactComponent")
         {
@@ -59,6 +61,11 @@ namespace BattleFury.Components
                 try
                 {
                     environment.ItemManager.Remove((Item)Parent);
+                    System.EventHandler handler = OnDestroy;
+                    if (handler != null)
+                    {
+                        handler(this, null);
+                    }
                 } 
                 catch (System.ArgumentException)
                 {
