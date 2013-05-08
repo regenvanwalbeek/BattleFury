@@ -93,6 +93,7 @@ namespace BattleFury.Components.Movement
                 // Do ground pound
                 if (GameplayBindings.IsGroundPound(controllingPlayer))
                 {
+                    System.Console.WriteLine("Ground Pound!");
                     Vector3 offset = new Vector3(0, -4, 0);
                     Vector3 impulse = new Vector3(0, -50, 0);
                     bepuPhysicsComponent.Box.ApplyLinearImpulse(ref impulse);

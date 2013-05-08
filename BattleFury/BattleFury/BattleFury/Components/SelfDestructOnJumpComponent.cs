@@ -47,10 +47,11 @@ namespace BattleFury.Components
         {
             if (markedForRemoval)
             {
+                System.Console.WriteLine("Dafuq");
                 environment.ItemManager.Remove((Item)Parent);
             }
 
-            if (jumpComponent.IsJumping)
+            if (jumpComponent.JumpedThisFrame)
             {
                 markedForRemoval = true;
             }
