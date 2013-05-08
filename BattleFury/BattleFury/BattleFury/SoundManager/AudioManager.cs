@@ -65,7 +65,7 @@ namespace BattleFury.SoundManager
             {
                 battleMusicInstance = ContentLoader.BattleMusic.CreateInstance();
                 battleMusicInstance.IsLooped = true;
-                battleMusicInstance.Volume = MusicVolume *.5f;
+                battleMusicInstance.Volume = MusicVolume *.35f;
                 battleMusicInstance.Play();
             }
         }

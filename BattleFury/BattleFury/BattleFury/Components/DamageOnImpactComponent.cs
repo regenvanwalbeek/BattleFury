@@ -8,6 +8,7 @@ using BEPUphysics.Collidables;
 using BattleFury.Components.Characters;
 using BattleFury.Entities.Arenas;
 using Microsoft.Xna.Framework;
+using BattleFury.Components.Movement;
 
 namespace BattleFury.Components
 {
@@ -83,12 +84,16 @@ namespace BattleFury.Components
                             // RAGE MODE
                             flinch *= 4;
                         }
-                        Vector3 characterPosition = ((BepuPhysicsComponent) characters[i].GetComponent("BepuPhysicsComponent")).Box.Position;
-                        Vector3 flinchDirection = characterPosition - this.bepuPhysicsComponent.Box.Position;
-                        flinchDirection = Vector3.Normalize(flinchDirection);
+                        // Apply flinch if the character is not being grabbed.
+                        if (!((GrabbableComponent)characters[i].GetComponent("GrabbableComponent")).IsGrabbed)
+                        {
+                            Vector3 characterPosition = ((BepuPhysicsComponent)characters[i].GetComponent("BepuPhysicsComponent")).Box.Position;
+                            Vector3 flinchDirection = characterPosition - this.bepuPhysicsComponent.Box.Position;
+                            flinchDirection = Vector3.Normalize(flinchDirection);
 
-                        Vector3 flinchVector = flinchDirection * flinch;
-                        characters[i].GetBox().ApplyLinearImpulse(ref flinchVector);
+                            Vector3 flinchVector = flinchDirection * flinch;
+                            characters[i].GetBox().ApplyLinearImpulse(ref flinchVector);
+                        }
                     }
                 }
                 else if (!collidingWithCharacter && tempIgnoredEntities.Contains(characters[i]))

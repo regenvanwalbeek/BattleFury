@@ -112,7 +112,8 @@ namespace BattleFury.Components.Movement
                     }
                     else if (grabberCurrentDirection == -1)
                     {
-                        this.bepuPhysicsComponent.Box.Position = grabber.GetPosition() - new Vector3(bepuPhysicsComponent.Box.Width - offset, 0, 0); // new Vector3(grabber.GetPosition().X - bepuPhysicsComponent.Box.Width, currentPos.Y, currentPos.Z);
+                        BepuPhysicsComponent grabberPhysicsComp = (BepuPhysicsComponent)Parent.GetComponent("BepuPhysicsComponent");
+                        this.bepuPhysicsComponent.Box.Position = grabber.GetPosition() - new Vector3(grabberPhysicsComp.Box.Width + offset, 0, 0); // new Vector3(grabber.GetPosition().X - bepuPhysicsComponent.Box.Width, currentPos.Y, currentPos.Z);
                     }
 
 
