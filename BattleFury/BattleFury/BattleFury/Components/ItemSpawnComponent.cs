@@ -73,7 +73,7 @@ namespace BattleFury.Components
                 }
                 else
                 {
-                    item = new Popsicle(spawnPosition, 50.0f, 3000, environment);
+                    item = new IceCream(spawnPosition, 50.0f, 3000, environment);
                 }
                 item.Initialize();
                 itemManagerComponent.Add(item);

@@ -239,10 +239,19 @@ namespace BattleFury.Screens
             this.ScreenManager.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
             this.ScreenManager.GraphicsDevice.Clear(Color.Black);
 
+            // Some models, like the ice cream cone, have backward cull modes...
+            RasterizerState oldRasterizerState = this.ScreenManager.GraphicsDevice.RasterizerState;
+            RasterizerState newRasterizerState = new RasterizerState();
+            newRasterizerState.CullMode = CullMode.None;
+            this.ScreenManager.GraphicsDevice.RasterizerState = newRasterizerState;
+
             // Draw the entities based on the current camera. Will draw 3D elements first, then 2D.
             Matrix view = cameraEntities[currentCameraIndex].GetView();
             Matrix projection = cameraEntities[currentCameraIndex].GetProjection();
             entityManager.Draw(gameTime, view, projection, ScreenManager.SpriteBatch);
+
+            // Reset cull mode.
+            this.ScreenManager.GraphicsDevice.RasterizerState = oldRasterizerState;
         }
 
         /// <summary>

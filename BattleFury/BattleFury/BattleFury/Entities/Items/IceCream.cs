@@ -7,7 +7,7 @@ using BattleFury.Components;
 
 namespace BattleFury.Entities.Items
 {
-    public class Popsicle : Item
+    public class IceCream : Item
     {
 
         private float healAmount;
@@ -18,7 +18,7 @@ namespace BattleFury.Entities.Items
 
         private Environment environment;
 
-        public Popsicle(Vector3 spawnPosition, float healAmount, float healTime, Environment environment)
+        public IceCream(Vector3 spawnPosition, float healAmount, float healTime, Environment environment)
             : base(new Box(spawnPosition, 1, 1, 1, .01f))
         {
             this.healAmount = healAmount;
@@ -27,8 +27,8 @@ namespace BattleFury.Entities.Items
 
             // Create the rendering component. Since the cube model is 1x1x1, 
             // it needs to be scaled to match the size of each individual box.
-            Matrix scaling = Matrix.CreateScale(.7f, .7f, .7f);
-            BasicModelComponent drawComponent = new CubeRenderComponent(this, scaling);
+            Matrix scaling = Matrix.CreateScale(1f, 1f, 1f);
+            BasicModelComponent drawComponent = new IceCreamRenderComponent(this, scaling);
             this.AttachComponent(drawComponent);
 
             grabbable = new GrabbableComponent(this, 0, 100);

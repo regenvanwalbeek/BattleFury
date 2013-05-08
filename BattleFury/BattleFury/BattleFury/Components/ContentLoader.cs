@@ -28,6 +28,8 @@ namespace BattleFury.Components
 
         public static Model Robot;
 
+        public static Model IceCream;
+
         // Temporary hack due to some blender silliness
         public static Model RobotRed;
         public static Model RobotBlue;
@@ -64,13 +66,16 @@ namespace BattleFury.Components
             Content = content;
 
             // Load the cube model
-            Cube = content.Load<Model>("meshes/Cube");
+            Cube = content.Load<Model>("meshes/cube");
             
             // Load the robot model
             Robot = content.Load<Model>("meshes/Robot-joined");
             RobotRed = content.Load<Model>("meshes/Robot-red");
             RobotBlue = content.Load<Model>("meshes/Robot-blue");
             RobotYellow = content.Load<Model>("meshes/Robot-yellow");
+
+            // Load the ice cream model
+            IceCream = content.Load<Model>("meshes/icecreamcone");
 
             // Load HUD Fonts
             HUDRageFont = content.Load<SpriteFont>("fonts/HUDFontRage");

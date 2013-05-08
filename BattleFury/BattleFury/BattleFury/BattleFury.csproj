@@ -80,6 +80,7 @@
     <Compile Include="Components\Animated\AnimationComponent.cs" />
     <Compile Include="Components\Animated\BasicModelComponent.cs" />
     <Compile Include="Components\Animated\CharacterAnimationComponent.cs" />
+    <Compile Include="Components\Animated\IceCreamRenderComponent.cs" />
     <Compile Include="Components\Animated\CubeRenderComponent.cs" />
     <Compile Include="Components\Animated\RobotRenderComponent.cs" />
     <Compile Include="Components\CameraComponents\BattleCameraComponent.cs" />
@@ -122,7 +123,7 @@
     <Compile Include="Entities\Items\GroundPoundHitbox.cs" />
     <Compile Include="Entities\Items\Fist.cs" />
     <Compile Include="Entities\Items\ItemManager.cs" />
-    <Compile Include="Entities\Items\Popsicle.cs" />
+    <Compile Include="Entities\Items\IceCream.cs" />
     <Compile Include="Entities\Items\Projectile.cs" />
     <Compile Include="Entities\Items\Rock.cs" />
     <Compile Include="Entities\Arenas\PlainArena.cs" />
