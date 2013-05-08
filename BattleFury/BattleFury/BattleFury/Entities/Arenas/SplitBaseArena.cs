@@ -41,8 +41,9 @@ namespace BattleFury.Entities.Arenas
         public SplitBaseArena(EntityManager entityManager, PhysicsSimulator physicsSimulator)
         {
             // Create the platforms.
-            Platform leftGround = new Platform(new Vector3(-7.5f, 0, 0), 15.0f, 3.0f, 5.0f);
-            Platform rightGround = new Platform(new Vector3(7.5f, 0, 0), 15.0f, 3.0f, 5.0f);
+            float focus = 15.0f;
+            Platform leftGround = new Platform(new Vector3(-focus, 0, 0), 22.0f, 2.0f, 5.0f);
+            Platform rightGround = new Platform(new Vector3(focus, 0, 0), 22.0f, 2.0f, 5.0f);
 
             Platforms.Add(leftGround);
             entityManager.AddEntity(leftGround);

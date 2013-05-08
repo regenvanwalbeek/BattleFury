@@ -41,7 +41,7 @@ namespace BattleFury.Entities.Arenas
         public WalledArena(EntityManager entityManager, PhysicsSimulator physicsSimulator)
         {
             // Create the platforms.
-            Platform ground = new Platform(new Vector3(0, 0, 0), 50.0f, 3.0f, 5.0f);
+            Platform ground = new Platform(new Vector3(0, -0.5f, 0), 50.0f, 3.0f, 5.0f);
 
             float xOffset = 25.0f;
             int heightStart = 8;
@@ -51,6 +51,8 @@ namespace BattleFury.Entities.Arenas
             for (int height = heightStart; height < heightStop; height++)
             {
                 Platform leftWall = new Platform(new Vector3(-xOffset, height, 0.0f), 1.0f, 1.0f, 5.0f);
+                leftWall.GetBox().Material.KineticFriction = 0;
+                leftWall.GetBox().Material.StaticFriction = 0;
                 Platforms.Add(leftWall);
                 entityManager.AddEntity(leftWall);
                 physicsSimulator.AddPhysicsEntity(leftWall.GetBox());
@@ -60,6 +62,9 @@ namespace BattleFury.Entities.Arenas
             for (int height = heightStart; height < heightStop; height++)
             {
                 Platform rightWall = new Platform(new Vector3(xOffset, height, 0.0f), 1.0f, 1.0f, 5.0f);
+                rightWall.GetBox().Material.KineticFriction = 0;
+                rightWall.GetBox().Material.StaticFriction = 0;
+
                 Platforms.Add(rightWall);
                 entityManager.AddEntity(rightWall);
                 physicsSimulator.AddPhysicsEntity(rightWall.GetBox());

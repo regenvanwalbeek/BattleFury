@@ -44,11 +44,11 @@ namespace BattleFury.Entities.Items
         public void OnRockThrow(object sender, EventArgs e)
         {
             DamageOnImpactComponent damageComponent = new DamageOnImpactComponent(this, DAMAGE, environment, MIN_FLINCH_DISTANCE, MAX_FLINCH_DISTANCE);
-            damageComponent.IgnoreEntityTemporarily((Character) grabbable.Grabber.Parent);
+            damageComponent.IgnoreEntity((Character) grabbable.Grabber.Parent);
             this.AttachComponent(damageComponent);
 
             SelfDestructOnImpactComponent selfDestructComponent = new SelfDestructOnImpactComponent(this, environment, false);
-            selfDestructComponent.IgnoreEntityTemporarily(grabbable.Grabber.Parent);
+            selfDestructComponent.IgnoreEntity(grabbable.Grabber.Parent);
             this.AttachComponent(selfDestructComponent);
         }
 

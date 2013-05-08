@@ -41,10 +41,27 @@ namespace BattleFury.Entities.Arenas
         public DeathPitArena(EntityManager entityManager, PhysicsSimulator physicsSimulator)
         {
             // Create the platforms.
-            Platform ground = new Platform(new Vector3(0, 0, 0), 50.0f, 3.0f, 5.0f);
-            Platforms.Add(ground);
-            entityManager.AddEntity(ground);
-            physicsSimulator.AddPhysicsEntity(ground.GetBox());
+            Platform left = new Platform(new Vector3(-30, 5.5f, 0), 15.0f, 20.0f, 5.0f);
+            Platform right = new Platform(new Vector3(30, 5.5f, 0), 15.0f, 20.0f, 5.0f);
+            Platform mid = new Platform(new Vector3(0, -3, 0), 60.0f, 3.0f, 5.0f);
+            Platform centerPlat = new Platform(new Vector3(0, 10, 0), 10.0f, 1.0f, 5.0f);
+            left.GetBox().Material.KineticFriction = 0;
+            left.GetBox().Material.StaticFriction = 0;
+            right.GetBox().Material.KineticFriction = 0;
+            right.GetBox().Material.StaticFriction = 0;
+
+            Platforms.Add(left);
+            entityManager.AddEntity(left);
+            physicsSimulator.AddPhysicsEntity(left.GetBox());
+            Platforms.Add(right);
+            entityManager.AddEntity(right);
+            physicsSimulator.AddPhysicsEntity(right.GetBox());
+            Platforms.Add(mid);
+            entityManager.AddEntity(mid);
+            physicsSimulator.AddPhysicsEntity(mid.GetBox());
+            Platforms.Add(centerPlat);
+            entityManager.AddEntity(centerPlat);
+            physicsSimulator.AddPhysicsEntity(centerPlat.GetBox());
 
             // Create the Spawn Positions
             spawnPositions = new List<Vector3>();

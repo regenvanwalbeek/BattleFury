@@ -69,6 +69,8 @@ namespace BattleFury.Screens
 
         private bool itemsOn;
 
+        private bool firstBlood = false;
+
         /// <summary>
         /// Constructs the battle screen.
         /// </summary>
@@ -200,6 +202,19 @@ namespace BattleFury.Screens
 
             // Update the entities.
             entityManager.Update(gameTime);
+
+            if (!firstBlood)
+            {
+                for (int i = 0; i < characters.Count; i++)
+                {
+                    if (characters[i].IsKO())
+                    {
+                        firstBlood = true;
+                        AudioManager.PlayFirstBlood();
+                        break;
+                    }
+                }
+            }
 
             // Check if another player has been KO'd. Set placement if KO'd
             int numKilled = 0; // Count the number of characters KO'd this frame

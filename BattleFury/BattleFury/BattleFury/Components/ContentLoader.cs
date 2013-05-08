@@ -52,6 +52,7 @@ namespace BattleFury.Components
         public static SoundEffect Punch3;
         public static SoundEffect Punch4;
 
+        public static SoundEffect FirstBlood;
 
 
         private ContentLoader()
@@ -102,6 +103,7 @@ namespace BattleFury.Components
             Punch2 = content.Load<SoundEffect>("sounds/punch2");
             Punch3 = content.Load<SoundEffect>("sounds/punch3");
             Punch4 = content.Load<SoundEffect>("sounds/punch4");
+            FirstBlood = content.Load<SoundEffect>("sounds/firstblood");
 
             contentLoaded = true;
         }

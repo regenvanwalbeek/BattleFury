@@ -65,7 +65,7 @@ namespace BattleFury.SoundManager
             {
                 battleMusicInstance = ContentLoader.BattleMusic.CreateInstance();
                 battleMusicInstance.IsLooped = true;
-                battleMusicInstance.Volume = MusicVolume *.35f;
+                battleMusicInstance.Volume = MusicVolume *.40f;
                 battleMusicInstance.Play();
             }
         }
@@ -105,6 +105,10 @@ namespace BattleFury.SoundManager
             ContentLoader.MissedPunch.Play(FXVolume * 1.0f, 0, 0);
         }
 
+        public static void PlayFirstBlood()
+        {
+            ContentLoader.FirstBlood.Play(FXVolume * 1.0f, 0, 0);
+        }
       
 
 

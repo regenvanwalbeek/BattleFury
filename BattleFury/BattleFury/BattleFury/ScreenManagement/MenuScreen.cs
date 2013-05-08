@@ -15,6 +15,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using BattleFury.Input;
 using BattleFury.Settings;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 #endregion
 
 namespace BattleFury.ScreenManagement
@@ -61,6 +63,27 @@ namespace BattleFury.ScreenManagement
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
         }
 
+        private ContentManager content;
+        private SoundEffect click;
+        private SoundEffect back;
+
+        public override void LoadContent()
+        {
+            base.LoadContent();
+            // Create the Content Manager.
+            if (content == null)
+            {
+                content = new ContentManager(ScreenManager.Game.Services, "Content");
+            }
+            click = content.Load<SoundEffect>("sounds/click");
+            back = content.Load<SoundEffect>("sounds/back");
+        }
+
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+            content.Unload();
+        }
 
         #endregion
 
@@ -101,22 +124,27 @@ namespace BattleFury.ScreenManagement
             if (MenuBindings.IsMenuSelect(ControllingPlayer, out playerIndex))
             {
                 OnSelectEntry(selectedEntry, playerIndex);
+                click.Play();
             }
             else if (MenuBindings.IsMenuCancel(ControllingPlayer, out playerIndex))
             {
+                back.Play();
                 OnCancel(playerIndex);
             }
             else if (MenuBindings.IsMenuRight(ControllingPlayer))
             {
                 OnRightEntry(selectedEntry, playerIndex);
+                click.Play();
             }
             else if (MenuBindings.IsMenuLeft(ControllingPlayer))
             {
                 OnLeftEntry(selectedEntry, playerIndex);
+                click.Play();
             }
             else if (MenuBindings.IsStart(ControllingPlayer, out playerIndex))
             {
                 OnStartEntry(selectedEntry, playerIndex);
+                click.Play();
             }
         }
 

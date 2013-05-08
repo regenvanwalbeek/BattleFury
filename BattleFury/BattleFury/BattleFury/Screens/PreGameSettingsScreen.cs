@@ -66,7 +66,7 @@ namespace BattleFury.Screens
             itemsMenuEntry.LeftSelected += ItemsSelected;
             itemsMenuEntry.RightSelected += ItemsSelected;
             arenaMenuEntry.LeftSelected += ArenaLeftSelected;
-            arenaMenuEntry.RightSelected += ArenaLeftSelected;
+            arenaMenuEntry.RightSelected += ArenaRightSelected;
             numLivesMenuEntry.LeftSelected += NumLivesLeftSelected;
             numLivesMenuEntry.RightSelected += NumLivesRightSelected;
             fightEntry.Selected += FightSelected;
@@ -173,6 +173,7 @@ namespace BattleFury.Screens
             {
                 arenaIndex = 0;
             }
+            GameSettings.Arena = arenas[arenaIndex];
             setArenaText();
         }
 
@@ -183,6 +184,7 @@ namespace BattleFury.Screens
             {
                 arenaIndex = arenas.Count - 1;
             }
+            GameSettings.Arena = arenas[arenaIndex];
             setArenaText();
         }
 
