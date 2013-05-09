@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleFury.EntitySystem.Component">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAgYAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntitySystem\Component.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BattleFury.EntitySystem.DrawableComponent">
+    <Position X="2.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>EntitySystem\DrawableComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BattleFury.EntitySystem.Entity">
+    <Position X="5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AwQCAAAAAAAAAwAAAACABAAAAAEAAAAEAACAAAAAAAA=</HashCode>
+      <FileName>EntitySystem\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.EntitySystem.EntityManager">
+    <Position X="7.75" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAwAAAAABAAAAAAAAAQAAAIAAAAAAAAA=</HashCode>
+      <FileName>EntitySystem\EntityManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

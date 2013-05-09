@@ -1,93 +1,128 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="BattleFury.Entities.Arena" Collapsed="true">
-    <Position X="11.25" Y="2.25" Width="1.5" />
+  <Class Name="BattleFury.Entities.Arenas.Arena" Collapsed="true">
+    <Position X="9.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
-      <FileName>Entities\Arena.cs</FileName>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAkAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Arenas\Arena.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BattleFury.Entities.Platform" Collapsed="true">
-    <Position X="13.5" Y="2.25" Width="1.5" />
+  <Class Name="BattleFury.Entities.Arenas.DeathPitArena" Collapsed="true">
+    <Position X="10" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Platform.cs</FileName>
+      <HashCode>AAAAAAAAAUAAAAAAAAAAAAAkBAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Arenas\DeathPitArena.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Arenas.PlainArena" Collapsed="true">
+    <Position X="11.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAUAAAAAAAAAAAAAkBAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Arenas\PlainArena.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Arenas.Platform" Collapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQEAAAAAAMAAAAAAIAAAAgAACAAA=</HashCode>
+      <FileName>Entities\Arenas\Platform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Arenas.SplitBaseArena" Collapsed="true">
+    <Position X="6.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAUAAAAAAAAAAAAAkBAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Arenas\SplitBaseArena.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Arenas.WalledArena" Collapsed="true">
+    <Position X="8.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAUAAAAAAAAAAAAAkBAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Arenas\WalledArena.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Camera" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAQCAAAAAABAAAAAAAAAgAAAIAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Entities\Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.HUD" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\HUD.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleFury.Entities.Characters.Character" Collapsed="true">
-    <Position X="5.75" Y="2" Width="1.5" />
+    <Position X="12" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAQAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>CQAEEAAAACAAAAAAAIAAAgQAIAAAAgAIAAAAgAACAEA=</HashCode>
       <FileName>Entities\Characters\Character.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleFury.Entities.Characters.FightingRobot" Collapsed="true">
-    <Position X="5.75" Y="3.5" Width="1.5" />
+    <Position X="12" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>gBAAIgAAAAgIQAIAQACAACEAAAVIAAgBDBABgAAAEBA=</HashCode>
       <FileName>Entities\Characters\FightingRobot.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BattleFury.Entities.Hitboxes.AbsorptionHitbox" Collapsed="true">
-    <Position X="7.25" Y="6" Width="1.5" />
+  <Class Name="BattleFury.Entities.Items.Fist" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Hitboxes\AbsorptionHitbox.cs</FileName>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Items\Fist.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BattleFury.Entities.Hitboxes.DamageableHitbox" Collapsed="true">
-    <Position X="9.5" Y="6" Width="1.5" />
+  <Class Name="BattleFury.Entities.Items.GroundPoundHitbox" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Hitboxes\DamageableHitbox.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Entities\Items\GroundPoundHitbox.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BattleFury.Entities.Hitboxes.DamagingHitbox" Collapsed="true">
-    <Position X="11.75" Y="6" Width="1.5" />
+  <Class Name="BattleFury.Entities.Items.IceCream" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Hitboxes\DamagingHitbox.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BattleFury.Entities.Hitboxes.GrabHitbox" Collapsed="true">
-    <Position X="14" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Hitboxes\GrabHitbox.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BattleFury.Entities.Hitboxes.Hitbox" Collapsed="true">
-    <Position X="9.5" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Hitboxes\Hitbox.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BattleFury.Entities.Hitboxes.ShieldHitbox" Collapsed="true">
-    <Position X="5" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Hitboxes\ShieldHitbox.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAgAYCAAA=</HashCode>
+      <FileName>Entities\Items\IceCream.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleFury.Entities.Items.Item" Collapsed="true">
-    <Position X="8" Y="2" Width="1.5" />
+    <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Entities\Items\Item.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BattleFury.Entities.Items.Rock" Collapsed="true">
-    <Position X="8" Y="3.5" Width="1.5" />
+  <Class Name="BattleFury.Entities.Items.ItemManager" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAgAAAAgAAAAAgAAAAAAA=</HashCode>
+      <FileName>Entities\Items\ItemManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Items.Projectile" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Items\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleFury.Entities.Items.Rock" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgIAAAAAAAAAAAIAAAAAAgAAgAAAAgA=</HashCode>
       <FileName>Entities\Items\Rock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleFury.EntitySystem.Entity" Collapsed="true">
-    <Position X="9.5" Y="0.75" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgQAAAAAAAAAg4AAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AwQCAAAAAAAAAwAAAACABAAAAAEAAAAEAACAAAAAAAA=</HashCode>
       <FileName>EntitySystem\Entity.cs</FileName>
     </TypeIdentifier>
   </Class>

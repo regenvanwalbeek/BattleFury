@@ -75,11 +75,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimationEngine\Animation.cs" />
-    <Compile Include="AnimationEngine\AnimationManager.cs" />
-    <Compile Include="Components\Animated\AnimationComponent.cs" />
     <Compile Include="Components\Animated\BasicModelComponent.cs" />
-    <Compile Include="Components\Animated\CharacterAnimationComponent.cs" />
     <Compile Include="Components\Animated\IceCreamRenderComponent.cs" />
     <Compile Include="Components\Animated\CubeRenderComponent.cs" />
     <Compile Include="Components\Animated\RobotRenderComponent.cs" />
@@ -106,7 +102,6 @@
     <Compile Include="Components\Physics\BepuPhysicsComponent.cs" />
     <Compile Include="Components\Physics\PhysicsSimulationComponent.cs" />
     <Compile Include="Components\Movement\GrabComponent.cs" />
-    <Compile Include="Components\Animated\ItemAnimationComponent.cs" />
     <Compile Include="Components\Movement\JumpComponent.cs" />
     <Compile Include="Components\SelfDestructOnJumpComponent.cs" />
     <Compile Include="Entities\Arenas\Arena.cs" />
@@ -117,11 +112,6 @@
     <Compile Include="Entities\Characters\Character.cs" />
     <Compile Include="Entities\Characters\FightingRobot.cs" />
     <Compile Include="Entities\Environment.cs" />
-    <Compile Include="Entities\Hitboxes\AbsorptionHitbox.cs" />
-    <Compile Include="Entities\Hitboxes\DamageableHitbox.cs" />
-    <Compile Include="Entities\Hitboxes\DamagingHitbox.cs" />
-    <Compile Include="Entities\Hitboxes\GrabHitbox.cs" />
-    <Compile Include="Entities\Hitboxes\ShieldHitbox.cs" />
     <Compile Include="Entities\HUD.cs" />
     <Compile Include="Entities\Items\GroundPoundHitbox.cs" />
     <Compile Include="Entities\Items\Fist.cs" />
@@ -133,12 +123,10 @@
     <Compile Include="Entities\Physics\BepuPhysicsBox.cs" />
     <Compile Include="Entities\Physics\PhysicsSimulator.cs" />
     <Compile Include="Entities\Arenas\Platform.cs" />
-    <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="EntitySystem\Component.cs" />
     <Compile Include="EntitySystem\DrawableComponent.cs" />
     <Compile Include="EntitySystem\Entity.cs" />
     <Compile Include="EntitySystem\EntityManager.cs" />
-    <Compile Include="Entities\Hitboxes\Hitbox.cs" />
     <Compile Include="EntitySystem\IEntityDrawable.cs" />
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
@@ -210,6 +198,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="_ClassDiagrams\Physics.cd" />
+    <None Include="_ClassDiagrams\ComponentImplementationFinal.cd" />
     <None Include="_ClassDiagrams\Arena.cd" />
     <None Include="_ClassDiagrams\Items.cd" />
     <None Include="_ClassDiagrams\Hitboxes.cd" />
