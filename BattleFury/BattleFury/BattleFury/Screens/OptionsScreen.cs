@@ -34,6 +34,8 @@ namespace BattleFury.Screens
         /// </summary>
         private MenuEntry windowedMenuEntry;
 
+        private MenuEntry punchJumpEntry;
+
         private int displayModeIndex = 0;
 
         private List<DisplayMode> displayModes = new List<DisplayMode>();
@@ -49,12 +51,14 @@ namespace BattleFury.Screens
             fxVolumeMenuEntry = new MenuEntry(string.Empty);
             windowedMenuEntry = new MenuEntry(string.Empty);
             resolutionMenuEntry = new MenuEntry(string.Empty);
+            punchJumpEntry = new MenuEntry(string.Empty);
             MenuEntry backMenuEntry = new MenuEntry("Back");
 
             setMusicVolumeText() ;
             setWindowedEntryText();
             setResolutionEntryText();
             setFXVolumeText();
+            setPunchJumpText();
 
             // Attach the event handlers
             musicVolumeMenuEntry.RightSelected += MusicVolumeIncrease;
@@ -66,13 +70,17 @@ namespace BattleFury.Screens
             windowedMenuEntry.LeftSelected += FullscreenMenuEntrySelected;
             resolutionMenuEntry.RightSelected += ResolutionRightSelected;
             resolutionMenuEntry.LeftSelected += ResolutionLeftSelected;
+            punchJumpEntry.Selected += PunchJumpSelect;
+            punchJumpEntry.RightSelected += PunchJumpSelect;
+            punchJumpEntry.LeftSelected += PunchJumpSelect;
             backMenuEntry.Selected += OnComplete;
             backMenuEntry.Selected += OnCancel;
 
             MenuEntries.Add(musicVolumeMenuEntry);
             MenuEntries.Add(fxVolumeMenuEntry);
-            MenuEntries.Add(windowedMenuEntry);
+            MenuEntries.Add(punchJumpEntry);
             MenuEntries.Add(resolutionMenuEntry);
+            MenuEntries.Add(windowedMenuEntry);
             MenuEntries.Add(backMenuEntry);
         }
 
@@ -98,6 +106,11 @@ namespace BattleFury.Screens
         private void setResolutionEntryText()
         {
             resolutionMenuEntry.Text = "Resolution: " + GameSettings.WindowWidth + "x" + GameSettings.WindowHeight;
+        }
+
+        private void setPunchJumpText()
+        {
+            punchJumpEntry.Text = "Punch Jump Mode: " + (GameSettings.PunchJumpMode ? "on" : "off");
         }
 
         // Increase music volume
@@ -142,6 +155,12 @@ namespace BattleFury.Screens
                 GameSettings.FXVolume = 0;
             }
             setFXVolumeText();
+        }
+
+        private void PunchJumpSelect(object sender, PlayerIndexEventArgs e)
+        {
+            GameSettings.PunchJumpMode = !GameSettings.PunchJumpMode;
+            setPunchJumpText();
         }
 
 

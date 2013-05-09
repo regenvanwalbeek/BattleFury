@@ -109,11 +109,25 @@ namespace BattleFury.Components.Movement
                     Vector3 offset;
                     if (GameplayBindings.IsUpPunch(controllingPlayer))
                     {
-                        offset = new Vector3(0, 2, 0);
+                        if (GameSettings.PunchJumpMode)
+                        {
+                            offset = new Vector3(0, 2.6f, 0);
+                        }
+                        else
+                        {
+                            offset = new Vector3(0, 2.635f, 0);
+                        }
                     }
                     else
                     {
-                        offset = new Vector3(moveComponent.DirectionX, 0, 0);
+                        if (GameSettings.PunchJumpMode) // because my playtesters are sadists who hate fun.
+                        {
+                            offset = new Vector3(moveComponent.DirectionX, 0, 0);
+                        }
+                        else
+                        {
+                            offset = new Vector3(moveComponent.DirectionX * 1.435f, 0, 0);
+                        }
                     }
                     // Get all the entities colliding with the hitbox
                     Fist f = new Fist(bepuPhysicsComponent.Box.Position + offset, (Character)Parent, damage, minFlinch, maxFlinch, environment);

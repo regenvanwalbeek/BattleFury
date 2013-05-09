@@ -53,6 +53,11 @@ namespace BattleFury.Settings
         public static bool ItemsOn = true;
 
         /// <summary>
+        /// Whether punch jumping should be enabled. To satisfy my playtesters' sickening desires.
+        /// </summary>
+        public static bool PunchJumpMode = false;
+
+        /// <summary>
         /// The Arena to battle in.
         /// </summary>
         public static ARENA_SETTING Arena = ARENA_SETTING.PLAIN_ARENA;

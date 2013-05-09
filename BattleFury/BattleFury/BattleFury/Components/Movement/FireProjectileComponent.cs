@@ -93,7 +93,15 @@ namespace BattleFury.Components.Movement
                 }
 
                 // Create a projectile and add it to the environment.
-                Vector3 spawnPosition = this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX, 0, 0);
+                Vector3 spawnPosition;
+                if (GameSettings.PunchJumpMode)
+                {
+                    spawnPosition = this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX, 0, 0);
+                }
+                else
+                {
+                    spawnPosition = this.bepuPhysicsComponent.Box.Position + new Vector3(movementComponent.DirectionX * 1.435f, 0, 0);
+                }
                 Vector3 velocity = new Vector3(movementComponent.DirectionX, 0, 0) * fireVelocity;
                 Projectile p = new Projectile(spawnPosition, velocity, environment, (Character) Parent, damage, minFlinch, maxFlinch);
                 p.Initialize();
