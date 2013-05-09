@@ -47,7 +47,6 @@ namespace BattleFury.Components
         {
             if (markedForRemoval)
             {
-                System.Console.WriteLine("Dafuq");
                 environment.ItemManager.Remove((Item)Parent);
             }
 
