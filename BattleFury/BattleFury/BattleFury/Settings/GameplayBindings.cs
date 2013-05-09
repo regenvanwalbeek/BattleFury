@@ -139,13 +139,5 @@ namespace BattleFury.Settings
             return InputState.GetLeftAnalogStick(controllingPlayer).X;
         }
 
-        /// <summary>
-        /// Gets the direction to punch the character.
-        /// </summary>
-        public static Vector2 GetPunchDirection(PlayerIndex controllingPlayer)
-        {
-            return InputState.GetLeftAnalogStick(controllingPlayer);
-        }
-
     }
 }
