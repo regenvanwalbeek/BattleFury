@@ -35,8 +35,6 @@ namespace BattleFury.Screens
         /// </summary>
         private EntityManager entityManager;
 
-        private float pauseAlpha;
-
         /// <summary>
         /// Cameras to view the world.
         /// </summary>
@@ -194,6 +192,7 @@ namespace BattleFury.Screens
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+
 
             if (!IsActive)
             {

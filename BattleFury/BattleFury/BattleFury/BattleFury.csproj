@@ -141,7 +141,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="BattleFuryGame.cs" />
-    <Compile Include="Screens\ArenaSelectScreen.cs" />
     <Compile Include="Screens\BattleScreen.cs" />
     <Compile Include="ScreenManagement\GameScreen.cs" />
     <Compile Include="Input\InputState.cs" />
