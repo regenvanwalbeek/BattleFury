@@ -145,7 +145,7 @@ namespace BattleFury.Entities.Characters
             //BasicModelComponent drawComponent2 = new CubeRenderComponent(this, Matrix.CreateScale(BEPU_PHYSICS_WIDTH, BEPU_PHYSICS_HEIGHT, BEPU_PHYSICS_WIDTH));
             //this.AttachComponent(drawComponent2);
             
-            JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS);
+            JumpComponent jumpComponent = new JumpComponent(this, JUMP_HEIGHT, MAX_JUMPS, environment);
             this.AttachComponent(jumpComponent);
 
             MoveComponent moveComponent = new MoveComponent(this, SPEED);

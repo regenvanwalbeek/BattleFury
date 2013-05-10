@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -9,6 +8,8 @@ using BattleFury.Components.Characters;
 using BattleFury.Settings;
 using BEPUphysics.Collidables;
 using BattleFury.SoundManager;
+using BattleFury.Entities;
+using BattleFury.Entities.Arenas;
 
 namespace BattleFury.Components.Movement
 {
@@ -42,17 +43,20 @@ namespace BattleFury.Components.Movement
         /// </summary>
         private int numJumps = 0;
 
+        private Environment environment;
+
         private const int RESET_JUMP_TIME = 25;
         private int timeSinceJump = RESET_JUMP_TIME;
 
         private BepuPhysicsComponent bepuPhysicsComponent;
 
-        public JumpComponent(Entity parent, int jumpHeight, int maxJumps)
+        public JumpComponent(Entity parent, int jumpHeight, int maxJumps, Environment environment)
             : base(parent, "JumpComponent")
         {
             this.JumpHeight = jumpHeight;
             this.MaxJumps = maxJumps;
             this.JumpedThisFrame = false;
+            this.environment = environment;
         }
 
         public override void Initialize()
@@ -75,8 +79,33 @@ namespace BattleFury.Components.Movement
             timeSinceJump += gameTime.ElapsedGameTime.Milliseconds;
 
             // Reset the number of jumps if hitting the ground and didnt just jump
-            CollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedCollidables;
-            if (overlappedCollideables.Count > 0 && timeSinceJump > RESET_JUMP_TIME)
+            bool collidingWithPlatform = false;
+
+            if (GameSettings.PunchJumpMode)
+            {
+                // Because my playtesters are sadists. Why would you play it this way?
+                // Apparently it's not a bug, it's a feature...
+                collidingWithPlatform = true;
+            }
+            else
+            {
+                // The way the game is meant to be played
+                List<Platform> platforms = environment.Arena.Platforms;
+                EntityCollidableCollection overlappedCollideables = bepuPhysicsComponent.Box.CollisionInformation.OverlappedEntities;
+                EntityCollidableCollection.Enumerator enumerator = overlappedCollideables.GetEnumerator();
+                while (enumerator.MoveNext())
+                {
+                    foreach (Platform p in platforms)
+                    {
+                        if (p.GetBox() == enumerator.Current)
+                        {
+                            collidingWithPlatform = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (collidingWithPlatform && timeSinceJump > RESET_JUMP_TIME)
             {
                 numJumps = 0;
             }

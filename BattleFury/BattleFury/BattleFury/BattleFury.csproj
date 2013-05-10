@@ -198,7 +198,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="_ClassDiagrams\Entities.cd" />
     <None Include="_ClassDiagrams\Physics.cd" />
     <None Include="_ClassDiagrams\ComponentImplementationFinal.cd" />
     <None Include="_ClassDiagrams\Arena.cd" />
@@ -206,7 +206,6 @@
     <None Include="_ClassDiagrams\Hitboxes.cd" />
     <None Include="_ClassDiagrams\Components.cd" />
     <None Include="_ClassDiagrams\Robot.cd" />
-    <None Include="_ClassDiagrams\Entities.cd" />
     <None Include="_ClassDiagrams\EntityManager.cd" />
     <None Include="_ClassDiagrams\EntityComponent.cd" />
     <None Include="_ClassDiagrams\Interfaces.cd" />
