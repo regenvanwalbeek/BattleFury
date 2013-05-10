@@ -21,7 +21,7 @@ B + Down (after Jump) - Ground Pound
 X - Grab, Pick up items
 X + Direction - Throw in direction
 Y + Left/Right - Fire projectile
-Start - Pause Game
+Start - Pause Game 
 
 -------------------------------------------------------------------------------
 
