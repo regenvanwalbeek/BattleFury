@@ -34,6 +34,11 @@ namespace BattleFury.Screens
         /// </summary>
         private MenuEntry windowedMenuEntry;
 
+        /// <summary>
+        /// Menu entry for enabling and disabling rumble
+        /// </summary>
+        private MenuEntry rumbleMenuEntry;
+
         private MenuEntry punchJumpEntry;
 
         private int displayModeIndex = 0;
@@ -52,6 +57,7 @@ namespace BattleFury.Screens
             windowedMenuEntry = new MenuEntry(string.Empty);
             resolutionMenuEntry = new MenuEntry(string.Empty);
             punchJumpEntry = new MenuEntry(string.Empty);
+            rumbleMenuEntry = new MenuEntry(string.Empty);
             MenuEntry backMenuEntry = new MenuEntry("Back");
 
             setMusicVolumeText() ;
@@ -59,6 +65,7 @@ namespace BattleFury.Screens
             setResolutionEntryText();
             setFXVolumeText();
             setPunchJumpText();
+            setRumbleText();
 
             // Attach the event handlers
             musicVolumeMenuEntry.RightSelected += MusicVolumeIncrease;
@@ -73,6 +80,9 @@ namespace BattleFury.Screens
             punchJumpEntry.Selected += PunchJumpSelect;
             punchJumpEntry.RightSelected += PunchJumpSelect;
             punchJumpEntry.LeftSelected += PunchJumpSelect;
+            rumbleMenuEntry.Selected += RumbleSelect;
+            rumbleMenuEntry.RightSelected += RumbleSelect;
+            rumbleMenuEntry.LeftSelected += RumbleSelect;
             backMenuEntry.Selected += OnComplete;
             backMenuEntry.Selected += OnCancel;
 
@@ -81,6 +91,7 @@ namespace BattleFury.Screens
             MenuEntries.Add(punchJumpEntry);
             MenuEntries.Add(resolutionMenuEntry);
             MenuEntries.Add(windowedMenuEntry);
+            MenuEntries.Add(rumbleMenuEntry);
             MenuEntries.Add(backMenuEntry);
         }
 
@@ -111,6 +122,11 @@ namespace BattleFury.Screens
         private void setPunchJumpText()
         {
             punchJumpEntry.Text = "Punch Jump Mode: " + (GameSettings.PunchJumpMode ? "on" : "off");
+        }
+
+        private void setRumbleText()
+        {
+            rumbleMenuEntry.Text = "Rumble: " + (GameSettings.Rumble ? "on" : "off");
         }
 
         // Increase music volume
@@ -161,6 +177,12 @@ namespace BattleFury.Screens
         {
             GameSettings.PunchJumpMode = !GameSettings.PunchJumpMode;
             setPunchJumpText();
+        }
+
+        private void RumbleSelect(object sender, PlayerIndexEventArgs e)
+        {
+            GameSettings.Rumble = !GameSettings.Rumble;
+            setRumbleText();
         }
 
 

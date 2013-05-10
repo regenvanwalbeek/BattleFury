@@ -72,6 +72,8 @@ namespace BattleFury.Settings
         /// </summary>
         public static int NumLives = 3;
 
+        public static bool Rumble = true;
+
         /// <summary>
         /// List of characters each player will use to play.
         /// </summary>

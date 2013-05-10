@@ -37,3 +37,12 @@ When enabled, you can infinitely jump by alternating jump and punch attacks.
 This was a bug, but my sadistic playtesters enjoyed the game more when I treated
 it as a feature. So you can enable punch jump mode in the Options menu if you like.
 However, no guarantees on bugs that occur in punch jump mode.
+
+
+-------------------------------------------------------------------------------
+Other notes
+If you have problems with the game crashing/hanging whenever a player gets hit,
+unplug the controller, quit the game, and try reinstalling the drivers for your 
+controller. If that doesn't work, disable Rumble in the Options screen, and the 
+game will play fine. As far as I can tell, this is a driver issue and there isn't
+anything I can really do about it.

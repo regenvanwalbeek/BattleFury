@@ -1,6 +1,7 @@
 ﻿using BattleFury.EntitySystem;
 using Microsoft.Xna.Framework;
 using BattleFury.Input;
+using BattleFury.Settings;
 
 namespace BattleFury.Components.Characters
 {
@@ -68,7 +69,7 @@ namespace BattleFury.Components.Characters
                 if (timeTillRumbleOff[i] >= 0)
                 {
                     timeTillRumbleOff[i] -= gameTime.ElapsedGameTime.Milliseconds;
-                    if (timeTillRumbleOff[i] < 0)
+                    if (timeTillRumbleOff[i] < 0 && GameSettings.Rumble)
                     {
                        InputState.Rumble(characterInformationComponent.PlayerIndex, 0, 0);
                     }
@@ -82,7 +83,7 @@ namespace BattleFury.Components.Characters
         /// <param name="damageAmount">The amount to damage the entity</param>
         public void Damage(float damageAmount)
         {
-            if (characterInformationComponent != null)
+            if (characterInformationComponent != null && GameSettings.Rumble)
             {
                 bool rumbled = InputState.Rumble(characterInformationComponent.PlayerIndex, 1, 1);
                 timeTillRumbleOff[(int) characterInformationComponent.PlayerIndex] = RUMBLE_TIME;
